@@ -959,7 +959,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .action { min-height: 44px; border: 1px solid var(--jw-line); background: var(--jw-surface); color: var(--jw-text); padding: 9px 13px; border-radius: 7px; cursor: pointer; font: inherit; }
     #jackup-wireframe .action.primary { background: var(--jw-dark); color: var(--jw-dark-text); border-color: var(--jw-dark); }
     #jackup-wireframe :is([data-tooltip], [data-help], [data-order]) { position: relative; }
-    #jackup-wireframe .guide-tooltip { position: absolute; z-index: 100; width: max-content; max-width: min(310px, calc(100% - 24px)); padding: 9px 11px; border-radius: 7px; background: var(--jw-dark); color: var(--jw-dark-text); font-size: 11px; line-height: 1.5; text-align: left; pointer-events: none; opacity: 0; visibility: hidden; box-shadow: 0 6px 18px rgba(0,0,0,.22); }
+    #jackup-wireframe .guide-tooltip { position: absolute; z-index: 300; width: max-content; max-width: min(310px, calc(100% - 24px)); padding: 9px 11px; border-radius: 7px; background: var(--jw-dark); color: var(--jw-dark-text); font-size: 11px; line-height: 1.5; text-align: left; pointer-events: none; opacity: 0; visibility: hidden; box-shadow: 0 6px 18px rgba(0,0,0,.22); }
     #jackup-wireframe .guide-tooltip.visible { opacity: 1; visibility: visible; }
     #jackup-wireframe.guide-on .screen.active { counter-reset: guide-step; }
     #jackup-wireframe.guide-on .screen.active :is([data-tooltip], [data-help]):not([data-order])::before { counter-increment: guide-step; content: counter(guide-step); position: absolute; z-index: 12; right: -8px; top: -10px; width: 21px; height: 21px; display: grid; place-items: center; border-radius: 50%; background: var(--jw-warn); color: var(--jw-dark-text); font-size: 11px; font-weight: 500; box-shadow: 0 0 0 3px var(--jw-surface); }
@@ -1067,6 +1067,43 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .graph-fullscreen-body { min-width: 0; min-height: 0; display: grid; place-items: stretch; }
     #jackup-wireframe .graph-fullscreen-body .plot { width: 100%; height: 100%; min-height: 0; }
     #jackup-wireframe .graph-fullscreen .legend { margin-top: 0; min-height: 18px; }
+    #jackup-wireframe .pdf-preview { position: fixed; z-index: 210; top: 56px; right: max(0px, calc((100vw - 1340px) / 2)); bottom: 0; left: max(154px, calc((100vw - 1340px) / 2 + 154px)); display: none; grid-template-rows: auto minmax(0, 1fr) auto; gap: 12px; padding: 14px 18px; background: var(--jw-bg); color: var(--jw-text); }
+    #jackup-wireframe .pdf-preview.open { display: grid; }
+    #jackup-wireframe .pdf-preview-head, #jackup-wireframe .pdf-preview-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    #jackup-wireframe .pdf-preview-head h2 { margin: 0; }
+    #jackup-wireframe .pdf-preview-body { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 14px; min-height: 0; }
+    #jackup-wireframe .pdf-page-list { display: grid; gap: 6px; align-content: start; }
+    #jackup-wireframe .pdf-page-choice { min-height: 44px; border: 1px solid var(--jw-line); border-radius: 7px; background: var(--jw-surface); color: var(--jw-muted); padding: 8px 10px; cursor: pointer; font: inherit; text-align: left; }
+    #jackup-wireframe .pdf-page-choice[aria-selected=&quot;true&quot;] { border-color: var(--jw-accent); color: var(--jw-text); box-shadow: inset 3px 0 0 var(--jw-accent); }
+    #jackup-wireframe .pdf-page-stage { min-width: 0; min-height: 0; display: grid; place-items: center; }
+    #jackup-wireframe .pdf-page { display: none; height: 100%; max-height: 560px; max-width: 100%; aspect-ratio: 210 / 297; padding: 24px; overflow: hidden; background: light-dark(#ffffff, #f3f4f5); color: light-dark(#1c252c, #1c252c); border: 1px solid light-dark(#c5cbd0, #c5cbd0); box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+    #jackup-wireframe .pdf-page.active { display: flex; flex-direction: column; }
+    #jackup-wireframe .pdf-page h3 { margin: 0 0 12px; font-size: 18px; }
+    #jackup-wireframe .pdf-page h4 { margin: 12px 0 7px; font-size: 11px; font-weight: 500; }
+    #jackup-wireframe .pdf-page p { margin: 0; }
+    #jackup-wireframe .pdf-page table { color: inherit; font-size: 9px; }
+    #jackup-wireframe .pdf-page :is(th, td) { padding: 6px 4px; border-color: light-dark(#d5dade, #d5dade); }
+    #jackup-wireframe .pdf-page th { color: light-dark(#5f6a73, #5f6a73); }
+    #jackup-wireframe .pdf-page-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-bottom: 8px; margin-bottom: 14px; border-bottom: 2px solid light-dark(#26333d, #26333d); font-size: 9px; }
+    #jackup-wireframe .pdf-page-number { margin-top: auto; padding-top: 10px; text-align: center; color: light-dark(#6a747c, #6a747c); font-size: 9px; }
+    #jackup-wireframe .pdf-cover { justify-content: center; text-align: center; }
+    #jackup-wireframe .pdf-cover-mark { width: 46px; height: 46px; display: grid; place-items: center; margin: 0 auto 22px; border: 3px solid currentColor; border-radius: 50%; font-size: 20px; font-weight: 500; }
+    #jackup-wireframe .pdf-cover h3 { font-size: 24px; margin-bottom: 8px; }
+    #jackup-wireframe .pdf-cover-info { width: 78%; margin: 34px auto 0; text-align: left; }
+    #jackup-wireframe .pdf-kpi-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    #jackup-wireframe .pdf-kpi { padding: 10px; background: light-dark(#eef1f3, #eef1f3); }
+    #jackup-wireframe .pdf-kpi span { display: block; color: light-dark(#66717a, #66717a); font-size: 9px; }
+    #jackup-wireframe .pdf-kpi strong { display: block; margin-top: 5px; font-size: 14px; font-weight: 500; }
+    #jackup-wireframe .pdf-curve { width: 100%; height: auto; background: light-dark(#f7f8f9, #f7f8f9); }
+    #jackup-wireframe .pdf-curve text { fill: light-dark(#66717a, #66717a); font-size: 9px; }
+    #jackup-wireframe .pdf-curve .frame { stroke: light-dark(#aeb6bd, #aeb6bd); fill: none; }
+    #jackup-wireframe .pdf-curve .line-a { stroke: var(--jw-accent); }
+    #jackup-wireframe .pdf-curve .line-b { stroke: var(--jw-good); }
+    #jackup-wireframe .pdf-curve .line-c { stroke: var(--jw-warn); }
+    #jackup-wireframe .pdf-curve .line-d { stroke: var(--jw-bad); }
+    #jackup-wireframe .pdf-curve :is(.line-a, .line-b, .line-c, .line-d) { fill: none; stroke-width: 2; }
+    #jackup-wireframe .pdf-opinion-box { padding: 12px; margin-top: 10px; background: light-dark(#eef1f3, #eef1f3); font-size: 10px; line-height: 1.55; }
+    #jackup-wireframe .pdf-preview-status { color: var(--jw-good); font-size: 12px; }
     #jackup-wireframe .legend { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; color: var(--jw-muted); font-size: 11px; }
     #jackup-wireframe .legend span::before { content: &quot;&quot;; width: 14px; height: 3px; display: inline-block; margin-right: 5px; vertical-align: middle; background: currentColor; }
     #jackup-wireframe .instrument-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 10px; }
@@ -1145,6 +1182,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       #jackup-wireframe .result-confirmation-grid .remeasure-reason-field { grid-column: 1 / -1; }
       #jackup-wireframe .overview-history-grid { grid-template-columns: 1fr; }
       #jackup-wireframe .graph-fullscreen { left: 138px; right: 0; }
+      #jackup-wireframe .pdf-preview { left: 138px; right: 0; }
     }
     @media (max-width: 700px), (orientation: portrait) {
       #jackup-wireframe .shell { grid-template-columns: 1fr; }
@@ -1161,6 +1199,10 @@ html&gt;body{padding:0}&lt;/style&gt;
       #jackup-wireframe .analysis-meta-grid { grid-template-columns: 1fr; }
       #jackup-wireframe .analysis-reason-field { grid-column: 1; }
       #jackup-wireframe .graph-fullscreen { top: 124px; left: 0; right: 0; }
+      #jackup-wireframe .pdf-preview { top: 124px; left: 0; right: 0; }
+      #jackup-wireframe .pdf-preview-body { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); }
+      #jackup-wireframe .pdf-page-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      #jackup-wireframe .pdf-page-choice { text-align: center; }
       #jackup-wireframe .input-action { grid-template-columns: 1fr; }
       #jackup-wireframe .storage-field { grid-column: auto; }
       #jackup-wireframe .selected-bearing-editor { grid-template-columns: 1fr; }
@@ -1401,7 +1443,7 @@ html&gt;body{padding:0}&lt;/style&gt;
         &lt;/section&gt;
 
         &lt;section class=&quot;screen&quot; data-panel=&quot;report&quot;&gt;
-          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;결과 요약 · 리포트&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;베어링별 판정과 회차 이력을 통합 확인&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action&quot; type=&quot;button&quot; data-tooltip=&quot;최종 적용값과 계산 근거를 Excel 또는 CSV로 내보내기&quot;&gt;Excel / CSV&lt;/button&gt;&lt;button class=&quot;action primary&quot; type=&quot;button&quot; data-tooltip=&quot;검토·승인용 종합 결과 리포트를 PDF로 생성&quot;&gt;PDF 생성&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;결과 요약 · 리포트&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;베어링별 판정과 회차 이력을 통합 확인&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action&quot; type=&quot;button&quot; data-tooltip=&quot;최종 적용값과 계산 근거를 Excel 또는 CSV로 내보내기&quot;&gt;Excel / CSV&lt;/button&gt;&lt;button class=&quot;action primary&quot; id=&quot;generate-pdf-report&quot; type=&quot;button&quot; data-tooltip=&quot;리포트 전체 6개 페이지를 PDF로 변환한 뒤 미리보기 화면 열기&quot;&gt;PDF 생성&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
           &lt;div class=&quot;report-tabs&quot; role=&quot;tablist&quot; aria-label=&quot;결과 리포트 영역&quot; data-help=&quot;내용을 한 영역씩 확인할 수 있습니다. 탭을 선택하면 해당 결과만 화면에 표시됩니다.&quot;&gt;
             &lt;button class=&quot;report-tab&quot; id=&quot;report-tab-summary&quot; type=&quot;button&quot; role=&quot;tab&quot; data-report-tab=&quot;summary&quot; aria-controls=&quot;report-panel-summary&quot; aria-selected=&quot;true&quot;&gt;종합 판정&lt;/button&gt;
             &lt;button class=&quot;report-tab&quot; id=&quot;report-tab-confirm&quot; type=&quot;button&quot; role=&quot;tab&quot; data-report-tab=&quot;confirm&quot; aria-controls=&quot;report-panel-confirm&quot; aria-selected=&quot;false&quot;&gt;결과 확정&lt;/button&gt;
@@ -1438,6 +1480,58 @@ html&gt;body{padding:0}&lt;/style&gt;
     &lt;div class=&quot;graph-fullscreen-head&quot;&gt;&lt;h2 id=&quot;graph-fullscreen-title&quot;&gt;그래프 전체 화면&lt;/h2&gt;&lt;button class=&quot;action&quot; id=&quot;close-graph-fullscreen&quot; type=&quot;button&quot;&gt;전체 화면 닫기&lt;/button&gt;&lt;/div&gt;
     &lt;div class=&quot;graph-fullscreen-body&quot; id=&quot;graph-fullscreen-body&quot;&gt;&lt;/div&gt;
     &lt;div class=&quot;legend&quot; id=&quot;graph-fullscreen-legend&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;pdf-preview&quot; id=&quot;pdf-preview&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-labelledby=&quot;pdf-preview-title&quot;&gt;
+    &lt;div class=&quot;pdf-preview-head&quot;&gt;
+      &lt;div&gt;&lt;h2 id=&quot;pdf-preview-title&quot;&gt;PDF 미리보기&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;Shaft Reaction Report · 전체 6페이지&lt;/p&gt;&lt;/div&gt;
+      &lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action primary&quot; id=&quot;save-pdf-file&quot; type=&quot;button&quot; data-tooltip=&quot;미리보기 전체 6페이지를 하나의 PDF 파일로 저장&quot;&gt;PDF 파일 저장&lt;/button&gt;&lt;button class=&quot;action&quot; id=&quot;close-pdf-preview&quot; type=&quot;button&quot;&gt;미리보기 닫기&lt;/button&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;pdf-preview-body&quot;&gt;
+      &lt;div class=&quot;pdf-page-list&quot; role=&quot;tablist&quot; aria-label=&quot;PDF 페이지 선택&quot;&gt;
+        &lt;button class=&quot;pdf-page-choice&quot; type=&quot;button&quot; role=&quot;tab&quot; data-pdf-page=&quot;0&quot; aria-selected=&quot;true&quot;&gt;1 · 표지·기본정보&lt;/button&gt;
+        &lt;button class=&quot;pdf-page-choice&quot; type=&quot;button&quot; role=&quot;tab&quot; data-pdf-page=&quot;1&quot; aria-selected=&quot;false&quot;&gt;2 · 종합 판정&lt;/button&gt;
+        &lt;button class=&quot;pdf-page-choice&quot; type=&quot;button&quot; role=&quot;tab&quot; data-pdf-page=&quot;2&quot; aria-selected=&quot;false&quot;&gt;3 · 베어링별 곡선&lt;/button&gt;
+        &lt;button class=&quot;pdf-page-choice&quot; type=&quot;button&quot; role=&quot;tab&quot; data-pdf-page=&quot;3&quot; aria-selected=&quot;false&quot;&gt;4 · 최종 적용 데이터&lt;/button&gt;
+        &lt;button class=&quot;pdf-page-choice&quot; type=&quot;button&quot; role=&quot;tab&quot; data-pdf-page=&quot;4&quot; aria-selected=&quot;false&quot;&gt;5 · 회차·보정 이력&lt;/button&gt;
+        &lt;button class=&quot;pdf-page-choice&quot; type=&quot;button&quot; role=&quot;tab&quot; data-pdf-page=&quot;5&quot; aria-selected=&quot;false&quot;&gt;6 · 작업자 의견&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;pdf-page-stage&quot;&gt;
+        &lt;article class=&quot;pdf-page pdf-cover active&quot; data-pdf-preview-page=&quot;0&quot; aria-label=&quot;PDF 1페이지 표지와 기본정보&quot;&gt;
+          &lt;div class=&quot;pdf-cover-mark&quot;&gt;J&lt;/div&gt;&lt;h3&gt;Main Engine Shaft&lt;br&gt;Reaction Measurement Report&lt;/h3&gt;&lt;p&gt;메인 엔진 샤프트 반력 계측 결과 리포트&lt;/p&gt;
+          &lt;table class=&quot;pdf-cover-info&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;th&gt;Test ID&lt;/th&gt;&lt;td&gt;H2678-20260825-02&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;호선 / 엔진&lt;/th&gt;&lt;td&gt;H2678 / ME 6G70ME-C&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;시험 수행일시&lt;/th&gt;&lt;td&gt;2026-08-25 14:32&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;작업자&lt;/th&gt;&lt;td&gt;홍길동&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;장비 세트&lt;/th&gt;&lt;td&gt;SET-014&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+          &lt;p class=&quot;pdf-page-number&quot;&gt;1 / 6&lt;/p&gt;
+        &lt;/article&gt;
+        &lt;article class=&quot;pdf-page&quot; data-pdf-preview-page=&quot;1&quot; aria-label=&quot;PDF 2페이지 종합 판정&quot;&gt;
+          &lt;div class=&quot;pdf-page-header&quot;&gt;&lt;strong&gt;Shaft Reaction Report&lt;/strong&gt;&lt;span&gt;H2678-20260825-02&lt;/span&gt;&lt;/div&gt;&lt;h3&gt;종합 판정&lt;/h3&gt;
+          &lt;div class=&quot;pdf-kpi-grid&quot;&gt;&lt;div class=&quot;pdf-kpi&quot;&gt;&lt;span&gt;측정 완료&lt;/span&gt;&lt;strong&gt;4 / 4&lt;/strong&gt;&lt;/div&gt;&lt;div class=&quot;pdf-kpi&quot;&gt;&lt;span&gt;종합 판정&lt;/span&gt;&lt;strong&gt;조건부 OK&lt;/strong&gt;&lt;/div&gt;&lt;div class=&quot;pdf-kpi&quot;&gt;&lt;span&gt;재측정&lt;/span&gt;&lt;strong&gt;1 위치&lt;/strong&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;h4&gt;정적 베어링 하중 요약&lt;/h4&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;베어링&lt;/th&gt;&lt;th&gt;목표&lt;/th&gt;&lt;th&gt;측정&lt;/th&gt;&lt;th&gt;오차율&lt;/th&gt;&lt;th&gt;판정&lt;/th&gt;&lt;th&gt;회차&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;No.6&lt;/td&gt;&lt;td&gt;820 kN&lt;/td&gt;&lt;td&gt;815 kN&lt;/td&gt;&lt;td&gt;-0.6%&lt;/td&gt;&lt;td&gt;OK&lt;/td&gt;&lt;td&gt;2차&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;No.5&lt;/td&gt;&lt;td&gt;790 kN&lt;/td&gt;&lt;td&gt;802 kN&lt;/td&gt;&lt;td&gt;+1.5%&lt;/td&gt;&lt;td&gt;OK&lt;/td&gt;&lt;td&gt;2차&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;No.4&lt;/td&gt;&lt;td&gt;760 kN&lt;/td&gt;&lt;td&gt;754 kN&lt;/td&gt;&lt;td&gt;-0.8%&lt;/td&gt;&lt;td&gt;OK&lt;/td&gt;&lt;td&gt;2차&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;No.3&lt;/td&gt;&lt;td&gt;720 kN&lt;/td&gt;&lt;td&gt;676 kN&lt;/td&gt;&lt;td&gt;-6.1%&lt;/td&gt;&lt;td&gt;재측정&lt;/td&gt;&lt;td&gt;2차&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+          &lt;h4&gt;판정 근거&lt;/h4&gt;&lt;p class=&quot;pdf-opinion-box&quot;&gt;No.3 베어링은 목표 반력 대비 -6.1%로 허용오차 ±5%를 초과했습니다. 나머지 3개 위치는 허용범위를 만족합니다.&lt;/p&gt;&lt;p class=&quot;pdf-page-number&quot;&gt;2 / 6&lt;/p&gt;
+        &lt;/article&gt;
+        &lt;article class=&quot;pdf-page&quot; data-pdf-preview-page=&quot;2&quot; aria-label=&quot;PDF 3페이지 베어링별 곡선&quot;&gt;
+          &lt;div class=&quot;pdf-page-header&quot;&gt;&lt;strong&gt;Shaft Reaction Report&lt;/strong&gt;&lt;span&gt;H2678-20260825-02&lt;/span&gt;&lt;/div&gt;&lt;h3&gt;베어링별 하중–변위 곡선&lt;/h3&gt;
+          &lt;svg class=&quot;pdf-curve&quot; viewBox=&quot;0 0 460 250&quot; role=&quot;img&quot; aria-label=&quot;4개 베어링 하중 변위 곡선&quot;&gt;&lt;title&gt;베어링별 하중 변위 곡선&lt;/title&gt;&lt;desc&gt;하중 0에서 800 킬로뉴턴, 변위 0에서 1밀리미터 범위의 네 곡선&lt;/desc&gt;&lt;path class=&quot;frame&quot; d=&quot;M48 20V214H444M48 165H444M48 116H444M48 68H444&quot;/&gt;&lt;g&gt;&lt;text x=&quot;43&quot; y=&quot;218&quot; text-anchor=&quot;end&quot;&gt;0.00&lt;/text&gt;&lt;text x=&quot;43&quot; y=&quot;169&quot; text-anchor=&quot;end&quot;&gt;0.25&lt;/text&gt;&lt;text x=&quot;43&quot; y=&quot;120&quot; text-anchor=&quot;end&quot;&gt;0.50&lt;/text&gt;&lt;text x=&quot;43&quot; y=&quot;72&quot; text-anchor=&quot;end&quot;&gt;0.75&lt;/text&gt;&lt;text x=&quot;43&quot; y=&quot;24&quot; text-anchor=&quot;end&quot;&gt;1.00&lt;/text&gt;&lt;text x=&quot;48&quot; y=&quot;228&quot;&gt;0&lt;/text&gt;&lt;text x=&quot;147&quot; y=&quot;228&quot;&gt;200&lt;/text&gt;&lt;text x=&quot;246&quot; y=&quot;228&quot;&gt;400&lt;/text&gt;&lt;text x=&quot;345&quot; y=&quot;228&quot;&gt;600&lt;/text&gt;&lt;text x=&quot;430&quot; y=&quot;228&quot;&gt;800 kN&lt;/text&gt;&lt;text x=&quot;4&quot; y=&quot;12&quot;&gt;mm&lt;/text&gt;&lt;/g&gt;&lt;path class=&quot;line-a&quot; d=&quot;M54 205L110 201L165 190L220 166L276 132L332 94L388 55L438 36&quot;/&gt;&lt;path class=&quot;line-b&quot; d=&quot;M54 207L110 204L165 194L220 174L276 142L332 107L388 72L438 51&quot;/&gt;&lt;path class=&quot;line-c&quot; d=&quot;M54 209L110 206L165 198L220 181L276 153L332 119L388 84L438 62&quot;/&gt;&lt;path class=&quot;line-d&quot; d=&quot;M54 210L110 208L165 202L220 189L276 168L332 142L388 113L438 91&quot;/&gt;&lt;/svg&gt;
+          &lt;div class=&quot;legend&quot;&gt;&lt;span style=&quot;color:var(--jw-accent)&quot;&gt;No.6&lt;/span&gt;&lt;span style=&quot;color:var(--jw-good)&quot;&gt;No.5&lt;/span&gt;&lt;span style=&quot;color:var(--jw-warn)&quot;&gt;No.4&lt;/span&gt;&lt;span style=&quot;color:var(--jw-bad)&quot;&gt;No.3&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;pdf-opinion-box&quot;&gt;각 곡선은 최종 적용된 Lifting·Lowering 분석 구간과 Lift-off 판정값을 기준으로 생성되었습니다.&lt;/p&gt;&lt;p class=&quot;pdf-page-number&quot;&gt;3 / 6&lt;/p&gt;
+        &lt;/article&gt;
+        &lt;article class=&quot;pdf-page&quot; data-pdf-preview-page=&quot;3&quot; aria-label=&quot;PDF 4페이지 최종 적용 데이터&quot;&gt;
+          &lt;div class=&quot;pdf-page-header&quot;&gt;&lt;strong&gt;Shaft Reaction Report&lt;/strong&gt;&lt;span&gt;H2678-20260825-02&lt;/span&gt;&lt;/div&gt;&lt;h3&gt;최종 적용 데이터&lt;/h3&gt;
+          &lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Step&lt;/th&gt;&lt;th&gt;구간&lt;/th&gt;&lt;th&gt;압력&lt;/th&gt;&lt;th&gt;변위&lt;/th&gt;&lt;th&gt;환산 하중&lt;/th&gt;&lt;th&gt;적용&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;07&lt;/td&gt;&lt;td&gt;Lifting&lt;/td&gt;&lt;td&gt;486.3 bar&lt;/td&gt;&lt;td&gt;0.44 mm&lt;/td&gt;&lt;td&gt;616.1 kN&lt;/td&gt;&lt;td&gt;보정&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;08&lt;/td&gt;&lt;td&gt;Lifting&lt;/td&gt;&lt;td&gt;512.8 bar&lt;/td&gt;&lt;td&gt;0.51 mm&lt;/td&gt;&lt;td&gt;649.7 kN&lt;/td&gt;&lt;td&gt;원시값&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;09&lt;/td&gt;&lt;td&gt;Lowering&lt;/td&gt;&lt;td&gt;498.1 bar&lt;/td&gt;&lt;td&gt;0.48 mm&lt;/td&gt;&lt;td&gt;631.0 kN&lt;/td&gt;&lt;td&gt;원시값&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+          &lt;h4&gt;계산 결과&lt;/h4&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;th&gt;Lift-off 판정값&lt;/th&gt;&lt;td&gt;598.4 kN&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;평균 대표 하중&lt;/th&gt;&lt;td&gt;754.2 kN&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;최종 반력값&lt;/th&gt;&lt;td&gt;754.2 kN · OK&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;분석 구간&lt;/th&gt;&lt;td&gt;L Step 04~10 / D Step 03~09&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;기준 변위&lt;/th&gt;&lt;td&gt;0.60 mm&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+          &lt;p class=&quot;pdf-opinion-box&quot;&gt;원시 데이터는 별도 보존되며, 본 페이지에는 승인된 보정값과 최종 계산값이 표시됩니다.&lt;/p&gt;&lt;p class=&quot;pdf-page-number&quot;&gt;4 / 6&lt;/p&gt;
+        &lt;/article&gt;
+        &lt;article class=&quot;pdf-page&quot; data-pdf-preview-page=&quot;4&quot; aria-label=&quot;PDF 5페이지 회차와 보정 이력&quot;&gt;
+          &lt;div class=&quot;pdf-page-header&quot;&gt;&lt;strong&gt;Shaft Reaction Report&lt;/strong&gt;&lt;span&gt;H2678-20260825-02&lt;/span&gt;&lt;/div&gt;&lt;h3&gt;회차·보정 이력&lt;/h3&gt;
+          &lt;h4&gt;회차별 조정 결과&lt;/h4&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;회차&lt;/th&gt;&lt;th&gt;조정&lt;/th&gt;&lt;th&gt;결과&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;1차&lt;/td&gt;&lt;td&gt;No.3 Shim +0.20 mm&lt;/td&gt;&lt;td&gt;NG&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;2차&lt;/td&gt;&lt;td&gt;조정 후 재측정&lt;/td&gt;&lt;td&gt;재검토&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+          &lt;h4&gt;작업자 보정 이력&lt;/h4&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;시각&lt;/th&gt;&lt;th&gt;작업자&lt;/th&gt;&lt;th&gt;대상&lt;/th&gt;&lt;th&gt;변경&lt;/th&gt;&lt;th&gt;사유&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;14:41:22&lt;/td&gt;&lt;td&gt;홍길동&lt;/td&gt;&lt;td&gt;Step 07 변위&lt;/td&gt;&lt;td&gt;0.42 → 0.44 mm&lt;/td&gt;&lt;td&gt;센서 응답 지연&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;14:45:03&lt;/td&gt;&lt;td&gt;홍길동&lt;/td&gt;&lt;td&gt;분석 구간&lt;/td&gt;&lt;td&gt;L 04~09 → 04~10&lt;/td&gt;&lt;td&gt;직선성 검토&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+          &lt;p class=&quot;pdf-opinion-box&quot;&gt;모든 보정은 원시값을 변경하지 않고 최종 적용값으로 별도 저장되며 작업자·시각·사유가 함께 기록됩니다.&lt;/p&gt;&lt;p class=&quot;pdf-page-number&quot;&gt;5 / 6&lt;/p&gt;
+        &lt;/article&gt;
+        &lt;article class=&quot;pdf-page&quot; data-pdf-preview-page=&quot;5&quot; aria-label=&quot;PDF 6페이지 작업자 의견&quot;&gt;
+          &lt;div class=&quot;pdf-page-header&quot;&gt;&lt;strong&gt;Shaft Reaction Report&lt;/strong&gt;&lt;span&gt;H2678-20260825-02&lt;/span&gt;&lt;/div&gt;&lt;h3&gt;작업자 의견 · 재측정 확인&lt;/h3&gt;
+          &lt;h4&gt;재측정 여부&lt;/h4&gt;&lt;p class=&quot;pdf-opinion-box&quot; id=&quot;pdf-remeasure-decision&quot;&gt;필요 · 시스템 권장&lt;/p&gt;&lt;h4&gt;재측정 사유&lt;/h4&gt;&lt;p class=&quot;pdf-opinion-box&quot; id=&quot;pdf-remeasure-reason&quot;&gt;No.3 베어링 허용오차 초과 · Shim 조정 후 재측정&lt;/p&gt;&lt;h4&gt;최종 의견&lt;/h4&gt;&lt;p class=&quot;pdf-opinion-box&quot; id=&quot;pdf-final-opinion&quot;&gt;No.3 베어링 Shim 조정 후 재측정 필요. 나머지 위치는 허용범위 만족.&lt;/p&gt;
+          &lt;h4&gt;작업자 승인&lt;/h4&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;th&gt;작업자&lt;/th&gt;&lt;td&gt;홍길동&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;확정 상태&lt;/th&gt;&lt;td&gt;승인 대기&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;시험 수행일시&lt;/th&gt;&lt;td&gt;2026-08-25 14:32&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p class=&quot;pdf-page-number&quot;&gt;6 / 6&lt;/p&gt;
+        &lt;/article&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;pdf-preview-foot&quot;&gt;&lt;span class=&quot;pdf-preview-status&quot; id=&quot;pdf-preview-status&quot; role=&quot;status&quot;&gt;6 / 6 페이지 변환 완료&lt;/span&gt;&lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action&quot; id=&quot;pdf-previous-page&quot; type=&quot;button&quot;&gt;이전 페이지&lt;/button&gt;&lt;button class=&quot;action&quot; id=&quot;pdf-next-page&quot; type=&quot;button&quot;&gt;다음 페이지&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
   &lt;/div&gt;
   &lt;div class=&quot;guide-tooltip&quot; id=&quot;guide-tooltip&quot; role=&quot;tooltip&quot;&gt;&lt;/div&gt;
   &lt;script&gt;
@@ -1516,6 +1610,18 @@ html&gt;body{padding:0}&lt;/style&gt;
       const graphFullscreenBody = root.querySelector(&#x27;#graph-fullscreen-body&#x27;);
       const graphFullscreenLegend = root.querySelector(&#x27;#graph-fullscreen-legend&#x27;);
       const closeGraphFullscreen = root.querySelector(&#x27;#close-graph-fullscreen&#x27;);
+      const generatePdfReport = root.querySelector(&#x27;#generate-pdf-report&#x27;);
+      const pdfPreview = root.querySelector(&#x27;#pdf-preview&#x27;);
+      const closePdfPreview = root.querySelector(&#x27;#close-pdf-preview&#x27;);
+      const savePdfFile = root.querySelector(&#x27;#save-pdf-file&#x27;);
+      const pdfPageChoices = [...root.querySelectorAll(&#x27;[data-pdf-page]&#x27;)];
+      const pdfPages = [...root.querySelectorAll(&#x27;[data-pdf-preview-page]&#x27;)];
+      const pdfPreviewStatus = root.querySelector(&#x27;#pdf-preview-status&#x27;);
+      const pdfPreviousPage = root.querySelector(&#x27;#pdf-previous-page&#x27;);
+      const pdfNextPage = root.querySelector(&#x27;#pdf-next-page&#x27;);
+      const pdfRemeasureDecision = root.querySelector(&#x27;#pdf-remeasure-decision&#x27;);
+      const pdfRemeasureReason = root.querySelector(&#x27;#pdf-remeasure-reason&#x27;);
+      const pdfFinalOpinion = root.querySelector(&#x27;#pdf-final-opinion&#x27;);
       const guideTooltip = root.querySelector(&#x27;#guide-tooltip&#x27;);
       const remeasureDecision = root.querySelector(&#x27;#remeasure-decision&#x27;);
       const remeasureReasonField = root.querySelector(&#x27;#remeasure-reason-field&#x27;);
@@ -1598,8 +1704,43 @@ html&gt;body{padding:0}&lt;/style&gt;
       openLiveGraph.addEventListener(&#x27;click&#x27;, () =&gt; showGraphFullscreen(root.querySelector(&#x27;#live-trend-plot&#x27;), &#x27;실시간 하중-변위 추세&#x27;, openLiveGraph));
       openAnalysisGraph.addEventListener(&#x27;click&#x27;, () =&gt; showGraphFullscreen(analysisPlot, &#x27;Lifting · Lowering 분석 그래프&#x27;, openAnalysisGraph));
       closeGraphFullscreen.addEventListener(&#x27;click&#x27;, exitGraphFullscreen);
+      let currentPdfPage = 0;
+      const showPdfPage = (index) =&gt; {
+        currentPdfPage = Math.max(0, Math.min(index, pdfPages.length - 1));
+        pdfPageChoices.forEach((choice, choiceIndex) =&gt; choice.setAttribute(&#x27;aria-selected&#x27;, String(choiceIndex === currentPdfPage)));
+        pdfPages.forEach((page, pageIndex) =&gt; page.classList.toggle(&#x27;active&#x27;, pageIndex === currentPdfPage));
+        pdfPreviousPage.disabled = currentPdfPage === 0;
+        pdfNextPage.disabled = currentPdfPage === pdfPages.length - 1;
+        pdfPreviewStatus.textContent = `${pdfPages.length} / ${pdfPages.length} 페이지 변환 완료 · ${currentPdfPage + 1}페이지 표시`;
+      };
+      const exitPdfPreview = () =&gt; {
+        pdfPreview.classList.remove(&#x27;open&#x27;);
+        generatePdfReport.setAttribute(&#x27;aria-expanded&#x27;, &#x27;false&#x27;);
+        generatePdfReport.focus();
+      };
+      generatePdfReport.setAttribute(&#x27;aria-expanded&#x27;, &#x27;false&#x27;);
+      generatePdfReport.addEventListener(&#x27;click&#x27;, () =&gt; {
+        if (fullscreenGraphState) exitGraphFullscreen();
+        pdfRemeasureDecision.textContent = remeasureDecision.selectedOptions[0].textContent;
+        pdfRemeasureReason.textContent = remeasureDecision.value === &#x27;required&#x27; ? (remeasureReason.value.trim() || &#x27;미입력&#x27;) : &#x27;해당 없음&#x27;;
+        pdfFinalOpinion.textContent = finalOpinion.value.trim() || &#x27;최종 의견 미입력&#x27;;
+        savePdfFile.textContent = &#x27;PDF 파일 저장&#x27;;
+        pdfPreview.classList.add(&#x27;open&#x27;);
+        generatePdfReport.setAttribute(&#x27;aria-expanded&#x27;, &#x27;true&#x27;);
+        showPdfPage(0);
+        closePdfPreview.focus();
+      });
+      closePdfPreview.addEventListener(&#x27;click&#x27;, exitPdfPreview);
+      pdfPageChoices.forEach((choice) =&gt; choice.addEventListener(&#x27;click&#x27;, () =&gt; showPdfPage(Number(choice.dataset.pdfPage))));
+      pdfPreviousPage.addEventListener(&#x27;click&#x27;, () =&gt; showPdfPage(currentPdfPage - 1));
+      pdfNextPage.addEventListener(&#x27;click&#x27;, () =&gt; showPdfPage(currentPdfPage + 1));
+      savePdfFile.addEventListener(&#x27;click&#x27;, () =&gt; {
+        savePdfFile.textContent = &#x27;PDF 저장 완료&#x27;;
+        pdfPreviewStatus.textContent = &#x27;H2678-20260825-02_Shaft-Reaction-Report.pdf · 6페이지 저장 완료&#x27;;
+      });
       root.addEventListener(&#x27;keydown&#x27;, (event) =&gt; {
         if (event.key === &#x27;Escape&#x27; &amp;&amp; fullscreenGraphState) exitGraphFullscreen();
+        if (event.key === &#x27;Escape&#x27; &amp;&amp; pdfPreview.classList.contains(&#x27;open&#x27;)) exitPdfPreview();
       });
       buttons.forEach((button) =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; {
         if (fullscreenGraphState) exitGraphFullscreen();
