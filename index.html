@@ -1097,6 +1097,14 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .quality-item strong { display: block; margin-top: 3px; font-weight: 500; }
     #jackup-wireframe .section-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
     #jackup-wireframe .section-tabs span { background: var(--jw-surface-2); color: var(--jw-muted); padding: 6px 8px; border-radius: 5px; font-size: 11px; }
+    #jackup-wireframe .result-confirmation { margin-top: 12px; }
+    #jackup-wireframe .result-confirmation-grid { display: grid; grid-template-columns: minmax(150px, .7fr) minmax(180px, .8fr) minmax(240px, 1.5fr); gap: 12px; align-items: start; }
+    #jackup-wireframe .result-verdict { min-height: 70px; padding: 10px 12px; border-radius: 7px; background: var(--jw-surface-2); }
+    #jackup-wireframe .result-verdict strong { display: block; margin-top: 7px; font-size: 18px; font-weight: 500; }
+    #jackup-wireframe .result-opinion-field { margin-top: 12px; }
+    #jackup-wireframe .result-confirmation-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
+    #jackup-wireframe .result-save-status { color: var(--jw-muted); font-size: 12px; }
+    #jackup-wireframe .result-save-status.saved { color: var(--jw-good); }
     #jackup-wireframe .shaft-layout { margin: 10px 0; padding: 12px 8px; background: var(--jw-surface-2); border-radius: 8px; }
     #jackup-wireframe .bearing-count-field { display: grid; grid-template-columns: auto 54px; align-items: center; gap: 7px; width: 100%; margin: 0; }
     #jackup-wireframe .bearing-count-field label { white-space: nowrap; }
@@ -1129,6 +1137,8 @@ html&gt;body{padding:0}&lt;/style&gt;
       #jackup-wireframe .set-builder { grid-template-columns: 1fr auto 1fr; }
       #jackup-wireframe .set-builder .field, #jackup-wireframe .set-builder .action { grid-column: span 1; }
       #jackup-wireframe .analysis-meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #jackup-wireframe .result-confirmation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #jackup-wireframe .result-confirmation-grid .remeasure-reason-field { grid-column: 1 / -1; }
       #jackup-wireframe .overview-history-grid { grid-template-columns: 1fr; }
       #jackup-wireframe .graph-fullscreen { left: 138px; right: 0; }
     }
@@ -1152,6 +1162,10 @@ html&gt;body{padding:0}&lt;/style&gt;
       #jackup-wireframe .selected-bearing-editor { grid-template-columns: 1fr; }
       #jackup-wireframe .layout-controls.bearing-toolbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       #jackup-wireframe .overview-history-grid { grid-template-columns: 1fr; }
+      #jackup-wireframe .result-confirmation-grid { grid-template-columns: 1fr; }
+      #jackup-wireframe .result-confirmation-grid .remeasure-reason-field { grid-column: auto; }
+      #jackup-wireframe .result-confirmation-footer { align-items: stretch; flex-direction: column; }
+      #jackup-wireframe .result-confirmation-footer .action { width: 100%; }
     }
   &lt;/style&gt;
   &lt;div class=&quot;device&quot;&gt;
@@ -1374,7 +1388,7 @@ html&gt;body{padding:0}&lt;/style&gt;
             &lt;/div&gt;
             &lt;div class=&quot;panel&quot; data-help=&quot;최종 계산값, Lift-off 판정, 평균 대표 하중, 알람과 작업 메모를 시험 이력에 함께 저장합니다.&quot;&gt;
               &lt;h3&gt;계산 결과 · 작업 기록&lt;/h3&gt;
-              &lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Lift-off 판정값&lt;/td&gt;&lt;td&gt;598.4 kN&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;평균 대표 하중&lt;/td&gt;&lt;td&gt;754.2 kN&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;최종 반력값&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;754.2 kN · OK&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;알람&lt;/td&gt;&lt;td class=&quot;warn&quot;&gt;Step 07 센서 응답 지연&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+              &lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Lift-off 판정값&lt;/td&gt;&lt;td&gt;598.4 kN&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;평균 대표 하중&lt;/td&gt;&lt;td&gt;754.2 kN&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;최종 반력값&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;754.2 kN · OK&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;알람&lt;/td&gt;&lt;td class=&quot;warn&quot;&gt;Step 07 센서 응답 지연&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;결과 확정&lt;/td&gt;&lt;td id=&quot;final-result-history&quot;&gt;저장 전 · 작업자 승인 대기&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
               &lt;div class=&quot;field&quot; style=&quot;margin-top:10px&quot;&gt;&lt;label&gt;작업 메모&lt;/label&gt;&lt;textarea&gt;No.4 위치 JIG 고정상태 재확인. 보정 후 분석선 재실행 완료.&lt;/textarea&gt;&lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
@@ -1386,7 +1400,17 @@ html&gt;body{padding:0}&lt;/style&gt;
           &lt;div class=&quot;section-tabs&quot; data-help=&quot;최종 PDF 리포트에 포함되는 페이지 구성입니다.&quot;&gt;&lt;span&gt;1 표지·기본정보&lt;/span&gt;&lt;span&gt;2 종합 판정&lt;/span&gt;&lt;span&gt;3 베어링별 곡선&lt;/span&gt;&lt;span&gt;4 최종 적용 데이터&lt;/span&gt;&lt;span&gt;5 회차·보정 이력&lt;/span&gt;&lt;span&gt;6 작업자 의견&lt;/span&gt;&lt;/div&gt;
           &lt;div class=&quot;grid three&quot;&gt;&lt;div class=&quot;panel&quot; data-help=&quot;시험 설정에서 등록한 전체 베어링 4개가 모두 한 회차 이상 측정 완료되었다는 의미입니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;측정 완료&lt;/span&gt;&lt;div class=&quot;metric&quot;&gt;4 / 4&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;panel&quot; data-help=&quot;일부 위치가 허용범위를 벗어나 조정·재측정이 필요하지만 나머지 위치는 만족하는 상태입니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;종합 판정&lt;/span&gt;&lt;div class=&quot;metric warn&quot;&gt;조건부 OK&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;panel&quot; data-help=&quot;허용오차를 벗어나 다시 측정해야 하는 베어링 위치의 수입니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;재측정&lt;/span&gt;&lt;div class=&quot;metric&quot;&gt;1 위치&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
           &lt;div class=&quot;panel&quot; data-help=&quot;베어링별 목표 반력과 최종 측정 반력, 목표 대비 오차율, 허용오차에 따른 OK·재측정 판정, 적용 회차를 비교합니다.&quot; style=&quot;margin-top:12px&quot;&gt;&lt;h3&gt;정적 베어링 하중 요약&lt;/h3&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;베어링&lt;/th&gt;&lt;th&gt;목표&lt;/th&gt;&lt;th&gt;측정&lt;/th&gt;&lt;th&gt;오차율&lt;/th&gt;&lt;th&gt;판정&lt;/th&gt;&lt;th&gt;회차&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;No.6&lt;/td&gt;&lt;td&gt;820 kN&lt;/td&gt;&lt;td&gt;815 kN&lt;/td&gt;&lt;td&gt;-0.6%&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;OK&lt;/td&gt;&lt;td&gt;2차&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;No.5&lt;/td&gt;&lt;td&gt;790 kN&lt;/td&gt;&lt;td&gt;802 kN&lt;/td&gt;&lt;td&gt;+1.5%&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;OK&lt;/td&gt;&lt;td&gt;2차&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;No.4&lt;/td&gt;&lt;td&gt;760 kN&lt;/td&gt;&lt;td&gt;754 kN&lt;/td&gt;&lt;td&gt;-0.8%&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;OK&lt;/td&gt;&lt;td&gt;2차&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;No.3&lt;/td&gt;&lt;td&gt;720 kN&lt;/td&gt;&lt;td&gt;676 kN&lt;/td&gt;&lt;td&gt;-6.1%&lt;/td&gt;&lt;td class=&quot;bad&quot;&gt;재측정&lt;/td&gt;&lt;td&gt;2차&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
-          &lt;div class=&quot;grid two&quot; style=&quot;margin-top:12px&quot;&gt;&lt;div class=&quot;panel&quot; data-help=&quot;리포트 표지와 모든 상세 페이지에 공통으로 표시할 시험 식별정보입니다.&quot;&gt;&lt;h3&gt;표지·기본정보&lt;/h3&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Test ID&lt;/td&gt;&lt;td&gt;H2678-20260825-02&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;호선 / 엔진&lt;/td&gt;&lt;td&gt;H2678 / ME 6G70ME-C&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;작업자 / 일시&lt;/td&gt;&lt;td&gt;홍길동 / 2026-08-25 14:32&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;장비 세트&lt;/td&gt;&lt;td&gt;SET-014&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;div class=&quot;panel&quot; data-help=&quot;측정 결과가 실제 정렬 조정 작업으로 이어지도록 조정 대상, 재측정 필요 여부와 작업자 판단을 기록합니다.&quot;&gt;&lt;h3&gt;최종 의견 · 재측정 여부&lt;/h3&gt;&lt;p class=&quot;sub&quot;&gt;No.3 베어링 Shim 조정 후 재측정 필요. 나머지 위치는 허용범위 만족.&lt;/p&gt;&lt;div class=&quot;banner&quot;&gt;재측정 플래그: No.3 · Shim 조정 이력 포함 · 작업자 승인 대기&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;panel result-confirmation&quot; data-help=&quot;모든 베어링 측정이 끝난 뒤 시스템의 종합 판정을 확인하고, 작업자가 재측정 여부와 최종 의견을 확정하여 현재 Test ID의 이력으로 저장합니다.&quot;&gt;
+            &lt;h3&gt;결과 확정&lt;/h3&gt;
+            &lt;div class=&quot;result-confirmation-grid&quot;&gt;
+              &lt;div class=&quot;result-verdict&quot; data-help=&quot;허용오차와 베어링별 판정을 종합한 시스템 계산 결과입니다. 작업자가 직접 수정하는 값이 아닙니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;1 · 종합 판정&lt;/span&gt;&lt;strong class=&quot;warn&quot;&gt;조건부 OK&lt;/strong&gt;&lt;p class=&quot;sub&quot;&gt;No.3 허용범위 초과&lt;/p&gt;&lt;/div&gt;
+              &lt;div class=&quot;field&quot; data-help=&quot;시스템은 No.3의 재측정을 권장합니다. 작업자가 현장 상태를 확인한 뒤 필요 또는 불필요를 최종 선택합니다.&quot;&gt;&lt;label for=&quot;remeasure-decision&quot;&gt;2 · 재측정 여부&lt;/label&gt;&lt;select id=&quot;remeasure-decision&quot;&gt;&lt;option value=&quot;required&quot; selected&gt;필요 · 시스템 권장&lt;/option&gt;&lt;option value=&quot;not-required&quot;&gt;불필요 · 작업자 확인&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+              &lt;div class=&quot;field remeasure-reason-field&quot; id=&quot;remeasure-reason-field&quot; data-help=&quot;재측정이 필요한 대상과 현장 조치 계획을 기록합니다. 재측정 필요 선택 시 필수 입력 항목입니다.&quot;&gt;&lt;label for=&quot;remeasure-reason&quot;&gt;재측정 사유&lt;/label&gt;&lt;input id=&quot;remeasure-reason&quot; value=&quot;No.3 베어링 허용오차 초과 · Shim 조정 후 재측정&quot; placeholder=&quot;대상 베어링과 재측정 사유 입력&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;field result-opinion-field&quot; data-help=&quot;측정 결과, 현장 확인 내용과 후속 조치에 대한 작업자의 최종 판단을 기록합니다. PDF 리포트와 데이터 이력에 함께 저장됩니다.&quot;&gt;&lt;label for=&quot;final-opinion&quot;&gt;3 · 최종 의견&lt;/label&gt;&lt;textarea id=&quot;final-opinion&quot; placeholder=&quot;측정 결과와 후속 조치에 대한 작업자 의견 입력&quot;&gt;No.3 베어링 Shim 조정 후 재측정 필요. 나머지 위치는 허용범위 만족.&lt;/textarea&gt;&lt;/div&gt;
+            &lt;div class=&quot;result-confirmation-footer&quot;&gt;&lt;span class=&quot;result-save-status&quot; id=&quot;result-save-status&quot; role=&quot;status&quot;&gt;저장 전 · 작업자 승인 대기&lt;/span&gt;&lt;button class=&quot;action primary&quot; id=&quot;save-final-result&quot; type=&quot;button&quot; data-tooltip=&quot;재측정 여부와 최종 의견을 현재 Test ID의 데이터 이력으로 저장&quot;&gt;4 · 결과 저장&lt;/button&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;panel&quot; data-help=&quot;리포트 표지와 모든 상세 페이지에 공통으로 표시할 시험 식별정보입니다.&quot; style=&quot;margin-top:12px&quot;&gt;&lt;h3&gt;표지·기본정보&lt;/h3&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Test ID&lt;/td&gt;&lt;td&gt;H2678-20260825-02&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;호선 / 엔진&lt;/td&gt;&lt;td&gt;H2678 / ME 6G70ME-C&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;작업자 / 일시&lt;/td&gt;&lt;td&gt;홍길동 / 2026-08-25 14:32&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;장비 세트&lt;/td&gt;&lt;td&gt;SET-014&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
           &lt;div class=&quot;grid two&quot; style=&quot;margin-top:12px&quot;&gt;&lt;div class=&quot;panel&quot; data-help=&quot;각 회차의 측정 반력, Shim 조정과 재측정 결과를 리포트에 포함합니다.&quot;&gt;&lt;h3&gt;회차별 조정 이력&lt;/h3&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;회차&lt;/th&gt;&lt;th&gt;조정&lt;/th&gt;&lt;th&gt;결과&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;1차&lt;/td&gt;&lt;td&gt;No.3 Shim +0.20 mm&lt;/td&gt;&lt;td class=&quot;bad&quot;&gt;NG&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;2차&lt;/td&gt;&lt;td&gt;조정 후 재측정&lt;/td&gt;&lt;td class=&quot;warn&quot;&gt;재검토&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;div class=&quot;panel&quot; data-help=&quot;최종 적용 데이터에는 원시값이 아니라 승인된 보정값과 계산값을 사용하되 원시값·수정 이력은 별도 부록으로 보존합니다.&quot;&gt;&lt;h3&gt;최종 적용 데이터&lt;/h3&gt;&lt;p class=&quot;sub&quot;&gt;Step별 압력·변위·환산 하중 / Lift-off / 평균 대표 하중 / 최종 반력 / 보정값·사유 / 알람·메모&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
         &lt;/section&gt;
       &lt;/main&gt;
@@ -1473,6 +1497,13 @@ html&gt;body{padding:0}&lt;/style&gt;
       const graphFullscreenLegend = root.querySelector(&#x27;#graph-fullscreen-legend&#x27;);
       const closeGraphFullscreen = root.querySelector(&#x27;#close-graph-fullscreen&#x27;);
       const guideTooltip = root.querySelector(&#x27;#guide-tooltip&#x27;);
+      const remeasureDecision = root.querySelector(&#x27;#remeasure-decision&#x27;);
+      const remeasureReasonField = root.querySelector(&#x27;#remeasure-reason-field&#x27;);
+      const remeasureReason = root.querySelector(&#x27;#remeasure-reason&#x27;);
+      const finalOpinion = root.querySelector(&#x27;#final-opinion&#x27;);
+      const saveFinalResult = root.querySelector(&#x27;#save-final-result&#x27;);
+      const resultSaveStatus = root.querySelector(&#x27;#result-save-status&#x27;);
+      const finalResultHistory = root.querySelector(&#x27;#final-result-history&#x27;);
       const helpTargets = [...root.querySelectorAll(&#x27;[data-tooltip], [data-help]&#x27;)];
       const hideTooltip = () =&gt; guideTooltip.classList.remove(&#x27;visible&#x27;);
       const showTooltip = (target) =&gt; {
@@ -1590,6 +1621,45 @@ html&gt;body{padding:0}&lt;/style&gt;
         guideToggle.setAttribute(&#x27;aria-pressed&#x27;, String(enabled));
         guideToggle.textContent = enabled ? &#x27;가이드 모드 끄기&#x27; : &#x27;가이드 모드 켜기&#x27;;
       });
+      const markFinalResultUnsaved = () =&gt; {
+        resultSaveStatus.className = &#x27;result-save-status&#x27;;
+        resultSaveStatus.textContent = &#x27;변경사항 저장 전 · 작업자 승인 대기&#x27;;
+        saveFinalResult.textContent = &#x27;4 · 결과 저장&#x27;;
+      };
+      const syncRemeasureReason = () =&gt; {
+        const required = remeasureDecision.value === &#x27;required&#x27;;
+        remeasureReasonField.hidden = !required;
+        remeasureReason.disabled = !required;
+        markFinalResultUnsaved();
+      };
+      remeasureDecision.addEventListener(&#x27;change&#x27;, syncRemeasureReason);
+      remeasureReason.addEventListener(&#x27;input&#x27;, markFinalResultUnsaved);
+      finalOpinion.addEventListener(&#x27;input&#x27;, markFinalResultUnsaved);
+      saveFinalResult.addEventListener(&#x27;click&#x27;, () =&gt; {
+        const requiresRemeasure = remeasureDecision.value === &#x27;required&#x27;;
+        if (requiresRemeasure &amp;&amp; !remeasureReason.value.trim()) {
+          resultSaveStatus.className = &#x27;result-save-status bad&#x27;;
+          resultSaveStatus.textContent = &#x27;재측정 사유를 입력해야 결과를 저장할 수 있습니다.&#x27;;
+          remeasureReason.focus();
+          return;
+        }
+        if (!finalOpinion.value.trim()) {
+          resultSaveStatus.className = &#x27;result-save-status bad&#x27;;
+          resultSaveStatus.textContent = &#x27;최종 의견을 입력해야 결과를 저장할 수 있습니다.&#x27;;
+          finalOpinion.focus();
+          return;
+        }
+        const now = new Date();
+        const pad = (value) =&gt; String(value).padStart(2, &#x27;0&#x27;);
+        const savedTime = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+        const decisionLabel = requiresRemeasure ? &#x27;재측정 필요&#x27; : &#x27;재측정 불필요&#x27;;
+        resultSaveStatus.className = &#x27;result-save-status saved&#x27;;
+        resultSaveStatus.textContent = `저장 완료 · 홍길동 · ${savedTime} · 데이터 이력 반영`;
+        finalResultHistory.className = requiresRemeasure ? &#x27;warn&#x27; : &#x27;good&#x27;;
+        finalResultHistory.textContent = `${decisionLabel} · 최종 의견 저장됨 · 홍길동 ${savedTime}`;
+        saveFinalResult.textContent = &#x27;결과 저장 완료&#x27;;
+      });
+      syncRemeasureReason();
       const syncDeviceSet = () =&gt; {
         const pressure = pressureModules.find((item) =&gt; item.checked);
         const displacement = displacementModules.find((item) =&gt; item.checked);
