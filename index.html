@@ -435,6 +435,10 @@ small,
   color: var(--muted-foreground);
 }
 
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -877,6 +881,85 @@ textarea.form-control {
   outline-offset: 2px;
 }
 
+@media (pointer: coarse) {
+  .btn,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control,
+  .form-select {
+    font-size: max(16px, var(--font-size-normal));
+  }
+
+  .form-control[type=&quot;file&quot;]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type=&quot;color&quot;] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type=&quot;date&quot;],
+    [type=&quot;datetime-local&quot;],
+    [type=&quot;month&quot;],
+    [type=&quot;time&quot;],
+    [type=&quot;week&quot;]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: &quot;&quot;;
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+
+  .form-range::-webkit-slider-runnable-track {
+    height: 44px;
+  }
+
+  .form-range::-moz-range-track {
+    height: 44px;
+  }
+
+  .form-range::-webkit-slider-thumb {
+    margin-top: 12px;
+  }
+}
+
 svg {
   display: block;
   max-width: 100%;
@@ -1235,7 +1318,7 @@ html&gt;body{padding:0}&lt;/style&gt;
         &lt;section class=&quot;screen active&quot; data-panel=&quot;overview&quot;&gt;
           &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;작업 홈&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;프로젝트 선택 → 시험 조건 설정 → 장치 확인 → 베어링별 순차 측정&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action primary&quot; id=&quot;new-test-button&quot; type=&quot;button&quot; data-tooltip=&quot;신규 시험을 생성하고 시험 조건 설정 화면으로 이동&quot;&gt;새 시험 시작&lt;/button&gt;&lt;/div&gt;
           &lt;div class=&quot;grid three&quot;&gt;
-            &lt;div class=&quot;panel&quot; data-help=&quot;현재 선택된 호선·설비와 작업 회차입니다. H2678은 프로젝트 식별값, 2차 조정은 재측정 회차를 뜻합니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;진행 중 프로젝트&lt;/span&gt;&lt;div class=&quot;metric&quot;&gt;H2678&lt;/div&gt;&lt;p class=&quot;sub&quot;&gt;ME Shaft / 2차 조정&lt;/p&gt;&lt;/div&gt;
+            &lt;div class=&quot;panel&quot; data-help=&quot;현재 선택된 호선·설비와 작업 회차입니다. H2678은 프로젝트 식별값, 2차는 현재 측정 회차를 뜻합니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;진행 중 프로젝트&lt;/span&gt;&lt;div class=&quot;metric&quot;&gt;H2678&lt;/div&gt;&lt;p class=&quot;sub&quot;&gt;ME Shaft / 2차&lt;/p&gt;&lt;/div&gt;
             &lt;div class=&quot;panel&quot; data-help=&quot;시험 조건에서 설정한 전체 4개 베어링 중 2개 측정을 완료했으며, 현재 No.4 위치를 측정한다는 의미입니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;측정 진행&lt;/span&gt;&lt;div class=&quot;metric&quot;&gt;2 / 4&lt;/div&gt;&lt;p class=&quot;sub&quot;&gt;현재 No.4 베어링&lt;/p&gt;&lt;/div&gt;
             &lt;div class=&quot;panel&quot; data-help=&quot;압력·변위 모듈의 연결 상태와 배터리 잔량을 요약합니다. 정상은 두 장치 모두 통신 가능한 상태입니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;장치 상태&lt;/span&gt;&lt;div class=&quot;metric good&quot;&gt;정상&lt;/div&gt;&lt;p class=&quot;sub&quot;&gt;압력 82% · 변위 76%&lt;/p&gt;&lt;/div&gt;
           &lt;/div&gt;
@@ -1289,7 +1372,7 @@ html&gt;body{padding:0}&lt;/style&gt;
               &lt;div class=&quot;field&quot; data-order=&quot;3&quot; data-help=&quot;측정 수행자 또는 책임자를 입력하며 보정·수정 이력과 연결됩니다.&quot;&gt;&lt;label&gt;작업자&lt;/label&gt;&lt;input value=&quot;홍길동&quot;&gt;&lt;/div&gt;
               &lt;div class=&quot;field&quot; data-order=&quot;4&quot; data-help=&quot;승인된 엔진 템플릿을 선택하면 해당 템플릿의 베어링 위치와 수량을 자동 구성합니다. 실제 축계 구성과 다른 경우 위치를 수정할 수 있습니다.&quot;&gt;&lt;label for=&quot;engine-model&quot;&gt;엔진명 / 구성 템플릿&lt;/label&gt;&lt;select id=&quot;engine-model&quot;&gt;&lt;option value=&quot;6g70&quot; selected&gt;MAN B&amp;amp;W 6G70ME-C&lt;/option&gt;&lt;option value=&quot;5g70&quot;&gt;MAN B&amp;amp;W 5G70ME-C&lt;/option&gt;&lt;option value=&quot;custom&quot;&gt;기타 · 직접 구성&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
               &lt;div class=&quot;field&quot; data-order=&quot;5&quot; data-help=&quot;장치 연결 화면에서 저장한 압력·변위 모듈 세트가 자동 표시됩니다. 시험 설정에서는 임의로 변경할 수 없습니다.&quot;&gt;&lt;label for=&quot;setup-device-set-id&quot;&gt;장비 세트 ID&lt;/label&gt;&lt;input id=&quot;setup-device-set-id&quot; value=&quot;SET-014 / PRS-A-014 + DIS-B-014&quot; readonly aria-readonly=&quot;true&quot;&gt;&lt;/div&gt;
-              &lt;div class=&quot;field&quot; data-order=&quot;6&quot; data-help=&quot;최초 측정, 조정 후 재측정 등 현재 시험 회차를 선택합니다.&quot;&gt;&lt;label&gt;측정 회차&lt;/label&gt;&lt;select&gt;&lt;option&gt;2차 · 조정 후&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+              &lt;div class=&quot;field&quot; data-order=&quot;6&quot; data-help=&quot;현재 시험의 측정 회차를 1차부터 5차까지 선택합니다.&quot;&gt;&lt;label&gt;측정 회차&lt;/label&gt;&lt;select&gt;&lt;option&gt;1차&lt;/option&gt;&lt;option selected&gt;2차&lt;/option&gt;&lt;option&gt;3차&lt;/option&gt;&lt;option&gt;4차&lt;/option&gt;&lt;option&gt;5차&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
               &lt;div class=&quot;field storage-field&quot; data-order=&quot;7&quot; data-help=&quot;태블릿 내부 저장공간에서 프로젝트 폴더를 직접 찾아 선택합니다. 선택한 위치에 원시값·최종값·리포트가 저장됩니다.&quot;&gt;&lt;label for=&quot;storage-location&quot;&gt;저장 위치&lt;/label&gt;&lt;div class=&quot;input-action&quot;&gt;&lt;input id=&quot;storage-location&quot; value=&quot;/storage/emulated/0/Jackup/H2678/Run02&quot; readonly aria-readonly=&quot;true&quot;&gt;&lt;button class=&quot;action&quot; id=&quot;browse-storage-folder&quot; type=&quot;button&quot; data-tooltip=&quot;태블릿 내부 저장공간의 폴더 목록을 열어 저장 위치 선택&quot;&gt;폴더 선택&lt;/button&gt;&lt;/div&gt;&lt;span class=&quot;field-note&quot;&gt;태블릿 내부 저장공간&lt;/span&gt;&lt;/div&gt;
               &lt;div class=&quot;folder-picker&quot; id=&quot;folder-picker&quot; data-help=&quot;Android 태블릿의 폴더 선택 화면을 단순화한 예시입니다. 저장할 프로젝트 폴더를 선택한 뒤 ‘이 폴더 사용’을 누릅니다.&quot;&gt;
                 &lt;div class=&quot;folder-picker-head&quot;&gt;&lt;div&gt;&lt;h3&gt;태블릿 저장 폴더 선택&lt;/h3&gt;&lt;div class=&quot;folder-path&quot; id=&quot;folder-picker-path&quot;&gt;내 파일 / 내부 저장공간 / Jackup / H2678 / Run02&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;내부 저장공간&lt;/span&gt;&lt;/div&gt;
@@ -1340,7 +1423,7 @@ html&gt;body{padding:0}&lt;/style&gt;
             &lt;/div&gt;
           &lt;/div&gt;
           &lt;div class=&quot;grid two&quot; style=&quot;margin-top:12px&quot;&gt;
-            &lt;div class=&quot;panel&quot; data-help=&quot;선택 위치의 목표 반력, 허용오차와 이전 회차 결과를 측정 전에 확인합니다.&quot;&gt;&lt;h3&gt;선택 위치&lt;/h3&gt;&lt;div class=&quot;metric&quot; id=&quot;selected-measurement-bearing&quot;&gt;Intermediate Bearing No.1&lt;/div&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;목표 반력&lt;/td&gt;&lt;td id=&quot;selected-bearing-target&quot;&gt;760 kN&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;허용오차&lt;/td&gt;&lt;td&gt;±5%&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;측정 회차&lt;/td&gt;&lt;td&gt;2차 · 조정 후&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;이전 결과&lt;/td&gt;&lt;td id=&quot;selected-bearing-previous&quot; class=&quot;bad&quot;&gt;728 kN · NG&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+            &lt;div class=&quot;panel&quot; data-help=&quot;선택 위치의 목표 반력, 허용오차와 이전 회차 결과를 측정 전에 확인합니다.&quot;&gt;&lt;h3&gt;선택 위치&lt;/h3&gt;&lt;div class=&quot;metric&quot; id=&quot;selected-measurement-bearing&quot;&gt;Intermediate Bearing No.1&lt;/div&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;목표 반력&lt;/td&gt;&lt;td id=&quot;selected-bearing-target&quot;&gt;760 kN&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;허용오차&lt;/td&gt;&lt;td&gt;±5%&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;측정 회차&lt;/td&gt;&lt;td&gt;2차&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;이전 결과&lt;/td&gt;&lt;td id=&quot;selected-bearing-previous&quot; class=&quot;bad&quot;&gt;728 kN · NG&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
             &lt;div class=&quot;panel&quot; data-help=&quot;Jack-up 측정 시작 전 두 센서의 연결과 영점 상태를 확인합니다. 유압장치는 앱에서 제어하지 않습니다.&quot;&gt;&lt;h3&gt;측정 전 확인&lt;/h3&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;압력 모듈&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;연결 · Zero OK&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;다이얼 게이지&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;연결 · Zero OK&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;배터리&lt;/td&gt;&lt;td&gt;82% / 76%&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;데이터 스트리밍&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;1초 주기 정상&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;div class=&quot;banner&quot;&gt;선택 위치와 실제 JIG·유압 잭 설치 위치가 일치하는지 작업자가 최종 확인합니다.&lt;/div&gt;&lt;/div&gt;
           &lt;/div&gt;
         &lt;/section&gt;
@@ -2202,6 +2285,8 @@ html&gt;body{padding:0}&lt;/style&gt;
   let autoUpdateCleanup = null;
   let positionRequest = 0;
   let skipDelayUntil = 0;
+  let lastPointerWasTouch = false;
+  let pinnedByTouch = false;
 
   const getTrigger = (target) =&gt;
     target?.nodeType === Node.ELEMENT_NODE
@@ -2250,6 +2335,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   };
   const closeTooltip = (activateSkipDelay = true) =&gt; {
     clearOpenTimeout();
+    pinnedByTouch = false;
     positionRequest += 1;
     autoUpdateCleanup?.();
     autoUpdateCleanup = null;
@@ -2356,7 +2442,40 @@ html&gt;body{padding:0}&lt;/style&gt;
     }
     requestOpen(trigger);
   };
+  const handlePointer = (event) =&gt; {
+    lastPointerWasTouch =
+      event.type === &quot;pointerdown&quot; &amp;&amp; event.pointerType === &quot;touch&quot;;
+  };
+  const handleTouchClick = (event) =&gt; {
+    const isTouch = event.pointerType === &quot;touch&quot; || lastPointerWasTouch;
+    lastPointerWasTouch = false;
+    if (!isTouch || event.detail === 0) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (
+      trigger == null ||
+      !trigger.isConnected ||
+      getContent(trigger).length === 0 ||
+      (pinnedByTouch &amp;&amp; activeTrigger === trigger)
+    ) {
+      if (pinnedByTouch) {
+        closeTooltip();
+      }
+      return;
+    }
+    openTooltip(trigger);
+    pinnedByTouch = activeTrigger === trigger;
+    window.setTimeout(() =&gt; {
+      if (activeTrigger === trigger &amp;&amp; !trigger.isConnected) {
+        closeTooltip(false);
+      }
+    }, 0);
+  };
   const handleLeave = (event) =&gt; {
+    if (pinnedByTouch) {
+      return;
+    }
     const trigger = getTrigger(event.target);
     if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
       return;
@@ -2377,6 +2496,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     }
   };
   const handleContextMenu = (event) =&gt; {
+    lastPointerWasTouch = false;
     const trigger = getTrigger(event.target);
     if (activeTrigger === trigger || pendingTrigger === trigger) {
       closeTooltip();
@@ -2384,7 +2504,11 @@ html&gt;body{padding:0}&lt;/style&gt;
   };
   const destroy = () =&gt; {
     closeTooltip(false);
+    lastPointerWasTouch = false;
     document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerdown&quot;, handlePointer);
+    document.removeEventListener(&quot;pointercancel&quot;, handlePointer);
+    document.removeEventListener(&quot;click&quot;, handleTouchClick);
     document.removeEventListener(&quot;pointerout&quot;, handleLeave);
     document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
     document.removeEventListener(&quot;focusout&quot;, handleLeave);
@@ -2394,6 +2518,9 @@ html&gt;body{padding:0}&lt;/style&gt;
   };
 
   document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerdown&quot;, handlePointer);
+  document.addEventListener(&quot;pointercancel&quot;, handlePointer);
+  document.addEventListener(&quot;click&quot;, handleTouchClick);
   document.addEventListener(&quot;pointerout&quot;, handleLeave);
   document.addEventListener(&quot;focusin&quot;, handleFocusIn);
   document.addEventListener(&quot;focusout&quot;, handleLeave);
