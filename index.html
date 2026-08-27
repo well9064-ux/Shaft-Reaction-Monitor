@@ -1296,6 +1296,8 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .bearing-name-editor { position: relative; z-index: 3; max-width: 118px; padding: 6px; font-size: 10px; text-align: center; }
     #jackup-wireframe .flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; color: var(--jw-muted); font-size: 12px; }
     #jackup-wireframe .flow b { color: var(--jw-text); background: var(--jw-surface-2); padding: 7px 9px; border-radius: 6px; font-weight: 500; }
+    #jackup-wireframe [data-panel=&quot;measure&quot;] .panel &gt; h3 + .btnrow { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    #jackup-wireframe [data-panel=&quot;measure&quot;] .panel &gt; h3 + .btnrow .action { width: 100%; min-height: 48px; display: flex; align-items: center; justify-content: center; text-align: center; }
     @media (max-width: 900px) and (orientation: landscape) {
       #jackup-wireframe .shell { grid-template-columns: 138px minmax(0, 1fr); }
       #jackup-wireframe .main { padding: 14px; }
@@ -1334,6 +1336,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       #jackup-wireframe .storage-field { grid-column: auto; }
       #jackup-wireframe .selected-bearing-editor { grid-template-columns: 1fr; }
       #jackup-wireframe .layout-controls.bearing-toolbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #jackup-wireframe [data-panel=&quot;measure&quot;] .panel &gt; h3 + .btnrow { grid-template-columns: 1fr; }
       #jackup-wireframe .overview-history-grid { grid-template-columns: 1fr; }
       #jackup-wireframe .report-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       #jackup-wireframe .result-confirmation-grid { grid-template-columns: 1fr; }
