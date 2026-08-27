@@ -1125,7 +1125,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .jack-motion { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--jw-line); }
     #jackup-wireframe .jack-motion-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
     #jackup-wireframe .jack-motion-head h3 { margin: 0; }
-    #jackup-wireframe .jack-motion-svg { width: 100%; height: 170px; display: block; background: var(--jw-surface-2); border: 1px solid var(--jw-line); }
+    #jackup-wireframe .jack-motion-svg { width: 100%; height: 190px; display: block; background: var(--jw-surface-2); border: 1px solid var(--jw-line); }
     #jackup-wireframe .jack-motion-svg text { fill: var(--jw-muted); font-size: 11px; }
     #jackup-wireframe .jack-motion-svg .structure { fill: var(--jw-surface); stroke: var(--jw-muted); stroke-width: 2; }
     #jackup-wireframe .jack-motion-svg .shaft { fill: color-mix(in srgb, var(--jw-text) 18%, var(--jw-surface)); stroke: var(--jw-text); stroke-width: 2; }
@@ -1134,6 +1134,8 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .jack-motion-svg .pressure-wave { fill: none; stroke: var(--jw-accent); stroke-width: 2; }
     #jackup-wireframe .jack-motion-svg .datum { stroke: var(--jw-line); stroke-width: 1.5; stroke-dasharray: 5 4; }
     #jackup-wireframe .jack-motion-svg .motion-label { fill: var(--jw-text); font-weight: 500; }
+    #jackup-wireframe .jack-motion-svg .value-divider { stroke: var(--jw-line); stroke-width: 1; }
+    #jackup-wireframe .jack-motion-svg .live-motion-value { fill: var(--jw-text); font-weight: 500; }
     #jackup-wireframe .jack-motion-svg .shaft-motion { animation: jw-shaft-lift 4.2s ease-in-out infinite; }
     #jackup-wireframe .jack-motion-svg .piston-motion { animation: jw-piston-lift 4.2s ease-in-out infinite; }
     #jackup-wireframe .jack-motion-svg .oil-motion { transform-box: fill-box; transform-origin: center bottom; animation: jw-oil-rise 4.2s ease-in-out infinite; }
@@ -1236,6 +1238,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .dial .track { stroke: var(--jw-line); stroke-width: 18; fill: none; stroke-linecap: round; }
     #jackup-wireframe .dial .value-arc { stroke: var(--jw-accent); stroke-width: 18; fill: none; stroke-linecap: round; }
     #jackup-wireframe .dial .needle { stroke: var(--jw-text); stroke-width: 3; }
+    #jackup-wireframe .dial :is(.value-arc, .needle), #jackup-wireframe :is(.meter-fill, .bar-fill) { transition: transform .35s ease, height .35s ease, width .35s ease, stroke-dasharray .35s ease; }
     #jackup-wireframe .dial text { fill: var(--jw-muted); font-size: 11px; }
     #jackup-wireframe .dial .dial-value { fill: var(--jw-text); font-size: 25px; font-weight: 500; }
     #jackup-wireframe .vertical-meter { height: 138px; display: grid; grid-template-columns: 36px 1fr; gap: 12px; align-items: stretch; margin-top: 8px; }
@@ -1471,33 +1474,41 @@ html&gt;body{padding:0}&lt;/style&gt;
           &lt;div class=&quot;grid two&quot;&gt;
             &lt;div&gt;&lt;div class=&quot;instrument-grid&quot;&gt;
               &lt;div class=&quot;instrument&quot; data-help=&quot;압력계에서 1초마다 수신한 실시간 압력입니다. 아직 현재 Step의 공식 측정값으로 확정되지 않은 모니터링 값입니다.&quot;&gt;
-                &lt;div class=&quot;instrument-title&quot;&gt;&lt;span&gt;압력 게이지&lt;/span&gt;&lt;strong&gt;486.3 bar&lt;/strong&gt;&lt;/div&gt;
-                &lt;svg class=&quot;dial&quot; viewBox=&quot;0 0 240 150&quot; role=&quot;img&quot; aria-label=&quot;현재 압력 486.3 bar, 측정 범위 0에서 1000 bar&quot;&gt;
+                &lt;div class=&quot;instrument-title&quot;&gt;&lt;span&gt;압력 게이지&lt;/span&gt;&lt;strong id=&quot;live-pressure-value&quot;&gt;486.3 bar&lt;/strong&gt;&lt;/div&gt;
+                &lt;svg class=&quot;dial&quot; id=&quot;live-pressure-dial&quot; viewBox=&quot;0 0 240 150&quot; role=&quot;img&quot; aria-label=&quot;현재 압력 486.3 bar, 측정 범위 0에서 1000 bar&quot;&gt;
                   &lt;path class=&quot;track&quot; pathLength=&quot;100&quot; d=&quot;M35 120 A85 85 0 0 1 205 120&quot;/&gt;
-                  &lt;path class=&quot;value-arc&quot; pathLength=&quot;100&quot; stroke-dasharray=&quot;48.6 100&quot; d=&quot;M35 120 A85 85 0 0 1 205 120&quot;/&gt;
-                  &lt;line class=&quot;needle&quot; x1=&quot;120&quot; y1=&quot;120&quot; x2=&quot;116&quot; y2=&quot;54&quot;/&gt;
+                  &lt;path class=&quot;value-arc&quot; id=&quot;live-pressure-arc&quot; pathLength=&quot;100&quot; stroke-dasharray=&quot;48.6 100&quot; d=&quot;M35 120 A85 85 0 0 1 205 120&quot;/&gt;
+                  &lt;line class=&quot;needle&quot; id=&quot;live-pressure-needle&quot; x1=&quot;120&quot; y1=&quot;120&quot; x2=&quot;120&quot; y2=&quot;54&quot; transform=&quot;rotate(-2.5 120 120)&quot;/&gt;
                   &lt;circle cx=&quot;120&quot; cy=&quot;120&quot; r=&quot;7&quot; fill=&quot;var(--jw-text)&quot;/&gt;
                   &lt;text x=&quot;27&quot; y=&quot;142&quot;&gt;0&lt;/text&gt;&lt;text x=&quot;190&quot; y=&quot;142&quot;&gt;1000&lt;/text&gt;
-                  &lt;text class=&quot;dial-value&quot; x=&quot;120&quot; y=&quot;103&quot; text-anchor=&quot;middle&quot;&gt;486.3&lt;/text&gt;
+                  &lt;text class=&quot;dial-value&quot; id=&quot;live-pressure-dial-value&quot; x=&quot;120&quot; y=&quot;103&quot; text-anchor=&quot;middle&quot;&gt;486.3&lt;/text&gt;
                 &lt;/svg&gt;
               &lt;/div&gt;
               &lt;div class=&quot;instrument&quot; data-help=&quot;디지털 다이얼 게이지가 측정한 샤프트의 수직 이동 거리입니다. 단위는 mm이며 기준선은 분석 참고값입니다.&quot;&gt;
-                &lt;div class=&quot;instrument-title&quot;&gt;&lt;span&gt;다이얼 게이지(변위)&lt;/span&gt;&lt;strong&gt;0.42 mm&lt;/strong&gt;&lt;/div&gt;
-                &lt;div class=&quot;vertical-meter&quot; role=&quot;img&quot; aria-label=&quot;현재 변위 0.42 밀리미터, 표시 범위 0에서 1 밀리미터&quot;&gt;
-                  &lt;div class=&quot;meter-track&quot;&gt;&lt;span class=&quot;meter-fill&quot;&gt;&lt;/span&gt;&lt;span class=&quot;meter-target&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+                &lt;div class=&quot;instrument-title&quot;&gt;&lt;span&gt;다이얼 게이지(변위)&lt;/span&gt;&lt;strong id=&quot;live-displacement-value&quot;&gt;0.42 mm&lt;/strong&gt;&lt;/div&gt;
+                &lt;div class=&quot;vertical-meter&quot; id=&quot;live-displacement-meter&quot; role=&quot;img&quot; aria-label=&quot;현재 변위 0.42 밀리미터, 표시 범위 0에서 1 밀리미터&quot;&gt;
+                  &lt;div class=&quot;meter-track&quot;&gt;&lt;span class=&quot;meter-fill&quot; id=&quot;live-displacement-fill&quot;&gt;&lt;/span&gt;&lt;span class=&quot;meter-target&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/div&gt;
                   &lt;div class=&quot;meter-scale&quot;&gt;&lt;span&gt;1.00&lt;/span&gt;&lt;span class=&quot;warn&quot;&gt;기준 0.60&lt;/span&gt;&lt;span&gt;0.00 mm&lt;/span&gt;&lt;/div&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
               &lt;div class=&quot;instrument instrument-wide&quot; data-help=&quot;현재 압력에 유압 잭 유효면적을 적용한 하중입니다. 최대 환산 하중은 현재 측정 세션에서 기록된 가장 큰 값입니다.&quot;&gt;
-                &lt;div class=&quot;instrument-title&quot;&gt;&lt;span&gt;환산 하중&lt;/span&gt;&lt;strong&gt;616.1 kN&lt;/strong&gt;&lt;/div&gt;
-                &lt;div class=&quot;instrument-meta&quot;&gt;최대 환산 하중 642.8 kN&lt;/div&gt;
-                &lt;div class=&quot;bar-reading&quot; role=&quot;img&quot; aria-label=&quot;환산 하중 616.1 킬로뉴턴, 목표 하중 660 킬로뉴턴&quot;&gt;
-                  &lt;div class=&quot;bar-track&quot;&gt;&lt;span class=&quot;bar-fill&quot;&gt;&lt;/span&gt;&lt;span class=&quot;bar-target&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-                  &lt;div class=&quot;bar-labels&quot;&gt;&lt;span&gt;0&lt;/span&gt;&lt;span&gt;현재 616.1&lt;/span&gt;&lt;span class=&quot;warn&quot;&gt;목표 660&lt;/span&gt;&lt;span&gt;800 kN&lt;/span&gt;&lt;/div&gt;
+                &lt;div class=&quot;instrument-title&quot;&gt;&lt;span&gt;환산 하중&lt;/span&gt;&lt;strong id=&quot;live-load-value&quot;&gt;616.1 kN&lt;/strong&gt;&lt;/div&gt;
+                &lt;div class=&quot;instrument-meta&quot; id=&quot;live-peak-load&quot;&gt;최대 환산 하중 642.8 kN&lt;/div&gt;
+                &lt;div class=&quot;bar-reading&quot; id=&quot;live-load-bar&quot; role=&quot;img&quot; aria-label=&quot;환산 하중 616.1 킬로뉴턴, 목표 하중 660 킬로뉴턴&quot;&gt;
+                  &lt;div class=&quot;bar-track&quot;&gt;&lt;span class=&quot;bar-fill&quot; id=&quot;live-load-fill&quot;&gt;&lt;/span&gt;&lt;span class=&quot;bar-target&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+                  &lt;div class=&quot;bar-labels&quot;&gt;&lt;span&gt;0&lt;/span&gt;&lt;span id=&quot;live-load-current&quot;&gt;현재 616.1&lt;/span&gt;&lt;span class=&quot;warn&quot;&gt;목표 660&lt;/span&gt;&lt;span&gt;800 kN&lt;/span&gt;&lt;/div&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
             &lt;/div&gt;&lt;div class=&quot;panel&quot; style=&quot;margin-top:12px&quot;&gt;&lt;h3&gt;측정 제어&lt;/h3&gt;&lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action primary&quot; type=&quot;button&quot; data-tooltip=&quot;현재 압력·변위 시점값을 다음 Step의 공식 측정값으로 저장&quot;&gt;현재값 저장&lt;/button&gt;&lt;button class=&quot;action&quot; type=&quot;button&quot; data-tooltip=&quot;유압장치가 아니라 앱의 데이터 기록만 일시정지&quot;&gt;데이터 기록 일시정지&lt;/button&gt;&lt;button class=&quot;action&quot; type=&quot;button&quot; data-tooltip=&quot;Lifting 데이터 기록을 마치고 Lowering 단계로 전환&quot;&gt;Lifting 기록 완료&lt;/button&gt;&lt;button class=&quot;action&quot; type=&quot;button&quot; data-tooltip=&quot;현재 베어링의 측정 세션을 종료하며 유압장치는 제어하지 않음&quot;&gt;현재 측정 세션 종료&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;banner&quot;&gt;물리 스위치 트리거 시 압력·변위 시점값을 같은 Step으로 저장합니다. 본 앱은 유압장치를 원격 제어하지 않습니다.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-            &lt;div class=&quot;panel&quot; data-help=&quot;X축은 다이얼 게이지 변위(mm), Y축은 압력과 잭 유효면적으로 계산한 환산 하중(kN)입니다. 1초 스트리밍 추세를 보여주며 최종 분석에는 저장된 Step 측정점을 사용합니다.&quot;&gt;&lt;div class=&quot;plot-heading&quot;&gt;&lt;h3&gt;실시간 추세&lt;/h3&gt;&lt;button class=&quot;action&quot; id=&quot;open-live-graph&quot; type=&quot;button&quot; data-tooltip=&quot;실시간 추세 그래프를 태블릿 화면 전체로 확대&quot;&gt;전체 화면&lt;/button&gt;&lt;/div&gt;&lt;svg class=&quot;plot&quot; id=&quot;live-trend-plot&quot; viewBox=&quot;0 0 500 250&quot; role=&quot;img&quot; aria-label=&quot;실시간 하중 변위 추세, 가로축 변위 0에서 1.0 밀리미터, 세로축 환산 하중 0에서 800 킬로뉴턴&quot;&gt;&lt;path class=&quot;gridline&quot; d=&quot;M48 30H480M48 76H480M48 122H480M48 168H480M156 30V214M264 30V214M372 30V214&quot;/&gt;&lt;path class=&quot;axis&quot; d=&quot;M48 30V214H480&quot;/&gt;&lt;g class=&quot;axis-ticks&quot;&gt;&lt;text x=&quot;42&quot; y=&quot;34&quot; text-anchor=&quot;end&quot;&gt;800&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;80&quot; text-anchor=&quot;end&quot;&gt;600&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;126&quot; text-anchor=&quot;end&quot;&gt;400&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;172&quot; text-anchor=&quot;end&quot;&gt;200&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;218&quot; text-anchor=&quot;end&quot;&gt;0&lt;/text&gt;&lt;text x=&quot;48&quot; y=&quot;229&quot; text-anchor=&quot;start&quot;&gt;0.00&lt;/text&gt;&lt;text x=&quot;156&quot; y=&quot;229&quot; text-anchor=&quot;middle&quot;&gt;0.25&lt;/text&gt;&lt;text x=&quot;264&quot; y=&quot;229&quot; text-anchor=&quot;middle&quot;&gt;0.50&lt;/text&gt;&lt;text x=&quot;372&quot; y=&quot;229&quot; text-anchor=&quot;middle&quot;&gt;0.75&lt;/text&gt;&lt;text x=&quot;480&quot; y=&quot;229&quot; text-anchor=&quot;end&quot;&gt;1.00&lt;/text&gt;&lt;/g&gt;&lt;path class=&quot;lift&quot; d=&quot;M78.5 211 L85.6 189.7 L104.3 169.7 L151.3 147.1 L214.7 125.8 L289.8 102.8 L365 79 L428.3 53.4&quot;/&gt;&lt;text x=&quot;220&quot; y=&quot;247&quot;&gt;변위 (mm)&lt;/text&gt;&lt;text x=&quot;8&quot; y=&quot;20&quot;&gt;하중 (kN)&lt;/text&gt;&lt;/svg&gt;&lt;div class=&quot;legend&quot;&gt;&lt;span style=&quot;color:var(--jw-accent)&quot;&gt;Lifting 실시간&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;jack-motion&quot; data-help=&quot;압력이 상승하면 유압 오일이 피스톤을 밀어 올리고, 잭의 위쪽 힘이 샤프트에 전달되어 다이얼 게이지 변위가 발생하는 과정을 반복해서 보여줍니다.&quot;&gt;&lt;div class=&quot;jack-motion-head&quot;&gt;&lt;h3&gt;유압잭 작동 원리&lt;/h3&gt;&lt;span class=&quot;status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;측정값 연동 예시&lt;/span&gt;&lt;/div&gt;&lt;svg class=&quot;jack-motion-svg&quot; viewBox=&quot;0 0 500 170&quot; role=&quot;img&quot; aria-label=&quot;유압잭 내부 압력이 상승하고 피스톤이 샤프트를 위로 밀어 변위와 환산 하중이 발생하는 반복 애니메이션&quot;&gt;&lt;title&gt;유압잭 작동 과정&lt;/title&gt;&lt;desc&gt;압력 상승, 잭 하중 발생, 샤프트 변위 순서가 반복됩니다.&lt;/desc&gt;&lt;line class=&quot;datum&quot; x1=&quot;55&quot; y1=&quot;61&quot; x2=&quot;445&quot; y2=&quot;61&quot;/&gt;&lt;text x=&quot;57&quot; y=&quot;55&quot;&gt;초기 샤프트 위치&lt;/text&gt;&lt;g class=&quot;shaft-motion&quot;&gt;&lt;rect class=&quot;shaft&quot; x=&quot;58&quot; y=&quot;69&quot; width=&quot;382&quot; height=&quot;22&quot; rx=&quot;11&quot;/&gt;&lt;text class=&quot;motion-label&quot; x=&quot;70&quot; y=&quot;84&quot;&gt;SHAFT&lt;/text&gt;&lt;line class=&quot;structure&quot; x1=&quot;397&quot; y1=&quot;49&quot; x2=&quot;397&quot; y2=&quot;69&quot;/&gt;&lt;circle class=&quot;structure&quot; cx=&quot;397&quot; cy=&quot;39&quot; r=&quot;15&quot;/&gt;&lt;line class=&quot;dial-needle&quot; x1=&quot;397&quot; y1=&quot;39&quot; x2=&quot;397&quot; y2=&quot;28&quot; stroke=&quot;var(--jw-warn)&quot; stroke-width=&quot;2&quot;/&gt;&lt;text x=&quot;416&quot; y=&quot;43&quot;&gt;변위&lt;/text&gt;&lt;/g&gt;&lt;path class=&quot;structure&quot; d=&quot;M95 91V111Q95 125 109 125H151Q165 125 165 111V91&quot;/&gt;&lt;path class=&quot;structure&quot; d=&quot;M335 91V111Q335 125 349 125H391Q405 125 405 111V91&quot;/&gt;&lt;rect class=&quot;structure&quot; x=&quot;215&quot; y=&quot;111&quot; width=&quot;70&quot; height=&quot;49&quot; rx=&quot;6&quot;/&gt;&lt;rect class=&quot;oil oil-motion&quot; x=&quot;222&quot; y=&quot;126&quot; width=&quot;56&quot; height=&quot;27&quot; rx=&quot;3&quot;/&gt;&lt;g class=&quot;piston-motion&quot;&gt;&lt;rect class=&quot;structure&quot; x=&quot;231&quot; y=&quot;103&quot; width=&quot;38&quot; height=&quot;13&quot; rx=&quot;3&quot;/&gt;&lt;rect class=&quot;structure&quot; x=&quot;246&quot; y=&quot;81&quot; width=&quot;8&quot; height=&quot;25&quot;/&gt;&lt;path class=&quot;force force-motion&quot; d=&quot;M250 102V76M242 84L250 76L258 84&quot;/&gt;&lt;/g&gt;&lt;ellipse class=&quot;pressure-wave wave-one&quot; cx=&quot;250&quot; cy=&quot;140&quot; rx=&quot;22&quot; ry=&quot;9&quot;/&gt;&lt;ellipse class=&quot;pressure-wave wave-two&quot; cx=&quot;250&quot; cy=&quot;140&quot; rx=&quot;22&quot; ry=&quot;9&quot;/&gt;&lt;text class=&quot;motion-label&quot; x=&quot;226&quot; y=&quot;165&quot;&gt;유압잭&lt;/text&gt;&lt;g class=&quot;phase-pressure&quot;&gt;&lt;circle cx=&quot;64&quot; cy=&quot;145&quot; r=&quot;4&quot; fill=&quot;var(--jw-accent)&quot;/&gt;&lt;text class=&quot;motion-label&quot; x=&quot;75&quot; y=&quot;149&quot;&gt;압력 486.3 bar&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;phase-force&quot;&gt;&lt;circle cx=&quot;170&quot; cy=&quot;145&quot; r=&quot;4&quot; fill=&quot;var(--jw-warn)&quot;/&gt;&lt;text class=&quot;motion-label&quot; x=&quot;181&quot; y=&quot;149&quot;&gt;잭 하중 616.1 kN&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;phase-displacement&quot;&gt;&lt;circle cx=&quot;354&quot; cy=&quot;145&quot; r=&quot;4&quot; fill=&quot;var(--jw-good)&quot;/&gt;&lt;text class=&quot;motion-label&quot; x=&quot;365&quot; y=&quot;149&quot;&gt;변위 0.42 mm&lt;/text&gt;&lt;/g&gt;&lt;/svg&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;panel&quot; data-help=&quot;X축은 다이얼 게이지 변위(mm), Y축은 압력과 잭 유효면적으로 계산한 환산 하중(kN)입니다. 1초 스트리밍 추세를 보여주며 최종 분석에는 저장된 Step 측정점을 사용합니다.&quot;&gt;
+              &lt;div class=&quot;plot-heading&quot;&gt;&lt;h3&gt;실시간 추세&lt;/h3&gt;&lt;button class=&quot;action&quot; id=&quot;open-live-graph&quot; type=&quot;button&quot; data-tooltip=&quot;실시간 추세 그래프를 태블릿 화면 전체로 확대&quot;&gt;전체 화면&lt;/button&gt;&lt;/div&gt;
+              &lt;svg class=&quot;plot&quot; id=&quot;live-trend-plot&quot; viewBox=&quot;0 0 500 250&quot; role=&quot;img&quot; aria-label=&quot;실시간 하중 변위 추세, 가로축 변위 0에서 1.0 밀리미터, 세로축 환산 하중 0에서 800 킬로뉴턴&quot;&gt;&lt;path class=&quot;gridline&quot; d=&quot;M48 30H480M48 76H480M48 122H480M48 168H480M156 30V214M264 30V214M372 30V214&quot;/&gt;&lt;path class=&quot;axis&quot; d=&quot;M48 30V214H480&quot;/&gt;&lt;g class=&quot;axis-ticks&quot;&gt;&lt;text x=&quot;42&quot; y=&quot;34&quot; text-anchor=&quot;end&quot;&gt;800&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;80&quot; text-anchor=&quot;end&quot;&gt;600&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;126&quot; text-anchor=&quot;end&quot;&gt;400&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;172&quot; text-anchor=&quot;end&quot;&gt;200&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;218&quot; text-anchor=&quot;end&quot;&gt;0&lt;/text&gt;&lt;text x=&quot;48&quot; y=&quot;229&quot; text-anchor=&quot;start&quot;&gt;0.00&lt;/text&gt;&lt;text x=&quot;156&quot; y=&quot;229&quot; text-anchor=&quot;middle&quot;&gt;0.25&lt;/text&gt;&lt;text x=&quot;264&quot; y=&quot;229&quot; text-anchor=&quot;middle&quot;&gt;0.50&lt;/text&gt;&lt;text x=&quot;372&quot; y=&quot;229&quot; text-anchor=&quot;middle&quot;&gt;0.75&lt;/text&gt;&lt;text x=&quot;480&quot; y=&quot;229&quot; text-anchor=&quot;end&quot;&gt;1.00&lt;/text&gt;&lt;/g&gt;&lt;path class=&quot;lift&quot; d=&quot;M78.5 211 L85.6 189.7 L104.3 169.7 L151.3 147.1 L214.7 125.8 L289.8 102.8 L365 79 L428.3 53.4&quot;/&gt;&lt;text x=&quot;220&quot; y=&quot;247&quot;&gt;변위 (mm)&lt;/text&gt;&lt;text x=&quot;8&quot; y=&quot;20&quot;&gt;하중 (kN)&lt;/text&gt;&lt;/svg&gt;
+              &lt;div class=&quot;legend&quot;&gt;&lt;span style=&quot;color:var(--jw-accent)&quot;&gt;Lifting 실시간&lt;/span&gt;&lt;/div&gt;
+              &lt;div class=&quot;jack-motion&quot; data-help=&quot;압력이 상승하면 유압 오일이 피스톤을 밀어 올리고, 잭의 위쪽 힘이 샤프트에 전달되어 다이얼 게이지 변위가 발생하는 과정을 반복해서 보여줍니다.&quot;&gt;
+                &lt;div class=&quot;jack-motion-head&quot;&gt;&lt;h3&gt;유압잭 작동 원리&lt;/h3&gt;&lt;span class=&quot;status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;1초 실시간 연동&lt;/span&gt;&lt;/div&gt;
+                &lt;svg class=&quot;jack-motion-svg&quot; id=&quot;jack-motion-svg&quot; viewBox=&quot;0 0 500 205&quot; role=&quot;img&quot; aria-label=&quot;유압잭 내부 압력이 상승하고 피스톤이 샤프트를 위로 밀어 변위와 환산 하중이 발생하는 반복 애니메이션&quot;&gt;&lt;title&gt;유압잭 작동 과정&lt;/title&gt;&lt;desc&gt;압력 상승, 잭 하중 발생, 샤프트 변위 순서가 반복됩니다.&lt;/desc&gt;&lt;line class=&quot;datum&quot; x1=&quot;55&quot; y1=&quot;61&quot; x2=&quot;445&quot; y2=&quot;61&quot;/&gt;&lt;text x=&quot;57&quot; y=&quot;55&quot;&gt;초기 샤프트 위치&lt;/text&gt;&lt;g class=&quot;shaft-motion&quot;&gt;&lt;rect class=&quot;shaft&quot; x=&quot;58&quot; y=&quot;69&quot; width=&quot;382&quot; height=&quot;22&quot; rx=&quot;11&quot;/&gt;&lt;text class=&quot;motion-label&quot; x=&quot;70&quot; y=&quot;84&quot;&gt;SHAFT&lt;/text&gt;&lt;line class=&quot;structure&quot; x1=&quot;397&quot; y1=&quot;49&quot; x2=&quot;397&quot; y2=&quot;69&quot;/&gt;&lt;circle class=&quot;structure&quot; cx=&quot;397&quot; cy=&quot;39&quot; r=&quot;15&quot;/&gt;&lt;line class=&quot;dial-needle&quot; x1=&quot;397&quot; y1=&quot;39&quot; x2=&quot;397&quot; y2=&quot;28&quot; stroke=&quot;var(--jw-warn)&quot; stroke-width=&quot;2&quot;/&gt;&lt;text x=&quot;416&quot; y=&quot;43&quot;&gt;변위&lt;/text&gt;&lt;/g&gt;&lt;path class=&quot;structure&quot; d=&quot;M95 91V111Q95 125 109 125H151Q165 125 165 111V91&quot;/&gt;&lt;path class=&quot;structure&quot; d=&quot;M335 91V111Q335 125 349 125H391Q405 125 405 111V91&quot;/&gt;&lt;rect class=&quot;structure&quot; x=&quot;215&quot; y=&quot;111&quot; width=&quot;70&quot; height=&quot;49&quot; rx=&quot;6&quot;/&gt;&lt;rect class=&quot;oil oil-motion&quot; x=&quot;222&quot; y=&quot;126&quot; width=&quot;56&quot; height=&quot;27&quot; rx=&quot;3&quot;/&gt;&lt;g class=&quot;piston-motion&quot;&gt;&lt;rect class=&quot;structure&quot; x=&quot;231&quot; y=&quot;103&quot; width=&quot;38&quot; height=&quot;13&quot; rx=&quot;3&quot;/&gt;&lt;rect class=&quot;structure&quot; x=&quot;246&quot; y=&quot;81&quot; width=&quot;8&quot; height=&quot;25&quot;/&gt;&lt;path class=&quot;force force-motion&quot; d=&quot;M250 102V76M242 84L250 76L258 84&quot;/&gt;&lt;/g&gt;&lt;ellipse class=&quot;pressure-wave wave-one&quot; cx=&quot;250&quot; cy=&quot;140&quot; rx=&quot;22&quot; ry=&quot;9&quot;/&gt;&lt;ellipse class=&quot;pressure-wave wave-two&quot; cx=&quot;250&quot; cy=&quot;140&quot; rx=&quot;22&quot; ry=&quot;9&quot;/&gt;&lt;text class=&quot;motion-label&quot; x=&quot;226&quot; y=&quot;165&quot;&gt;유압잭&lt;/text&gt;&lt;line class=&quot;value-divider&quot; x1=&quot;167&quot; y1=&quot;172&quot; x2=&quot;167&quot; y2=&quot;198&quot;/&gt;&lt;line class=&quot;value-divider&quot; x1=&quot;333&quot; y1=&quot;172&quot; x2=&quot;333&quot; y2=&quot;198&quot;/&gt;&lt;g class=&quot;phase-pressure&quot;&gt;&lt;text x=&quot;84&quot; y=&quot;181&quot; text-anchor=&quot;middle&quot;&gt;압력&lt;/text&gt;&lt;text class=&quot;live-motion-value&quot; id=&quot;motion-pressure-value&quot; x=&quot;84&quot; y=&quot;196&quot; text-anchor=&quot;middle&quot;&gt;486.3 bar&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;phase-force&quot;&gt;&lt;text x=&quot;250&quot; y=&quot;181&quot; text-anchor=&quot;middle&quot;&gt;잭 하중&lt;/text&gt;&lt;text class=&quot;live-motion-value&quot; id=&quot;motion-load-value&quot; x=&quot;250&quot; y=&quot;196&quot; text-anchor=&quot;middle&quot;&gt;616.1 kN&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;phase-displacement&quot;&gt;&lt;text x=&quot;416&quot; y=&quot;181&quot; text-anchor=&quot;middle&quot;&gt;변위&lt;/text&gt;&lt;text class=&quot;live-motion-value&quot; id=&quot;motion-displacement-value&quot; x=&quot;416&quot; y=&quot;196&quot; text-anchor=&quot;middle&quot;&gt;0.42 mm&lt;/text&gt;&lt;/g&gt;&lt;/svg&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
           &lt;/div&gt;
         &lt;/section&gt;
 
@@ -1750,6 +1761,64 @@ html&gt;body{padding:0}&lt;/style&gt;
       const saveFinalResult = root.querySelector(&#x27;#save-final-result&#x27;);
       const resultSaveStatus = root.querySelector(&#x27;#result-save-status&#x27;);
       const finalResultHistory = root.querySelector(&#x27;#final-result-history&#x27;);
+      const livePressureValue = root.querySelector(&#x27;#live-pressure-value&#x27;);
+      const livePressureDial = root.querySelector(&#x27;#live-pressure-dial&#x27;);
+      const livePressureArc = root.querySelector(&#x27;#live-pressure-arc&#x27;);
+      const livePressureNeedle = root.querySelector(&#x27;#live-pressure-needle&#x27;);
+      const livePressureDialValue = root.querySelector(&#x27;#live-pressure-dial-value&#x27;);
+      const liveDisplacementValue = root.querySelector(&#x27;#live-displacement-value&#x27;);
+      const liveDisplacementMeter = root.querySelector(&#x27;#live-displacement-meter&#x27;);
+      const liveDisplacementFill = root.querySelector(&#x27;#live-displacement-fill&#x27;);
+      const liveLoadValue = root.querySelector(&#x27;#live-load-value&#x27;);
+      const livePeakLoad = root.querySelector(&#x27;#live-peak-load&#x27;);
+      const liveLoadBar = root.querySelector(&#x27;#live-load-bar&#x27;);
+      const liveLoadFill = root.querySelector(&#x27;#live-load-fill&#x27;);
+      const liveLoadCurrent = root.querySelector(&#x27;#live-load-current&#x27;);
+      const jackMotionSvg = root.querySelector(&#x27;#jack-motion-svg&#x27;);
+      const motionPressureValue = root.querySelector(&#x27;#motion-pressure-value&#x27;);
+      const motionLoadValue = root.querySelector(&#x27;#motion-load-value&#x27;);
+      const motionDisplacementValue = root.querySelector(&#x27;#motion-displacement-value&#x27;);
+      const liveSamples = [
+        { pressure: 432.0, displacement: 0.28 },
+        { pressure: 451.8, displacement: 0.33 },
+        { pressure: 468.6, displacement: 0.37 },
+        { pressure: 486.3, displacement: 0.42 },
+        { pressure: 501.2, displacement: 0.47 },
+        { pressure: 512.8, displacement: 0.51 },
+        { pressure: 498.1, displacement: 0.48 },
+        { pressure: 474.6, displacement: 0.40 }
+      ];
+      let liveSampleIndex = 3;
+      let peakLoadValue = 642.8;
+      const updateLiveSample = (sample) =&gt; {
+        const load = sample.pressure * 126.7 * 0.01;
+        peakLoadValue = Math.max(peakLoadValue, load);
+        const pressureText = sample.pressure.toFixed(1);
+        const displacementText = sample.displacement.toFixed(2);
+        const loadText = load.toFixed(1);
+        livePressureValue.textContent = `${pressureText} bar`;
+        livePressureDialValue.textContent = pressureText;
+        livePressureArc.setAttribute(&#x27;stroke-dasharray&#x27;, `${(sample.pressure / 10).toFixed(1)} 100`);
+        livePressureNeedle.setAttribute(&#x27;transform&#x27;, `rotate(${((sample.pressure / 1000) * 180 - 90).toFixed(1)} 120 120)`);
+        livePressureDial.setAttribute(&#x27;aria-label&#x27;, `현재 압력 ${pressureText} bar, 측정 범위 0에서 1000 bar`);
+        liveDisplacementValue.textContent = `${displacementText} mm`;
+        liveDisplacementFill.style.height = `${Math.min(100, sample.displacement * 100)}%`;
+        liveDisplacementMeter.setAttribute(&#x27;aria-label&#x27;, `현재 변위 ${displacementText} 밀리미터, 표시 범위 0에서 1 밀리미터`);
+        liveLoadValue.textContent = `${loadText} kN`;
+        livePeakLoad.textContent = `최대 환산 하중 ${peakLoadValue.toFixed(1)} kN`;
+        liveLoadFill.style.width = `${Math.min(100, (load / 800) * 100)}%`;
+        liveLoadCurrent.textContent = `현재 ${loadText}`;
+        liveLoadBar.setAttribute(&#x27;aria-label&#x27;, `환산 하중 ${loadText} 킬로뉴턴, 목표 하중 660 킬로뉴턴`);
+        motionPressureValue.textContent = `${pressureText} bar`;
+        motionLoadValue.textContent = `${loadText} kN`;
+        motionDisplacementValue.textContent = `${displacementText} mm`;
+        jackMotionSvg.setAttribute(&#x27;aria-label&#x27;, `압력 ${pressureText} bar, 잭 하중 ${loadText} 킬로뉴턴, 샤프트 변위 ${displacementText} 밀리미터인 유압잭 작동 애니메이션`);
+      };
+      updateLiveSample(liveSamples[liveSampleIndex]);
+      window.setInterval(() =&gt; {
+        liveSampleIndex = (liveSampleIndex + 1) % liveSamples.length;
+        updateLiveSample(liveSamples[liveSampleIndex]);
+      }, 1000);
       const helpTargets = [...root.querySelectorAll(&#x27;[data-tooltip], [data-help]&#x27;)];
       const hideTooltip = () =&gt; guideTooltip.classList.remove(&#x27;visible&#x27;);
       const showTooltip = (target) =&gt; {
