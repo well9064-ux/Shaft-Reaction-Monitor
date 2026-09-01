@@ -1008,18 +1008,18 @@ html&gt;body{padding:0}&lt;/style&gt;
       position: relative;
     }
     #jackup-wireframe * { box-sizing: border-box; }
-    #jackup-wireframe .device { width: 100%; max-width: 1340px; margin: 0 auto; background: var(--jw-bg); border: 1px solid var(--jw-line); border-radius: 18px; overflow: hidden; min-height: clamp(680px, 59.701vw, 800px); }
-    #jackup-wireframe .topbar { min-height: 56px; padding: 8px 16px; background: var(--jw-dark); color: var(--jw-dark-text); display: flex; gap: 14px; align-items: center; justify-content: space-between; }
+    #jackup-wireframe .device { width: min(100%, 1007px); max-width: 1007px; max-height: 601px; aspect-ratio: 1007 / 601; margin: 0 auto; background: var(--jw-bg); border: 1px solid var(--jw-line); border-radius: 14px; overflow: hidden; }
+    #jackup-wireframe .topbar { height: 52px; min-height: 52px; padding: 6px 14px; background: var(--jw-dark); color: var(--jw-dark-text); display: flex; gap: 12px; align-items: center; justify-content: space-between; }
     #jackup-wireframe .brand { display: flex; align-items: center; gap: 9px; font-weight: 500; }
     #jackup-wireframe .brand-mark { width: 24px; height: 24px; border: 2px solid currentColor; border-radius: 50%; display: grid; place-items: center; }
     #jackup-wireframe .device-profile { color: #b8c4cc; border-left: 1px solid #66737d; padding-left: 9px; font-size: 11px; font-weight: 400; white-space: nowrap; }
     #jackup-wireframe .top-status { display: flex; gap: 14px; align-items: center; color: #dce4e9; font-size: 12px; }
     #jackup-wireframe .guide-toggle { min-height: 40px; border: 1px solid #82909a; background: transparent; color: #f7f9fa; border-radius: 6px; padding: 7px 10px; cursor: pointer; font: inherit; }
-    #jackup-wireframe .shell { display: grid; grid-template-columns: 154px minmax(0, 1fr); min-height: clamp(624px, calc(59.701vw - 56px), 744px); }
-    #jackup-wireframe .nav { background: var(--jw-surface); border-right: 1px solid var(--jw-line); padding: 12px 8px; }
-    #jackup-wireframe .nav button { width: 100%; min-height: 44px; border: 0; background: transparent; color: var(--jw-muted); text-align: left; padding: 10px; margin: 2px 0; border-radius: 7px; cursor: pointer; font: inherit; display: flex; gap: 8px; align-items: center; }
+    #jackup-wireframe .shell { display: grid; grid-template-columns: 142px minmax(0, 1fr); height: calc(100% - 52px); min-height: 0; }
+    #jackup-wireframe .nav { min-height: 0; overflow-y: auto; background: var(--jw-surface); border-right: 1px solid var(--jw-line); padding: 8px 6px; }
+    #jackup-wireframe .nav button { width: 100%; min-height: 42px; border: 0; background: transparent; color: var(--jw-muted); text-align: left; padding: 8px 9px; margin: 1px 0; border-radius: 7px; cursor: pointer; font: inherit; display: flex; gap: 8px; align-items: center; }
     #jackup-wireframe .nav button[aria-selected=&quot;true&quot;] { background: var(--jw-surface-2); color: var(--jw-text); font-weight: 500; box-shadow: inset 3px 0 0 var(--jw-accent); }
-    #jackup-wireframe .main { padding: 18px; min-width: 0; }
+    #jackup-wireframe .main { min-width: 0; min-height: 0; overflow-y: auto; padding: 12px; }
     #jackup-wireframe .screen { display: none; }
     #jackup-wireframe .screen.active { display: block; }
     #jackup-wireframe .headline { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
@@ -1041,11 +1041,11 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .btnrow { display: flex; gap: 8px; flex-wrap: wrap; }
     #jackup-wireframe .action { min-height: 44px; border: 1px solid var(--jw-line); background: var(--jw-surface); color: var(--jw-text); padding: 9px 13px; border-radius: 7px; cursor: pointer; font: inherit; }
     #jackup-wireframe .action.primary { background: var(--jw-dark); color: var(--jw-dark-text); border-color: var(--jw-dark); }
-    #jackup-wireframe :is([data-tooltip], [data-help], [data-order]) { position: relative; }
+    #jackup-wireframe :is([data-jw-tooltip], [data-help], [data-order]) { position: relative; }
     #jackup-wireframe .guide-tooltip { position: absolute; z-index: 300; width: max-content; max-width: min(310px, calc(100% - 24px)); padding: 9px 11px; border-radius: 7px; background: var(--jw-dark); color: var(--jw-dark-text); font-size: 11px; line-height: 1.5; text-align: left; pointer-events: none; opacity: 0; visibility: hidden; box-shadow: 0 6px 18px rgba(0,0,0,.22); }
     #jackup-wireframe .guide-tooltip.visible { opacity: 1; visibility: visible; }
     #jackup-wireframe.guide-on .screen.active { counter-reset: guide-step; }
-    #jackup-wireframe.guide-on .screen.active :is([data-tooltip], [data-help]):not([data-order])::before { counter-increment: guide-step; content: counter(guide-step); position: absolute; z-index: 12; right: -8px; top: -10px; width: 21px; height: 21px; display: grid; place-items: center; border-radius: 50%; background: var(--jw-warn); color: var(--jw-dark-text); font-size: 11px; font-weight: 500; box-shadow: 0 0 0 3px var(--jw-surface); }
+    #jackup-wireframe.guide-on .screen.active :is([data-jw-tooltip], [data-help]):not([data-order])::before { counter-increment: guide-step; content: counter(guide-step); position: absolute; z-index: 12; right: -8px; top: -10px; width: 21px; height: 21px; display: grid; place-items: center; border-radius: 50%; background: var(--jw-warn); color: var(--jw-dark-text); font-size: 11px; font-weight: 500; box-shadow: 0 0 0 3px var(--jw-surface); }
     #jackup-wireframe.guide-on .screen.active .curve-range-card[data-help]::before { right: auto; left: -8px; }
     #jackup-wireframe.guide-on [data-order]::before { content: attr(data-order); position: absolute; z-index: 12; left: -9px; top: -9px; min-width: 22px; height: 22px; padding: 0 5px; display: grid; place-items: center; border-radius: 11px; background: var(--jw-accent); color: var(--jw-dark-text); font-size: 10px; font-weight: 500; box-shadow: 0 0 0 3px var(--jw-surface); }
     #jackup-wireframe .field { display: grid; gap: 5px; }
@@ -1072,6 +1072,8 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .folder-picker-actions { display: flex; justify-content: flex-end; gap: 7px; margin-top: 10px; }
     #jackup-wireframe textarea { min-height: 72px; resize: vertical; }
     #jackup-wireframe .formgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    #jackup-wireframe .setup-bearing-panel { order: 1; }
+    #jackup-wireframe .setup-conditions-panel { order: 2; }
     #jackup-wireframe table { width: 100%; border-collapse: collapse; font-size: 12px; }
     #jackup-wireframe th, #jackup-wireframe td { padding: 9px 7px; text-align: left; border-bottom: 1px solid var(--jw-line); }
     #jackup-wireframe th { color: var(--jw-muted); font-weight: 500; }
@@ -1089,6 +1091,25 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .history-context { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
     #jackup-wireframe .history-context strong { font-weight: 500; }
     #jackup-wireframe .history-context.readonly { border-left-color: var(--jw-warn); }
+    #jackup-wireframe .alarm-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 12px; }
+    #jackup-wireframe .alarm-summary .panel { padding: 12px 14px; }
+    #jackup-wireframe .alarm-summary-value { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 6px; }
+    #jackup-wireframe .alarm-summary-value strong { font-size: 22px; font-weight: 500; }
+    #jackup-wireframe .alarm-filter-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
+    #jackup-wireframe .alarm-table-wrap { max-width: 100%; overflow-x: auto; }
+    #jackup-wireframe .alarm-table { min-width: 850px; table-layout: fixed; }
+    #jackup-wireframe .alarm-table :is(th, td):nth-child(1) { width: 14%; }
+    #jackup-wireframe .alarm-table :is(th, td):nth-child(2) { width: 10%; }
+    #jackup-wireframe .alarm-table :is(th, td):nth-child(3) { width: 16%; }
+    #jackup-wireframe .alarm-table :is(th, td):nth-child(4) { width: 20%; }
+    #jackup-wireframe .alarm-table :is(th, td):nth-child(5) { width: 16%; }
+    #jackup-wireframe .alarm-table :is(th, td):nth-child(6) { width: 14%; }
+    #jackup-wireframe .alarm-table :is(th, td):nth-child(7) { width: 10%; }
+    #jackup-wireframe .alarm-level { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; }
+    #jackup-wireframe .alarm-level::before { content: &quot;&quot;; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+    #jackup-wireframe .alarm-ack { min-height: 36px; padding: 6px 10px; }
+    #jackup-wireframe .alarm-ack:disabled { cursor: default; opacity: .65; }
+    #jackup-wireframe .alarm-safety-state { margin-top: 12px; }
     #jackup-wireframe .data-edit-action:disabled { cursor: not-allowed; opacity: .45; }
     #jackup-wireframe .sensor { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--jw-line); }
     #jackup-wireframe .sensor:last-child { border-bottom: 0; }
@@ -1103,8 +1124,6 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .set-module strong { display: block; margin-top: 5px; font-weight: 500; }
     #jackup-wireframe .set-plus { align-self: center; color: var(--jw-muted); font-size: 18px; }
     #jackup-wireframe .set-status { margin-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-    #jackup-wireframe .battery { width: 70px; height: 8px; background: var(--jw-line); border-radius: 8px; overflow: hidden; }
-    #jackup-wireframe .battery span { display: block; height: 100%; background: var(--jw-good); }
     #jackup-wireframe .stepper { display: flex; gap: 5px; margin-bottom: 14px; }
     #jackup-wireframe .step { flex: 1; height: 6px; border-radius: 6px; background: var(--jw-line); }
     #jackup-wireframe .step.done { background: var(--jw-good); }
@@ -1126,6 +1145,62 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .plot .live-displacement-point { fill: var(--jw-warn); stroke: var(--jw-surface); stroke-width: 2; }
     #jackup-wireframe .plot .mean { stroke: var(--jw-text); stroke-width: 2; stroke-dasharray: 7 5; fill: none; }
     #jackup-wireframe .plot .fit { stroke: var(--jw-good); stroke-width: 2; fill: none; }
+    #jackup-wireframe .plot .analysis-line-lifting { stroke: var(--jw-good); stroke-width: 3; fill: none; }
+    #jackup-wireframe .plot .analysis-line-lowering { stroke: var(--jw-bad); stroke-width: 3; fill: none; }
+    #jackup-wireframe .plot .mean-analysis-line { stroke: var(--jw-text); stroke-width: 3; stroke-dasharray: 8 6; fill: none; }
+    #jackup-wireframe .plot .slope-adjust-handle { fill: var(--jw-surface); stroke-width: 3; cursor: grab; pointer-events: all; touch-action: none; }
+    #jackup-wireframe .plot .slope-adjust-handle[data-slope-line=&quot;lifting&quot;] { stroke: var(--jw-good); }
+    #jackup-wireframe .plot .slope-adjust-handle[data-slope-line=&quot;lowering&quot;] { stroke: var(--jw-bad); }
+    #jackup-wireframe .plot .slope-adjust-handle:active { cursor: grabbing; }
+    #jackup-wireframe .analysis-main-grid { grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); align-items: start; }
+    #jackup-wireframe .analysis-graph-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+    #jackup-wireframe .analysis-graph-head .status { flex: 0 0 auto; }
+    #jackup-wireframe .analysis-result-column { display: grid; gap: 12px; align-content: start; }
+    #jackup-wireframe .analysis-result-column .grid.two { gap: 10px; }
+    #jackup-wireframe .bar-reading-table th, #jackup-wireframe .bar-reading-table td { padding: 5px 7px; text-align: right; }
+    #jackup-wireframe .bar-reading-table th:nth-child(1), #jackup-wireframe .bar-reading-table th:nth-child(3) { color: var(--jw-muted); }
+    #jackup-wireframe .bar-reading-table td:nth-child(1), #jackup-wireframe .bar-reading-table td:nth-child(3) { color: var(--jw-text); }
+    #jackup-wireframe .bar-table-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+    #jackup-wireframe .bar-table-head h3 { margin: 0; }
+    #jackup-wireframe .bar-table-actions { display: flex; align-items: center; gap: 7px; }
+    #jackup-wireframe .bar-table-actions .action { min-height: 40px; padding: 7px 10px; }
+    #jackup-wireframe .bar-reading-table input { min-width: 0; min-height: 40px; padding: 6px 7px; text-align: right; }
+    #jackup-wireframe .bar-reading-table input[readonly] { background: var(--jw-surface-2); color: var(--jw-muted); cursor: default; }
+    #jackup-wireframe .bar-reading-table .bar-row-delete { min-height: 40px; padding: 6px 9px; }
+    #jackup-wireframe .bar-reading-table th:last-child, #jackup-wireframe .bar-reading-table td:last-child { width: 64px; text-align: center; }
+    #jackup-wireframe .bar-reading-status { margin-top: 7px; min-height: 18px; color: var(--jw-muted); font-size: 11px; }
+    #jackup-wireframe .sag-table-wrap { max-width: 100%; overflow-x: auto; }
+    #jackup-wireframe .sag-table { min-width: 720px; table-layout: fixed; }
+    #jackup-wireframe .sag-table :is(th, td) { padding: 5px; text-align: center; }
+    #jackup-wireframe .sag-table :is(th, td):first-child { width: 178px; text-align: left; }
+    #jackup-wireframe .sag-table input { min-width: 0; min-height: 38px; padding: 5px; text-align: center; }
+    #jackup-wireframe .sag-table input[data-sag-input] { background: color-mix(in srgb, var(--jw-warn) 22%, var(--jw-surface)); border-color: color-mix(in srgb, var(--jw-warn) 60%, var(--jw-line)); }
+    #jackup-wireframe .sag-reference-row { background: var(--jw-surface-2); }
+    #jackup-wireframe .sag-result-layout { grid-template-columns: minmax(0, 1fr); align-items: start; margin-top: 12px; }
+    #jackup-wireframe .sag-plot { height: 300px; }
+    #jackup-wireframe .sag-plot .sag-limit-max, #jackup-wireframe .sag-plot .sag-limit-min { stroke: var(--jw-muted); stroke-width: 2; stroke-dasharray: 6 5; fill: none; }
+    #jackup-wireframe .sag-plot .sag-nominal { stroke: var(--jw-text); stroke-width: 2; stroke-dasharray: 3 4; fill: none; }
+    #jackup-wireframe .sag-plot .sag-exhaust { stroke: var(--jw-accent); stroke-width: 3; fill: none; }
+    #jackup-wireframe .sag-plot .sag-man { stroke: var(--jw-warn); stroke-width: 3; fill: none; }
+    #jackup-wireframe .sag-plot .sag-exhaust-point { fill: var(--jw-accent); stroke: var(--jw-surface); stroke-width: 2; }
+    #jackup-wireframe .sag-plot .sag-man-point { fill: var(--jw-warn); stroke: var(--jw-surface); stroke-width: 2; }
+    #jackup-wireframe .sag-output-panel { margin-top: 12px; }
+    #jackup-wireframe .sag-output-wrap { max-width: 100%; overflow-x: auto; }
+    #jackup-wireframe .sag-output-table { min-width: 750px; table-layout: fixed; font-size: 11px; }
+    #jackup-wireframe .sag-output-table :is(th, td) { padding: 6px 5px; text-align: center; border: 1px solid var(--jw-line); }
+    #jackup-wireframe .sag-output-table :is(th, td):first-child { text-align: left; }
+    #jackup-wireframe .sag-output-table .sag-col-label { width: 196px; }
+    #jackup-wireframe .sag-output-table .sag-col-bearing { width: 54px; }
+    #jackup-wireframe .sag-output-table .sag-col-tolerance { width: 80px; }
+    #jackup-wireframe .sag-output-table .sag-col-result { width: 96px; }
+    #jackup-wireframe .sag-output-table .sag-section-heading th { background: color-mix(in srgb, var(--jw-accent) 18%, var(--jw-surface)); color: var(--jw-text); text-align: center; }
+    #jackup-wireframe .sag-output-table .sag-column-labels th { background: var(--jw-surface-2); color: var(--jw-muted); text-align: center; }
+    #jackup-wireframe .sag-output-table .sag-curve-label { background: color-mix(in srgb, var(--jw-accent) 12%, var(--jw-surface)); color: var(--jw-text); font-weight: 500; }
+    #jackup-wireframe .sag-output-table .sag-judge-cell.good { background: color-mix(in srgb, var(--jw-good) 12%, var(--jw-surface)); }
+    #jackup-wireframe .sag-output-table .sag-judge-cell.bad { background: color-mix(in srgb, var(--jw-bad) 13%, var(--jw-surface)); }
+    #jackup-wireframe .sag-output-table .sag-result-value { font-weight: 500; white-space: nowrap; }
+    #jackup-wireframe .sag-output-table .sag-empty-cell { background: var(--jw-surface-2); }
+    #jackup-wireframe .sag-calc-status { margin-top: 10px; min-height: 18px; color: var(--jw-muted); font-size: 11px; }
     #jackup-wireframe .jack-motion { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--jw-line); }
     #jackup-wireframe .jack-motion-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
     #jackup-wireframe .jack-motion-head h3 { margin: 0; }
@@ -1186,14 +1261,14 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .analysis-range-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
     #jackup-wireframe .analysis-meta-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
     #jackup-wireframe .analysis-reason-field { grid-column: 1 / -1; }
-    #jackup-wireframe .graph-fullscreen { position: fixed; z-index: 200; top: 56px; right: max(0px, calc((100vw - 1340px) / 2)); bottom: 0; left: max(154px, calc((100vw - 1340px) / 2 + 154px)); display: none; grid-template-rows: auto minmax(0, 1fr) auto; gap: 12px; padding: 18px; background: var(--jw-surface); color: var(--jw-text); }
+    #jackup-wireframe .graph-fullscreen { position: absolute; z-index: 200; top: 52px; right: max(0px, calc((100vw - 1007px) / 2)); bottom: 0; left: max(142px, calc((100vw - 1007px) / 2 + 142px)); display: none; grid-template-rows: auto minmax(0, 1fr) auto; gap: 10px; padding: 12px; overflow: hidden; background: var(--jw-surface); color: var(--jw-text); }
     #jackup-wireframe .graph-fullscreen.open { display: grid; }
     #jackup-wireframe .graph-fullscreen-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     #jackup-wireframe .graph-fullscreen-head h2 { margin: 0; }
-    #jackup-wireframe .graph-fullscreen-body { min-width: 0; min-height: 0; display: grid; place-items: stretch; }
-    #jackup-wireframe .graph-fullscreen-body .plot { width: 100%; height: 100%; min-height: 0; }
+    #jackup-wireframe .graph-fullscreen-body { min-width: 0; min-height: 0; display: grid; place-items: stretch; overflow: hidden; }
+    #jackup-wireframe .graph-fullscreen-body .plot { width: 100%; height: 100%; min-width: 0; min-height: 0; max-width: 100%; max-height: 100%; }
     #jackup-wireframe .graph-fullscreen .legend { margin-top: 0; min-height: 18px; }
-    #jackup-wireframe .pdf-preview { position: fixed; z-index: 210; top: 56px; right: max(0px, calc((100vw - 1340px) / 2)); bottom: 0; left: max(154px, calc((100vw - 1340px) / 2 + 154px)); display: none; grid-template-rows: auto minmax(0, 1fr) auto; gap: 12px; padding: 14px 18px; background: var(--jw-bg); color: var(--jw-text); }
+    #jackup-wireframe .pdf-preview { position: fixed; z-index: 210; top: 52px; right: max(0px, calc((100vw - 1007px) / 2)); bottom: max(0px, calc((100vh - 601px) / 2)); left: max(142px, calc((100vw - 1007px) / 2 + 142px)); display: none; grid-template-rows: auto minmax(0, 1fr) auto; gap: 10px; padding: 12px; background: var(--jw-bg); color: var(--jw-text); }
     #jackup-wireframe .pdf-preview.open { display: grid; }
     #jackup-wireframe .pdf-preview-head, #jackup-wireframe .pdf-preview-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     #jackup-wireframe .pdf-preview-head h2 { margin: 0; }
@@ -1298,26 +1373,29 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .flow b { color: var(--jw-text); background: var(--jw-surface-2); padding: 7px 9px; border-radius: 6px; font-weight: 500; }
     #jackup-wireframe [data-panel=&quot;measure&quot;] .panel &gt; h3 + .btnrow { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
     #jackup-wireframe [data-panel=&quot;measure&quot;] .panel &gt; h3 + .btnrow .action { width: 100%; min-height: 48px; display: flex; align-items: center; justify-content: center; text-align: center; }
-    @media (max-width: 900px) and (orientation: landscape) {
-      #jackup-wireframe .shell { grid-template-columns: 138px minmax(0, 1fr); }
-      #jackup-wireframe .main { padding: 14px; }
+    @media (max-width: 1050px) and (orientation: landscape) {
+      #jackup-wireframe .shell { grid-template-columns: 142px minmax(0, 1fr); }
+      #jackup-wireframe .main { padding: 12px; }
       #jackup-wireframe .nav { padding-inline: 6px; }
       #jackup-wireframe .top-status { gap: 9px; }
       #jackup-wireframe .device-profile { display: none; }
       #jackup-wireframe .set-builder { grid-template-columns: 1fr auto 1fr; }
       #jackup-wireframe .set-builder .field, #jackup-wireframe .set-builder .action { grid-column: span 1; }
       #jackup-wireframe .analysis-meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #jackup-wireframe .analysis-main-grid { grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr); }
+      #jackup-wireframe .sag-result-layout { grid-template-columns: minmax(0, 1.45fr) minmax(250px, .75fr); }
       #jackup-wireframe .result-confirmation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       #jackup-wireframe .result-confirmation-grid .remeasure-reason-field { grid-column: 1 / -1; }
       #jackup-wireframe .overview-history-grid { grid-template-columns: 1fr; }
-      #jackup-wireframe .graph-fullscreen { left: 138px; right: 0; }
-      #jackup-wireframe .pdf-preview { left: 138px; right: 0; }
+      #jackup-wireframe .graph-fullscreen { left: 142px; right: 0; bottom: 0; }
+      #jackup-wireframe .pdf-preview { left: 142px; right: 0; bottom: 0; }
     }
     @media (max-width: 700px), (orientation: portrait) {
       #jackup-wireframe .shell { grid-template-columns: 1fr; }
       #jackup-wireframe .nav { border-right: 0; border-bottom: 1px solid var(--jw-line); display: flex; overflow-x: auto; }
       #jackup-wireframe .nav button { min-width: max-content; width: auto; }
       #jackup-wireframe .grid.two, #jackup-wireframe .grid.three, #jackup-wireframe .formgrid, #jackup-wireframe .instrument-grid, #jackup-wireframe .quality-list, #jackup-wireframe .curve-range-grid { grid-template-columns: 1fr; }
+      #jackup-wireframe .sag-result-layout { grid-template-columns: 1fr; }
       #jackup-wireframe .instrument-wide { grid-column: auto; }
       #jackup-wireframe .top-status .hide-small { display: none; }
       #jackup-wireframe .device-profile { display: none; }
@@ -1338,6 +1416,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       #jackup-wireframe .layout-controls.bearing-toolbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       #jackup-wireframe [data-panel=&quot;measure&quot;] .panel &gt; h3 + .btnrow { grid-template-columns: 1fr; }
       #jackup-wireframe .overview-history-grid { grid-template-columns: 1fr; }
+      #jackup-wireframe .alarm-summary, #jackup-wireframe .alarm-filter-grid { grid-template-columns: 1fr; }
       #jackup-wireframe .report-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       #jackup-wireframe .result-confirmation-grid { grid-template-columns: 1fr; }
       #jackup-wireframe .result-confirmation-grid .remeasure-reason-field { grid-column: auto; }
@@ -1347,7 +1426,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   &lt;/style&gt;
   &lt;div class=&quot;device&quot;&gt;
     &lt;header class=&quot;topbar&quot;&gt;
-      &lt;div class=&quot;brand&quot;&gt;&lt;span class=&quot;brand-mark&quot;&gt;J&lt;/span&gt; Shaft Reaction Monitor &lt;span class=&quot;device-profile&quot;&gt;Galaxy Tab A11 · 8.7″ · 1340×800 · 가로&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;brand&quot;&gt;&lt;span class=&quot;brand-mark&quot;&gt;J&lt;/span&gt; Shaft Reaction Monitor &lt;span class=&quot;device-profile&quot;&gt;Galaxy Tab 11 · 1007×601 · 가로&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;top-status&quot;&gt;&lt;button class=&quot;guide-toggle&quot; id=&quot;guide-toggle&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;가이드 모드 켜기&lt;/button&gt;&lt;span class=&quot;hide-small&quot;&gt;TEST: H2678-20260825-02&lt;/span&gt;&lt;span class=&quot;status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;2/2 연결&lt;/span&gt;&lt;span&gt;14:32&lt;/span&gt;&lt;/div&gt;
     &lt;/header&gt;
     &lt;div class=&quot;shell&quot;&gt;
@@ -1358,16 +1437,18 @@ html&gt;body{padding:0}&lt;/style&gt;
         &lt;button type=&quot;button&quot; data-screen=&quot;bearing-select&quot; aria-selected=&quot;false&quot;&gt;04 베어링 선택&lt;/button&gt;
         &lt;button type=&quot;button&quot; data-screen=&quot;measure&quot; aria-selected=&quot;false&quot;&gt;05 Jack-up 측정&lt;/button&gt;
         &lt;button type=&quot;button&quot; data-screen=&quot;analysis&quot; aria-selected=&quot;false&quot;&gt;06 분석·보정&lt;/button&gt;
-        &lt;button type=&quot;button&quot; data-screen=&quot;data&quot; aria-selected=&quot;false&quot;&gt;07 데이터·이력&lt;/button&gt;
-        &lt;button type=&quot;button&quot; data-screen=&quot;report&quot; aria-selected=&quot;false&quot;&gt;08 결과·리포트&lt;/button&gt;
+        &lt;button type=&quot;button&quot; data-screen=&quot;sag&quot; aria-selected=&quot;false&quot;&gt;07 SAG&lt;/button&gt;
+        &lt;button type=&quot;button&quot; data-screen=&quot;data&quot; aria-selected=&quot;false&quot;&gt;08 데이터·이력&lt;/button&gt;
+        &lt;button type=&quot;button&quot; data-screen=&quot;report&quot; aria-selected=&quot;false&quot;&gt;09 결과·리포트&lt;/button&gt;
+        &lt;button type=&quot;button&quot; data-screen=&quot;alarms&quot; aria-selected=&quot;false&quot;&gt;10 알람·경고&lt;/button&gt;
       &lt;/nav&gt;
       &lt;main class=&quot;main&quot;&gt;
         &lt;section class=&quot;screen active&quot; data-panel=&quot;overview&quot;&gt;
-          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;작업 홈&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;프로젝트 선택 → 시험 조건 설정 → 장치 확인 → 베어링별 순차 측정&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action primary&quot; id=&quot;new-test-button&quot; type=&quot;button&quot; data-tooltip=&quot;신규 시험을 생성하고 시험 조건 설정 화면으로 이동&quot;&gt;새 시험 시작&lt;/button&gt;&lt;/div&gt;
+          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;작업 홈&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;프로젝트 선택 → 시험 조건 설정 → 장치 확인 → 베어링별 순차 측정&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action primary&quot; id=&quot;new-test-button&quot; type=&quot;button&quot; data-jw-tooltip=&quot;신규 시험을 생성하고 시험 조건 설정 화면으로 이동&quot;&gt;새 시험 시작&lt;/button&gt;&lt;/div&gt;
           &lt;div class=&quot;grid three&quot;&gt;
             &lt;div class=&quot;panel&quot; data-help=&quot;현재 선택된 호선·설비와 작업 회차입니다. H2678은 프로젝트 식별값, 2차는 현재 측정 회차를 뜻합니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;진행 중 프로젝트&lt;/span&gt;&lt;div class=&quot;metric&quot;&gt;H2678&lt;/div&gt;&lt;p class=&quot;sub&quot;&gt;ME Shaft / 2차&lt;/p&gt;&lt;/div&gt;
             &lt;div class=&quot;panel&quot; data-help=&quot;시험 조건에서 설정한 전체 4개 베어링 중 2개 측정을 완료했으며, 현재 No.4 위치를 측정한다는 의미입니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;측정 진행&lt;/span&gt;&lt;div class=&quot;metric&quot;&gt;2 / 4&lt;/div&gt;&lt;p class=&quot;sub&quot;&gt;현재 No.4 베어링&lt;/p&gt;&lt;/div&gt;
-            &lt;div class=&quot;panel&quot; data-help=&quot;압력·변위 모듈의 연결 상태와 배터리 잔량을 요약합니다. 정상은 두 장치 모두 통신 가능한 상태입니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;장치 상태&lt;/span&gt;&lt;div class=&quot;metric good&quot;&gt;정상&lt;/div&gt;&lt;p class=&quot;sub&quot;&gt;압력 82% · 변위 76%&lt;/p&gt;&lt;/div&gt;
+            &lt;div class=&quot;panel&quot; data-help=&quot;압력·변위 모듈의 연결 상태와 실제 데이터 통신 주기를 요약합니다. 정상은 두 장치가 1초 주기로 수신되는 상태입니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;장치 상태&lt;/span&gt;&lt;div class=&quot;metric good&quot;&gt;정상&lt;/div&gt;&lt;p class=&quot;sub&quot;&gt;압력·변위 연결 · 통신 주기 1초&lt;/p&gt;&lt;/div&gt;
           &lt;/div&gt;
           &lt;div class=&quot;overview-history-grid&quot;&gt;
             &lt;div class=&quot;panel&quot; data-help=&quot;태블릿에 저장된 시험 내역이 최신순으로 누적됩니다. Test ID를 선택하면 해당 시험의 원시값·최종값·보정 이력을 조회합니다.&quot;&gt;&lt;h3&gt;최근 시험 · 누적 저장 내역&lt;/h3&gt;&lt;div class=&quot;history-table-wrap&quot;&gt;&lt;table class=&quot;history-table&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Test ID&lt;/th&gt;&lt;th&gt;세트 이름&lt;/th&gt;&lt;th&gt;회차&lt;/th&gt;&lt;th&gt;판정&lt;/th&gt;&lt;th&gt;시험일&lt;/th&gt;&lt;th&gt;작업자&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;button class=&quot;history-link&quot; type=&quot;button&quot; data-history-open data-current=&quot;true&quot; data-test-id=&quot;H2678-20260825-02&quot; data-test-date=&quot;2026-08-25&quot; data-set-name=&quot;SET-014&quot; data-set-modules=&quot;PRS-A-014 + DIS-B-014&quot; data-worker=&quot;홍길동&quot; data-round=&quot;2차&quot; data-status=&quot;진행 중&quot; aria-label=&quot;H2678-20260825-02 현재 시험 데이터 보기&quot;&gt;H2678-20260825-02&lt;/button&gt;&lt;/td&gt;&lt;td&gt;SET-014&lt;/td&gt;&lt;td&gt;2차&lt;/td&gt;&lt;td class=&quot;warn&quot;&gt;진행 중&lt;/td&gt;&lt;td&gt;2026-08-25&lt;/td&gt;&lt;td&gt;홍길동&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;button class=&quot;history-link&quot; type=&quot;button&quot; data-history-open data-test-id=&quot;H2678-20260821-01&quot; data-test-date=&quot;2026-08-21&quot; data-set-name=&quot;SET-009&quot; data-set-modules=&quot;PRS-A-009 + DIS-B-008&quot; data-worker=&quot;김민수&quot; data-round=&quot;1차&quot; data-status=&quot;재측정&quot; aria-label=&quot;H2678-20260821-01 과거 데이터 이력 보기&quot;&gt;H2678-20260821-01&lt;/button&gt;&lt;/td&gt;&lt;td&gt;SET-009&lt;/td&gt;&lt;td&gt;1차&lt;/td&gt;&lt;td class=&quot;bad&quot;&gt;재측정&lt;/td&gt;&lt;td&gt;2026-08-21&lt;/td&gt;&lt;td&gt;김민수&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;button class=&quot;history-link&quot; type=&quot;button&quot; data-history-open data-test-id=&quot;H2611-20260817-03&quot; data-test-date=&quot;2026-08-17&quot; data-set-name=&quot;SET-021&quot; data-set-modules=&quot;PRS-A-021 + DIS-B-026&quot; data-worker=&quot;박지훈&quot; data-round=&quot;3차&quot; data-status=&quot;완료&quot; aria-label=&quot;H2611-20260817-03 과거 데이터 이력 보기&quot;&gt;H2611-20260817-03&lt;/button&gt;&lt;/td&gt;&lt;td&gt;SET-021&lt;/td&gt;&lt;td&gt;3차&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;완료&lt;/td&gt;&lt;td&gt;2026-08-17&lt;/td&gt;&lt;td&gt;박지훈&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;button class=&quot;history-link&quot; type=&quot;button&quot; data-history-open data-test-id=&quot;H2542-20260810-01&quot; data-test-date=&quot;2026-08-10&quot; data-set-name=&quot;SET-006&quot; data-set-modules=&quot;PRS-A-006 + DIS-B-004&quot; data-worker=&quot;이서준&quot; data-round=&quot;1차&quot; data-status=&quot;완료&quot; aria-label=&quot;H2542-20260810-01 과거 데이터 이력 보기&quot;&gt;H2542-20260810-01&lt;/button&gt;&lt;/td&gt;&lt;td&gt;SET-006&lt;/td&gt;&lt;td&gt;1차&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;완료&lt;/td&gt;&lt;td&gt;2026-08-10&lt;/td&gt;&lt;td&gt;이서준&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;p class=&quot;sub&quot;&gt;시험 완료 시 날짜·작업자·사용 장치 세트가 태블릿 저장공간에 계속 누적됩니다.&lt;/p&gt;&lt;/div&gt;
@@ -1376,41 +1457,41 @@ html&gt;body{padding:0}&lt;/style&gt;
         &lt;/section&gt;
 
         &lt;section class=&quot;screen&quot; data-panel=&quot;connect&quot;&gt;
-          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;장치 연결&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;주변 장치 검색 → 압력 모듈 1개 선택 → 변위 모듈 1개 선택 → 측정 세트 저장&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action&quot; id=&quot;rescan-modules&quot; type=&quot;button&quot; data-order=&quot;1&quot; data-tooltip=&quot;주변에서 연결 요청 중인 BLE 압력·변위 모듈을 다시 검색&quot;&gt;주변 장치 다시 검색&lt;/button&gt;&lt;/div&gt;
+          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;장치 연결&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;주변 장치 검색 → 압력 모듈 1개 선택 → 변위 모듈 1개 선택 → 측정 세트 저장&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action&quot; id=&quot;rescan-modules&quot; type=&quot;button&quot; data-order=&quot;1&quot; data-jw-tooltip=&quot;주변에서 연결 요청 중인 BLE 압력·변위 모듈을 다시 검색&quot;&gt;주변 장치 다시 검색&lt;/button&gt;&lt;/div&gt;
           &lt;div class=&quot;grid two&quot;&gt;
-            &lt;div class=&quot;panel&quot; data-order=&quot;2&quot; data-help=&quot;검색된 압력 센서용 BLE 모듈 목록입니다. 장치 ID·측정 범위·신호 세기·배터리를 확인하고 이번 시험에 사용할 장치 하나를 선택합니다.&quot;&gt;
+            &lt;div class=&quot;panel&quot; data-order=&quot;2&quot; data-help=&quot;검색된 압력 센서용 BLE 모듈 목록입니다. 장치 ID·측정 범위·신호 세기·통신 주기를 확인하고 이번 시험에 사용할 장치 하나를 선택합니다.&quot;&gt;
               &lt;div class=&quot;instrument-title&quot;&gt;&lt;h3&gt;검색된 압력 모듈&lt;/h3&gt;&lt;span&gt;3개 검색됨&lt;/span&gt;&lt;/div&gt;
               &lt;div class=&quot;module-list&quot; role=&quot;radiogroup&quot; aria-label=&quot;압력 모듈 선택&quot;&gt;
-                &lt;label class=&quot;module-option&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;pressure-module&quot; value=&quot;PRS-A-014&quot; data-meta=&quot;1,000 bar · -48 dBm · 배터리 82%&quot; checked&gt;&lt;span&gt;&lt;strong&gt;PRS-A-014&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;1,000 bar · RSSI -48 dBm · 배터리 82%&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;module-state status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;신호 강함&lt;/span&gt;&lt;/label&gt;
-                &lt;label class=&quot;module-option&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;pressure-module&quot; value=&quot;PRS-A-021&quot; data-meta=&quot;700 bar · -61 dBm · 배터리 67%&quot;&gt;&lt;span&gt;&lt;strong&gt;PRS-A-021&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;700 bar · RSSI -61 dBm · 배터리 67%&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;module-state status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;신호 양호&lt;/span&gt;&lt;/label&gt;
-                &lt;label class=&quot;module-option&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;pressure-module&quot; value=&quot;PRS-A-033&quot; data-meta=&quot;1,000 bar · -74 dBm · 배터리 43%&quot;&gt;&lt;span&gt;&lt;strong&gt;PRS-A-033&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;1,000 bar · RSSI -74 dBm · 배터리 43%&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;module-state status warn&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;신호 약함&lt;/span&gt;&lt;/label&gt;
+                &lt;label class=&quot;module-option&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;pressure-module&quot; value=&quot;PRS-A-014&quot; data-meta=&quot;1,000 bar · -48 dBm · 통신 1초&quot; checked&gt;&lt;span&gt;&lt;strong&gt;PRS-A-014&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;1,000 bar · RSSI -48 dBm · 통신 1초&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;module-state status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;신호 강함&lt;/span&gt;&lt;/label&gt;
+                &lt;label class=&quot;module-option&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;pressure-module&quot; value=&quot;PRS-A-021&quot; data-meta=&quot;700 bar · -61 dBm · 통신 1초&quot;&gt;&lt;span&gt;&lt;strong&gt;PRS-A-021&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;700 bar · RSSI -61 dBm · 통신 1초&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;module-state status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;신호 양호&lt;/span&gt;&lt;/label&gt;
+                &lt;label class=&quot;module-option&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;pressure-module&quot; value=&quot;PRS-A-033&quot; data-meta=&quot;1,000 bar · -74 dBm · 통신 1초&quot;&gt;&lt;span&gt;&lt;strong&gt;PRS-A-033&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;1,000 bar · RSSI -74 dBm · 통신 1초&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;module-state status warn&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;신호 약함&lt;/span&gt;&lt;/label&gt;
               &lt;/div&gt;
             &lt;/div&gt;
-            &lt;div class=&quot;panel&quot; data-order=&quot;3&quot; data-help=&quot;검색된 디지털 다이얼 게이지용 BLE 모듈 목록입니다. 장치 ID·분해능·신호 세기·배터리를 확인하고 압력 모듈과 함께 사용할 장치 하나를 선택합니다.&quot;&gt;
+            &lt;div class=&quot;panel&quot; data-order=&quot;3&quot; data-help=&quot;검색된 디지털 다이얼 게이지용 BLE 모듈 목록입니다. 장치 ID·분해능·신호 세기·통신 주기를 확인하고 압력 모듈과 함께 사용할 장치 하나를 선택합니다.&quot;&gt;
               &lt;div class=&quot;instrument-title&quot;&gt;&lt;h3&gt;검색된 변위 모듈&lt;/h3&gt;&lt;span&gt;3개 검색됨&lt;/span&gt;&lt;/div&gt;
               &lt;div class=&quot;module-list&quot; role=&quot;radiogroup&quot; aria-label=&quot;변위 모듈 선택&quot;&gt;
-                &lt;label class=&quot;module-option&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;displacement-module&quot; value=&quot;DIS-B-014&quot; data-meta=&quot;0.01 mm · -52 dBm · 배터리 76%&quot; checked&gt;&lt;span&gt;&lt;strong&gt;DIS-B-014&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;0.01 mm · RSSI -52 dBm · 배터리 76%&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;module-state status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;신호 강함&lt;/span&gt;&lt;/label&gt;
-                &lt;label class=&quot;module-option&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;displacement-module&quot; value=&quot;DIS-B-008&quot; data-meta=&quot;0.01 mm · -63 dBm · 배터리 91%&quot;&gt;&lt;span&gt;&lt;strong&gt;DIS-B-008&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;0.01 mm · RSSI -63 dBm · 배터리 91%&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;module-state status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;신호 양호&lt;/span&gt;&lt;/label&gt;
-                &lt;label class=&quot;module-option&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;displacement-module&quot; value=&quot;DIS-B-026&quot; data-meta=&quot;0.001 mm · -78 dBm · 배터리 55%&quot;&gt;&lt;span&gt;&lt;strong&gt;DIS-B-026&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;0.001 mm · RSSI -78 dBm · 배터리 55%&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;module-state status warn&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;신호 약함&lt;/span&gt;&lt;/label&gt;
+                &lt;label class=&quot;module-option&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;displacement-module&quot; value=&quot;DIS-B-014&quot; data-meta=&quot;0.01 mm · -52 dBm · 통신 1초&quot; checked&gt;&lt;span&gt;&lt;strong&gt;DIS-B-014&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;0.01 mm · RSSI -52 dBm · 통신 1초&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;module-state status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;신호 강함&lt;/span&gt;&lt;/label&gt;
+                &lt;label class=&quot;module-option&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;displacement-module&quot; value=&quot;DIS-B-008&quot; data-meta=&quot;0.01 mm · -63 dBm · 통신 1초&quot;&gt;&lt;span&gt;&lt;strong&gt;DIS-B-008&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;0.01 mm · RSSI -63 dBm · 통신 1초&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;module-state status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;신호 양호&lt;/span&gt;&lt;/label&gt;
+                &lt;label class=&quot;module-option&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;displacement-module&quot; value=&quot;DIS-B-026&quot; data-meta=&quot;0.001 mm · -78 dBm · 통신 1초&quot;&gt;&lt;span&gt;&lt;strong&gt;DIS-B-026&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;0.001 mm · RSSI -78 dBm · 통신 1초&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;module-state status warn&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;신호 약함&lt;/span&gt;&lt;/label&gt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
           &lt;div class=&quot;panel&quot; data-help=&quot;선택한 압력 모듈과 변위 모듈을 하나의 장비 세트로 묶습니다. 저장된 세트 ID는 시험 조건과 측정 데이터에 함께 기록됩니다.&quot; style=&quot;margin-top:12px&quot;&gt;
             &lt;h3&gt;선택 장치 세트&lt;/h3&gt;
             &lt;div class=&quot;set-builder&quot;&gt;
-              &lt;div class=&quot;set-module&quot;&gt;&lt;span class=&quot;label&quot;&gt;압력 모듈&lt;/span&gt;&lt;strong id=&quot;selected-pressure-module&quot;&gt;PRS-A-014&lt;/strong&gt;&lt;span class=&quot;sub&quot; id=&quot;selected-pressure-meta&quot;&gt;1,000 bar · -48 dBm · 배터리 82%&lt;/span&gt;&lt;/div&gt;
+              &lt;div class=&quot;set-module&quot;&gt;&lt;span class=&quot;label&quot;&gt;압력 모듈&lt;/span&gt;&lt;strong id=&quot;selected-pressure-module&quot;&gt;PRS-A-014&lt;/strong&gt;&lt;span class=&quot;sub&quot; id=&quot;selected-pressure-meta&quot;&gt;1,000 bar · -48 dBm · 통신 1초&lt;/span&gt;&lt;/div&gt;
               &lt;span class=&quot;set-plus&quot; aria-hidden=&quot;true&quot;&gt;＋&lt;/span&gt;
-              &lt;div class=&quot;set-module&quot;&gt;&lt;span class=&quot;label&quot;&gt;변위 모듈&lt;/span&gt;&lt;strong id=&quot;selected-displacement-module&quot;&gt;DIS-B-014&lt;/strong&gt;&lt;span class=&quot;sub&quot; id=&quot;selected-displacement-meta&quot;&gt;0.01 mm · -52 dBm · 배터리 76%&lt;/span&gt;&lt;/div&gt;
+              &lt;div class=&quot;set-module&quot;&gt;&lt;span class=&quot;label&quot;&gt;변위 모듈&lt;/span&gt;&lt;strong id=&quot;selected-displacement-module&quot;&gt;DIS-B-014&lt;/strong&gt;&lt;span class=&quot;sub&quot; id=&quot;selected-displacement-meta&quot;&gt;0.01 mm · -52 dBm · 통신 1초&lt;/span&gt;&lt;/div&gt;
               &lt;div class=&quot;field&quot; data-order=&quot;4&quot; data-help=&quot;두 장치를 함께 식별할 측정 세트 이름입니다. 이후 시험 설정의 장비 세트 ID에 자동 반영됩니다.&quot;&gt;&lt;label for=&quot;device-set-name&quot;&gt;세트 이름&lt;/label&gt;&lt;input id=&quot;device-set-name&quot; value=&quot;SET-014&quot;&gt;&lt;/div&gt;
-              &lt;button class=&quot;action primary&quot; id=&quot;save-device-set&quot; type=&quot;button&quot; data-order=&quot;5&quot; data-tooltip=&quot;현재 선택한 압력 모듈 1개와 변위 모듈 1개를 측정 세트로 저장하고 연결 점검을 시작&quot;&gt;이 구성으로 세트 저장&lt;/button&gt;
+              &lt;button class=&quot;action primary&quot; id=&quot;save-device-set&quot; type=&quot;button&quot; data-order=&quot;5&quot; data-jw-tooltip=&quot;현재 선택한 압력 모듈 1개와 변위 모듈 1개를 측정 세트로 저장하고 연결 점검을 시작&quot;&gt;이 구성으로 세트 저장&lt;/button&gt;
             &lt;/div&gt;
-            &lt;div class=&quot;set-status&quot;&gt;&lt;span class=&quot;status warn&quot; id=&quot;device-set-status&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;압력 1개 · 변위 1개 선택 완료 / 저장 전&lt;/span&gt;&lt;span class=&quot;sub&quot; id=&quot;device-set-detail&quot;&gt;PRS-A-014 + DIS-B-014&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;set-status&quot;&gt;&lt;span class=&quot;status warn&quot; id=&quot;device-set-status&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;압력 1개 · 변위 1개 선택 완료 / 저장 전&lt;/span&gt;&lt;span class=&quot;sub&quot; id=&quot;device-set-detail&quot;&gt;PRS-A-014 + DIS-B-014 · 통신 주기 1초&lt;/span&gt;&lt;/div&gt;
           &lt;/div&gt;
           &lt;div class=&quot;panel&quot; data-help=&quot;세트 저장 후 1초 스트리밍 수신, 두 모듈의 시간 차이, 물리 스위치 트리거 패킷, 연결 해제 후 자동 재연결 동작을 점검합니다.&quot; style=&quot;margin-top:12px&quot;&gt;&lt;h3&gt;연결 점검&lt;/h3&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;항목&lt;/th&gt;&lt;th&gt;압력&lt;/th&gt;&lt;th&gt;변위&lt;/th&gt;&lt;th&gt;판정&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;1초 주기 스트리밍&lt;/td&gt;&lt;td&gt;수신 중&lt;/td&gt;&lt;td&gt;수신 중&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;정상&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;타임스탬프&lt;/td&gt;&lt;td&gt;14:32:08.221&lt;/td&gt;&lt;td&gt;14:32:08.225&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;4 ms&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;트리거 패킷&lt;/td&gt;&lt;td&gt;대기&lt;/td&gt;&lt;td&gt;대기&lt;/td&gt;&lt;td&gt;미시험&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;자동 재연결&lt;/td&gt;&lt;td&gt;지원&lt;/td&gt;&lt;td&gt;지원&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;정상&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
         &lt;/section&gt;
 
         &lt;section class=&quot;screen&quot; data-panel=&quot;setup&quot;&gt;
-          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;시험 조건 설정&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;공통 조건은 한 번 입력하고 모든 베어링 측정 화면에 적용&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action primary&quot; id=&quot;setup-complete-button&quot; type=&quot;button&quot; data-tooltip=&quot;시험 조건을 저장하고 이번에 측정할 베어링 선택 화면으로 이동&quot;&gt;저장 후 베어링 선택&lt;/button&gt;&lt;/div&gt;
+          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;시험 조건 설정&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;공통 조건은 한 번 입력하고 모든 베어링 측정 화면에 적용&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action primary&quot; id=&quot;setup-complete-button&quot; type=&quot;button&quot; data-jw-tooltip=&quot;시험 조건을 저장하고 이번에 측정할 베어링 선택 화면으로 이동&quot;&gt;저장 후 베어링 선택&lt;/button&gt;&lt;/div&gt;
           &lt;div class=&quot;panel&quot; data-help=&quot;시험 식별, 책임자, 대상 장비와 저장 기준을 등록합니다. 시험 수행일시는 새 시험 시작 시 자동 기록되므로 입력란에서 제외합니다.&quot;&gt;
             &lt;h3&gt;기본 정보&lt;/h3&gt;
             &lt;div class=&quot;formgrid&quot;&gt;
@@ -1418,9 +1499,9 @@ html&gt;body{padding:0}&lt;/style&gt;
               &lt;div class=&quot;field&quot; data-order=&quot;2&quot; data-help=&quot;계측 대상 선박 또는 프로젝트 식별번호를 입력합니다.&quot;&gt;&lt;label&gt;프로젝트 / 호선&lt;/label&gt;&lt;input value=&quot;H2678&quot;&gt;&lt;/div&gt;
               &lt;div class=&quot;field&quot; data-order=&quot;3&quot; data-help=&quot;측정 수행자 또는 책임자를 입력하며 보정·수정 이력과 연결됩니다.&quot;&gt;&lt;label&gt;작업자&lt;/label&gt;&lt;input value=&quot;홍길동&quot;&gt;&lt;/div&gt;
               &lt;div class=&quot;field&quot; data-order=&quot;4&quot; data-help=&quot;승인된 엔진 템플릿을 선택하면 해당 템플릿의 베어링 위치와 수량을 자동 구성합니다. 실제 축계 구성과 다른 경우 위치를 수정할 수 있습니다.&quot;&gt;&lt;label for=&quot;engine-model&quot;&gt;엔진명 / 구성 템플릿&lt;/label&gt;&lt;select id=&quot;engine-model&quot;&gt;&lt;option value=&quot;6g70&quot; selected&gt;MAN B&amp;amp;W 6G70ME-C&lt;/option&gt;&lt;option value=&quot;5g70&quot;&gt;MAN B&amp;amp;W 5G70ME-C&lt;/option&gt;&lt;option value=&quot;custom&quot;&gt;기타 · 직접 구성&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
-              &lt;div class=&quot;field&quot; data-order=&quot;5&quot; data-help=&quot;장치 연결 화면에서 저장한 압력·변위 모듈 세트가 자동 표시됩니다. 시험 설정에서는 임의로 변경할 수 없습니다.&quot;&gt;&lt;label for=&quot;setup-device-set-id&quot;&gt;장비 세트 ID&lt;/label&gt;&lt;input id=&quot;setup-device-set-id&quot; value=&quot;SET-014 / PRS-A-014 + DIS-B-014&quot; readonly aria-readonly=&quot;true&quot;&gt;&lt;/div&gt;
+              &lt;div class=&quot;field&quot; data-order=&quot;5&quot; data-help=&quot;장치 연결 화면에서 저장한 압력·변위 모듈 세트와 고정 통신 주기가 자동 표시됩니다. 시험 설정에서는 임의로 변경할 수 없습니다.&quot;&gt;&lt;label for=&quot;setup-device-set-id&quot;&gt;장비 세트 ID&lt;/label&gt;&lt;input id=&quot;setup-device-set-id&quot; value=&quot;SET-014 / PRS-A-014 + DIS-B-014&quot; readonly aria-readonly=&quot;true&quot;&gt;&lt;/div&gt;
               &lt;div class=&quot;field&quot; data-order=&quot;6&quot; data-help=&quot;현재 시험의 측정 회차를 1차부터 5차까지 선택합니다.&quot;&gt;&lt;label&gt;측정 회차&lt;/label&gt;&lt;select&gt;&lt;option&gt;1차&lt;/option&gt;&lt;option selected&gt;2차&lt;/option&gt;&lt;option&gt;3차&lt;/option&gt;&lt;option&gt;4차&lt;/option&gt;&lt;option&gt;5차&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
-              &lt;div class=&quot;field storage-field&quot; data-order=&quot;7&quot; data-help=&quot;태블릿 내부 저장공간에서 프로젝트 폴더를 직접 찾아 선택합니다. 선택한 위치에 원시값·최종값·리포트가 저장됩니다.&quot;&gt;&lt;label for=&quot;storage-location&quot;&gt;저장 위치&lt;/label&gt;&lt;div class=&quot;input-action&quot;&gt;&lt;input id=&quot;storage-location&quot; value=&quot;/storage/emulated/0/Jackup/H2678/Run02&quot; readonly aria-readonly=&quot;true&quot;&gt;&lt;button class=&quot;action&quot; id=&quot;browse-storage-folder&quot; type=&quot;button&quot; data-tooltip=&quot;태블릿 내부 저장공간의 폴더 목록을 열어 저장 위치 선택&quot;&gt;폴더 선택&lt;/button&gt;&lt;/div&gt;&lt;span class=&quot;field-note&quot;&gt;태블릿 내부 저장공간&lt;/span&gt;&lt;/div&gt;
+              &lt;div class=&quot;field storage-field&quot; data-order=&quot;7&quot; data-help=&quot;태블릿 내부 저장공간에서 프로젝트 폴더를 직접 찾아 선택합니다. 선택한 위치에 원시값·최종값·리포트가 저장됩니다.&quot;&gt;&lt;label for=&quot;storage-location&quot;&gt;저장 위치&lt;/label&gt;&lt;div class=&quot;input-action&quot;&gt;&lt;input id=&quot;storage-location&quot; value=&quot;/storage/emulated/0/Jackup/H2678/Run02&quot; readonly aria-readonly=&quot;true&quot;&gt;&lt;button class=&quot;action&quot; id=&quot;browse-storage-folder&quot; type=&quot;button&quot; data-jw-tooltip=&quot;태블릿 내부 저장공간의 폴더 목록을 열어 저장 위치 선택&quot;&gt;폴더 선택&lt;/button&gt;&lt;/div&gt;&lt;span class=&quot;field-note&quot;&gt;태블릿 내부 저장공간&lt;/span&gt;&lt;/div&gt;
               &lt;div class=&quot;folder-picker&quot; id=&quot;folder-picker&quot; data-help=&quot;Android 태블릿의 폴더 선택 화면을 단순화한 예시입니다. 저장할 프로젝트 폴더를 선택한 뒤 ‘이 폴더 사용’을 누릅니다.&quot;&gt;
                 &lt;div class=&quot;folder-picker-head&quot;&gt;&lt;div&gt;&lt;h3&gt;태블릿 저장 폴더 선택&lt;/h3&gt;&lt;div class=&quot;folder-path&quot; id=&quot;folder-picker-path&quot;&gt;내 파일 / 내부 저장공간 / Jackup / H2678 / Run02&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;내부 저장공간&lt;/span&gt;&lt;/div&gt;
                 &lt;div class=&quot;folder-list&quot; aria-label=&quot;저장 폴더 목록&quot;&gt;
@@ -1433,26 +1514,26 @@ html&gt;body{padding:0}&lt;/style&gt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
-          &lt;div class=&quot;grid two&quot; style=&quot;margin-top:12px&quot;&gt;
-            &lt;div class=&quot;panel&quot; data-help=&quot;잭 유효면적은 압력(bar)을 하중(kN)으로 환산하는 핵심 상수입니다. 허용오차는 목표 반력 대비 OK/NG 판정 범위입니다.&quot;&gt;
+          &lt;div class=&quot;grid setup-stack&quot; style=&quot;margin-top:12px&quot;&gt;
+            &lt;div class=&quot;panel setup-conditions-panel&quot; data-help=&quot;잭 유효면적은 압력(bar)을 하중(kN)으로 환산하는 핵심 상수입니다. 허용오차는 목표 반력 대비 OK/NG 판정 범위입니다.&quot;&gt;
               &lt;h3&gt;유압 잭 / 판정 조건&lt;/h3&gt;
-              &lt;div class=&quot;formgrid&quot; style=&quot;grid-template-columns:1fr 1fr&quot;&gt;
-                &lt;div class=&quot;field&quot; data-order=&quot;8&quot; data-help=&quot;현장에 설치한 유압 잭 모델을 선택합니다. 모델값은 유효면적 검증에 사용합니다.&quot;&gt;&lt;label&gt;잭 모델&lt;/label&gt;&lt;input value=&quot;HJ-100T&quot;&gt;&lt;/div&gt;
-                &lt;div class=&quot;field&quot; data-order=&quot;9&quot; data-help=&quot;교정성적서 또는 카탈로그의 잭 유효면적 숫자만 입력합니다. 단위 cm²는 고정값이며 압력을 하중으로 환산하는 핵심 상수입니다.&quot;&gt;&lt;label for=&quot;effective-area&quot;&gt;유효면적&lt;/label&gt;&lt;div class=&quot;input-unit&quot;&gt;&lt;input id=&quot;effective-area&quot; type=&quot;number&quot; step=&quot;0.1&quot; value=&quot;126.7&quot;&gt;&lt;span class=&quot;unit-suffix&quot; aria-label=&quot;단위 제곱센티미터&quot;&gt;cm²&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
-                &lt;div class=&quot;field&quot; data-order=&quot;10&quot; data-help=&quot;압력계가 전송하는 표시 단위를 선택합니다. 기본값은 bar입니다.&quot;&gt;&lt;label&gt;압력 단위&lt;/label&gt;&lt;select&gt;&lt;option&gt;bar&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
-                &lt;div class=&quot;field&quot; data-order=&quot;11&quot; data-help=&quot;반력 산정 시 Lift-off를 평가할 기준 변위 숫자만 입력합니다. 단위 mm는 고정값입니다.&quot;&gt;&lt;label for=&quot;reference-displacement&quot;&gt;기준 변위&lt;/label&gt;&lt;div class=&quot;input-unit&quot;&gt;&lt;input id=&quot;reference-displacement&quot; type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;0.60&quot;&gt;&lt;span class=&quot;unit-suffix&quot; aria-label=&quot;단위 밀리미터&quot;&gt;mm&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
-                &lt;div class=&quot;field&quot; data-order=&quot;12&quot; data-help=&quot;목표 반력 대비 측정 반력의 허용오차를 목록에서 선택합니다. ± 기호와 % 단위는 고정값입니다.&quot;&gt;&lt;label for=&quot;reaction-tolerance&quot;&gt;허용오차&lt;/label&gt;&lt;div class=&quot;input-affix&quot;&gt;&lt;span class=&quot;unit-prefix&quot; aria-label=&quot;플러스 마이너스&quot;&gt;±&lt;/span&gt;&lt;select id=&quot;reaction-tolerance&quot;&gt;&lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;&lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;&lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;&lt;option value=&quot;5&quot; selected&gt;5&lt;/option&gt;&lt;option value=&quot;10&quot;&gt;10&lt;/option&gt;&lt;/select&gt;&lt;span class=&quot;unit-suffix&quot; aria-label=&quot;단위 퍼센트&quot;&gt;%&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
-                &lt;div class=&quot;field&quot; data-order=&quot;13&quot; data-help=&quot;측정 오차율과 허용오차를 어떤 조건으로 비교하여 OK로 판정할지 선택합니다. 허용오차 변경 시 비교값도 자동 갱신됩니다.&quot;&gt;&lt;label for=&quot;acceptance-criteria&quot;&gt;판정 기준&lt;/label&gt;&lt;select id=&quot;acceptance-criteria&quot;&gt;&lt;option value=&quot;gte&quot;&gt;|오차율| ≥ 5% · 같거나 클 경우 OK&lt;/option&gt;&lt;option value=&quot;lte&quot; selected&gt;|오차율| ≤ 5% · 같거나 작을 경우 OK&lt;/option&gt;&lt;option value=&quot;gt&quot;&gt;|오차율| &amp;gt; 5% · 클 경우 OK&lt;/option&gt;&lt;option value=&quot;lt&quot;&gt;|오차율| &amp;lt; 5% · 작을 경우 OK&lt;/option&gt;&lt;option value=&quot;eq&quot;&gt;|오차율| = 5% · 같을 경우 OK&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+              &lt;div class=&quot;formgrid&quot;&gt;
+                &lt;div class=&quot;field&quot; data-order=&quot;10&quot; data-help=&quot;현장에 설치한 유압 잭 모델을 선택합니다. 모델값은 유효면적 검증에 사용합니다.&quot;&gt;&lt;label&gt;잭 모델&lt;/label&gt;&lt;input value=&quot;HJ-100T&quot;&gt;&lt;/div&gt;
+                &lt;div class=&quot;field&quot; data-order=&quot;11&quot; data-help=&quot;교정성적서 또는 카탈로그의 잭 유효면적 숫자만 입력합니다. 단위 cm²는 고정값이며 압력을 하중으로 환산하는 핵심 상수입니다.&quot;&gt;&lt;label for=&quot;effective-area&quot;&gt;유효면적&lt;/label&gt;&lt;div class=&quot;input-unit&quot;&gt;&lt;input id=&quot;effective-area&quot; type=&quot;number&quot; step=&quot;0.1&quot; value=&quot;126.7&quot;&gt;&lt;span class=&quot;unit-suffix&quot; aria-label=&quot;단위 제곱센티미터&quot;&gt;cm²&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+                &lt;div class=&quot;field&quot; data-order=&quot;12&quot; data-help=&quot;압력계가 전송하는 표시 단위를 선택합니다. 기본값은 bar입니다.&quot;&gt;&lt;label&gt;압력 단위&lt;/label&gt;&lt;select&gt;&lt;option&gt;bar&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+                &lt;div class=&quot;field&quot; data-order=&quot;13&quot; data-help=&quot;반력 산정 시 Lift-off를 평가할 기준 변위 숫자만 입력합니다. 단위 mm는 고정값입니다.&quot;&gt;&lt;label for=&quot;reference-displacement&quot;&gt;기준 변위&lt;/label&gt;&lt;div class=&quot;input-unit&quot;&gt;&lt;input id=&quot;reference-displacement&quot; type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;0.60&quot;&gt;&lt;span class=&quot;unit-suffix&quot; aria-label=&quot;단위 밀리미터&quot;&gt;mm&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+                &lt;div class=&quot;field&quot; data-order=&quot;14&quot; data-help=&quot;목표 반력 대비 측정 반력의 허용오차를 목록에서 선택합니다. ± 기호와 % 단위는 고정값입니다.&quot;&gt;&lt;label for=&quot;reaction-tolerance&quot;&gt;허용오차&lt;/label&gt;&lt;div class=&quot;input-affix&quot;&gt;&lt;span class=&quot;unit-prefix&quot; aria-label=&quot;플러스 마이너스&quot;&gt;±&lt;/span&gt;&lt;select id=&quot;reaction-tolerance&quot;&gt;&lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;&lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;&lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;&lt;option value=&quot;5&quot; selected&gt;5&lt;/option&gt;&lt;option value=&quot;10&quot;&gt;10&lt;/option&gt;&lt;/select&gt;&lt;span class=&quot;unit-suffix&quot; aria-label=&quot;단위 퍼센트&quot;&gt;%&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+                &lt;div class=&quot;field&quot; data-order=&quot;15&quot; data-help=&quot;측정 오차율과 허용오차를 어떤 조건으로 비교하여 OK로 판정할지 선택합니다. 허용오차 변경 시 비교값도 자동 갱신됩니다.&quot;&gt;&lt;label for=&quot;acceptance-criteria&quot;&gt;판정 기준&lt;/label&gt;&lt;select id=&quot;acceptance-criteria&quot;&gt;&lt;option value=&quot;gte&quot;&gt;|오차율| ≥ 5% · 같거나 클 경우 OK&lt;/option&gt;&lt;option value=&quot;lte&quot; selected&gt;|오차율| ≤ 5% · 같거나 작을 경우 OK&lt;/option&gt;&lt;option value=&quot;gt&quot;&gt;|오차율| &amp;gt; 5% · 클 경우 OK&lt;/option&gt;&lt;option value=&quot;lt&quot;&gt;|오차율| &amp;lt; 5% · 작을 경우 OK&lt;/option&gt;&lt;option value=&quot;eq&quot;&gt;|오차율| = 5% · 같을 경우 OK&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
               &lt;/div&gt;
             &lt;/div&gt;
-            &lt;div class=&quot;panel&quot; data-help=&quot;축계 도형에서 베어링을 선택하고 선택된 위치의 목표 반력과 상태만 확인합니다. 명칭은 해당 베어링 도형을 더블클릭해 수정합니다.&quot;&gt;
+            &lt;div class=&quot;panel setup-bearing-panel&quot; data-help=&quot;축계 도형에서 베어링을 선택하고 선택된 위치의 목표 반력과 상태만 확인합니다. 명칭은 해당 베어링 도형을 더블클릭해 수정합니다.&quot;&gt;
               &lt;h3&gt;베어링 구성&lt;/h3&gt;
               &lt;div class=&quot;shaft-layout&quot; data-help=&quot;축계를 기관측에서 선미측 방향으로 단순화한 개략 배치입니다. 베어링을 선택한 뒤 앞·뒤 이동 버튼으로 표시 순서를 조정합니다. 실제 위치 확정은 승인 도면을 기준으로 합니다.&quot;&gt;
                 &lt;div class=&quot;shaft-direction&quot;&gt;&lt;span&gt;기관측 · 엔진&lt;/span&gt;&lt;span&gt;선미측 · 프로펠러&lt;/span&gt;&lt;/div&gt;
                 &lt;div class=&quot;shaft-track&quot; id=&quot;shaft-track&quot;&gt;&lt;span class=&quot;shaft-end&quot;&gt;ENGINE&lt;/span&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;true&quot;&gt;ME Bearing No.6&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;ME Bearing No.5&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;Intermediate No.1&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;Stern Tube FWD&lt;/button&gt;&lt;span class=&quot;shaft-end&quot;&gt;PROP.&lt;/span&gt;&lt;/div&gt;
-                &lt;div class=&quot;layout-controls bearing-toolbar&quot;&gt;&lt;div class=&quot;field bearing-count-field&quot; data-order=&quot;14&quot; data-help=&quot;이번 시험에서 순차 측정할 베어링의 전체 개수입니다. 엔진 템플릿 선택 시 자동 구성되며 필요하면 변경할 수 있습니다.&quot;&gt;&lt;label for=&quot;bearing-count&quot;&gt;베어링 수&lt;/label&gt;&lt;input id=&quot;bearing-count&quot; type=&quot;number&quot; min=&quot;1&quot; max=&quot;20&quot; value=&quot;4&quot;&gt;&lt;/div&gt;&lt;button class=&quot;action&quot; id=&quot;move-bearing-forward&quot; type=&quot;button&quot;&gt;← 기관측 이동&lt;/button&gt;&lt;button class=&quot;action&quot; id=&quot;move-bearing-aft&quot; type=&quot;button&quot;&gt;선미측 이동 →&lt;/button&gt;&lt;button class=&quot;action&quot; id=&quot;remove-bearing&quot; type=&quot;button&quot;&gt;삭제&lt;/button&gt;&lt;/div&gt;
+                &lt;div class=&quot;layout-controls bearing-toolbar&quot;&gt;&lt;div class=&quot;field bearing-count-field&quot; data-order=&quot;8&quot; data-help=&quot;이번 시험에서 순차 측정할 베어링의 전체 개수입니다. 엔진 템플릿 선택 시 자동 구성되며 필요하면 변경할 수 있습니다.&quot;&gt;&lt;label for=&quot;bearing-count&quot;&gt;베어링 수&lt;/label&gt;&lt;input id=&quot;bearing-count&quot; type=&quot;number&quot; min=&quot;1&quot; max=&quot;20&quot; value=&quot;4&quot;&gt;&lt;/div&gt;&lt;button class=&quot;action&quot; id=&quot;move-bearing-forward&quot; type=&quot;button&quot;&gt;← 기관측 이동&lt;/button&gt;&lt;button class=&quot;action&quot; id=&quot;move-bearing-aft&quot; type=&quot;button&quot;&gt;선미측 이동 →&lt;/button&gt;&lt;button class=&quot;action&quot; id=&quot;remove-bearing&quot; type=&quot;button&quot;&gt;삭제&lt;/button&gt;&lt;/div&gt;
               &lt;/div&gt;
-              &lt;div class=&quot;selected-bearing-editor&quot; data-order=&quot;15&quot; data-help=&quot;선택된 베어링 한 개의 정보만 표시합니다. 목표 반력은 승인 설계·축계 정렬 자료에서 확인해 입력하며 상태는 대기 또는 측정으로 색상 표시됩니다.&quot;&gt;
+              &lt;div class=&quot;selected-bearing-editor&quot; data-order=&quot;9&quot; data-help=&quot;선택된 베어링 한 개의 정보만 표시합니다. 목표 반력은 승인 설계·축계 정렬 자료에서 확인해 입력하며 상태는 대기 또는 측정으로 색상 표시됩니다.&quot;&gt;
                 &lt;div class=&quot;selected-bearing-name&quot;&gt;&lt;span class=&quot;label&quot;&gt;선택 베어링&lt;/span&gt;&lt;strong id=&quot;selected-setup-bearing-name&quot;&gt;ME Bearing No.6&lt;/strong&gt;&lt;/div&gt;
                 &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;selected-bearing-reaction&quot;&gt;목표 반력&lt;/label&gt;&lt;div class=&quot;input-unit&quot;&gt;&lt;input id=&quot;selected-bearing-reaction&quot; type=&quot;number&quot; placeholder=&quot;설계값 입력&quot;&gt;&lt;span class=&quot;unit-suffix&quot; aria-label=&quot;단위 킬로뉴턴&quot;&gt;kN&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
                 &lt;div class=&quot;bearing-status-box&quot;&gt;&lt;span class=&quot;label&quot;&gt;상태&lt;/span&gt;&lt;div class=&quot;bearing-status-chip waiting&quot; id=&quot;selected-bearing-status&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;대기&lt;/div&gt;&lt;/div&gt;
@@ -1462,7 +1543,7 @@ html&gt;body{padding:0}&lt;/style&gt;
         &lt;/section&gt;
 
         &lt;section class=&quot;screen&quot; data-panel=&quot;bearing-select&quot;&gt;
-          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;측정 베어링 선택&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;시험 설정에서 구성한 위치 중 이번에 Jack-up 측정할 베어링 선택&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action primary&quot; id=&quot;start-bearing-button&quot; type=&quot;button&quot; data-tooltip=&quot;선택한 베어링의 영점 상태를 확인하고 Jack-up 측정 화면으로 이동&quot;&gt;선택 위치 측정 시작&lt;/button&gt;&lt;/div&gt;
+          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;측정 베어링 선택&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;시험 설정에서 구성한 위치 중 이번에 Jack-up 측정할 베어링 선택&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action primary&quot; id=&quot;start-bearing-button&quot; type=&quot;button&quot; data-jw-tooltip=&quot;선택한 베어링의 영점 상태를 확인하고 Jack-up 측정 화면으로 이동&quot;&gt;선택 위치 측정 시작&lt;/button&gt;&lt;/div&gt;
           &lt;div class=&quot;panel&quot; data-help=&quot;기관측에서 선미측 방향으로 배치된 베어링의 진행 상태를 확인합니다. 완료 위치도 재측정 회차로 다시 선택할 수 있습니다.&quot;&gt;
             &lt;div class=&quot;shaft-layout&quot;&gt;
               &lt;div class=&quot;shaft-direction&quot;&gt;&lt;span&gt;기관측 · 엔진&lt;/span&gt;&lt;span&gt;선미측 · 프로펠러&lt;/span&gt;&lt;/div&gt;
@@ -1471,7 +1552,7 @@ html&gt;body{padding:0}&lt;/style&gt;
           &lt;/div&gt;
           &lt;div class=&quot;grid two&quot; style=&quot;margin-top:12px&quot;&gt;
             &lt;div class=&quot;panel&quot; data-help=&quot;선택 위치의 목표 반력, 허용오차와 이전 회차 결과를 측정 전에 확인합니다.&quot;&gt;&lt;h3&gt;선택 위치&lt;/h3&gt;&lt;div class=&quot;metric&quot; id=&quot;selected-measurement-bearing&quot;&gt;Intermediate Bearing No.1&lt;/div&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;목표 반력&lt;/td&gt;&lt;td id=&quot;selected-bearing-target&quot;&gt;760 kN&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;허용오차&lt;/td&gt;&lt;td&gt;±5%&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;측정 회차&lt;/td&gt;&lt;td&gt;2차&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;이전 결과&lt;/td&gt;&lt;td id=&quot;selected-bearing-previous&quot; class=&quot;bad&quot;&gt;728 kN · NG&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
-            &lt;div class=&quot;panel&quot; data-help=&quot;Jack-up 측정 시작 전 두 센서의 연결과 영점 상태를 확인합니다. 유압장치는 앱에서 제어하지 않습니다.&quot;&gt;&lt;h3&gt;측정 전 확인&lt;/h3&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;압력 모듈&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;연결 · Zero OK&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;다이얼 게이지&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;연결 · Zero OK&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;배터리&lt;/td&gt;&lt;td&gt;82% / 76%&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;데이터 스트리밍&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;1초 주기 정상&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;div class=&quot;banner&quot;&gt;선택 위치와 실제 JIG·유압 잭 설치 위치가 일치하는지 작업자가 최종 확인합니다.&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;panel&quot; data-help=&quot;Jack-up 측정 시작 전 두 센서의 연결과 영점 상태를 확인합니다. 유압장치는 앱에서 제어하지 않습니다.&quot;&gt;&lt;h3&gt;측정 전 확인&lt;/h3&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;압력 모듈&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;연결 · Zero OK&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;다이얼 게이지&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;연결 · Zero OK&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;데이터 스트리밍&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;1초 주기 정상&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;div class=&quot;banner&quot;&gt;선택 위치와 실제 JIG·유압 잭 설치 위치가 일치하는지 작업자가 최종 확인합니다.&lt;/div&gt;&lt;/div&gt;
           &lt;/div&gt;
         &lt;/section&gt;
 
@@ -1506,9 +1587,9 @@ html&gt;body{padding:0}&lt;/style&gt;
                   &lt;div class=&quot;bar-labels&quot;&gt;&lt;span&gt;0&lt;/span&gt;&lt;span id=&quot;live-load-current&quot;&gt;현재 616.1&lt;/span&gt;&lt;span class=&quot;warn&quot;&gt;목표 660&lt;/span&gt;&lt;span&gt;800 kN&lt;/span&gt;&lt;/div&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
-            &lt;/div&gt;&lt;div class=&quot;panel&quot; style=&quot;margin-top:12px&quot;&gt;&lt;h3&gt;측정 제어&lt;/h3&gt;&lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action primary&quot; type=&quot;button&quot; data-tooltip=&quot;현재 압력·변위 시점값을 다음 Step의 공식 측정값으로 저장&quot;&gt;현재값 저장&lt;/button&gt;&lt;button class=&quot;action&quot; type=&quot;button&quot; data-tooltip=&quot;유압장치가 아니라 앱의 데이터 기록만 일시정지&quot;&gt;데이터 기록 일시정지&lt;/button&gt;&lt;button class=&quot;action&quot; type=&quot;button&quot; data-tooltip=&quot;Lifting 데이터 기록을 마치고 Lowering 단계로 전환&quot;&gt;Lifting 기록 완료&lt;/button&gt;&lt;button class=&quot;action&quot; type=&quot;button&quot; data-tooltip=&quot;현재 베어링의 측정 세션을 종료하며 유압장치는 제어하지 않음&quot;&gt;현재 측정 세션 종료&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;banner&quot;&gt;물리 스위치 트리거 시 압력·변위 시점값을 같은 Step으로 저장합니다. 본 앱은 유압장치를 원격 제어하지 않습니다.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;/div&gt;&lt;div class=&quot;panel&quot; style=&quot;margin-top:12px&quot;&gt;&lt;h3&gt;측정 제어&lt;/h3&gt;&lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action primary&quot; type=&quot;button&quot; data-jw-tooltip=&quot;현재 압력·변위 시점값을 다음 Step의 공식 측정값으로 저장&quot;&gt;현재값 저장&lt;/button&gt;&lt;button class=&quot;action&quot; type=&quot;button&quot; data-jw-tooltip=&quot;유압장치가 아니라 앱의 데이터 기록만 일시정지&quot;&gt;데이터 기록 일시정지&lt;/button&gt;&lt;button class=&quot;action&quot; type=&quot;button&quot; data-jw-tooltip=&quot;Lifting 데이터 기록을 마치고 Lowering 단계로 전환&quot;&gt;Lifting 기록 완료&lt;/button&gt;&lt;button class=&quot;action&quot; type=&quot;button&quot; data-jw-tooltip=&quot;현재 베어링의 측정 세션을 종료하며 유압장치는 제어하지 않음&quot;&gt;현재 측정 세션 종료&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;banner&quot;&gt;물리 스위치 트리거 시 압력·변위 시점값을 같은 Step으로 저장합니다. 본 앱은 유압장치를 원격 제어하지 않습니다.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
             &lt;div class=&quot;panel&quot; data-help=&quot;X축은 최근 30초의 시간, 왼쪽 Y축은 환산 하중(kN), 오른쪽 Y축은 변위(mm)입니다. 압력과 변위를 1초마다 수신할 때마다 두 추세선에 새 측정점이 추가됩니다.&quot;&gt;
-              &lt;div class=&quot;plot-heading&quot;&gt;&lt;h3&gt;실시간 추세&lt;/h3&gt;&lt;button class=&quot;action&quot; id=&quot;open-live-graph&quot; type=&quot;button&quot; data-tooltip=&quot;실시간 추세 그래프를 태블릿 화면 전체로 확대&quot;&gt;전체 화면&lt;/button&gt;&lt;/div&gt;
+              &lt;div class=&quot;plot-heading&quot;&gt;&lt;h3&gt;실시간 추세&lt;/h3&gt;&lt;button class=&quot;action&quot; id=&quot;open-live-graph&quot; type=&quot;button&quot; data-jw-tooltip=&quot;실시간 추세 그래프를 태블릿 화면 전체로 확대&quot;&gt;전체 화면&lt;/button&gt;&lt;/div&gt;
               &lt;svg class=&quot;plot&quot; id=&quot;live-trend-plot&quot; viewBox=&quot;0 0 500 250&quot; role=&quot;img&quot; aria-label=&quot;최근 30초 동안 1초마다 누적되는 환산 하중과 변위 실시간 추세&quot;&gt;&lt;path class=&quot;gridline&quot; d=&quot;M48 30H446M48 76H446M48 122H446M48 168H446M180.7 30V214M313.3 30V214M446 30V214&quot;/&gt;&lt;path class=&quot;axis&quot; d=&quot;M48 30V214H446V30&quot;/&gt;&lt;g class=&quot;axis-ticks&quot;&gt;&lt;text x=&quot;42&quot; y=&quot;34&quot; text-anchor=&quot;end&quot;&gt;800&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;80&quot; text-anchor=&quot;end&quot;&gt;600&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;126&quot; text-anchor=&quot;end&quot;&gt;400&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;172&quot; text-anchor=&quot;end&quot;&gt;200&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;218&quot; text-anchor=&quot;end&quot;&gt;0&lt;/text&gt;&lt;text x=&quot;452&quot; y=&quot;34&quot;&gt;1.00&lt;/text&gt;&lt;text x=&quot;452&quot; y=&quot;80&quot;&gt;0.75&lt;/text&gt;&lt;text x=&quot;452&quot; y=&quot;126&quot;&gt;0.50&lt;/text&gt;&lt;text x=&quot;452&quot; y=&quot;172&quot;&gt;0.25&lt;/text&gt;&lt;text x=&quot;452&quot; y=&quot;218&quot;&gt;0.00&lt;/text&gt;&lt;text x=&quot;48&quot; y=&quot;229&quot; text-anchor=&quot;start&quot;&gt;-30&lt;/text&gt;&lt;text x=&quot;180.7&quot; y=&quot;229&quot; text-anchor=&quot;middle&quot;&gt;-20&lt;/text&gt;&lt;text x=&quot;313.3&quot; y=&quot;229&quot; text-anchor=&quot;middle&quot;&gt;-10&lt;/text&gt;&lt;text x=&quot;446&quot; y=&quot;229&quot; text-anchor=&quot;end&quot;&gt;현재&lt;/text&gt;&lt;/g&gt;&lt;path class=&quot;live-load-line&quot; id=&quot;live-load-line&quot; d=&quot;&quot;/&gt;&lt;path class=&quot;live-displacement-line&quot; id=&quot;live-displacement-line&quot; d=&quot;&quot;/&gt;&lt;circle class=&quot;live-load-point&quot; id=&quot;live-load-point&quot; cx=&quot;446&quot; cy=&quot;72&quot; r=&quot;5&quot;/&gt;&lt;circle class=&quot;live-displacement-point&quot; id=&quot;live-displacement-point&quot; cx=&quot;446&quot; cy=&quot;137&quot; r=&quot;5&quot;/&gt;&lt;text x=&quot;205&quot; y=&quot;247&quot;&gt;시간 (초)&lt;/text&gt;&lt;text x=&quot;8&quot; y=&quot;20&quot;&gt;하중 (kN)&lt;/text&gt;&lt;text x=&quot;420&quot; y=&quot;20&quot;&gt;변위 (mm)&lt;/text&gt;&lt;/svg&gt;
               &lt;div class=&quot;legend&quot;&gt;&lt;span style=&quot;color:var(--jw-accent)&quot;&gt;환산 하중&lt;/span&gt;&lt;span style=&quot;color:var(--jw-warn)&quot;&gt;변위&lt;/span&gt;&lt;span&gt;최근 30초 · 1초 간격&lt;/span&gt;&lt;/div&gt;
               &lt;div class=&quot;jack-motion&quot; data-help=&quot;압력이 상승하면 유압 오일이 피스톤을 밀어 올리고, 잭의 위쪽 힘이 샤프트에 전달되어 다이얼 게이지 변위가 발생하는 과정을 반복해서 보여줍니다.&quot;&gt;
@@ -1520,29 +1601,39 @@ html&gt;body{padding:0}&lt;/style&gt;
         &lt;/section&gt;
 
         &lt;section class=&quot;screen&quot; data-panel=&quot;analysis&quot;&gt;
-          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;그래프 분석 · 작업자 보정&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;자동 추천 구간을 검토하고 필요한 경우 직선 계산의 시작점·종료점을 조정&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action&quot; id=&quot;open-analysis-graph&quot; type=&quot;button&quot; data-tooltip=&quot;Lifting·Lowering 분석 그래프를 태블릿 화면 전체로 확대&quot;&gt;그래프 전체 화면&lt;/button&gt;&lt;button class=&quot;action&quot; type=&quot;button&quot; data-tooltip=&quot;작업자가 조정한 구간을 취소하고 시스템이 추천한 직선 분석구간으로 복원&quot;&gt;자동 추천 구간 복원&lt;/button&gt;&lt;button class=&quot;action primary&quot; type=&quot;button&quot; data-tooltip=&quot;검토·보정된 분석 결과를 해당 회차의 최종값으로 저장&quot;&gt;최종 적용&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
-          &lt;div class=&quot;grid two&quot;&gt;
-            &lt;div class=&quot;panel&quot; data-help=&quot;가로축 변위(mm)에 따른 세로축 환산 하중(kN) 곡선입니다. Lifting과 Lowering의 직선 분석구간은 각각 따로 지정하며, 해당 곡선의 선택 버튼을 누른 뒤 시작점과 종료점을 순서대로 터치합니다.&quot;&gt;&lt;svg class=&quot;plot&quot; id=&quot;analysis-plot&quot; viewBox=&quot;0 0 500 250&quot; role=&quot;img&quot; aria-label=&quot;Lifting과 Lowering 곡선별 직선 분석구간, 가로축 변위 0에서 1.0 밀리미터, 세로축 환산 하중 0에서 800 킬로뉴턴&quot;&gt;&lt;path class=&quot;gridline&quot; d=&quot;M48 30H480M48 76H480M48 122H480M48 168H480M156 30V214M264 30V214M372 30V214&quot;/&gt;&lt;path class=&quot;axis&quot; d=&quot;M48 30V214H480&quot;/&gt;&lt;g class=&quot;axis-ticks&quot;&gt;&lt;text x=&quot;42&quot; y=&quot;34&quot; text-anchor=&quot;end&quot;&gt;800&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;80&quot; text-anchor=&quot;end&quot;&gt;600&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;126&quot; text-anchor=&quot;end&quot;&gt;400&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;172&quot; text-anchor=&quot;end&quot;&gt;200&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;218&quot; text-anchor=&quot;end&quot;&gt;0&lt;/text&gt;&lt;text x=&quot;48&quot; y=&quot;229&quot; text-anchor=&quot;start&quot;&gt;0.00&lt;/text&gt;&lt;text x=&quot;156&quot; y=&quot;229&quot; text-anchor=&quot;middle&quot;&gt;0.25&lt;/text&gt;&lt;text x=&quot;264&quot; y=&quot;229&quot; text-anchor=&quot;middle&quot;&gt;0.50&lt;/text&gt;&lt;text x=&quot;372&quot; y=&quot;229&quot; text-anchor=&quot;middle&quot;&gt;0.75&lt;/text&gt;&lt;text x=&quot;480&quot; y=&quot;229&quot; text-anchor=&quot;end&quot;&gt;1.00&lt;/text&gt;&lt;/g&gt;&lt;path class=&quot;lift&quot; d=&quot;M78.5 211 L85.6 191 L109 171.4 L163 147.1 L233.5 124.6 L313.3 100.3 L386.1 76.4 L437.7 50.4&quot;/&gt;&lt;path class=&quot;lower&quot; d=&quot;M404.9 50.4 L360.3 74.7 L289.8 99 L210 123.3 L141.9 145.9 L95 170.1 L76.2 190.1 L69.1 211&quot;/&gt;&lt;path class=&quot;mean&quot; d=&quot;M83.2 191 L102 170.6 L151.3 146.3 L221.7 123.7 L301.6 99.9 L372 75.6 L421.3 50.4&quot;/&gt;&lt;path class=&quot;fit&quot; d=&quot;M120.8 164.2 L395.5 67.9&quot;/&gt;&lt;g class=&quot;analysis-selection analysis-selection-lifting&quot; id=&quot;analysis-lifting-selection&quot; aria-label=&quot;Lifting 시작점과 종료점&quot;&gt;&lt;line class=&quot;range-line&quot; id=&quot;lifting-start-line&quot; x1=&quot;120.8&quot; y1=&quot;32&quot; x2=&quot;120.8&quot; y2=&quot;214&quot;/&gt;&lt;line class=&quot;range-line&quot; id=&quot;lifting-end-line&quot; x1=&quot;395.5&quot; y1=&quot;32&quot; x2=&quot;395.5&quot; y2=&quot;214&quot;/&gt;&lt;circle class=&quot;range-handle&quot; id=&quot;lifting-start-handle&quot; cx=&quot;120.8&quot; cy=&quot;164.2&quot; r=&quot;8&quot;/&gt;&lt;circle class=&quot;range-handle&quot; id=&quot;lifting-end-handle&quot; cx=&quot;395.5&quot; cy=&quot;67.9&quot; r=&quot;8&quot;/&gt;&lt;text class=&quot;range-label&quot; id=&quot;lifting-start-label&quot; x=&quot;98.8&quot; y=&quot;25&quot;&gt;L 시작&lt;/text&gt;&lt;text class=&quot;range-label&quot; id=&quot;lifting-end-label&quot; x=&quot;373.5&quot; y=&quot;25&quot;&gt;L 종료&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;analysis-selection analysis-selection-lowering&quot; id=&quot;analysis-lowering-selection&quot; aria-label=&quot;Lowering 시작점과 종료점&quot;&gt;&lt;line class=&quot;range-line&quot; id=&quot;lowering-start-line&quot; x1=&quot;360.3&quot; y1=&quot;48&quot; x2=&quot;360.3&quot; y2=&quot;214&quot;/&gt;&lt;line class=&quot;range-line&quot; id=&quot;lowering-end-line&quot; x1=&quot;95&quot; y1=&quot;48&quot; x2=&quot;95&quot; y2=&quot;214&quot;/&gt;&lt;circle class=&quot;range-handle&quot; id=&quot;lowering-start-handle&quot; cx=&quot;360.3&quot; cy=&quot;74.7&quot; r=&quot;8&quot;/&gt;&lt;circle class=&quot;range-handle&quot; id=&quot;lowering-end-handle&quot; cx=&quot;95&quot; cy=&quot;170.1&quot; r=&quot;8&quot;/&gt;&lt;text class=&quot;range-label&quot; id=&quot;lowering-start-label&quot; x=&quot;338.3&quot; y=&quot;42&quot;&gt;D 시작&lt;/text&gt;&lt;text class=&quot;range-label&quot; id=&quot;lowering-end-label&quot; x=&quot;73&quot; y=&quot;42&quot;&gt;D 종료&lt;/text&gt;&lt;/g&gt;&lt;circle cx=&quot;210&quot; cy=&quot;123&quot; r=&quot;6&quot; fill=&quot;var(--jw-good)&quot;/&gt;&lt;text x=&quot;219&quot; y=&quot;117&quot;&gt;Lift-off&lt;/text&gt;&lt;text x=&quot;220&quot; y=&quot;247&quot;&gt;변위 (mm)&lt;/text&gt;&lt;text x=&quot;8&quot; y=&quot;20&quot;&gt;하중 (kN)&lt;/text&gt;&lt;rect class=&quot;analysis-touch-target&quot; id=&quot;analysis-touch-target&quot; x=&quot;48&quot; y=&quot;30&quot; width=&quot;432&quot; height=&quot;184&quot; aria-label=&quot;분석구간 터치 선택 영역&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;legend&quot;&gt;&lt;span style=&quot;color:var(--jw-accent)&quot;&gt;Lifting&lt;/span&gt;&lt;span style=&quot;color:var(--jw-warn)&quot;&gt;Lowering&lt;/span&gt;&lt;span&gt;Mean&lt;/span&gt;&lt;span style=&quot;color:var(--jw-good)&quot;&gt;Fit&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
-            &lt;div&gt;
+          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;그래프 분석 · 작업자 보정&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;Bar–변위 원시 곡선을 확인하고 분석선 끝점을 손가락으로 움직여 기울기를 보정&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action&quot; id=&quot;open-analysis-graph&quot; type=&quot;button&quot; data-jw-tooltip=&quot;Bar–변위 분석 그래프를 태블릿 화면 전체로 확대&quot;&gt;그래프 전체 화면&lt;/button&gt;&lt;button class=&quot;action&quot; id=&quot;restore-analysis-auto&quot; type=&quot;button&quot; data-jw-tooltip=&quot;작업자가 조정한 구간과 분석선 기울기를 취소하고 시스템 추천값으로 복원&quot;&gt;자동 추천 구간 복원&lt;/button&gt;&lt;button class=&quot;action primary&quot; id=&quot;apply-analysis-result&quot; type=&quot;button&quot; data-jw-tooltip=&quot;작업자와 보정 사유를 확인하고 현재 분석 결과를 최종값으로 저장한 뒤 데이터·이력 화면으로 이동&quot;&gt;최종 적용&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;grid two analysis-main-grid&quot;&gt;
+            &lt;div class=&quot;panel&quot; data-help=&quot;가로축은 유압 압력 Bar, 세로축은 다이얼 게이지 변위 1/100 mm입니다. 청록색·자주색 분석선의 양 끝점을 손가락으로 끌어 기울기를 조정합니다.&quot;&gt;
+              &lt;div class=&quot;analysis-graph-head&quot;&gt;&lt;h3&gt;Bar–변위 분석 그래프&lt;/h3&gt;&lt;span class=&quot;status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;끝점 드래그로 기울기 조정&lt;/span&gt;&lt;/div&gt;
+              &lt;svg class=&quot;plot&quot; id=&quot;analysis-plot&quot; viewBox=&quot;0 0 500 250&quot; role=&quot;img&quot; aria-label=&quot;Lifting과 Lowering 압력-변위 곡선, 가로축 0에서 800 Bar, 세로축 0에서 30 단위 1/100 밀리미터&quot;&gt;&lt;path class=&quot;gridline&quot; d=&quot;M48 30H480M48 91.3H480M48 152.7H480M156 30V214M264 30V214M372 30V214&quot;/&gt;&lt;path class=&quot;axis&quot; d=&quot;M48 30V214H480&quot;/&gt;&lt;g class=&quot;axis-ticks&quot;&gt;&lt;text x=&quot;42&quot; y=&quot;34&quot; text-anchor=&quot;end&quot;&gt;30&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;95&quot; text-anchor=&quot;end&quot;&gt;20&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;157&quot; text-anchor=&quot;end&quot;&gt;10&lt;/text&gt;&lt;text x=&quot;42&quot; y=&quot;218&quot; text-anchor=&quot;end&quot;&gt;0&lt;/text&gt;&lt;text x=&quot;48&quot; y=&quot;229&quot; text-anchor=&quot;start&quot;&gt;0&lt;/text&gt;&lt;text x=&quot;156&quot; y=&quot;229&quot; text-anchor=&quot;middle&quot;&gt;200&lt;/text&gt;&lt;text x=&quot;264&quot; y=&quot;229&quot; text-anchor=&quot;middle&quot;&gt;400&lt;/text&gt;&lt;text x=&quot;372&quot; y=&quot;229&quot; text-anchor=&quot;middle&quot;&gt;600&lt;/text&gt;&lt;text x=&quot;480&quot; y=&quot;229&quot; text-anchor=&quot;end&quot;&gt;800&lt;/text&gt;&lt;/g&gt;&lt;path class=&quot;lift&quot; d=&quot;M48 214 L102 214 L156 214 L210 214 L253.2 214 L274.8 214 L296.4 207.9 L318 195.6 L339.6 177.2 L361.2 152.7 L382.8 134.3 L404.4 109.7 L426 85.2 L447.6 54.5&quot;/&gt;&lt;path class=&quot;lower&quot; d=&quot;M48 214 L210 214 L274.8 183.3 L296.4 152.7 L318 134.3 L339.6 115.9 L361.2 91.3 L382.8 72.9 L404.4 66.8 L426 54.5&quot;/&gt;&lt;line class=&quot;analysis-line-lifting&quot; id=&quot;slope-line-lifting&quot; x1=&quot;246.6&quot; y1=&quot;214&quot; x2=&quot;397.4&quot; y2=&quot;54.5&quot;/&gt;&lt;line class=&quot;analysis-line-lowering&quot; id=&quot;slope-line-lowering&quot; x1=&quot;304.2&quot; y1=&quot;214&quot; x2=&quot;456.5&quot; y2=&quot;54.5&quot;/&gt;&lt;line class=&quot;mean-analysis-line&quot; id=&quot;mean-analysis-line&quot; x1=&quot;275.4&quot; y1=&quot;214&quot; x2=&quot;427&quot; y2=&quot;54.5&quot;/&gt;&lt;g aria-label=&quot;손가락으로 조정하는 분석선 끝점&quot;&gt;&lt;circle class=&quot;slope-adjust-handle&quot; data-slope-line=&quot;lifting&quot; data-slope-end=&quot;start&quot; cx=&quot;246.6&quot; cy=&quot;214&quot; r=&quot;10&quot;/&gt;&lt;circle class=&quot;slope-adjust-handle&quot; data-slope-line=&quot;lifting&quot; data-slope-end=&quot;end&quot; cx=&quot;397.4&quot; cy=&quot;54.5&quot; r=&quot;10&quot;/&gt;&lt;circle class=&quot;slope-adjust-handle&quot; data-slope-line=&quot;lowering&quot; data-slope-end=&quot;start&quot; cx=&quot;304.2&quot; cy=&quot;214&quot; r=&quot;10&quot;/&gt;&lt;circle class=&quot;slope-adjust-handle&quot; data-slope-line=&quot;lowering&quot; data-slope-end=&quot;end&quot; cx=&quot;456.5&quot; cy=&quot;54.5&quot; r=&quot;10&quot;/&gt;&lt;/g&gt;&lt;g class=&quot;analysis-selection analysis-selection-lifting&quot; id=&quot;analysis-lifting-selection&quot; aria-label=&quot;Lifting 시작점과 종료점&quot;&gt;&lt;line class=&quot;range-line&quot; id=&quot;lifting-start-line&quot; x1=&quot;246.6&quot; y1=&quot;32&quot; x2=&quot;246.6&quot; y2=&quot;214&quot;/&gt;&lt;line class=&quot;range-line&quot; id=&quot;lifting-end-line&quot; x1=&quot;397.4&quot; y1=&quot;32&quot; x2=&quot;397.4&quot; y2=&quot;214&quot;/&gt;&lt;circle class=&quot;range-handle&quot; id=&quot;lifting-start-handle&quot; cx=&quot;246.6&quot; cy=&quot;214&quot; r=&quot;8&quot;/&gt;&lt;circle class=&quot;range-handle&quot; id=&quot;lifting-end-handle&quot; cx=&quot;397.4&quot; cy=&quot;54.5&quot; r=&quot;8&quot;/&gt;&lt;text class=&quot;range-label&quot; id=&quot;lifting-start-label&quot; x=&quot;224.6&quot; y=&quot;25&quot;&gt;L 시작&lt;/text&gt;&lt;text class=&quot;range-label&quot; id=&quot;lifting-end-label&quot; x=&quot;375.4&quot; y=&quot;25&quot;&gt;L 종료&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;analysis-selection analysis-selection-lowering&quot; id=&quot;analysis-lowering-selection&quot; aria-label=&quot;Lowering 시작점과 종료점&quot;&gt;&lt;line class=&quot;range-line&quot; id=&quot;lowering-start-line&quot; x1=&quot;456.5&quot; y1=&quot;48&quot; x2=&quot;456.5&quot; y2=&quot;214&quot;/&gt;&lt;line class=&quot;range-line&quot; id=&quot;lowering-end-line&quot; x1=&quot;304.2&quot; y1=&quot;48&quot; x2=&quot;304.2&quot; y2=&quot;214&quot;/&gt;&lt;circle class=&quot;range-handle&quot; id=&quot;lowering-start-handle&quot; cx=&quot;456.5&quot; cy=&quot;54.5&quot; r=&quot;8&quot;/&gt;&lt;circle class=&quot;range-handle&quot; id=&quot;lowering-end-handle&quot; cx=&quot;304.2&quot; cy=&quot;214&quot; r=&quot;8&quot;/&gt;&lt;text class=&quot;range-label&quot; id=&quot;lowering-start-label&quot; x=&quot;434.5&quot; y=&quot;42&quot;&gt;D 시작&lt;/text&gt;&lt;text class=&quot;range-label&quot; id=&quot;lowering-end-label&quot; x=&quot;282.2&quot; y=&quot;42&quot;&gt;D 종료&lt;/text&gt;&lt;/g&gt;&lt;text x=&quot;220&quot; y=&quot;247&quot;&gt;압력 (Bar)&lt;/text&gt;&lt;text x=&quot;8&quot; y=&quot;20&quot;&gt;변위 (1/100 mm)&lt;/text&gt;&lt;rect class=&quot;analysis-touch-target&quot; id=&quot;analysis-touch-target&quot; x=&quot;48&quot; y=&quot;30&quot; width=&quot;432&quot; height=&quot;184&quot; aria-label=&quot;분석구간 터치 선택 영역&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;legend&quot;&gt;&lt;span style=&quot;color:var(--jw-accent)&quot;&gt;Lifting 원시값&lt;/span&gt;&lt;span style=&quot;color:var(--jw-warn)&quot;&gt;Lowering 원시값&lt;/span&gt;&lt;span style=&quot;color:var(--jw-good)&quot;&gt;L 분석선&lt;/span&gt;&lt;span style=&quot;color:var(--jw-bad)&quot;&gt;D 분석선&lt;/span&gt;&lt;span&gt;평균선&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;analysis-result-column&quot;&gt;
               &lt;div class=&quot;grid two&quot;&gt;
-                &lt;div class=&quot;panel&quot; data-help=&quot;선택된 대표 직선과 Lift-off 기준으로 산정한 해당 베어링의 최종 반력입니다. 목표 반력과 비교하여 판정합니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;최종 반력&lt;/span&gt;&lt;div class=&quot;metric&quot;&gt;754.2 kN&lt;/div&gt;&lt;p class=&quot;sub&quot;&gt;목표 760.0 kN&lt;/p&gt;&lt;/div&gt;
-                &lt;div class=&quot;panel&quot; data-help=&quot;(측정 반력-목표 반력)÷목표 반력의 비율입니다. -0.8%는 목표보다 0.8% 낮으며 허용 ±5% 안이므로 OK입니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;오차율&lt;/span&gt;&lt;div class=&quot;metric good&quot;&gt;-0.8%&lt;/div&gt;&lt;p class=&quot;sub&quot;&gt;허용 ±5%&lt;/p&gt;&lt;/div&gt;
+                &lt;div class=&quot;panel&quot; data-help=&quot;두 분석선의 0 변위 교점 평균과 잭 유효면적·보정계수로 계산한 해당 베어링의 최종 반력입니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;최종 반력&lt;/span&gt;&lt;div class=&quot;metric&quot; id=&quot;analysis-final-reaction&quot;&gt;583.2 kN&lt;/div&gt;&lt;/div&gt;
+                &lt;div class=&quot;panel&quot; data-help=&quot;최종 반력과 목표 반력 600.0 kN의 차이를 목표값 대비 백분율로 표시합니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;오차율&lt;/span&gt;&lt;div class=&quot;metric good&quot; id=&quot;analysis-error-rate&quot;&gt;-2.8%&lt;/div&gt;&lt;/div&gt;
               &lt;/div&gt;
-              &lt;div class=&quot;panel&quot; data-help=&quot;대표 직선은 최소 연속 3점 이상이어야 하며, 선형성·기울기 안정성·잔차 편향·데이터 연속성을 함께 평가합니다.&quot; style=&quot;margin-top:12px&quot;&gt;
-                &lt;h3&gt;대표 구간 품질&lt;/h3&gt;
-                &lt;div class=&quot;quality-list&quot;&gt;&lt;div class=&quot;quality-item&quot;&gt;선택 포인트&lt;strong class=&quot;good&quot;&gt;7점 · 충족&lt;/strong&gt;&lt;/div&gt;&lt;div class=&quot;quality-item&quot;&gt;선형 회귀&lt;strong&gt;R² 0.998&lt;/strong&gt;&lt;/div&gt;&lt;div class=&quot;quality-item&quot;&gt;기울기 변화율&lt;strong class=&quot;good&quot;&gt;1.8% · 안정&lt;/strong&gt;&lt;/div&gt;&lt;div class=&quot;quality-item&quot;&gt;잔차 편향 / 연속성&lt;strong class=&quot;good&quot;&gt;없음 / 정상&lt;/strong&gt;&lt;/div&gt;&lt;/div&gt;
+              &lt;div class=&quot;panel&quot; data-help=&quot;L Bar와 D Bar는 작업자가 설정합니다. 측정 중 압력이 설정 Bar에 도달하면 그 시점의 다이얼 게이지 변위가 L 값과 D 값에 자동 기록·저장됩니다.&quot;&gt;
+                &lt;div class=&quot;bar-table-head&quot;&gt;&lt;h3&gt;Bar별 변위값 &lt;span class=&quot;sub&quot;&gt;[1/100 mm]&lt;/span&gt;&lt;/h3&gt;&lt;div class=&quot;bar-table-actions&quot;&gt;&lt;span class=&quot;status&quot; id=&quot;bar-reading-count&quot;&gt;5개 행&lt;/span&gt;&lt;button class=&quot;action&quot; id=&quot;add-bar-reading&quot; type=&quot;button&quot; data-jw-tooltip=&quot;Lifting·Lowering 목표 Bar 설정 행 추가&quot;&gt;행 추가&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+                &lt;table class=&quot;bar-reading-table&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;L Bar&lt;/th&gt;&lt;th&gt;L 값 (자동)&lt;/th&gt;&lt;th&gt;D Bar&lt;/th&gt;&lt;th&gt;D 값 (자동)&lt;/th&gt;&lt;th&gt;관리&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody id=&quot;bar-reading-body&quot;&gt;
+                  &lt;tr&gt;&lt;td&gt;&lt;input type=&quot;number&quot; min=&quot;0&quot; inputmode=&quot;numeric&quot; value=&quot;0&quot; aria-label=&quot;Lifting Bar 1행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.1&quot; value=&quot;0.0&quot; readonly aria-label=&quot;자동 기록된 Lifting 변위 1행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; min=&quot;0&quot; inputmode=&quot;numeric&quot; value=&quot;0&quot; aria-label=&quot;Lowering Bar 1행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.1&quot; value=&quot;0.0&quot; readonly aria-label=&quot;자동 기록된 Lowering 변위 1행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;action bar-row-delete&quot; type=&quot;button&quot;&gt;삭제&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;td&gt;&lt;input type=&quot;number&quot; min=&quot;0&quot; inputmode=&quot;numeric&quot; value=&quot;100&quot; aria-label=&quot;Lifting Bar 2행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.1&quot; value=&quot;0.0&quot; readonly aria-label=&quot;자동 기록된 Lifting 변위 2행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; min=&quot;0&quot; inputmode=&quot;numeric&quot; value=&quot;300&quot; aria-label=&quot;Lowering Bar 2행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.1&quot; value=&quot;0.0&quot; readonly aria-label=&quot;자동 기록된 Lowering 변위 2행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;action bar-row-delete&quot; type=&quot;button&quot;&gt;삭제&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;td&gt;&lt;input type=&quot;number&quot; min=&quot;0&quot; inputmode=&quot;numeric&quot; value=&quot;200&quot; aria-label=&quot;Lifting Bar 3행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.1&quot; value=&quot;0.0&quot; readonly aria-label=&quot;자동 기록된 Lifting 변위 3행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; min=&quot;0&quot; inputmode=&quot;numeric&quot; value=&quot;420&quot; aria-label=&quot;Lowering Bar 3행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.1&quot; value=&quot;5.0&quot; readonly aria-label=&quot;자동 기록된 Lowering 변위 3행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;action bar-row-delete&quot; type=&quot;button&quot;&gt;삭제&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;td&gt;&lt;input type=&quot;number&quot; min=&quot;0&quot; inputmode=&quot;numeric&quot; value=&quot;300&quot; aria-label=&quot;Lifting Bar 4행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.1&quot; value=&quot;0.0&quot; readonly aria-label=&quot;자동 기록된 Lifting 변위 4행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; min=&quot;0&quot; inputmode=&quot;numeric&quot; value=&quot;460&quot; aria-label=&quot;Lowering Bar 4행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.1&quot; value=&quot;10.0&quot; readonly aria-label=&quot;자동 기록된 Lowering 변위 4행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;action bar-row-delete&quot; type=&quot;button&quot;&gt;삭제&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;td&gt;&lt;input type=&quot;number&quot; min=&quot;0&quot; inputmode=&quot;numeric&quot; value=&quot;380&quot; aria-label=&quot;Lifting Bar 5행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.1&quot; value=&quot;0.0&quot; readonly aria-label=&quot;자동 기록된 Lifting 변위 5행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; min=&quot;0&quot; inputmode=&quot;numeric&quot; value=&quot;500&quot; aria-label=&quot;Lowering Bar 5행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.1&quot; value=&quot;13.0&quot; readonly aria-label=&quot;자동 기록된 Lowering 변위 5행&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;action bar-row-delete&quot; type=&quot;button&quot;&gt;삭제&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;/tbody&gt;&lt;/table&gt;
+                &lt;div class=&quot;bar-reading-status&quot; id=&quot;bar-reading-status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;L·D Bar만 설정 · L·D 값은 해당 압력 도달 시 자동 기록·저장됩니다.&lt;/div&gt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
           &lt;div class=&quot;panel&quot; data-help=&quot;원본 측정값은 바꾸지 않고 대표 직선 계산에 포함할 시작점과 종료점만 조정합니다. 조정 후 재분석을 누르면 대표 직선과 Lift-off를 다시 계산합니다.&quot; style=&quot;margin-top:12px&quot;&gt;
-            &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h3&gt;직선 분석구간 조정&lt;/h3&gt;&lt;p class=&quot;sub&quot;&gt;대표 직선 계산에 사용할 시작점·종료점 지정&lt;/p&gt;&lt;/div&gt;&lt;span class=&quot;status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;축 자동 조정 · &lt;span id=&quot;analysis-generation-method&quot;&gt;분석선 자동 추천&lt;/span&gt; · X 0~1.0 mm / Y 0~850 kN&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h3&gt;직선 분석구간 조정&lt;/h3&gt;&lt;p class=&quot;sub&quot;&gt;대표 직선 계산에 사용할 시작점·종료점 지정&lt;/p&gt;&lt;/div&gt;&lt;span class=&quot;status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;축 자동 조정 · &lt;span id=&quot;analysis-generation-method&quot;&gt;분석선 자동 추천&lt;/span&gt; · X 0~800 Bar / Y 0~30 (1/100 mm)&lt;/span&gt;&lt;/div&gt;
             &lt;div class=&quot;curve-range-grid&quot;&gt;
               &lt;div class=&quot;curve-range-card lifting&quot; data-help=&quot;Lifting 가압 곡선의 직선 분석구간만 별도로 지정합니다.&quot;&gt;
-                &lt;div class=&quot;curve-range-head&quot;&gt;&lt;strong&gt;Lifting 시작점 / 종료점&lt;/strong&gt;&lt;button class=&quot;action&quot; id=&quot;select-lifting-range&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot; data-tooltip=&quot;그래프에서 Lifting 시작점과 종료점을 순서대로 터치&quot;&gt;그래프에서 Lifting 선택&lt;/button&gt;&lt;/div&gt;
+                &lt;div class=&quot;curve-range-head&quot;&gt;&lt;strong&gt;Lifting 시작점 / 종료점&lt;/strong&gt;&lt;button class=&quot;action&quot; id=&quot;select-lifting-range&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot; data-jw-tooltip=&quot;그래프에서 Lifting 시작점과 종료점을 순서대로 터치&quot;&gt;그래프에서 Lifting 선택&lt;/button&gt;&lt;/div&gt;
                 &lt;div class=&quot;curve-range-values&quot;&gt;&lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;analysis-lifting-range&quot;&gt;선택 Step&lt;/label&gt;&lt;input id=&quot;analysis-lifting-range&quot; value=&quot;Step 04 / Step 10&quot; readonly&gt;&lt;/div&gt;&lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;analysis-lifting-displacement&quot;&gt;변위 범위&lt;/label&gt;&lt;input id=&quot;analysis-lifting-displacement&quot; value=&quot;0.17 mm / 0.80 mm&quot; readonly&gt;&lt;/div&gt;&lt;/div&gt;
               &lt;/div&gt;
               &lt;div class=&quot;curve-range-card lowering&quot; data-help=&quot;Lowering 감압 곡선의 직선 분석구간만 별도로 지정합니다. 측정 진행 방향 때문에 시작점이 그래프 오른쪽에 있을 수 있습니다.&quot;&gt;
-                &lt;div class=&quot;curve-range-head&quot;&gt;&lt;strong&gt;Lowering 시작점 / 종료점&lt;/strong&gt;&lt;button class=&quot;action&quot; id=&quot;select-lowering-range&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot; data-tooltip=&quot;그래프에서 Lowering 시작점과 종료점을 순서대로 터치&quot;&gt;그래프에서 Lowering 선택&lt;/button&gt;&lt;/div&gt;
+                &lt;div class=&quot;curve-range-head&quot;&gt;&lt;strong&gt;Lowering 시작점 / 종료점&lt;/strong&gt;&lt;button class=&quot;action&quot; id=&quot;select-lowering-range&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot; data-jw-tooltip=&quot;그래프에서 Lowering 시작점과 종료점을 순서대로 터치&quot;&gt;그래프에서 Lowering 선택&lt;/button&gt;&lt;/div&gt;
                 &lt;div class=&quot;curve-range-values&quot;&gt;&lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;analysis-lowering-range&quot;&gt;선택 Step&lt;/label&gt;&lt;input id=&quot;analysis-lowering-range&quot; value=&quot;Step 03 / Step 09&quot; readonly&gt;&lt;/div&gt;&lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;analysis-lowering-displacement&quot;&gt;변위 범위&lt;/label&gt;&lt;input id=&quot;analysis-lowering-displacement&quot; value=&quot;0.72 mm / 0.11 mm&quot; readonly&gt;&lt;/div&gt;&lt;/div&gt;
               &lt;/div&gt;
             &lt;/div&gt;
@@ -1553,14 +1644,65 @@ html&gt;body{padding:0}&lt;/style&gt;
               &lt;div class=&quot;field&quot; data-help=&quot;현재 보정을 수행하고 이력에 책임자로 기록될 작업자입니다.&quot;&gt;&lt;label for=&quot;analysis-correction-worker&quot;&gt;보정 작업자&lt;/label&gt;&lt;input id=&quot;analysis-correction-worker&quot; value=&quot;홍길동&quot; required&gt;&lt;/div&gt;
               &lt;div class=&quot;field analysis-reason-field&quot; data-help=&quot;곡선 구간이나 기준 변위를 수정한 이유를 입력하며 수정 이력과 결과 리포트에 함께 저장됩니다.&quot;&gt;&lt;label for=&quot;analysis-correction-reason&quot;&gt;보정 사유&lt;/label&gt;&lt;input id=&quot;analysis-correction-reason&quot; placeholder=&quot;예: 직선성 검토를 위한 분석구간 조정&quot; required&gt;&lt;/div&gt;
             &lt;/div&gt;
-            &lt;div class=&quot;analysis-range-actions&quot;&gt;&lt;button class=&quot;action primary&quot; id=&quot;analysis-rerun&quot; type=&quot;button&quot; data-tooltip=&quot;곡선별 지정 구간과 기준 변위로 재분석하고 작업자·보정 사유를 수정 이력에 저장&quot;&gt;재분석 및 이력 저장&lt;/button&gt;&lt;/div&gt;
+            &lt;div class=&quot;analysis-range-actions&quot;&gt;&lt;button class=&quot;action primary&quot; id=&quot;analysis-rerun&quot; type=&quot;button&quot; data-jw-tooltip=&quot;곡선별 지정 구간과 기준 변위로 재분석하고 작업자·보정 사유를 수정 이력에 저장&quot;&gt;재분석 및 이력 저장&lt;/button&gt;&lt;/div&gt;
             &lt;div class=&quot;banner&quot; id=&quot;analysis-range-status&quot;&gt;원본 측정 데이터는 변경되지 않으며 선택한 구간만 계산에 적용됩니다.&lt;/div&gt;
           &lt;/div&gt;
         &lt;/section&gt;
 
+        &lt;section class=&quot;screen&quot; data-panel=&quot;sag&quot;&gt;
+          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;SAG Alignment&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;Piano Wire 기준과 양측 측정값으로 베드플레이트 처짐 곡선 및 허용범위를 계산&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action&quot; id=&quot;open-sag-graph&quot; type=&quot;button&quot; data-jw-tooltip=&quot;SAG 계산 그래프를 태블릿 화면 전체로 확대&quot;&gt;그래프 전체 화면&lt;/button&gt;&lt;/div&gt;
+          &lt;div class=&quot;panel&quot; data-help=&quot;노란색 셀에 배기측과 조작측의 베어링별 측정 SAG를 입력합니다. 최대·권장·최소 SAG는 설계 기준이며 측정값 입력 시 두 측면의 베드플레이트 곡선과 판정이 자동 갱신됩니다.&quot;&gt;
+            &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h3&gt;SAG 기준 및 측정값&lt;/h3&gt;&lt;p class=&quot;sub&quot;&gt;단위 mm · Main Bearing No.1~7 · Fore → Aft&lt;/p&gt;&lt;/div&gt;&lt;span class=&quot;status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;자동 계산&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;sag-table-wrap&quot;&gt;
+              &lt;table class=&quot;sag-table&quot;&gt;
+                &lt;thead&gt;&lt;tr&gt;&lt;th&gt;항목&lt;/th&gt;&lt;th&gt;No.1&lt;/th&gt;&lt;th&gt;No.2&lt;/th&gt;&lt;th&gt;No.3&lt;/th&gt;&lt;th&gt;No.4&lt;/th&gt;&lt;th&gt;No.5&lt;/th&gt;&lt;th&gt;No.6&lt;/th&gt;&lt;th&gt;No.7&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+                &lt;tbody&gt;
+                  &lt;tr class=&quot;sag-reference-row&quot;&gt;&lt;th&gt;Piano Wire 곡선&lt;/th&gt;&lt;td&gt;0.00&lt;/td&gt;&lt;td&gt;-0.19&lt;/td&gt;&lt;td&gt;-0.30&lt;/td&gt;&lt;td&gt;-0.33&lt;/td&gt;&lt;td&gt;-0.30&lt;/td&gt;&lt;td&gt;-0.19&lt;/td&gt;&lt;td&gt;0.00&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr class=&quot;sag-reference-row&quot;&gt;&lt;th&gt;Maximum SAG&lt;/th&gt;&lt;td&gt;0.10&lt;/td&gt;&lt;td&gt;0.03&lt;/td&gt;&lt;td&gt;-0.02&lt;/td&gt;&lt;td&gt;-0.03&lt;/td&gt;&lt;td&gt;-0.02&lt;/td&gt;&lt;td&gt;0.03&lt;/td&gt;&lt;td&gt;0.10&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr class=&quot;sag-reference-row&quot;&gt;&lt;th&gt;Preferred SAG&lt;/th&gt;&lt;td&gt;0.00&lt;/td&gt;&lt;td&gt;-0.07&lt;/td&gt;&lt;td&gt;-0.12&lt;/td&gt;&lt;td&gt;-0.13&lt;/td&gt;&lt;td&gt;-0.12&lt;/td&gt;&lt;td&gt;-0.07&lt;/td&gt;&lt;td&gt;0.00&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr class=&quot;sag-reference-row&quot;&gt;&lt;th&gt;Minimum SAG&lt;/th&gt;&lt;td&gt;-0.10&lt;/td&gt;&lt;td&gt;-0.17&lt;/td&gt;&lt;td&gt;-0.22&lt;/td&gt;&lt;td&gt;-0.23&lt;/td&gt;&lt;td&gt;-0.22&lt;/td&gt;&lt;td&gt;-0.17&lt;/td&gt;&lt;td&gt;-0.10&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;th&gt;Measurement · Exhaust&lt;/th&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;0.00&quot; data-sag-input data-side=&quot;exhaust&quot; aria-label=&quot;배기측 No.1 SAG&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;-0.10&quot; data-sag-input data-side=&quot;exhaust&quot; aria-label=&quot;배기측 No.2 SAG&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;-0.13&quot; data-sag-input data-side=&quot;exhaust&quot; aria-label=&quot;배기측 No.3 SAG&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;-0.17&quot; data-sag-input data-side=&quot;exhaust&quot; aria-label=&quot;배기측 No.4 SAG&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;-0.14&quot; data-sag-input data-side=&quot;exhaust&quot; aria-label=&quot;배기측 No.5 SAG&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;-0.09&quot; data-sag-input data-side=&quot;exhaust&quot; aria-label=&quot;배기측 No.6 SAG&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;0.00&quot; data-sag-input data-side=&quot;exhaust&quot; aria-label=&quot;배기측 No.7 SAG&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;th&gt;Measurement · Man.&lt;/th&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;0.00&quot; data-sag-input data-side=&quot;man&quot; aria-label=&quot;조작측 No.1 SAG&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;-0.14&quot; data-sag-input data-side=&quot;man&quot; aria-label=&quot;조작측 No.2 SAG&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;-0.17&quot; data-sag-input data-side=&quot;man&quot; aria-label=&quot;조작측 No.3 SAG&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;-0.18&quot; data-sag-input data-side=&quot;man&quot; aria-label=&quot;조작측 No.4 SAG&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;-0.15&quot; data-sag-input data-side=&quot;man&quot; aria-label=&quot;조작측 No.5 SAG&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;-0.12&quot; data-sag-input data-side=&quot;man&quot; aria-label=&quot;조작측 No.6 SAG&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;0.00&quot; data-sag-input data-side=&quot;man&quot; aria-label=&quot;조작측 No.7 SAG&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;/tbody&gt;
+              &lt;/table&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;sag-calc-status&quot; id=&quot;sag-calc-status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;측정값 14개 적용 · SAG 허용범위 및 인접 베어링 수직차 자동 계산 완료&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;grid sag-result-layout&quot;&gt;
+            &lt;div class=&quot;panel&quot; data-help=&quot;Max·Nominal·Min 기준 곡선과 배기측·조작측 측정값으로 계산한 베드플레이트 곡선을 겹쳐 표시합니다.&quot;&gt;
+              &lt;div class=&quot;analysis-graph-head&quot;&gt;&lt;h3&gt;Bedplate Deflection&lt;/h3&gt;&lt;/div&gt;
+              &lt;svg class=&quot;plot sag-plot&quot; id=&quot;sag-plot&quot; viewBox=&quot;0 0 800 300&quot; role=&quot;img&quot; aria-label=&quot;Main Bearing No.1에서 No.7까지 SAG 허용 곡선과 배기측 및 조작측 베드플레이트 처짐 곡선&quot;&gt;&lt;path class=&quot;gridline&quot; d=&quot;M64 30H760M64 86H760M64 142H760M64 198H760M64 254H760M64 30V254M180 30V254M296 30V254M412 30V254M528 30V254M644 30V254M760 30V254M122 30V254M238 30V254M354 30V254M470 30V254M586 30V254M702 30V254&quot;/&gt;&lt;path class=&quot;axis&quot; d=&quot;M64 30V254H760&quot;/&gt;&lt;g class=&quot;axis-ticks&quot;&gt;&lt;text x=&quot;56&quot; y=&quot;34&quot; text-anchor=&quot;end&quot;&gt;0.10&lt;/text&gt;&lt;text x=&quot;56&quot; y=&quot;90&quot; text-anchor=&quot;end&quot;&gt;0.00&lt;/text&gt;&lt;text x=&quot;56&quot; y=&quot;146&quot; text-anchor=&quot;end&quot;&gt;-0.10&lt;/text&gt;&lt;text x=&quot;56&quot; y=&quot;202&quot; text-anchor=&quot;end&quot;&gt;-0.20&lt;/text&gt;&lt;text x=&quot;56&quot; y=&quot;258&quot; text-anchor=&quot;end&quot;&gt;-0.30&lt;/text&gt;&lt;text x=&quot;64&quot; y=&quot;272&quot; text-anchor=&quot;middle&quot;&gt;1&lt;/text&gt;&lt;text x=&quot;180&quot; y=&quot;272&quot; text-anchor=&quot;middle&quot;&gt;2&lt;/text&gt;&lt;text x=&quot;296&quot; y=&quot;272&quot; text-anchor=&quot;middle&quot;&gt;3&lt;/text&gt;&lt;text x=&quot;412&quot; y=&quot;272&quot; text-anchor=&quot;middle&quot;&gt;4&lt;/text&gt;&lt;text x=&quot;528&quot; y=&quot;272&quot; text-anchor=&quot;middle&quot;&gt;5&lt;/text&gt;&lt;text x=&quot;644&quot; y=&quot;272&quot; text-anchor=&quot;middle&quot;&gt;6&lt;/text&gt;&lt;text x=&quot;760&quot; y=&quot;272&quot; text-anchor=&quot;middle&quot;&gt;7&lt;/text&gt;&lt;/g&gt;&lt;path class=&quot;sag-limit-max&quot; id=&quot;sag-limit-max&quot;/&gt;&lt;path class=&quot;sag-nominal&quot; id=&quot;sag-nominal&quot;/&gt;&lt;path class=&quot;sag-limit-min&quot; id=&quot;sag-limit-min&quot;/&gt;&lt;path class=&quot;sag-exhaust&quot; id=&quot;sag-exhaust&quot;/&gt;&lt;path class=&quot;sag-man&quot; id=&quot;sag-man&quot;/&gt;&lt;g id=&quot;sag-points&quot;&gt;&lt;/g&gt;&lt;text x=&quot;412&quot; y=&quot;294&quot; text-anchor=&quot;middle&quot;&gt;Main Bearing No.&lt;/text&gt;&lt;text x=&quot;18&quot; y=&quot;18&quot;&gt;mm&lt;/text&gt;&lt;/svg&gt;
+              &lt;div class=&quot;legend&quot; id=&quot;sag-legend&quot;&gt;&lt;span&gt;Max&lt;/span&gt;&lt;span&gt;Nominal&lt;/span&gt;&lt;span&gt;Min&lt;/span&gt;&lt;span style=&quot;color:var(--jw-accent)&quot;&gt;Exhaust&lt;/span&gt;&lt;span style=&quot;color:var(--jw-warn)&quot;&gt;Man.&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;panel sag-output-panel&quot; data-help=&quot;엑셀 SAG 시트와 같은 구조로 베어링별 OK/OUT, 허용값, 종합 결과와 계산된 베드플레이트 곡선 수치를 표시합니다.&quot;&gt;
+            &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h3&gt;SAG 판정 및 계산값&lt;/h3&gt;&lt;p class=&quot;sub&quot;&gt;입력값 변경 시 베어링별 판정과 계산값이 자동 갱신됩니다.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;sag-output-wrap&quot;&gt;
+              &lt;table class=&quot;sag-output-table&quot; aria-label=&quot;SAG 자동 판정 및 베드플레이트 계산값&quot;&gt;
+                &lt;colgroup&gt;&lt;col class=&quot;sag-col-label&quot;&gt;&lt;col class=&quot;sag-col-bearing&quot; span=&quot;7&quot;&gt;&lt;col class=&quot;sag-col-tolerance&quot;&gt;&lt;col class=&quot;sag-col-result&quot;&gt;&lt;/colgroup&gt;
+                &lt;tbody&gt;
+                  &lt;tr class=&quot;sag-section-heading&quot;&gt;&lt;th colspan=&quot;8&quot;&gt;Deviation from SAG curve&lt;/th&gt;&lt;th&gt;Tolerance&lt;/th&gt;&lt;th&gt;Result&lt;/th&gt;&lt;/tr&gt;
+                  &lt;tr class=&quot;sag-column-labels&quot;&gt;&lt;th&gt;측정 측면&lt;/th&gt;&lt;th&gt;No.1&lt;/th&gt;&lt;th&gt;No.2&lt;/th&gt;&lt;th&gt;No.3&lt;/th&gt;&lt;th&gt;No.4&lt;/th&gt;&lt;th&gt;No.5&lt;/th&gt;&lt;th&gt;No.6&lt;/th&gt;&lt;th&gt;No.7&lt;/th&gt;&lt;th&gt;허용값&lt;/th&gt;&lt;th&gt;종합 판정&lt;/th&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;th&gt;Exhaust side&lt;/th&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-deviation=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-deviation=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-deviation=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-deviation=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-deviation=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-deviation=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-deviation=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td&gt;0.10 mm&lt;/td&gt;&lt;td class=&quot;sag-result-value&quot; id=&quot;sag-deviation-result-exhaust&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;th&gt;Man. side&lt;/th&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-deviation=&quot;man&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-deviation=&quot;man&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-deviation=&quot;man&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-deviation=&quot;man&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-deviation=&quot;man&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-deviation=&quot;man&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-deviation=&quot;man&quot;&gt;&lt;/td&gt;&lt;td&gt;0.10 mm&lt;/td&gt;&lt;td class=&quot;sag-result-value&quot; id=&quot;sag-deviation-result-man&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr class=&quot;sag-section-heading&quot;&gt;&lt;th colspan=&quot;8&quot;&gt;Vertical tolerance between 2 bearings&lt;/th&gt;&lt;th&gt;Tolerance&lt;/th&gt;&lt;th&gt;Result&lt;/th&gt;&lt;/tr&gt;
+                  &lt;tr class=&quot;sag-column-labels&quot;&gt;&lt;th&gt;측정 측면&lt;/th&gt;&lt;th&gt;1–2&lt;/th&gt;&lt;th&gt;2–3&lt;/th&gt;&lt;th&gt;3–4&lt;/th&gt;&lt;th&gt;4–5&lt;/th&gt;&lt;th&gt;5–6&lt;/th&gt;&lt;th&gt;6–7&lt;/th&gt;&lt;th&gt;—&lt;/th&gt;&lt;th&gt;허용값&lt;/th&gt;&lt;th&gt;종합 판정&lt;/th&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;th&gt;Exhaust side&lt;/th&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-vertical=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-vertical=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-vertical=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-vertical=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-vertical=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-vertical=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-empty-cell&quot;&gt;&lt;/td&gt;&lt;td&gt;0.10 mm&lt;/td&gt;&lt;td class=&quot;sag-result-value&quot; id=&quot;sag-vertical-result-exhaust&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;th&gt;Man. side&lt;/th&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-vertical=&quot;man&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-vertical=&quot;man&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-vertical=&quot;man&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-vertical=&quot;man&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-vertical=&quot;man&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-judge-cell&quot; data-sag-vertical=&quot;man&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-empty-cell&quot;&gt;&lt;/td&gt;&lt;td&gt;0.10 mm&lt;/td&gt;&lt;td class=&quot;sag-result-value&quot; id=&quot;sag-vertical-result-man&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;th class=&quot;sag-curve-label&quot;&gt;Max&lt;/th&gt;&lt;td data-sag-curve=&quot;maximum&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;maximum&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;maximum&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;maximum&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;maximum&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;maximum&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;maximum&quot;&gt;&lt;/td&gt;&lt;td class=&quot;sag-empty-cell&quot; colspan=&quot;2&quot; rowspan=&quot;5&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;th class=&quot;sag-curve-label&quot;&gt;Nominal&lt;/th&gt;&lt;td data-sag-curve=&quot;nominal&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;nominal&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;nominal&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;nominal&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;nominal&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;nominal&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;nominal&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;th class=&quot;sag-curve-label&quot;&gt;Min&lt;/th&gt;&lt;td data-sag-curve=&quot;minimum&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;minimum&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;minimum&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;minimum&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;minimum&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;minimum&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;minimum&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;th class=&quot;sag-curve-label&quot;&gt;Bedplate curve · Exhaust&lt;/th&gt;&lt;td data-sag-curve=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;exhaust&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;th class=&quot;sag-curve-label&quot;&gt;Bedplate curve · Man.&lt;/th&gt;&lt;td data-sag-curve=&quot;man&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;man&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;man&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;man&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;man&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;man&quot;&gt;&lt;/td&gt;&lt;td data-sag-curve=&quot;man&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;/tbody&gt;
+              &lt;/table&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+
         &lt;section class=&quot;screen&quot; data-panel=&quot;data&quot;&gt;
-          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;데이터 로그 · 보정 이력&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;원시값을 보존하면서 최종 적용값과 수정 근거를 추적&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action data-edit-action&quot; type=&quot;button&quot; data-tooltip=&quot;선택한 측정점을 최초 수신 원시값으로 되돌림&quot;&gt;원시값 복원&lt;/button&gt;&lt;button class=&quot;action primary data-edit-action&quot; type=&quot;button&quot; data-tooltip=&quot;보정값·사유·작업자·수정 시각을 새 이력으로 저장&quot;&gt;보정 이력 저장&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
-          &lt;div class=&quot;banner history-context&quot; id=&quot;history-context&quot; data-help=&quot;작업 홈에서 선택한 시험의 날짜, 사용 장치 세트와 조회 상태입니다. 완료된 과거 시험은 원본 보호를 위해 읽기 전용으로 표시합니다.&quot;&gt;&lt;strong id=&quot;history-context-label&quot;&gt;현재 시험&lt;/strong&gt;&lt;span id=&quot;history-context-detail&quot;&gt;H2678-20260825-02 · 시험일 2026-08-25 · 세트 이름 SET-014 · PRS-A-014 + DIS-B-014 · 2차 · 진행 중&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;데이터 로그 · 보정 이력&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;원시값을 보존하면서 최종 적용값과 수정 근거를 추적&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action data-edit-action&quot; type=&quot;button&quot; data-jw-tooltip=&quot;선택한 측정점을 최초 수신 원시값으로 되돌림&quot;&gt;원시값 복원&lt;/button&gt;&lt;button class=&quot;action primary data-edit-action&quot; type=&quot;button&quot; data-jw-tooltip=&quot;보정값·사유·작업자·수정 시각을 새 이력으로 저장&quot;&gt;보정 이력 저장&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;banner history-context&quot; id=&quot;history-context&quot; data-help=&quot;작업 홈에서 선택한 시험의 날짜, 사용 장치 세트, 통신 주기와 조회 상태입니다. 완료된 과거 시험은 원본 보호를 위해 읽기 전용으로 표시합니다.&quot;&gt;&lt;strong id=&quot;history-context-label&quot;&gt;현재 시험&lt;/strong&gt;&lt;span id=&quot;history-context-detail&quot;&gt;H2678-20260825-02 · 시험일 2026-08-25 · 세트 이름 SET-014 · PRS-A-014 + DIS-B-014 · 통신 주기 1초 · 2차 · 진행 중&lt;/span&gt;&lt;/div&gt;
           &lt;div class=&quot;panel&quot; data-help=&quot;압력·변위 원시값과 보정 후 최종 적용값을 Step별로 비교합니다. 하중은 최종 압력과 잭 유효면적으로 다시 계산됩니다.&quot;&gt;
             &lt;h3&gt;Step별 원시값 / 최종 적용값&lt;/h3&gt;
             &lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Step&lt;/th&gt;&lt;th&gt;구간&lt;/th&gt;&lt;th&gt;원시 압력&lt;/th&gt;&lt;th&gt;최종 압력&lt;/th&gt;&lt;th&gt;원시 변위&lt;/th&gt;&lt;th&gt;최종 변위&lt;/th&gt;&lt;th&gt;환산 하중&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;07&lt;/td&gt;&lt;td&gt;Lifting&lt;/td&gt;&lt;td&gt;486.3 bar&lt;/td&gt;&lt;td&gt;486.3 bar&lt;/td&gt;&lt;td&gt;0.42 mm&lt;/td&gt;&lt;td class=&quot;warn&quot;&gt;0.44 mm&lt;/td&gt;&lt;td&gt;616.1 kN&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;08&lt;/td&gt;&lt;td&gt;Lifting&lt;/td&gt;&lt;td&gt;512.8 bar&lt;/td&gt;&lt;td&gt;512.8 bar&lt;/td&gt;&lt;td&gt;0.51 mm&lt;/td&gt;&lt;td&gt;0.51 mm&lt;/td&gt;&lt;td&gt;649.7 kN&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;09&lt;/td&gt;&lt;td&gt;Lowering&lt;/td&gt;&lt;td&gt;498.1 bar&lt;/td&gt;&lt;td&gt;498.1 bar&lt;/td&gt;&lt;td&gt;0.48 mm&lt;/td&gt;&lt;td&gt;0.48 mm&lt;/td&gt;&lt;td&gt;631.0 kN&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
@@ -1580,8 +1722,41 @@ html&gt;body{padding:0}&lt;/style&gt;
           &lt;div class=&quot;panel&quot; data-help=&quot;원시값 변경 없이 누가 언제 어떤 값을 어떤 사유로 보정했는지 회차별로 조회합니다.&quot; style=&quot;margin-top:12px&quot;&gt;&lt;h3&gt;수정 이력&lt;/h3&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;시각&lt;/th&gt;&lt;th&gt;작업자&lt;/th&gt;&lt;th&gt;대상&lt;/th&gt;&lt;th&gt;변경&lt;/th&gt;&lt;th&gt;사유&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody id=&quot;correction-history-body&quot;&gt;&lt;tr&gt;&lt;td&gt;14:41:22&lt;/td&gt;&lt;td&gt;홍길동&lt;/td&gt;&lt;td&gt;Step 07 변위&lt;/td&gt;&lt;td&gt;0.42 → 0.44 mm&lt;/td&gt;&lt;td&gt;센서 응답 지연 보정&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;14:45:03&lt;/td&gt;&lt;td&gt;홍길동&lt;/td&gt;&lt;td&gt;분석 구간&lt;/td&gt;&lt;td&gt;L 04~09 → 04~10&lt;/td&gt;&lt;td&gt;직선성 검토&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
         &lt;/section&gt;
 
+        &lt;section class=&quot;screen&quot; data-panel=&quot;alarms&quot;&gt;
+          &lt;div class=&quot;headline&quot;&gt;
+            &lt;div&gt;&lt;h2&gt;Alarms &amp;amp; Alerts&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;장치·통신·측정 이상을 등급별로 확인하고 작업자 확인 이력을 관리&lt;/p&gt;&lt;/div&gt;
+            &lt;button class=&quot;action primary&quot; id=&quot;safety-stop-button&quot; type=&quot;button&quot; data-jw-tooltip=&quot;Safety Stop을 누르면 요청 완료 상태로 바뀌며, 요청 완료를 다시 누르면 초기 Safety Stop 버튼으로 돌아갑니다. 실제 설비 정지 연동 범위는 킥오프에서 확정합니다.&quot;&gt;Safety Stop&lt;/button&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;alarm-summary&quot; data-help=&quot;현재 미확인 상태인 알람을 CRITICAL, ALERT, WARNING 등급별로 집계합니다.&quot;&gt;
+            &lt;div class=&quot;panel&quot;&gt;&lt;span class=&quot;label&quot;&gt;CRITICAL · 미확인&lt;/span&gt;&lt;div class=&quot;alarm-summary-value&quot;&gt;&lt;strong class=&quot;bad&quot; id=&quot;critical-alarm-count&quot;&gt;1&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;즉시 확인&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;panel&quot;&gt;&lt;span class=&quot;label&quot;&gt;ALERT · 미확인&lt;/span&gt;&lt;div class=&quot;alarm-summary-value&quot;&gt;&lt;strong class=&quot;warn&quot; id=&quot;alert-alarm-count&quot;&gt;1&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;조치 필요&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;panel&quot;&gt;&lt;span class=&quot;label&quot;&gt;WARNING · 미확인&lt;/span&gt;&lt;div class=&quot;alarm-summary-value&quot;&gt;&lt;strong id=&quot;warning-alarm-count&quot;&gt;0&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;상태 확인&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;panel&quot; data-help=&quot;발생일시, 등급, 대상 장치, 원인, 발생값과 기준값, ACK 처리 상태를 최소 관리 항목으로 표시합니다.&quot;&gt;
+            &lt;h3&gt;알람 통합 목록&lt;/h3&gt;
+            &lt;div class=&quot;alarm-filter-grid&quot;&gt;
+              &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;alarm-level-filter&quot;&gt;등급&lt;/label&gt;&lt;select id=&quot;alarm-level-filter&quot;&gt;&lt;option value=&quot;all&quot;&gt;전체 등급&lt;/option&gt;&lt;option value=&quot;critical&quot;&gt;CRITICAL&lt;/option&gt;&lt;option value=&quot;alert&quot;&gt;ALERT&lt;/option&gt;&lt;option value=&quot;warning&quot;&gt;WARNING&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+              &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;alarm-status-filter&quot;&gt;처리 상태&lt;/label&gt;&lt;select id=&quot;alarm-status-filter&quot;&gt;&lt;option value=&quot;all&quot;&gt;전체 상태&lt;/option&gt;&lt;option value=&quot;open&quot;&gt;미확인&lt;/option&gt;&lt;option value=&quot;acked&quot;&gt;확인 완료&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+              &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;alarm-device-filter&quot;&gt;장비 세트&lt;/label&gt;&lt;select id=&quot;alarm-device-filter&quot;&gt;&lt;option value=&quot;all&quot;&gt;전체 장치&lt;/option&gt;&lt;option value=&quot;set-014&quot;&gt;SET-014&lt;/option&gt;&lt;option value=&quot;pressure&quot;&gt;압력 모듈&lt;/option&gt;&lt;option value=&quot;displacement&quot;&gt;변위 모듈&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;alarm-table-wrap&quot;&gt;
+              &lt;table class=&quot;alarm-table&quot;&gt;
+                &lt;thead&gt;&lt;tr&gt;&lt;th&gt;발생일시&lt;/th&gt;&lt;th&gt;등급&lt;/th&gt;&lt;th&gt;장치·세트&lt;/th&gt;&lt;th&gt;원인&lt;/th&gt;&lt;th&gt;발생값 / 기준&lt;/th&gt;&lt;th&gt;처리 상태&lt;/th&gt;&lt;th&gt;조치&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+                &lt;tbody id=&quot;alarm-table-body&quot;&gt;
+                  &lt;tr data-alarm-row data-level=&quot;critical&quot; data-status=&quot;open&quot; data-device=&quot;displacement&quot;&gt;&lt;td&gt;08-25 14:34:18&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;alarm-level bad&quot;&gt;CRITICAL&lt;/span&gt;&lt;/td&gt;&lt;td&gt;DIS-B-014&lt;br&gt;&lt;span class=&quot;sub&quot;&gt;SET-014&lt;/span&gt;&lt;/td&gt;&lt;td&gt;변위 모듈 통신 두절&lt;/td&gt;&lt;td&gt;5.0초 / 3.0초&lt;/td&gt;&lt;td data-alarm-state class=&quot;bad&quot;&gt;미확인&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;action alarm-ack&quot; type=&quot;button&quot; data-alarm-ack&gt;ACK&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr data-alarm-row data-level=&quot;alert&quot; data-status=&quot;open&quot; data-device=&quot;pressure&quot;&gt;&lt;td&gt;08-25 14:33:42&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;alarm-level warn&quot;&gt;ALERT&lt;/span&gt;&lt;/td&gt;&lt;td&gt;PRS-A-014&lt;br&gt;&lt;span class=&quot;sub&quot;&gt;SET-014&lt;/span&gt;&lt;/td&gt;&lt;td&gt;압력 상한 기준 초과&lt;/td&gt;&lt;td&gt;865 bar / 850 bar&lt;/td&gt;&lt;td data-alarm-state class=&quot;warn&quot;&gt;미확인&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;action alarm-ack&quot; type=&quot;button&quot; data-alarm-ack&gt;ACK&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr data-alarm-row data-level=&quot;warning&quot; data-status=&quot;acked&quot; data-device=&quot;pressure&quot;&gt;&lt;td&gt;08-25 14:30:11&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;alarm-level&quot;&gt;WARNING&lt;/span&gt;&lt;/td&gt;&lt;td&gt;PRS-A-014&lt;br&gt;&lt;span class=&quot;sub&quot;&gt;SET-014&lt;/span&gt;&lt;/td&gt;&lt;td&gt;BLE 신호 세기 저하&lt;/td&gt;&lt;td&gt;-79 dBm / -75 dBm&lt;/td&gt;&lt;td data-alarm-state class=&quot;good&quot;&gt;확인 완료&lt;br&gt;&lt;span class=&quot;sub&quot;&gt;홍길동 14:31&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;action alarm-ack&quot; type=&quot;button&quot; data-alarm-ack disabled&gt;완료&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr data-alarm-row data-level=&quot;warning&quot; data-status=&quot;acked&quot; data-device=&quot;set-014&quot;&gt;&lt;td&gt;08-25 14:28:06&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;alarm-level&quot;&gt;WARNING&lt;/span&gt;&lt;/td&gt;&lt;td&gt;SET-014&lt;/td&gt;&lt;td&gt;통신 주기 지연&lt;/td&gt;&lt;td&gt;2.4초 / 1.0초&lt;/td&gt;&lt;td data-alarm-state class=&quot;good&quot;&gt;확인 완료&lt;br&gt;&lt;span class=&quot;sub&quot;&gt;홍길동 14:29&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;action alarm-ack&quot; type=&quot;button&quot; data-alarm-ack disabled&gt;완료&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;/tbody&gt;
+              &lt;/table&gt;
+            &lt;/div&gt;
+            &lt;p class=&quot;sub&quot; id=&quot;alarm-filter-status&quot; role=&quot;status&quot;&gt;전체 알람 4건 표시&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;banner alarm-safety-state&quot; id=&quot;alarm-safety-state&quot; role=&quot;status&quot; data-help=&quot;Safety Stop 실행 여부와 작업자 확인 결과를 기록합니다. 실제 유압설비 제어 연동 여부는 별도 확정이 필요합니다.&quot;&gt;Safety Stop 대기 · 실제 설비 정지 연동 범위는 킥오프 확인 필요&lt;/div&gt;
+        &lt;/section&gt;
+
         &lt;section class=&quot;screen&quot; data-panel=&quot;report&quot;&gt;
-          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;결과 요약 · 리포트&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;베어링별 판정과 회차 이력을 통합 확인&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action&quot; type=&quot;button&quot; data-tooltip=&quot;최종 적용값과 계산 근거를 Excel 또는 CSV로 내보내기&quot;&gt;Excel / CSV&lt;/button&gt;&lt;button class=&quot;action primary&quot; id=&quot;generate-pdf-report&quot; type=&quot;button&quot; data-tooltip=&quot;리포트 전체 6개 페이지를 PDF로 변환한 뒤 미리보기 화면 열기&quot;&gt;PDF 생성&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;결과 요약 · 리포트&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;베어링별 판정과 회차 이력을 통합 확인&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action&quot; type=&quot;button&quot; data-jw-tooltip=&quot;최종 적용값과 계산 근거를 Excel 또는 CSV로 내보내기&quot;&gt;Excel / CSV&lt;/button&gt;&lt;button class=&quot;action primary&quot; id=&quot;generate-pdf-report&quot; type=&quot;button&quot; data-jw-tooltip=&quot;리포트 전체 6개 페이지를 PDF로 변환한 뒤 미리보기 화면 열기&quot;&gt;PDF 생성&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
           &lt;div class=&quot;report-tabs&quot; role=&quot;tablist&quot; aria-label=&quot;결과 리포트 영역&quot; data-help=&quot;내용을 한 영역씩 확인할 수 있습니다. 탭을 선택하면 해당 결과만 화면에 표시됩니다.&quot;&gt;
             &lt;button class=&quot;report-tab&quot; id=&quot;report-tab-summary&quot; type=&quot;button&quot; role=&quot;tab&quot; data-report-tab=&quot;summary&quot; aria-controls=&quot;report-panel-summary&quot; aria-selected=&quot;true&quot;&gt;종합 판정&lt;/button&gt;
             &lt;button class=&quot;report-tab&quot; id=&quot;report-tab-confirm&quot; type=&quot;button&quot; role=&quot;tab&quot; data-report-tab=&quot;confirm&quot; aria-controls=&quot;report-panel-confirm&quot; aria-selected=&quot;false&quot;&gt;결과 확정&lt;/button&gt;
@@ -1601,11 +1776,11 @@ html&gt;body{padding:0}&lt;/style&gt;
                 &lt;div class=&quot;field remeasure-reason-field&quot; id=&quot;remeasure-reason-field&quot; data-help=&quot;재측정이 필요한 대상과 현장 조치 계획을 기록합니다. 재측정 필요 선택 시 필수 입력 항목입니다.&quot;&gt;&lt;label for=&quot;remeasure-reason&quot;&gt;재측정 사유&lt;/label&gt;&lt;input id=&quot;remeasure-reason&quot; value=&quot;No.3 베어링 허용오차 초과 · Shim 조정 후 재측정&quot; placeholder=&quot;대상 베어링과 재측정 사유 입력&quot;&gt;&lt;/div&gt;
               &lt;/div&gt;
               &lt;div class=&quot;field result-opinion-field&quot; data-help=&quot;측정 결과, 현장 확인 내용과 후속 조치에 대한 작업자의 최종 판단을 기록합니다. PDF 리포트와 데이터 이력에 함께 저장됩니다.&quot;&gt;&lt;label for=&quot;final-opinion&quot;&gt;3 · 최종 의견&lt;/label&gt;&lt;textarea id=&quot;final-opinion&quot; placeholder=&quot;측정 결과와 후속 조치에 대한 작업자 의견 입력&quot;&gt;No.3 베어링 Shim 조정 후 재측정 필요. 나머지 위치는 허용범위 만족.&lt;/textarea&gt;&lt;/div&gt;
-              &lt;div class=&quot;result-confirmation-footer&quot;&gt;&lt;span class=&quot;result-save-status&quot; id=&quot;result-save-status&quot; role=&quot;status&quot;&gt;저장 전 · 작업자 승인 대기&lt;/span&gt;&lt;button class=&quot;action primary&quot; id=&quot;save-final-result&quot; type=&quot;button&quot; data-tooltip=&quot;재측정 여부와 최종 의견을 현재 Test ID의 데이터 이력으로 저장&quot;&gt;4 · 결과 저장&lt;/button&gt;&lt;/div&gt;
+              &lt;div class=&quot;result-confirmation-footer&quot;&gt;&lt;span class=&quot;result-save-status&quot; id=&quot;result-save-status&quot; role=&quot;status&quot;&gt;저장 전 · 작업자 승인 대기&lt;/span&gt;&lt;button class=&quot;action primary&quot; id=&quot;save-final-result&quot; type=&quot;button&quot; data-jw-tooltip=&quot;재측정 여부와 최종 의견을 현재 Test ID의 데이터 이력으로 저장&quot;&gt;4 · 결과 저장&lt;/button&gt;&lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
           &lt;div class=&quot;report-tab-panel&quot; id=&quot;report-panel-info&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;report-tab-info&quot; data-report-panel=&quot;info&quot;&gt;
-            &lt;div class=&quot;panel&quot; data-help=&quot;리포트 표지와 모든 상세 페이지에 공통으로 표시할 시험 식별정보입니다.&quot;&gt;&lt;h3&gt;표지·기본정보&lt;/h3&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Test ID&lt;/td&gt;&lt;td&gt;H2678-20260825-02&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;호선 / 엔진&lt;/td&gt;&lt;td&gt;H2678 / ME 6G70ME-C&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;작업자 / 일시&lt;/td&gt;&lt;td&gt;홍길동 / 2026-08-25 14:32&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;장비 세트&lt;/td&gt;&lt;td&gt;SET-014&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+            &lt;div class=&quot;panel&quot; data-help=&quot;리포트 표지와 모든 상세 페이지에 공통으로 표시할 시험 식별정보입니다.&quot;&gt;&lt;h3&gt;표지·기본정보&lt;/h3&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Test ID&lt;/td&gt;&lt;td&gt;H2678-20260825-02&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;호선 / 엔진&lt;/td&gt;&lt;td&gt;H2678 / ME 6G70ME-C&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;작업자 / 일시&lt;/td&gt;&lt;td&gt;홍길동 / 2026-08-25 14:32&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;장비 세트&lt;/td&gt;&lt;td&gt;SET-014&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;통신 주기&lt;/td&gt;&lt;td&gt;1초&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
           &lt;/div&gt;
           &lt;div class=&quot;report-tab-panel&quot; id=&quot;report-panel-history&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;report-tab-history&quot; data-report-panel=&quot;history&quot;&gt;
             &lt;div class=&quot;grid two&quot;&gt;&lt;div class=&quot;panel&quot; data-help=&quot;각 회차의 측정 반력, Shim 조정과 재측정 결과를 리포트에 포함합니다.&quot;&gt;&lt;h3&gt;회차별 조정 이력&lt;/h3&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;회차&lt;/th&gt;&lt;th&gt;조정&lt;/th&gt;&lt;th&gt;결과&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;1차&lt;/td&gt;&lt;td&gt;No.3 Shim +0.20 mm&lt;/td&gt;&lt;td class=&quot;bad&quot;&gt;NG&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;2차&lt;/td&gt;&lt;td&gt;조정 후 재측정&lt;/td&gt;&lt;td class=&quot;warn&quot;&gt;재검토&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;div class=&quot;panel&quot; data-help=&quot;최종 적용 데이터에는 원시값이 아니라 승인된 보정값과 계산값을 사용하되 원시값·수정 이력은 별도 부록으로 보존합니다.&quot;&gt;&lt;h3&gt;최종 적용 데이터&lt;/h3&gt;&lt;p class=&quot;sub&quot;&gt;Step별 압력·변위·환산 하중 / Lift-off / 평균 대표 하중 / 최종 반력 / 보정값·사유 / 알람·메모&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1622,7 +1797,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   &lt;div class=&quot;pdf-preview&quot; id=&quot;pdf-preview&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-labelledby=&quot;pdf-preview-title&quot;&gt;
     &lt;div class=&quot;pdf-preview-head&quot;&gt;
       &lt;div&gt;&lt;h2 id=&quot;pdf-preview-title&quot;&gt;PDF 미리보기&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;Shaft Reaction Report · 전체 6페이지&lt;/p&gt;&lt;/div&gt;
-      &lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action primary&quot; id=&quot;save-pdf-file&quot; type=&quot;button&quot; data-tooltip=&quot;미리보기 전체 6페이지를 하나의 PDF 파일로 저장&quot;&gt;PDF 파일 저장&lt;/button&gt;&lt;button class=&quot;action&quot; id=&quot;close-pdf-preview&quot; type=&quot;button&quot;&gt;미리보기 닫기&lt;/button&gt;&lt;/div&gt;
+      &lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action primary&quot; id=&quot;save-pdf-file&quot; type=&quot;button&quot; data-jw-tooltip=&quot;미리보기 전체 6페이지를 하나의 PDF 파일로 저장&quot;&gt;PDF 파일 저장&lt;/button&gt;&lt;button class=&quot;action&quot; id=&quot;close-pdf-preview&quot; type=&quot;button&quot;&gt;미리보기 닫기&lt;/button&gt;&lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&quot;pdf-preview-body&quot;&gt;
       &lt;div class=&quot;pdf-page-list&quot; role=&quot;tablist&quot; aria-label=&quot;PDF 페이지 선택&quot;&gt;
@@ -1636,7 +1811,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       &lt;div class=&quot;pdf-page-stage&quot;&gt;
         &lt;article class=&quot;pdf-page pdf-cover active&quot; data-pdf-preview-page=&quot;0&quot; aria-label=&quot;PDF 1페이지 표지와 기본정보&quot;&gt;
           &lt;div class=&quot;pdf-cover-mark&quot;&gt;J&lt;/div&gt;&lt;h3&gt;Main Engine Shaft&lt;br&gt;Reaction Measurement Report&lt;/h3&gt;&lt;p&gt;메인 엔진 샤프트 반력 계측 결과 리포트&lt;/p&gt;
-          &lt;table class=&quot;pdf-cover-info&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;th&gt;Test ID&lt;/th&gt;&lt;td&gt;H2678-20260825-02&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;호선 / 엔진&lt;/th&gt;&lt;td&gt;H2678 / ME 6G70ME-C&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;시험 수행일시&lt;/th&gt;&lt;td&gt;2026-08-25 14:32&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;작업자&lt;/th&gt;&lt;td&gt;홍길동&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;장비 세트&lt;/th&gt;&lt;td&gt;SET-014&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+          &lt;table class=&quot;pdf-cover-info&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;th&gt;Test ID&lt;/th&gt;&lt;td&gt;H2678-20260825-02&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;호선 / 엔진&lt;/th&gt;&lt;td&gt;H2678 / ME 6G70ME-C&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;시험 수행일시&lt;/th&gt;&lt;td&gt;2026-08-25 14:32&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;작업자&lt;/th&gt;&lt;td&gt;홍길동&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;장비 세트&lt;/th&gt;&lt;td&gt;SET-014&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;통신 주기&lt;/th&gt;&lt;td&gt;1초&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
           &lt;p class=&quot;pdf-page-number&quot;&gt;1 / 6&lt;/p&gt;
         &lt;/article&gt;
         &lt;article class=&quot;pdf-page&quot; data-pdf-preview-page=&quot;1&quot; aria-label=&quot;PDF 2페이지 종합 판정&quot;&gt;
@@ -1675,6 +1850,9 @@ html&gt;body{padding:0}&lt;/style&gt;
   &lt;script&gt;
     (() =&gt; {
       const root = document.getElementById(&#x27;jackup-wireframe&#x27;);
+      const setupBearingPanel = root.querySelector(&#x27;.setup-bearing-panel&#x27;);
+      const setupConditionsPanel = root.querySelector(&#x27;.setup-conditions-panel&#x27;);
+      setupConditionsPanel.parentElement.insertBefore(setupBearingPanel, setupConditionsPanel);
       const buttons = [...root.querySelectorAll(&#x27;[data-screen]&#x27;)];
       const panels = [...root.querySelectorAll(&#x27;[data-panel]&#x27;)];
       const reportTabs = [...root.querySelectorAll(&#x27;[data-report-tab]&#x27;)];
@@ -1685,6 +1863,16 @@ html&gt;body{padding:0}&lt;/style&gt;
       const historyContextDetail = root.querySelector(&#x27;#history-context-detail&#x27;);
       const dataPanel = root.querySelector(&#x27;[data-panel=&quot;data&quot;]&#x27;);
       const dataEditActions = [...dataPanel.querySelectorAll(&#x27;.data-edit-action&#x27;)];
+      const alarmRows = [...root.querySelectorAll(&#x27;[data-alarm-row]&#x27;)];
+      const alarmLevelFilter = root.querySelector(&#x27;#alarm-level-filter&#x27;);
+      const alarmStatusFilter = root.querySelector(&#x27;#alarm-status-filter&#x27;);
+      const alarmDeviceFilter = root.querySelector(&#x27;#alarm-device-filter&#x27;);
+      const alarmFilterStatus = root.querySelector(&#x27;#alarm-filter-status&#x27;);
+      const criticalAlarmCount = root.querySelector(&#x27;#critical-alarm-count&#x27;);
+      const alertAlarmCount = root.querySelector(&#x27;#alert-alarm-count&#x27;);
+      const warningAlarmCount = root.querySelector(&#x27;#warning-alarm-count&#x27;);
+      const safetyStopButton = root.querySelector(&#x27;#safety-stop-button&#x27;);
+      const alarmSafetyState = root.querySelector(&#x27;#alarm-safety-state&#x27;);
       const newTestButton = root.querySelector(&#x27;#new-test-button&#x27;);
       const setupCompleteButton = root.querySelector(&#x27;#setup-complete-button&#x27;);
       const startBearingButton = root.querySelector(&#x27;#start-bearing-button&#x27;);
@@ -1728,8 +1916,20 @@ html&gt;body{padding:0}&lt;/style&gt;
       const selectLiftingRange = root.querySelector(&#x27;#select-lifting-range&#x27;);
       const selectLoweringRange = root.querySelector(&#x27;#select-lowering-range&#x27;);
       const analysisRerun = root.querySelector(&#x27;#analysis-rerun&#x27;);
+      const applyAnalysisResult = root.querySelector(&#x27;#apply-analysis-result&#x27;);
+      const restoreAnalysisAuto = root.querySelector(&#x27;#restore-analysis-auto&#x27;);
       const analysisRangeStatus = root.querySelector(&#x27;#analysis-range-status&#x27;);
       const analysisTouchTarget = root.querySelector(&#x27;#analysis-touch-target&#x27;);
+      const analysisFinalReaction = root.querySelector(&#x27;#analysis-final-reaction&#x27;);
+      const analysisErrorRate = root.querySelector(&#x27;#analysis-error-rate&#x27;);
+      const slopeLineLifting = root.querySelector(&#x27;#slope-line-lifting&#x27;);
+      const slopeLineLowering = root.querySelector(&#x27;#slope-line-lowering&#x27;);
+      const meanAnalysisLine = root.querySelector(&#x27;#mean-analysis-line&#x27;);
+      const slopeAdjustHandles = [...root.querySelectorAll(&#x27;.slope-adjust-handle&#x27;)];
+      const barReadingBody = root.querySelector(&#x27;#bar-reading-body&#x27;);
+      const barReadingCount = root.querySelector(&#x27;#bar-reading-count&#x27;);
+      const barReadingStatus = root.querySelector(&#x27;#bar-reading-status&#x27;);
+      const addBarReading = root.querySelector(&#x27;#add-bar-reading&#x27;);
       const analysisLiftingRange = root.querySelector(&#x27;#analysis-lifting-range&#x27;);
       const analysisLiftingDisplacement = root.querySelector(&#x27;#analysis-lifting-displacement&#x27;);
       const analysisLoweringRange = root.querySelector(&#x27;#analysis-lowering-range&#x27;);
@@ -1743,6 +1943,33 @@ html&gt;body{padding:0}&lt;/style&gt;
       const correctionHistoryBody = root.querySelector(&#x27;#correction-history-body&#x27;);
       const openLiveGraph = root.querySelector(&#x27;#open-live-graph&#x27;);
       const openAnalysisGraph = root.querySelector(&#x27;#open-analysis-graph&#x27;);
+      const openSagGraph = root.querySelector(&#x27;#open-sag-graph&#x27;);
+      const sagPlot = root.querySelector(&#x27;#sag-plot&#x27;);
+      const sagInputs = [...root.querySelectorAll(&#x27;[data-sag-input]&#x27;)];
+      const sagLimitMax = root.querySelector(&#x27;#sag-limit-max&#x27;);
+      const sagNominal = root.querySelector(&#x27;#sag-nominal&#x27;);
+      const sagLimitMin = root.querySelector(&#x27;#sag-limit-min&#x27;);
+      const sagExhaust = root.querySelector(&#x27;#sag-exhaust&#x27;);
+      const sagMan = root.querySelector(&#x27;#sag-man&#x27;);
+      const sagPoints = root.querySelector(&#x27;#sag-points&#x27;);
+      const sagDeviationCells = {
+        exhaust: [...root.querySelectorAll(&#x27;[data-sag-deviation=&quot;exhaust&quot;]&#x27;)],
+        man: [...root.querySelectorAll(&#x27;[data-sag-deviation=&quot;man&quot;]&#x27;)]
+      };
+      const sagVerticalCells = {
+        exhaust: [...root.querySelectorAll(&#x27;[data-sag-vertical=&quot;exhaust&quot;]&#x27;)],
+        man: [...root.querySelectorAll(&#x27;[data-sag-vertical=&quot;man&quot;]&#x27;)]
+      };
+      const sagDeviationResults = {
+        exhaust: root.querySelector(&#x27;#sag-deviation-result-exhaust&#x27;),
+        man: root.querySelector(&#x27;#sag-deviation-result-man&#x27;)
+      };
+      const sagVerticalResults = {
+        exhaust: root.querySelector(&#x27;#sag-vertical-result-exhaust&#x27;),
+        man: root.querySelector(&#x27;#sag-vertical-result-man&#x27;)
+      };
+      const sagCurveCells = Object.fromEntries([&#x27;maximum&#x27;, &#x27;nominal&#x27;, &#x27;minimum&#x27;, &#x27;exhaust&#x27;, &#x27;man&#x27;].map((name) =&gt; [name, [...root.querySelectorAll(`[data-sag-curve=&quot;${name}&quot;]`)]]));
+      const sagCalcStatus = root.querySelector(&#x27;#sag-calc-status&#x27;);
       const graphFullscreen = root.querySelector(&#x27;#graph-fullscreen&#x27;);
       const graphFullscreenTitle = root.querySelector(&#x27;#graph-fullscreen-title&#x27;);
       const graphFullscreenBody = root.querySelector(&#x27;#graph-fullscreen-body&#x27;);
@@ -1863,11 +2090,81 @@ html&gt;body{padding:0}&lt;/style&gt;
         liveSampleIndex = (liveSampleIndex + 1) % liveSamples.length;
         updateLiveSample(liveSamples[liveSampleIndex]);
       }, 1000);
-      const helpTargets = [...root.querySelectorAll(&#x27;[data-tooltip], [data-help]&#x27;)];
+      const sagPianoWire = [0, -0.185399774, -0.296639638, -0.333719593, -0.296639638, -0.185399774, 0];
+      const sagMaximum = [0.10, 0.03, -0.02, -0.03, -0.02, 0.03, 0.10];
+      const sagPreferred = [0, -0.07, -0.12, -0.13, -0.12, -0.07, 0];
+      const sagMinimum = [-0.10, -0.17, -0.22, -0.23, -0.22, -0.17, -0.10];
+      const sagSvgNamespace = &#x27;http://www.w3.org/2000/svg&#x27;;
+      const sagX = (index) =&gt; 64 + index * ((760 - 64) / 6);
+      const sagY = (value) =&gt; 30 + ((0.10 - value) / 0.42) * (254 - 30);
+      const sagPath = (values) =&gt; values.map((value, index) =&gt; `${index === 0 ? &#x27;M&#x27; : &#x27;L&#x27;}${sagX(index).toFixed(1)} ${sagY(value).toFixed(1)}`).join(&#x27; &#x27;);
+      const updateSagJudgement = (cells, checks, resultNode) =&gt; {
+        checks.forEach((passed, index) =&gt; {
+          const cell = cells[index];
+          cell.textContent = passed ? &#x27;OK&#x27; : &#x27;OUT&#x27;;
+          cell.classList.toggle(&#x27;good&#x27;, passed);
+          cell.classList.toggle(&#x27;bad&#x27;, !passed);
+        });
+        const allOkay = checks.every(Boolean);
+        resultNode.textContent = allOkay ? &#x27;Inside limit&#x27; : &#x27;Outside limit&#x27;;
+        resultNode.classList.toggle(&#x27;good&#x27;, allOkay);
+        resultNode.classList.toggle(&#x27;bad&#x27;, !allOkay);
+        return allOkay;
+      };
+      const updateSagCurveRow = (cells, values) =&gt; {
+        cells.forEach((cell, index) =&gt; { cell.textContent = values[index].toFixed(2); });
+      };
+      const updateSagCalculation = () =&gt; {
+        const readSide = (side) =&gt; sagInputs.filter((input) =&gt; input.dataset.side === side).map((input) =&gt; {
+          const value = Number(input.value);
+          return Number.isFinite(value) ? value : 0;
+        });
+        const exhaustMeasurements = readSide(&#x27;exhaust&#x27;);
+        const manMeasurements = readSide(&#x27;man&#x27;);
+        const maximumCurve = sagPianoWire.map((value, index) =&gt; value - sagMaximum[index]);
+        const nominalCurve = sagPianoWire.map((value, index) =&gt; value - sagPreferred[index]);
+        const minimumCurve = sagPianoWire.map((value, index) =&gt; value - sagMinimum[index]);
+        const exhaustCurve = sagPianoWire.map((value, index) =&gt; value - exhaustMeasurements[index]);
+        const manCurve = sagPianoWire.map((value, index) =&gt; value - manMeasurements[index]);
+        sagLimitMax.setAttribute(&#x27;d&#x27;, sagPath(maximumCurve));
+        sagNominal.setAttribute(&#x27;d&#x27;, sagPath(nominalCurve));
+        sagLimitMin.setAttribute(&#x27;d&#x27;, sagPath(minimumCurve));
+        sagExhaust.setAttribute(&#x27;d&#x27;, sagPath(exhaustCurve));
+        sagMan.setAttribute(&#x27;d&#x27;, sagPath(manCurve));
+        updateSagCurveRow(sagCurveCells.maximum, maximumCurve);
+        updateSagCurveRow(sagCurveCells.nominal, nominalCurve);
+        updateSagCurveRow(sagCurveCells.minimum, minimumCurve);
+        updateSagCurveRow(sagCurveCells.exhaust, exhaustCurve);
+        updateSagCurveRow(sagCurveCells.man, manCurve);
+        sagPoints.replaceChildren();
+        [
+          { values: exhaustCurve, className: &#x27;sag-exhaust-point&#x27; },
+          { values: manCurve, className: &#x27;sag-man-point&#x27; }
+        ].forEach((series) =&gt; series.values.forEach((value, index) =&gt; {
+          const point = document.createElementNS(sagSvgNamespace, &#x27;circle&#x27;);
+          point.setAttribute(&#x27;cx&#x27;, sagX(index).toFixed(1));
+          point.setAttribute(&#x27;cy&#x27;, sagY(value).toFixed(1));
+          point.setAttribute(&#x27;r&#x27;, &#x27;4&#x27;);
+          point.setAttribute(&#x27;class&#x27;, series.className);
+          sagPoints.appendChild(point);
+        }));
+        const rangeChecks = (values) =&gt; values.map((value, index) =&gt; value &lt;= sagMaximum[index] + 0.000001 &amp;&amp; value &gt;= sagMinimum[index] - 0.000001);
+        const verticalChecks = (values) =&gt; values.slice(0, -1).map((value, index) =&gt; Math.abs(values[index + 1] - value) &lt;= 0.100001);
+        const rangeExhaustOk = updateSagJudgement(sagDeviationCells.exhaust, rangeChecks(exhaustMeasurements), sagDeviationResults.exhaust);
+        const rangeManOk = updateSagJudgement(sagDeviationCells.man, rangeChecks(manMeasurements), sagDeviationResults.man);
+        const verticalExhaustOk = updateSagJudgement(sagVerticalCells.exhaust, verticalChecks(exhaustCurve), sagVerticalResults.exhaust);
+        const verticalManOk = updateSagJudgement(sagVerticalCells.man, verticalChecks(manCurve), sagVerticalResults.man);
+        const allOkay = rangeExhaustOk &amp;&amp; rangeManOk &amp;&amp; verticalExhaustOk &amp;&amp; verticalManOk;
+        sagCalcStatus.textContent = `측정값 14개 적용 · ${allOkay ? &#x27;전체 판정 OK&#x27; : &#x27;OUT 항목 확인 필요&#x27;} · 베드플레이트 곡선 자동 갱신`;
+        sagPlot.setAttribute(&#x27;aria-label&#x27;, `SAG 계산 그래프, 배기측 ${rangeExhaustOk &amp;&amp; verticalExhaustOk ? &#x27;OK&#x27; : &#x27;OUT&#x27;}, 조작측 ${rangeManOk &amp;&amp; verticalManOk ? &#x27;OK&#x27; : &#x27;OUT&#x27;}`);
+      };
+      sagInputs.forEach((input) =&gt; input.addEventListener(&#x27;input&#x27;, updateSagCalculation));
+      updateSagCalculation();
+      const helpTargets = [...root.querySelectorAll(&#x27;[data-jw-tooltip], [data-help]&#x27;)];
       const hideTooltip = () =&gt; guideTooltip.classList.remove(&#x27;visible&#x27;);
       const showTooltip = (target) =&gt; {
         if (target.hasAttribute(&#x27;data-help&#x27;) &amp;&amp; !root.classList.contains(&#x27;guide-on&#x27;)) return;
-        const message = target.getAttribute(&#x27;data-tooltip&#x27;) || target.getAttribute(&#x27;data-help&#x27;);
+        const message = target.getAttribute(&#x27;data-jw-tooltip&#x27;) || target.getAttribute(&#x27;data-help&#x27;);
         if (!message) return;
         guideTooltip.textContent = message;
         guideTooltip.classList.add(&#x27;visible&#x27;);
@@ -1931,11 +2228,13 @@ html&gt;body{padding:0}&lt;/style&gt;
       };
       preparePlotExpandButton(root.querySelector(&#x27;#live-trend-plot&#x27;), openLiveGraph, &#x27;실시간 추세 그래프 크게 보기&#x27;);
       preparePlotExpandButton(analysisPlot, openAnalysisGraph, &#x27;분석 그래프 크게 보기&#x27;);
+      preparePlotExpandButton(sagPlot, openSagGraph, &#x27;SAG 그래프 크게 보기&#x27;);
       setTimeout(() =&gt; {
         if (window.lucide) window.lucide.createIcons({ attrs: { width: 20, height: 20 } });
       }, 0);
       openLiveGraph.addEventListener(&#x27;click&#x27;, () =&gt; showGraphFullscreen(root.querySelector(&#x27;#live-trend-plot&#x27;), &#x27;실시간 하중-변위 추세&#x27;, openLiveGraph));
       openAnalysisGraph.addEventListener(&#x27;click&#x27;, () =&gt; showGraphFullscreen(analysisPlot, &#x27;Lifting · Lowering 분석 그래프&#x27;, openAnalysisGraph));
+      openSagGraph.addEventListener(&#x27;click&#x27;, () =&gt; showGraphFullscreen(sagPlot, &#x27;SAG Bedplate Deflection&#x27;, openSagGraph));
       closeGraphFullscreen.addEventListener(&#x27;click&#x27;, exitGraphFullscreen);
       let currentPdfPage = 0;
       const showPdfPage = (index) =&gt; {
@@ -1979,7 +2278,51 @@ html&gt;body{padding:0}&lt;/style&gt;
         if (fullscreenGraphState) exitGraphFullscreen();
         buttons.forEach((item) =&gt; item.setAttribute(&#x27;aria-selected&#x27;, String(item === button)));
         panels.forEach((panel) =&gt; panel.classList.toggle(&#x27;active&#x27;, panel.dataset.panel === button.dataset.screen));
+        root.querySelector(&#x27;.main&#x27;).scrollTo({ top: 0, left: 0 });
       }));
+      const updateAlarmView = () =&gt; {
+        let visibleCount = 0;
+        alarmRows.forEach((row) =&gt; {
+          const levelMatch = alarmLevelFilter.value === &#x27;all&#x27; || row.dataset.level === alarmLevelFilter.value;
+          const statusMatch = alarmStatusFilter.value === &#x27;all&#x27; || row.dataset.status === alarmStatusFilter.value;
+          const deviceMatch = alarmDeviceFilter.value === &#x27;all&#x27; || row.dataset.device === alarmDeviceFilter.value || (alarmDeviceFilter.value === &#x27;set-014&#x27; &amp;&amp; row.textContent.includes(&#x27;SET-014&#x27;));
+          const visible = levelMatch &amp;&amp; statusMatch &amp;&amp; deviceMatch;
+          row.hidden = !visible;
+          if (visible) visibleCount += 1;
+        });
+        const openCount = (level) =&gt; alarmRows.filter((row) =&gt; row.dataset.level === level &amp;&amp; row.dataset.status === &#x27;open&#x27;).length;
+        criticalAlarmCount.textContent = String(openCount(&#x27;critical&#x27;));
+        alertAlarmCount.textContent = String(openCount(&#x27;alert&#x27;));
+        warningAlarmCount.textContent = String(openCount(&#x27;warning&#x27;));
+        alarmFilterStatus.textContent = `조건에 맞는 알람 ${visibleCount}건 표시`;
+      };
+      [alarmLevelFilter, alarmStatusFilter, alarmDeviceFilter].forEach((control) =&gt; control.addEventListener(&#x27;change&#x27;, updateAlarmView));
+      alarmRows.forEach((row) =&gt; {
+        const ackButton = row.querySelector(&#x27;[data-alarm-ack]&#x27;);
+        ackButton.addEventListener(&#x27;click&#x27;, () =&gt; {
+          row.dataset.status = &#x27;acked&#x27;;
+          const state = row.querySelector(&#x27;[data-alarm-state]&#x27;);
+          state.className = &#x27;good&#x27;;
+          state.innerHTML = &#x27;확인 완료&lt;br&gt;&lt;span class=&quot;sub&quot;&gt;홍길동 · 방금&lt;/span&gt;&#x27;;
+          ackButton.textContent = &#x27;완료&#x27;;
+          ackButton.disabled = true;
+          updateAlarmView();
+        });
+      });
+      safetyStopButton.addEventListener(&#x27;click&#x27;, () =&gt; {
+        const requested = safetyStopButton.dataset.requested === &#x27;true&#x27;;
+        if (requested) {
+          safetyStopButton.dataset.requested = &#x27;false&#x27;;
+          safetyStopButton.textContent = &#x27;Safety Stop&#x27;;
+          alarmSafetyState.classList.remove(&#x27;warn&#x27;);
+          alarmSafetyState.textContent = &#x27;Safety Stop 대기 · 실제 설비 정지 연동 범위는 킥오프 확인 필요&#x27;;
+          return;
+        }
+        safetyStopButton.dataset.requested = &#x27;true&#x27;;
+        safetyStopButton.textContent = &#x27;요청 완료&#x27;;
+        alarmSafetyState.classList.add(&#x27;warn&#x27;);
+        alarmSafetyState.textContent = &#x27;Safety Stop 요청 기록 · 측정 데이터 수집 일시정지 · 실제 설비 정지 연동은 미확정&#x27;;
+      });
       reportTabs.forEach((tab) =&gt; tab.addEventListener(&#x27;click&#x27;, () =&gt; {
         reportTabs.forEach((item) =&gt; item.setAttribute(&#x27;aria-selected&#x27;, String(item === tab)));
         reportTabPanels.forEach((panel) =&gt; panel.classList.toggle(&#x27;active&#x27;, panel.dataset.reportPanel === tab.dataset.reportTab));
@@ -1988,7 +2331,7 @@ html&gt;body{padding:0}&lt;/style&gt;
         const isCurrent = link.dataset.current === &#x27;true&#x27;;
         historyContext.classList.toggle(&#x27;readonly&#x27;, !isCurrent);
         historyContextLabel.textContent = isCurrent ? &#x27;현재 시험&#x27; : &#x27;과거 시험 · 읽기 전용&#x27;;
-        historyContextDetail.textContent = `${link.dataset.testId} · 시험일 ${link.dataset.testDate} · 작업자 ${link.dataset.worker} · 세트 이름 ${link.dataset.setName} · ${link.dataset.setModules} · ${link.dataset.round} · ${link.dataset.status}`;
+        historyContextDetail.textContent = `${link.dataset.testId} · 시험일 ${link.dataset.testDate} · 작업자 ${link.dataset.worker} · 세트 이름 ${link.dataset.setName} · ${link.dataset.setModules} · 통신 주기 1초 · ${link.dataset.round} · ${link.dataset.status}`;
         dataPanel.querySelectorAll(&#x27;input, textarea&#x27;).forEach((control) =&gt; {
           control.disabled = !isCurrent;
         });
@@ -2066,7 +2409,7 @@ html&gt;body{padding:0}&lt;/style&gt;
         selectedPressureMeta.textContent = pressure.dataset.meta;
         selectedDisplacementModule.textContent = displacement.value;
         selectedDisplacementMeta.textContent = displacement.dataset.meta;
-        deviceSetDetail.textContent = `${pressure.value} + ${displacement.value}`;
+        deviceSetDetail.textContent = `${pressure.value} + ${displacement.value} · 통신 주기 1초`;
         deviceSetStatus.className = &#x27;status warn&#x27;;
         deviceSetStatus.innerHTML = &#x27;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;압력 1개 · 변위 1개 선택 완료 / 저장 전&#x27;;
         saveDeviceSet.textContent = &#x27;이 구성으로 세트 저장&#x27;;
@@ -2085,7 +2428,7 @@ html&gt;body{padding:0}&lt;/style&gt;
         deviceSetName.value = setName;
         setupDeviceSetId.value = `${setName} / ${pressure.value} + ${displacement.value}`;
         deviceSetStatus.className = &#x27;status good&#x27;;
-        deviceSetStatus.innerHTML = `&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;${setName} 저장됨 · 2/2 연결`;
+        deviceSetStatus.innerHTML = `&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;${setName} 저장됨 · 2/2 연결 · 통신 1초`;
         saveDeviceSet.textContent = &#x27;세트 저장 완료&#x27;;
       });
       let pendingFolderPath = storageLocation.value;
@@ -2124,8 +2467,8 @@ html&gt;body{padding:0}&lt;/style&gt;
       };
       reactionTolerance.addEventListener(&#x27;change&#x27;, updateAcceptanceCriteria);
       const analysisStepLabel = (step) =&gt; `Step ${String(step).padStart(2, &#x27;0&#x27;)}`;
-      const liftingCurvePoints = [[78.5, 211], [85.6, 191], [109, 171.4], [163, 147.1], [233.5, 124.6], [313.3, 100.3], [386.1, 76.4], [437.7, 50.4]];
-      const loweringCurvePoints = [[69.1, 211], [76.2, 190.1], [95, 170.1], [141.9, 145.9], [210, 123.3], [289.8, 99], [360.3, 74.7], [404.9, 50.4]];
+      const liftingCurvePoints = [[48, 214], [102, 214], [156, 214], [210, 214], [253.2, 214], [274.8, 214], [296.4, 207.9], [318, 195.6], [339.6, 177.2], [361.2, 152.7], [382.8, 134.3], [404.4, 109.7], [426, 85.2], [447.6, 54.5]];
+      const loweringCurvePoints = [[48, 214], [210, 214], [274.8, 183.3], [296.4, 152.7], [318, 134.3], [339.6, 115.9], [361.2, 91.3], [382.8, 72.9], [404.4, 66.8], [426, 54.5]];
       const analysisCurves = {
         lifting: {
           label: &#x27;Lifting&#x27;, shortLabel: &#x27;L&#x27;, button: selectLiftingRange,
@@ -2135,8 +2478,8 @@ html&gt;body{padding:0}&lt;/style&gt;
           startLabel: root.querySelector(&#x27;#lifting-start-label&#x27;), endLabel: root.querySelector(&#x27;#lifting-end-label&#x27;),
           rangeInput: analysisLiftingRange, displacementInput: analysisLiftingDisplacement,
           curvePoints: liftingCurvePoints,
-          start: { x: 120.8, y: 164.2, step: 4, displacement: 0.17 },
-          end: { x: 395.5, y: 67.9, step: 10, displacement: 0.80 }
+          start: { x: 246.6, y: 214, step: 4, displacement: 0.17 },
+          end: { x: 397.4, y: 54.5, step: 10, displacement: 0.80 }
         },
         lowering: {
           label: &#x27;Lowering&#x27;, shortLabel: &#x27;D&#x27;, button: selectLoweringRange,
@@ -2146,8 +2489,8 @@ html&gt;body{padding:0}&lt;/style&gt;
           startLabel: root.querySelector(&#x27;#lowering-start-label&#x27;), endLabel: root.querySelector(&#x27;#lowering-end-label&#x27;),
           rangeInput: analysisLoweringRange, displacementInput: analysisLoweringDisplacement,
           curvePoints: loweringCurvePoints,
-          start: { x: 360.3, y: 74.7, step: 3, displacement: 0.72 },
-          end: { x: 95, y: 170.1, step: 9, displacement: 0.11 }
+          start: { x: 456.5, y: 54.5, step: 3, displacement: 0.72 },
+          end: { x: 304.2, y: 214, step: 9, displacement: 0.11 }
         }
       };
       let activeAnalysisCurve = null;
@@ -2162,8 +2505,8 @@ html&gt;body{padding:0}&lt;/style&gt;
       };
       const stepForCurveX = (curveKey, x) =&gt; {
         const rawStep = curveKey === &#x27;lifting&#x27;
-          ? 4 + ((x - 120.8) * 6) / 274.7
-          : 3 + ((360.3 - x) * 6) / 265.3;
+          ? 4 + ((x - 246.6) * 6) / 150.8
+          : 3 + ((456.5 - x) * 6) / 152.3;
         return Math.max(1, Math.min(12, Math.round(rawStep)));
       };
       const pointFromTouch = (event, curveKey) =&gt; {
@@ -2171,7 +2514,7 @@ html&gt;body{padding:0}&lt;/style&gt;
         svgPoint.x = event.clientX;
         svgPoint.y = event.clientY;
         const localPoint = svgPoint.matrixTransform(analysisPlot.getScreenCTM().inverse());
-        const x = Math.max(69.1, Math.min(437.7, localPoint.x));
+        const x = Math.max(48, Math.min(480, localPoint.x));
         const y = interpolateCurveY(analysisCurves[curveKey].curvePoints, x);
         const step = stepForCurveX(curveKey, x);
         const displacement = Math.max(0, Math.min(1, (x - 48) / 432));
@@ -2223,6 +2566,165 @@ html&gt;body{padding:0}&lt;/style&gt;
         analysisHasManualChange = true;
         analysisGenerationMethod.textContent = &#x27;분석선 자동 추천 + 작업자 조정&#x27;;
       };
+      const slopeDefaults = {
+        lifting: { start: { x: 246.6, y: 214 }, end: { x: 397.4, y: 54.5 } },
+        lowering: { start: { x: 304.2, y: 214 }, end: { x: 456.5, y: 54.5 } }
+      };
+      const slopeStates = {
+        lifting: { start: { ...slopeDefaults.lifting.start }, end: { ...slopeDefaults.lifting.end } },
+        lowering: { start: { ...slopeDefaults.lowering.start }, end: { ...slopeDefaults.lowering.end } }
+      };
+      const slopeLineElements = { lifting: slopeLineLifting, lowering: slopeLineLowering };
+      const xToBar = (x) =&gt; ((x - 48) / 432) * 800;
+      const updateSlopeResults = () =&gt; {
+        Object.entries(slopeStates).forEach(([key, state]) =&gt; {
+          const line = slopeLineElements[key];
+          line.setAttribute(&#x27;x1&#x27;, state.start.x);
+          line.setAttribute(&#x27;y1&#x27;, state.start.y);
+          line.setAttribute(&#x27;x2&#x27;, state.end.x);
+          line.setAttribute(&#x27;y2&#x27;, state.end.y);
+          slopeAdjustHandles.filter((handle) =&gt; handle.dataset.slopeLine === key).forEach((handle) =&gt; {
+            const point = state[handle.dataset.slopeEnd];
+            handle.setAttribute(&#x27;cx&#x27;, point.x);
+            handle.setAttribute(&#x27;cy&#x27;, point.y);
+          });
+        });
+        const meanStartX = (slopeStates.lifting.start.x + slopeStates.lowering.start.x) / 2;
+        const meanEndX = (slopeStates.lifting.end.x + slopeStates.lowering.end.x) / 2;
+        meanAnalysisLine.setAttribute(&#x27;x1&#x27;, meanStartX);
+        meanAnalysisLine.setAttribute(&#x27;y1&#x27;, 214);
+        meanAnalysisLine.setAttribute(&#x27;x2&#x27;, meanEndX);
+        meanAnalysisLine.setAttribute(&#x27;y2&#x27;, 54.5);
+        const finalReaction = xToBar(meanStartX) * 1.3851;
+        const errorRate = ((finalReaction - 600) / 600) * 100;
+        analysisFinalReaction.textContent = `${finalReaction.toFixed(1)} kN`;
+        analysisErrorRate.textContent = `${errorRate &gt;= 0 ? &#x27;+&#x27; : &#x27;&#x27;}${errorRate.toFixed(1)}%`;
+        analysisErrorRate.classList.remove(&#x27;good&#x27;, &#x27;warn&#x27;, &#x27;bad&#x27;);
+        analysisErrorRate.classList.add(Math.abs(errorRate) &lt;= 5 ? &#x27;good&#x27; : Math.abs(errorRate) &lt;= 10 ? &#x27;warn&#x27; : &#x27;bad&#x27;);
+      };
+      let activeSlopeDrag = null;
+      slopeAdjustHandles.forEach((handle) =&gt; {
+        handle.addEventListener(&#x27;pointerdown&#x27;, (event) =&gt; {
+          if (analysisPlot.classList.contains(&#x27;is-adjusting&#x27;)) return;
+          event.preventDefault();
+          activeSlopeDrag = { lineKey: handle.dataset.slopeLine, endKey: handle.dataset.slopeEnd, pointerId: event.pointerId, handle };
+          handle.setPointerCapture(event.pointerId);
+          analysisRangeStatus.textContent = `${handle.dataset.slopeLine === &#x27;lifting&#x27; ? &#x27;Lifting&#x27; : &#x27;Lowering&#x27;} 분석선 끝점을 좌우로 움직여 기울기를 조정합니다.`;
+        });
+        handle.addEventListener(&#x27;pointermove&#x27;, (event) =&gt; {
+          if (!activeSlopeDrag || activeSlopeDrag.pointerId !== event.pointerId || activeSlopeDrag.handle !== handle) return;
+          const svgPoint = analysisPlot.createSVGPoint();
+          svgPoint.x = event.clientX;
+          svgPoint.y = event.clientY;
+          const localPoint = svgPoint.matrixTransform(analysisPlot.getScreenCTM().inverse());
+          const state = slopeStates[activeSlopeDrag.lineKey];
+          const minX = activeSlopeDrag.endKey === &#x27;start&#x27; ? 48 : state.start.x + 36;
+          const maxX = activeSlopeDrag.endKey === &#x27;start&#x27; ? state.end.x - 36 : 480;
+          state[activeSlopeDrag.endKey].x = Math.max(minX, Math.min(maxX, localPoint.x));
+          updateSlopeResults();
+        });
+        const endSlopeDrag = (event) =&gt; {
+          if (!activeSlopeDrag || activeSlopeDrag.pointerId !== event.pointerId || activeSlopeDrag.handle !== handle) return;
+          markManualAnalysis();
+          const label = activeSlopeDrag.lineKey === &#x27;lifting&#x27; ? &#x27;Lifting&#x27; : &#x27;Lowering&#x27;;
+          activeSlopeDrag = null;
+          analysisRangeStatus.textContent = `${label} 분석선 기울기 조정 완료 · 재분석하면 최종 반력과 오차율에 반영됩니다.`;
+        };
+        handle.addEventListener(&#x27;pointerup&#x27;, endSlopeDrag);
+        handle.addEventListener(&#x27;pointercancel&#x27;, endSlopeDrag);
+      });
+      restoreAnalysisAuto.addEventListener(&#x27;click&#x27;, () =&gt; {
+        Object.keys(slopeStates).forEach((key) =&gt; {
+          slopeStates[key].start = { ...slopeDefaults[key].start };
+          slopeStates[key].end = { ...slopeDefaults[key].end };
+        });
+        analysisCurves.lifting.start = { x: 246.6, y: 214, step: 4, displacement: 0.17 };
+        analysisCurves.lifting.end = { x: 397.4, y: 54.5, step: 10, displacement: 0.80 };
+        analysisCurves.lowering.start = { x: 456.5, y: 54.5, step: 3, displacement: 0.72 };
+        analysisCurves.lowering.end = { x: 304.2, y: 214, step: 9, displacement: 0.11 };
+        Object.keys(analysisCurves).forEach((key) =&gt; {
+          updateCurveSelection(key);
+          analysisCurves[key].group.classList.remove(&#x27;is-visible&#x27;);
+        });
+        analysisReferenceDisplacement.value = &#x27;0.60&#x27;;
+        activeAnalysisCurve = null;
+        analysisSelectionPhase = -1;
+        analysisPlot.classList.remove(&#x27;is-adjusting&#x27;);
+        resetCurveButtons();
+        updateSlopeResults();
+        analysisHasManualChange = false;
+        analysisGenerationMethod.textContent = &#x27;분석선 자동 추천&#x27;;
+        analysisRangeStatus.textContent = &#x27;자동 추천 구간과 분석선 기울기로 복원했습니다.&#x27;;
+      });
+      updateSlopeResults();
+      const updateBarReadingRows = () =&gt; {
+        const rows = [...barReadingBody.rows];
+        const labels = [&#x27;Lifting Bar&#x27;, &#x27;자동 기록된 Lifting 변위&#x27;, &#x27;Lowering Bar&#x27;, &#x27;자동 기록된 Lowering 변위&#x27;];
+        rows.forEach((row, rowIndex) =&gt; {
+          [...row.querySelectorAll(&#x27;input&#x27;)].forEach((input, inputIndex) =&gt; {
+            input.setAttribute(&#x27;aria-label&#x27;, `${labels[inputIndex]} ${rowIndex + 1}행`);
+          });
+        });
+        barReadingCount.textContent = `${rows.length}개 행`;
+      };
+      const createBarReadingRow = () =&gt; {
+        const row = document.createElement(&#x27;tr&#x27;);
+        [
+          { step: &#x27;1&#x27;, label: &#x27;Lifting Bar&#x27;, automatic: false },
+          { step: &#x27;0.1&#x27;, label: &#x27;자동 기록된 Lifting 변위&#x27;, automatic: true },
+          { step: &#x27;1&#x27;, label: &#x27;Lowering Bar&#x27;, automatic: false },
+          { step: &#x27;0.1&#x27;, label: &#x27;자동 기록된 Lowering 변위&#x27;, automatic: true }
+        ].forEach(({ step, label, automatic }) =&gt; {
+          const cell = document.createElement(&#x27;td&#x27;);
+          const input = document.createElement(&#x27;input&#x27;);
+          input.type = &#x27;number&#x27;;
+          input.step = step;
+          if (automatic) {
+            input.readOnly = true;
+            input.placeholder = &#x27;자동 기록&#x27;;
+          } else {
+            input.min = &#x27;0&#x27;;
+            input.inputMode = &#x27;numeric&#x27;;
+            input.value = &#x27;0&#x27;;
+          }
+          input.setAttribute(&#x27;aria-label&#x27;, label);
+          cell.appendChild(input);
+          row.appendChild(cell);
+        });
+        const actionCell = document.createElement(&#x27;td&#x27;);
+        const removeButton = document.createElement(&#x27;button&#x27;);
+        removeButton.type = &#x27;button&#x27;;
+        removeButton.className = &#x27;action bar-row-delete&#x27;;
+        removeButton.textContent = &#x27;삭제&#x27;;
+        actionCell.appendChild(removeButton);
+        row.appendChild(actionCell);
+        return row;
+      };
+      addBarReading.addEventListener(&#x27;click&#x27;, () =&gt; {
+        const row = createBarReadingRow();
+        barReadingBody.appendChild(row);
+        updateBarReadingRows();
+        markManualAnalysis();
+        barReadingStatus.textContent = `Bar 설정 행을 추가했습니다. L·D 값은 측정 중 해당 Bar 도달 시 자동 기록됩니다.`;
+        row.querySelector(&#x27;input&#x27;).focus();
+      });
+      barReadingBody.addEventListener(&#x27;click&#x27;, (event) =&gt; {
+        const removeButton = event.target.closest(&#x27;.bar-row-delete&#x27;);
+        if (!removeButton) return;
+        removeButton.closest(&#x27;tr&#x27;).remove();
+        updateBarReadingRows();
+        markManualAnalysis();
+        barReadingStatus.textContent = barReadingBody.rows.length
+          ? `행을 삭제했습니다. 현재 ${barReadingBody.rows.length}개 행이며 재분석 시 반영됩니다.`
+          : &#x27;모든 행을 삭제했습니다. 측정값 입력이 필요하면 행 추가를 누르세요.&#x27;;
+      });
+      barReadingBody.addEventListener(&#x27;input&#x27;, (event) =&gt; {
+        if (event.target.readOnly) return;
+        if (event.target.value !== &#x27;&#x27; &amp;&amp; Number(event.target.value) &lt; 0) event.target.value = &#x27;0&#x27;;
+        markManualAnalysis();
+        barReadingStatus.textContent = &#x27;Bar 설정은 0 이상만 입력할 수 있습니다. 해당 압력 도달 시 변위값이 자동 기록됩니다.&#x27;;
+      });
+      updateBarReadingRows();
       const startCurveSelection = (curveKey) =&gt; {
         if (activeAnalysisCurve === curveKey &amp;&amp; analysisPlot.classList.contains(&#x27;is-adjusting&#x27;)) {
           activeAnalysisCurve = null;
@@ -2309,6 +2811,47 @@ html&gt;body{padding:0}&lt;/style&gt;
         correctionHistoryBody.appendChild(row);
         analysisHasManualChange = false;
         analysisRangeStatus.textContent = `재분석 및 이력 저장 완료 · ${worker} · ${reason}`;
+      });
+      applyAnalysisResult.addEventListener(&#x27;click&#x27;, () =&gt; {
+        const worker = analysisCorrectionWorker.value.trim();
+        const reason = analysisCorrectionReason.value.trim();
+        if (!worker) {
+          analysisRangeStatus.textContent = &#x27;보정 작업자를 입력해야 최종 적용할 수 있습니다.&#x27;;
+          analysisCorrectionWorker.focus();
+          return;
+        }
+        if (!reason) {
+          analysisRangeStatus.textContent = &#x27;보정 사유를 입력해야 최종 적용할 수 있습니다.&#x27;;
+          analysisCorrectionReason.focus();
+          return;
+        }
+        activeAnalysisCurve = null;
+        analysisSelectionPhase = -1;
+        analysisPlot.classList.remove(&#x27;is-adjusting&#x27;);
+        Object.values(analysisCurves).forEach((curve) =&gt; curve.group.classList.add(&#x27;is-visible&#x27;));
+        resetCurveButtons();
+        const now = new Date();
+        const padTime = (value) =&gt; String(value).padStart(2, &#x27;0&#x27;);
+        const time = `${padTime(now.getHours())}:${padTime(now.getMinutes())}:${padTime(now.getSeconds())}`;
+        const row = document.createElement(&#x27;tr&#x27;);
+        const values = [
+          time,
+          worker,
+          &#x27;최종 적용&#x27;,
+          `L ${analysisLiftingRange.value.replaceAll(&#x27;Step &#x27;, &#x27;&#x27;)} / D ${analysisLoweringRange.value.replaceAll(&#x27;Step &#x27;, &#x27;&#x27;)} / 기준 ${analysisReferenceDisplacement.value} mm`,
+          reason
+        ];
+        values.forEach((value) =&gt; {
+          const cell = document.createElement(&#x27;td&#x27;);
+          cell.textContent = value;
+          row.appendChild(cell);
+        });
+        correctionHistoryBody.appendChild(row);
+        analysisHasManualChange = false;
+        analysisRangeStatus.textContent = `최종 적용 완료 · ${worker} · 데이터 이력 반영`;
+        historyContextLabel.textContent = &#x27;최종 적용 완료&#x27;;
+        historyContextDetail.textContent = `H2678-20260825-02 · 통신 주기 1초 · ${worker} · ${time} · ${reason}`;
+        root.querySelector(&#x27;[data-screen=&quot;data&quot;]&#x27;).click();
       });
       updateExcludedRange();
       const engineTemplates = {
