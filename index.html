@@ -1498,7 +1498,7 @@ html&gt;body{padding:0}&lt;/style&gt;
               &lt;div class=&quot;field&quot; data-order=&quot;1&quot; data-help=&quot;시험을 구분하는 고유번호입니다. 호선·날짜·회차 조합으로 자동 생성한 뒤 필요 시 수정합니다.&quot;&gt;&lt;label&gt;Test ID&lt;/label&gt;&lt;input value=&quot;H2678-20260825-02&quot;&gt;&lt;/div&gt;
               &lt;div class=&quot;field&quot; data-order=&quot;2&quot; data-help=&quot;계측 대상 선박 또는 프로젝트 식별번호를 입력합니다.&quot;&gt;&lt;label&gt;프로젝트 / 호선&lt;/label&gt;&lt;input value=&quot;H2678&quot;&gt;&lt;/div&gt;
               &lt;div class=&quot;field&quot; data-order=&quot;3&quot; data-help=&quot;측정 수행자 또는 책임자를 입력하며 보정·수정 이력과 연결됩니다.&quot;&gt;&lt;label&gt;작업자&lt;/label&gt;&lt;input value=&quot;홍길동&quot;&gt;&lt;/div&gt;
-              &lt;div class=&quot;field&quot; data-order=&quot;4&quot; data-help=&quot;승인된 엔진 템플릿을 선택하면 해당 템플릿의 베어링 위치와 수량을 자동 구성합니다. 실제 축계 구성과 다른 경우 위치를 수정할 수 있습니다.&quot;&gt;&lt;label for=&quot;engine-model&quot;&gt;엔진명 / 구성 템플릿&lt;/label&gt;&lt;select id=&quot;engine-model&quot;&gt;&lt;option value=&quot;6g70&quot; selected&gt;MAN B&amp;amp;W 6G70ME-C&lt;/option&gt;&lt;option value=&quot;5g70&quot;&gt;MAN B&amp;amp;W 5G70ME-C&lt;/option&gt;&lt;option value=&quot;custom&quot;&gt;기타 · 직접 구성&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+              &lt;div class=&quot;field&quot; data-order=&quot;4&quot; data-help=&quot;선종을 선택하면 표준 베어링 수량·명칭·순서가 FWD에서 AFT 방향으로 자동 배치됩니다. 예외 구성은 아래 베어링 영역에서 수량·명칭·위치를 직접 수정할 수 있습니다.&quot;&gt;&lt;label for=&quot;ship-type&quot;&gt;선종 / 베어링 구성&lt;/label&gt;&lt;select id=&quot;ship-type&quot;&gt;&lt;option value=&quot;lngc&quot; selected&gt;LNGC · 6개&lt;/option&gt;&lt;option value=&quot;cont&quot;&gt;CONT · 6개&lt;/option&gt;&lt;option value=&quot;lpgc&quot;&gt;LPGC · 5개&lt;/option&gt;&lt;option value=&quot;vlcc&quot;&gt;VLCC · 5개&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
               &lt;div class=&quot;field&quot; data-order=&quot;5&quot; data-help=&quot;장치 연결 화면에서 저장한 압력·변위 모듈 세트와 고정 통신 주기가 자동 표시됩니다. 시험 설정에서는 임의로 변경할 수 없습니다.&quot;&gt;&lt;label for=&quot;setup-device-set-id&quot;&gt;장비 세트 ID&lt;/label&gt;&lt;input id=&quot;setup-device-set-id&quot; value=&quot;SET-014 / PRS-A-014 + DIS-B-014&quot; readonly aria-readonly=&quot;true&quot;&gt;&lt;/div&gt;
               &lt;div class=&quot;field&quot; data-order=&quot;6&quot; data-help=&quot;현재 시험의 측정 회차를 1차부터 5차까지 선택합니다.&quot;&gt;&lt;label&gt;측정 회차&lt;/label&gt;&lt;select&gt;&lt;option&gt;1차&lt;/option&gt;&lt;option selected&gt;2차&lt;/option&gt;&lt;option&gt;3차&lt;/option&gt;&lt;option&gt;4차&lt;/option&gt;&lt;option&gt;5차&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
               &lt;div class=&quot;field storage-field&quot; data-order=&quot;7&quot; data-help=&quot;태블릿 내부 저장공간에서 프로젝트 폴더를 직접 찾아 선택합니다. 선택한 위치에 원시값·최종값·리포트가 저장됩니다.&quot;&gt;&lt;label for=&quot;storage-location&quot;&gt;저장 위치&lt;/label&gt;&lt;div class=&quot;input-action&quot;&gt;&lt;input id=&quot;storage-location&quot; value=&quot;/storage/emulated/0/Jackup/H2678/Run02&quot; readonly aria-readonly=&quot;true&quot;&gt;&lt;button class=&quot;action&quot; id=&quot;browse-storage-folder&quot; type=&quot;button&quot; data-jw-tooltip=&quot;태블릿 내부 저장공간의 폴더 목록을 열어 저장 위치 선택&quot;&gt;폴더 선택&lt;/button&gt;&lt;/div&gt;&lt;span class=&quot;field-note&quot;&gt;태블릿 내부 저장공간&lt;/span&gt;&lt;/div&gt;
@@ -1518,8 +1518,8 @@ html&gt;body{padding:0}&lt;/style&gt;
             &lt;div class=&quot;panel setup-conditions-panel&quot; data-help=&quot;잭 유효면적은 압력(bar)을 하중(kN)으로 환산하는 핵심 상수입니다. 허용오차는 목표 반력 대비 OK/NG 판정 범위입니다.&quot;&gt;
               &lt;h3&gt;유압 잭 / 판정 조건&lt;/h3&gt;
               &lt;div class=&quot;formgrid&quot;&gt;
-                &lt;div class=&quot;field&quot; data-order=&quot;10&quot; data-help=&quot;현장에 설치한 유압 잭 모델을 선택합니다. 모델값은 유효면적 검증에 사용합니다.&quot;&gt;&lt;label&gt;잭 모델&lt;/label&gt;&lt;input value=&quot;HJ-100T&quot;&gt;&lt;/div&gt;
-                &lt;div class=&quot;field&quot; data-order=&quot;11&quot; data-help=&quot;교정성적서 또는 카탈로그의 잭 유효면적 숫자만 입력합니다. 단위 cm²는 고정값이며 압력을 하중으로 환산하는 핵심 상수입니다.&quot;&gt;&lt;label for=&quot;effective-area&quot;&gt;유효면적&lt;/label&gt;&lt;div class=&quot;input-unit&quot;&gt;&lt;input id=&quot;effective-area&quot; type=&quot;number&quot; step=&quot;0.1&quot; value=&quot;126.7&quot;&gt;&lt;span class=&quot;unit-suffix&quot; aria-label=&quot;단위 제곱센티미터&quot;&gt;cm²&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+                &lt;div class=&quot;field&quot; data-order=&quot;10&quot; data-help=&quot;현장에 설치한 RAM 종류를 선택하면 규정된 RAM AREA가 자동 입력됩니다. 예외 장비는 오른쪽 RAM AREA 값을 직접 수정합니다.&quot;&gt;&lt;label for=&quot;ram-type&quot;&gt;잭 종류&lt;/label&gt;&lt;select id=&quot;ram-type&quot;&gt;&lt;option value=&quot;50&quot; selected&gt;50톤 RAM&lt;/option&gt;&lt;option value=&quot;150&quot;&gt;150톤 RAM&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+                &lt;div class=&quot;field&quot; data-order=&quot;11&quot; data-help=&quot;50톤 RAM은 70.85 cm², 150톤 RAM은 153.90 cm²가 자동 반영됩니다. 예외적인 경우 숫자를 직접 수정할 수 있으며 압력을 하중으로 환산하는 데 사용됩니다.&quot;&gt;&lt;label for=&quot;effective-area&quot;&gt;RAM AREA&lt;/label&gt;&lt;div class=&quot;input-unit&quot;&gt;&lt;input id=&quot;effective-area&quot; type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;70.85&quot;&gt;&lt;span class=&quot;unit-suffix&quot; aria-label=&quot;단위 제곱센티미터&quot;&gt;cm²&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
                 &lt;div class=&quot;field&quot; data-order=&quot;12&quot; data-help=&quot;압력계가 전송하는 표시 단위를 선택합니다. 기본값은 bar입니다.&quot;&gt;&lt;label&gt;압력 단위&lt;/label&gt;&lt;select&gt;&lt;option&gt;bar&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
                 &lt;div class=&quot;field&quot; data-order=&quot;13&quot; data-help=&quot;반력 산정 시 Lift-off를 평가할 기준 변위 숫자만 입력합니다. 단위 mm는 고정값입니다.&quot;&gt;&lt;label for=&quot;reference-displacement&quot;&gt;기준 변위&lt;/label&gt;&lt;div class=&quot;input-unit&quot;&gt;&lt;input id=&quot;reference-displacement&quot; type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;0.60&quot;&gt;&lt;span class=&quot;unit-suffix&quot; aria-label=&quot;단위 밀리미터&quot;&gt;mm&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
                 &lt;div class=&quot;field&quot; data-order=&quot;14&quot; data-help=&quot;목표 반력 대비 측정 반력의 허용오차를 목록에서 선택합니다. ± 기호와 % 단위는 고정값입니다.&quot;&gt;&lt;label for=&quot;reaction-tolerance&quot;&gt;허용오차&lt;/label&gt;&lt;div class=&quot;input-affix&quot;&gt;&lt;span class=&quot;unit-prefix&quot; aria-label=&quot;플러스 마이너스&quot;&gt;±&lt;/span&gt;&lt;select id=&quot;reaction-tolerance&quot;&gt;&lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;&lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;&lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;&lt;option value=&quot;5&quot; selected&gt;5&lt;/option&gt;&lt;option value=&quot;10&quot;&gt;10&lt;/option&gt;&lt;/select&gt;&lt;span class=&quot;unit-suffix&quot; aria-label=&quot;단위 퍼센트&quot;&gt;%&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1529,12 +1529,12 @@ html&gt;body{padding:0}&lt;/style&gt;
             &lt;div class=&quot;panel setup-bearing-panel&quot; data-help=&quot;축계 도형에서 베어링을 선택하고 선택된 위치의 목표 반력과 상태만 확인합니다. 명칭은 해당 베어링 도형을 더블클릭해 수정합니다.&quot;&gt;
               &lt;h3&gt;베어링 구성&lt;/h3&gt;
               &lt;div class=&quot;shaft-layout&quot; data-help=&quot;축계를 기관측에서 선미측 방향으로 단순화한 개략 배치입니다. 베어링을 선택한 뒤 앞·뒤 이동 버튼으로 표시 순서를 조정합니다. 실제 위치 확정은 승인 도면을 기준으로 합니다.&quot;&gt;
-                &lt;div class=&quot;shaft-direction&quot;&gt;&lt;span&gt;기관측 · 엔진&lt;/span&gt;&lt;span&gt;선미측 · 프로펠러&lt;/span&gt;&lt;/div&gt;
-                &lt;div class=&quot;shaft-track&quot; id=&quot;shaft-track&quot;&gt;&lt;span class=&quot;shaft-end&quot;&gt;ENGINE&lt;/span&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;true&quot;&gt;ME Bearing No.6&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;ME Bearing No.5&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;Intermediate No.1&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;Stern Tube FWD&lt;/button&gt;&lt;span class=&quot;shaft-end&quot;&gt;PROP.&lt;/span&gt;&lt;/div&gt;
-                &lt;div class=&quot;layout-controls bearing-toolbar&quot;&gt;&lt;div class=&quot;field bearing-count-field&quot; data-order=&quot;8&quot; data-help=&quot;이번 시험에서 순차 측정할 베어링의 전체 개수입니다. 엔진 템플릿 선택 시 자동 구성되며 필요하면 변경할 수 있습니다.&quot;&gt;&lt;label for=&quot;bearing-count&quot;&gt;베어링 수&lt;/label&gt;&lt;input id=&quot;bearing-count&quot; type=&quot;number&quot; min=&quot;1&quot; max=&quot;20&quot; value=&quot;4&quot;&gt;&lt;/div&gt;&lt;button class=&quot;action&quot; id=&quot;move-bearing-forward&quot; type=&quot;button&quot;&gt;← 기관측 이동&lt;/button&gt;&lt;button class=&quot;action&quot; id=&quot;move-bearing-aft&quot; type=&quot;button&quot;&gt;선미측 이동 →&lt;/button&gt;&lt;button class=&quot;action&quot; id=&quot;remove-bearing&quot; type=&quot;button&quot;&gt;삭제&lt;/button&gt;&lt;/div&gt;
+                &lt;div class=&quot;shaft-direction&quot;&gt;&lt;span&gt;FWD · 기관측&lt;/span&gt;&lt;span&gt;AFT · 선미측&lt;/span&gt;&lt;/div&gt;
+                &lt;div class=&quot;shaft-track&quot; id=&quot;shaft-track&quot;&gt;&lt;span class=&quot;shaft-end&quot;&gt;FWD&lt;/span&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;true&quot;&gt;M/E(FWD)&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;M/E(AFT)&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;FLY WHEEL&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;I/S(FWD)&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;I/S(AFT)&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;FWD S/TUBE&lt;/button&gt;&lt;span class=&quot;shaft-end&quot;&gt;AFT&lt;/span&gt;&lt;/div&gt;
+                &lt;div class=&quot;layout-controls bearing-toolbar&quot;&gt;&lt;div class=&quot;field bearing-count-field&quot; data-order=&quot;8&quot; data-help=&quot;선종 선택 시 표준 베어링 수가 자동 입력됩니다. 예외 구성에서는 수량을 직접 변경할 수 있습니다.&quot;&gt;&lt;label for=&quot;bearing-count&quot;&gt;베어링 수&lt;/label&gt;&lt;input id=&quot;bearing-count&quot; type=&quot;number&quot; min=&quot;1&quot; max=&quot;20&quot; value=&quot;6&quot;&gt;&lt;/div&gt;&lt;button class=&quot;action&quot; id=&quot;move-bearing-forward&quot; type=&quot;button&quot;&gt;← 기관측 이동&lt;/button&gt;&lt;button class=&quot;action&quot; id=&quot;move-bearing-aft&quot; type=&quot;button&quot;&gt;선미측 이동 →&lt;/button&gt;&lt;button class=&quot;action&quot; id=&quot;remove-bearing&quot; type=&quot;button&quot;&gt;삭제&lt;/button&gt;&lt;/div&gt;
               &lt;/div&gt;
               &lt;div class=&quot;selected-bearing-editor&quot; data-order=&quot;9&quot; data-help=&quot;선택된 베어링 한 개의 정보만 표시합니다. 목표 반력은 승인 설계·축계 정렬 자료에서 확인해 입력하며 상태는 대기 또는 측정으로 색상 표시됩니다.&quot;&gt;
-                &lt;div class=&quot;selected-bearing-name&quot;&gt;&lt;span class=&quot;label&quot;&gt;선택 베어링&lt;/span&gt;&lt;strong id=&quot;selected-setup-bearing-name&quot;&gt;ME Bearing No.6&lt;/strong&gt;&lt;/div&gt;
+                &lt;div class=&quot;selected-bearing-name&quot;&gt;&lt;span class=&quot;label&quot;&gt;선택 베어링&lt;/span&gt;&lt;strong id=&quot;selected-setup-bearing-name&quot;&gt;M/E(FWD)&lt;/strong&gt;&lt;/div&gt;
                 &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;selected-bearing-reaction&quot;&gt;목표 반력&lt;/label&gt;&lt;div class=&quot;input-unit&quot;&gt;&lt;input id=&quot;selected-bearing-reaction&quot; type=&quot;number&quot; placeholder=&quot;설계값 입력&quot;&gt;&lt;span class=&quot;unit-suffix&quot; aria-label=&quot;단위 킬로뉴턴&quot;&gt;kN&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
                 &lt;div class=&quot;bearing-status-box&quot;&gt;&lt;span class=&quot;label&quot;&gt;상태&lt;/span&gt;&lt;div class=&quot;bearing-status-chip waiting&quot; id=&quot;selected-bearing-status&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;대기&lt;/div&gt;&lt;/div&gt;
               &lt;/div&gt;
@@ -1546,18 +1546,18 @@ html&gt;body{padding:0}&lt;/style&gt;
           &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;측정 베어링 선택&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;시험 설정에서 구성한 위치 중 이번에 Jack-up 측정할 베어링 선택&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action primary&quot; id=&quot;start-bearing-button&quot; type=&quot;button&quot; data-jw-tooltip=&quot;선택한 베어링의 영점 상태를 확인하고 Jack-up 측정 화면으로 이동&quot;&gt;선택 위치 측정 시작&lt;/button&gt;&lt;/div&gt;
           &lt;div class=&quot;panel&quot; data-help=&quot;기관측에서 선미측 방향으로 배치된 베어링의 진행 상태를 확인합니다. 완료 위치도 재측정 회차로 다시 선택할 수 있습니다.&quot;&gt;
             &lt;div class=&quot;shaft-layout&quot;&gt;
-              &lt;div class=&quot;shaft-direction&quot;&gt;&lt;span&gt;기관측 · 엔진&lt;/span&gt;&lt;span&gt;선미측 · 프로펠러&lt;/span&gt;&lt;/div&gt;
-              &lt;div class=&quot;shaft-track&quot;&gt;&lt;span class=&quot;shaft-end&quot;&gt;ENGINE&lt;/span&gt;&lt;button class=&quot;bearing-node bearing-choice&quot; type=&quot;button&quot; data-bearing-name=&quot;ME Bearing No.6&quot; data-target=&quot;820 kN&quot; data-previous=&quot;815 kN · OK&quot; aria-pressed=&quot;false&quot;&gt;ME Bearing No.6&lt;br&gt;완료&lt;/button&gt;&lt;button class=&quot;bearing-node bearing-choice&quot; type=&quot;button&quot; data-bearing-name=&quot;ME Bearing No.5&quot; data-target=&quot;790 kN&quot; data-previous=&quot;802 kN · OK&quot; aria-pressed=&quot;false&quot;&gt;ME Bearing No.5&lt;br&gt;완료&lt;/button&gt;&lt;button class=&quot;bearing-node bearing-choice&quot; type=&quot;button&quot; data-bearing-name=&quot;Intermediate Bearing No.1&quot; data-target=&quot;760 kN&quot; data-previous=&quot;728 kN · NG&quot; aria-pressed=&quot;true&quot;&gt;Intermediate No.1&lt;br&gt;측정 대기&lt;/button&gt;&lt;button class=&quot;bearing-node bearing-choice&quot; type=&quot;button&quot; data-bearing-name=&quot;Stern Tube FWD&quot; data-target=&quot;720 kN&quot; data-previous=&quot;미측정&quot; aria-pressed=&quot;false&quot;&gt;Stern Tube FWD&lt;br&gt;대기&lt;/button&gt;&lt;span class=&quot;shaft-end&quot;&gt;PROP.&lt;/span&gt;&lt;/div&gt;
+              &lt;div class=&quot;shaft-direction&quot;&gt;&lt;span&gt;FWD · 기관측&lt;/span&gt;&lt;span&gt;AFT · 선미측&lt;/span&gt;&lt;/div&gt;
+              &lt;div class=&quot;shaft-track&quot; id=&quot;measurement-shaft-track&quot;&gt;&lt;span class=&quot;shaft-end&quot;&gt;FWD&lt;/span&gt;&lt;button class=&quot;bearing-node bearing-choice&quot; type=&quot;button&quot; data-bearing-name=&quot;M/E(FWD)&quot; data-target=&quot;미입력&quot; data-previous=&quot;미측정&quot; aria-pressed=&quot;true&quot;&gt;M/E(FWD)&lt;br&gt;측정 대기&lt;/button&gt;&lt;button class=&quot;bearing-node bearing-choice&quot; type=&quot;button&quot; data-bearing-name=&quot;M/E(AFT)&quot; data-target=&quot;미입력&quot; data-previous=&quot;미측정&quot; aria-pressed=&quot;false&quot;&gt;M/E(AFT)&lt;br&gt;대기&lt;/button&gt;&lt;button class=&quot;bearing-node bearing-choice&quot; type=&quot;button&quot; data-bearing-name=&quot;FLY WHEEL&quot; data-target=&quot;미입력&quot; data-previous=&quot;미측정&quot; aria-pressed=&quot;false&quot;&gt;FLY WHEEL&lt;br&gt;대기&lt;/button&gt;&lt;button class=&quot;bearing-node bearing-choice&quot; type=&quot;button&quot; data-bearing-name=&quot;I/S(FWD)&quot; data-target=&quot;미입력&quot; data-previous=&quot;미측정&quot; aria-pressed=&quot;false&quot;&gt;I/S(FWD)&lt;br&gt;대기&lt;/button&gt;&lt;button class=&quot;bearing-node bearing-choice&quot; type=&quot;button&quot; data-bearing-name=&quot;I/S(AFT)&quot; data-target=&quot;미입력&quot; data-previous=&quot;미측정&quot; aria-pressed=&quot;false&quot;&gt;I/S(AFT)&lt;br&gt;대기&lt;/button&gt;&lt;button class=&quot;bearing-node bearing-choice&quot; type=&quot;button&quot; data-bearing-name=&quot;FWD S/TUBE&quot; data-target=&quot;미입력&quot; data-previous=&quot;미측정&quot; aria-pressed=&quot;false&quot;&gt;FWD S/TUBE&lt;br&gt;대기&lt;/button&gt;&lt;span class=&quot;shaft-end&quot;&gt;AFT&lt;/span&gt;&lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
           &lt;div class=&quot;grid two&quot; style=&quot;margin-top:12px&quot;&gt;
-            &lt;div class=&quot;panel&quot; data-help=&quot;선택 위치의 목표 반력, 허용오차와 이전 회차 결과를 측정 전에 확인합니다.&quot;&gt;&lt;h3&gt;선택 위치&lt;/h3&gt;&lt;div class=&quot;metric&quot; id=&quot;selected-measurement-bearing&quot;&gt;Intermediate Bearing No.1&lt;/div&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;목표 반력&lt;/td&gt;&lt;td id=&quot;selected-bearing-target&quot;&gt;760 kN&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;허용오차&lt;/td&gt;&lt;td&gt;±5%&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;측정 회차&lt;/td&gt;&lt;td&gt;2차&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;이전 결과&lt;/td&gt;&lt;td id=&quot;selected-bearing-previous&quot; class=&quot;bad&quot;&gt;728 kN · NG&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+            &lt;div class=&quot;panel&quot; data-help=&quot;선택 위치의 목표 반력, 허용오차와 이전 회차 결과를 측정 전에 확인합니다.&quot;&gt;&lt;h3&gt;선택 위치&lt;/h3&gt;&lt;div class=&quot;metric&quot; id=&quot;selected-measurement-bearing&quot;&gt;M/E(FWD)&lt;/div&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;목표 반력&lt;/td&gt;&lt;td id=&quot;selected-bearing-target&quot;&gt;미입력&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;허용오차&lt;/td&gt;&lt;td&gt;±5%&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;측정 회차&lt;/td&gt;&lt;td&gt;2차&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;이전 결과&lt;/td&gt;&lt;td id=&quot;selected-bearing-previous&quot;&gt;미측정&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
             &lt;div class=&quot;panel&quot; data-help=&quot;Jack-up 측정 시작 전 두 센서의 연결과 영점 상태를 확인합니다. 유압장치는 앱에서 제어하지 않습니다.&quot;&gt;&lt;h3&gt;측정 전 확인&lt;/h3&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;압력 모듈&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;연결 · Zero OK&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;다이얼 게이지&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;연결 · Zero OK&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;데이터 스트리밍&lt;/td&gt;&lt;td class=&quot;good&quot;&gt;1초 주기 정상&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;div class=&quot;banner&quot;&gt;선택 위치와 실제 JIG·유압 잭 설치 위치가 일치하는지 작업자가 최종 확인합니다.&lt;/div&gt;&lt;/div&gt;
           &lt;/div&gt;
         &lt;/section&gt;
 
         &lt;section class=&quot;screen&quot; data-panel=&quot;measure&quot;&gt;
-          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2 id=&quot;measurement-bearing-title&quot;&gt;Intermediate Bearing No.1 · Jack-up 측정&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;세션 RUN-02 · Lifting · Step 07&lt;/p&gt;&lt;/div&gt;&lt;span class=&quot;status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;LIVE · 1초 주기&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2 id=&quot;measurement-bearing-title&quot;&gt;M/E(FWD) · Jack-up 측정&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;세션 RUN-02 · Lifting · Step 07&lt;/p&gt;&lt;/div&gt;&lt;span class=&quot;status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;LIVE · 1초 주기&lt;/span&gt;&lt;/div&gt;
           &lt;div class=&quot;stepper&quot; data-help=&quot;현재 베어링 측정의 단계 진행도입니다. 완료 단계는 녹색, 현재 단계는 청색, 대기 단계는 회색으로 표시합니다.&quot; aria-label=&quot;측정 진행 상태&quot;&gt;&lt;span class=&quot;step done&quot;&gt;&lt;/span&gt;&lt;span class=&quot;step done&quot;&gt;&lt;/span&gt;&lt;span class=&quot;step current&quot;&gt;&lt;/span&gt;&lt;span class=&quot;step&quot;&gt;&lt;/span&gt;&lt;span class=&quot;step&quot;&gt;&lt;/span&gt;&lt;/div&gt;
           &lt;div class=&quot;grid two&quot;&gt;
             &lt;div&gt;&lt;div class=&quot;instrument-grid&quot;&gt;
@@ -1876,13 +1876,16 @@ html&gt;body{padding:0}&lt;/style&gt;
       const newTestButton = root.querySelector(&#x27;#new-test-button&#x27;);
       const setupCompleteButton = root.querySelector(&#x27;#setup-complete-button&#x27;);
       const startBearingButton = root.querySelector(&#x27;#start-bearing-button&#x27;);
-      const bearingChoices = [...root.querySelectorAll(&#x27;.bearing-choice&#x27;)];
+      const measurementShaftTrack = root.querySelector(&#x27;#measurement-shaft-track&#x27;);
+      let bearingChoices = [...root.querySelectorAll(&#x27;.bearing-choice&#x27;)];
       const selectedMeasurementBearing = root.querySelector(&#x27;#selected-measurement-bearing&#x27;);
       const selectedBearingTarget = root.querySelector(&#x27;#selected-bearing-target&#x27;);
       const selectedBearingPrevious = root.querySelector(&#x27;#selected-bearing-previous&#x27;);
       const measurementBearingTitle = root.querySelector(&#x27;#measurement-bearing-title&#x27;);
       const guideToggle = root.querySelector(&#x27;#guide-toggle&#x27;);
-      const engineModel = root.querySelector(&#x27;#engine-model&#x27;);
+      const shipType = root.querySelector(&#x27;#ship-type&#x27;);
+      const ramType = root.querySelector(&#x27;#ram-type&#x27;);
+      const effectiveArea = root.querySelector(&#x27;#effective-area&#x27;);
       const bearingCount = root.querySelector(&#x27;#bearing-count&#x27;);
       const shaftTrack = root.querySelector(&#x27;#shaft-track&#x27;);
       const selectedSetupBearingName = root.querySelector(&#x27;#selected-setup-bearing-name&#x27;);
@@ -2161,7 +2164,12 @@ html&gt;body{padding:0}&lt;/style&gt;
       sagInputs.forEach((input) =&gt; input.addEventListener(&#x27;input&#x27;, updateSagCalculation));
       updateSagCalculation();
       const helpTargets = [...root.querySelectorAll(&#x27;[data-jw-tooltip], [data-help]&#x27;)];
-      const hideTooltip = () =&gt; guideTooltip.classList.remove(&#x27;visible&#x27;);
+      const hideTooltip = () =&gt; {
+        guideTooltip.classList.remove(&#x27;visible&#x27;);
+        guideTooltip.textContent = &#x27;&#x27;;
+        guideTooltip.style.removeProperty(&#x27;left&#x27;);
+        guideTooltip.style.removeProperty(&#x27;top&#x27;);
+      };
       const showTooltip = (target) =&gt; {
         if (target.hasAttribute(&#x27;data-help&#x27;) &amp;&amp; !root.classList.contains(&#x27;guide-on&#x27;)) return;
         const message = target.getAttribute(&#x27;data-jw-tooltip&#x27;) || target.getAttribute(&#x27;data-help&#x27;);
@@ -2344,14 +2352,10 @@ html&gt;body{padding:0}&lt;/style&gt;
       const requestedButton = buttons.find((button) =&gt; button.dataset.screen === requestedPanel);
       if (requestedButton) requestedButton.click();
       newTestButton.addEventListener(&#x27;click&#x27;, () =&gt; root.querySelector(&#x27;[data-screen=&quot;setup&quot;]&#x27;).click());
-      setupCompleteButton.addEventListener(&#x27;click&#x27;, () =&gt; root.querySelector(&#x27;[data-screen=&quot;bearing-select&quot;]&#x27;).click());
-      bearingChoices.forEach((choice) =&gt; choice.addEventListener(&#x27;click&#x27;, () =&gt; {
-        bearingChoices.forEach((item) =&gt; item.setAttribute(&#x27;aria-pressed&#x27;, String(item === choice)));
-        selectedMeasurementBearing.textContent = choice.dataset.bearingName;
-        selectedBearingTarget.textContent = choice.dataset.target;
-        selectedBearingPrevious.textContent = choice.dataset.previous;
-        selectedBearingPrevious.className = choice.dataset.previous.includes(&#x27;NG&#x27;) ? &#x27;bad&#x27; : choice.dataset.previous.includes(&#x27;OK&#x27;) ? &#x27;good&#x27; : &#x27;&#x27;;
-      }));
+      setupCompleteButton.addEventListener(&#x27;click&#x27;, () =&gt; {
+        renderMeasurementBearingChoices();
+        root.querySelector(&#x27;[data-screen=&quot;bearing-select&quot;]&#x27;).click();
+      });
       startBearingButton.addEventListener(&#x27;click&#x27;, () =&gt; {
         measurementBearingTitle.textContent = `${selectedMeasurementBearing.textContent} · Jack-up 측정`;
         root.querySelector(&#x27;[data-screen=&quot;measure&quot;]&#x27;).click();
@@ -2854,12 +2858,15 @@ html&gt;body{padding:0}&lt;/style&gt;
         root.querySelector(&#x27;[data-screen=&quot;data&quot;]&#x27;).click();
       });
       updateExcludedRange();
-      const engineTemplates = {
-        &#x27;6g70&#x27;: [&#x27;ME Bearing No.6&#x27;, &#x27;ME Bearing No.5&#x27;, &#x27;Intermediate Bearing No.1&#x27;, &#x27;Stern Tube FWD&#x27;],
-        &#x27;5g70&#x27;: [&#x27;ME Bearing No.5&#x27;, &#x27;Intermediate Bearing No.1&#x27;, &#x27;Stern Tube FWD&#x27;]
+      const shipTypeTemplates = {
+        lngc: [&#x27;M/E(FWD)&#x27;, &#x27;M/E(AFT)&#x27;, &#x27;FLY WHEEL&#x27;, &#x27;I/S(FWD)&#x27;, &#x27;I/S(AFT)&#x27;, &#x27;FWD S/TUBE&#x27;],
+        cont: [&#x27;M/E(FWD)&#x27;, &#x27;M/E(AFT)&#x27;, &#x27;FLY WHEEL&#x27;, &#x27;I/S(FWD)&#x27;, &#x27;I/S(AFT)&#x27;, &#x27;FWD S/TUBE&#x27;],
+        lpgc: [&#x27;M/E(FWD)&#x27;, &#x27;M/E(AFT)&#x27;, &#x27;FLY WHEEL&#x27;, &#x27;I/S&#x27;, &#x27;FWD S/TUBE&#x27;],
+        vlcc: [&#x27;M/E(FWD)&#x27;, &#x27;M/E(AFT)&#x27;, &#x27;FLY WHEEL&#x27;, &#x27;I/S&#x27;, &#x27;FWD S/TUBE&#x27;]
       };
+      const ramAreas = { &#x27;50&#x27;: &#x27;70.85&#x27;, &#x27;150&#x27;: &#x27;153.90&#x27; };
       let selectedBearingIndex = 0;
-      let bearingItems = engineTemplates[&#x27;6g70&#x27;].map((position) =&gt; ({ position, target: &#x27;&#x27;, status: &#x27;대기&#x27; }));
+      let bearingItems = shipTypeTemplates.lngc.map((position) =&gt; ({ position, target: &#x27;&#x27;, status: &#x27;대기&#x27; }));
       const renderSelectedBearing = () =&gt; {
         const item = bearingItems[selectedBearingIndex];
         selectedSetupBearingName.textContent = item.position;
@@ -2893,10 +2900,10 @@ html&gt;body{padding:0}&lt;/style&gt;
         selectedBearingIndex = Math.max(0, Math.min(selectedBearingIndex, bearingItems.length - 1));
         const engineEnd = document.createElement(&#x27;span&#x27;);
         engineEnd.className = &#x27;shaft-end&#x27;;
-        engineEnd.textContent = &#x27;ENGINE&#x27;;
+        engineEnd.textContent = &#x27;FWD&#x27;;
         const propellerEnd = document.createElement(&#x27;span&#x27;);
         propellerEnd.className = &#x27;shaft-end&#x27;;
-        propellerEnd.textContent = &#x27;PROP.&#x27;;
+        propellerEnd.textContent = &#x27;AFT&#x27;;
         const nodes = bearingItems.map((item, index) =&gt; {
           const node = document.createElement(&#x27;button&#x27;);
           node.type = &#x27;button&#x27;;
@@ -2916,11 +2923,44 @@ html&gt;body{padding:0}&lt;/style&gt;
         bearingCount.value = String(bearingItems.length);
         renderSelectedBearing();
       };
-      engineModel.addEventListener(&#x27;change&#x27;, () =&gt; {
-        const template = engineTemplates[engineModel.value];
+      const selectMeasurementBearing = (choice) =&gt; {
+        bearingChoices.forEach((item) =&gt; item.setAttribute(&#x27;aria-pressed&#x27;, String(item === choice)));
+        selectedMeasurementBearing.textContent = choice.dataset.bearingName;
+        selectedBearingTarget.textContent = choice.dataset.target;
+        selectedBearingPrevious.textContent = choice.dataset.previous;
+        selectedBearingPrevious.className = choice.dataset.previous.includes(&#x27;NG&#x27;) ? &#x27;bad&#x27; : choice.dataset.previous.includes(&#x27;OK&#x27;) ? &#x27;good&#x27; : &#x27;&#x27;;
+      };
+      const renderMeasurementBearingChoices = () =&gt; {
+        const forwardEnd = document.createElement(&#x27;span&#x27;);
+        forwardEnd.className = &#x27;shaft-end&#x27;;
+        forwardEnd.textContent = &#x27;FWD&#x27;;
+        const aftEnd = document.createElement(&#x27;span&#x27;);
+        aftEnd.className = &#x27;shaft-end&#x27;;
+        aftEnd.textContent = &#x27;AFT&#x27;;
+        const nodes = bearingItems.map((item, index) =&gt; {
+          const node = document.createElement(&#x27;button&#x27;);
+          node.type = &#x27;button&#x27;;
+          node.className = &#x27;bearing-node bearing-choice&#x27;;
+          node.dataset.bearingName = item.position;
+          node.dataset.target = item.target ? `${item.target} kN` : &#x27;미입력&#x27;;
+          node.dataset.previous = &#x27;미측정&#x27;;
+          node.setAttribute(&#x27;aria-pressed&#x27;, String(index === 0));
+          node.append(document.createTextNode(item.position), document.createElement(&#x27;br&#x27;), document.createTextNode(index === 0 ? &#x27;측정 대기&#x27; : &#x27;대기&#x27;));
+          return node;
+        });
+        measurementShaftTrack.replaceChildren(forwardEnd, ...nodes, aftEnd);
+        bearingChoices = [...measurementShaftTrack.querySelectorAll(&#x27;.bearing-choice&#x27;)];
+        bearingChoices.forEach((choice) =&gt; choice.addEventListener(&#x27;click&#x27;, () =&gt; selectMeasurementBearing(choice)));
+        if (bearingChoices[0]) selectMeasurementBearing(bearingChoices[0]);
+      };
+      shipType.addEventListener(&#x27;change&#x27;, () =&gt; {
+        const template = shipTypeTemplates[shipType.value];
         selectedBearingIndex = 0;
         bearingItems = (template || [&#x27;Bearing 1&#x27;]).map((position) =&gt; ({ position, target: &#x27;&#x27;, status: &#x27;대기&#x27; }));
         renderShaftLayout();
+      });
+      ramType.addEventListener(&#x27;change&#x27;, () =&gt; {
+        effectiveArea.value = ramAreas[ramType.value] || effectiveArea.value;
       });
       bearingCount.addEventListener(&#x27;change&#x27;, () =&gt; {
         const count = Math.max(1, Math.min(20, Number(bearingCount.value) || 1));
@@ -2951,6 +2991,7 @@ html&gt;body{padding:0}&lt;/style&gt;
         renderShaftLayout();
       });
       renderShaftLayout();
+      renderMeasurementBearingChoices();
     })();
   &lt;/script&gt;
 &lt;/div&gt;
