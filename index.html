@@ -1146,21 +1146,16 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .alarm-summary .panel { padding: 12px 14px; }
     #jackup-wireframe .alarm-summary-value { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 6px; }
     #jackup-wireframe .alarm-summary-value strong { font-size: 22px; font-weight: 500; }
-    #jackup-wireframe .alarm-filter-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
+    #jackup-wireframe .alarm-filter-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
     #jackup-wireframe .alarm-table-wrap { max-width: 100%; overflow-x: auto; }
-    #jackup-wireframe .alarm-table { min-width: 850px; table-layout: fixed; }
-    #jackup-wireframe .alarm-table :is(th, td):nth-child(1) { width: 14%; }
-    #jackup-wireframe .alarm-table :is(th, td):nth-child(2) { width: 10%; }
-    #jackup-wireframe .alarm-table :is(th, td):nth-child(3) { width: 16%; }
-    #jackup-wireframe .alarm-table :is(th, td):nth-child(4) { width: 20%; }
-    #jackup-wireframe .alarm-table :is(th, td):nth-child(5) { width: 16%; }
-    #jackup-wireframe .alarm-table :is(th, td):nth-child(6) { width: 14%; }
-    #jackup-wireframe .alarm-table :is(th, td):nth-child(7) { width: 10%; }
+    #jackup-wireframe .alarm-table { width: 100%; min-width: 600px; table-layout: fixed; }
+    #jackup-wireframe .alarm-table :is(th, td):nth-child(1) { width: 18%; }
+    #jackup-wireframe .alarm-table :is(th, td):nth-child(2) { width: 15%; }
+    #jackup-wireframe .alarm-table :is(th, td):nth-child(3) { width: 17%; }
+    #jackup-wireframe .alarm-table :is(th, td):nth-child(4) { width: 28%; }
+    #jackup-wireframe .alarm-table :is(th, td):nth-child(5) { width: 22%; }
     #jackup-wireframe .alarm-level { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; }
     #jackup-wireframe .alarm-level::before { content: &quot;&quot;; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
-    #jackup-wireframe .alarm-ack { min-height: 36px; padding: 6px 10px; }
-    #jackup-wireframe .alarm-ack:disabled { cursor: default; opacity: .65; }
-    #jackup-wireframe .alarm-safety-state { margin-top: 12px; }
     #jackup-wireframe .data-edit-action:disabled { cursor: not-allowed; opacity: .45; }
     #jackup-wireframe .sensor { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--jw-line); }
     #jackup-wireframe .sensor:last-child { border-bottom: 0; }
@@ -1181,6 +1176,8 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .connection-headline &gt; div:first-child { flex: 1 1 260px; min-width: 0; }
     #jackup-wireframe .connection-headline .btnrow { flex: 0 0 auto; }
     #jackup-wireframe .connection-headline .action { min-height: 44px; white-space: nowrap; }
+    #jackup-wireframe #rescan-modules { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 44px; width: 44px; height: 44px; padding: 0; margin-left: auto; }
+    #jackup-wireframe #rescan-modules svg { width: 20px; height: 20px; }
     #jackup-wireframe .connection-module strong { display: block; margin-top: 5px; font-weight: 500; }
     #jackup-wireframe .connection-plus { align-self: center; color: var(--jw-muted); font-size: 18px; }
     #jackup-wireframe .connection-status { margin-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
@@ -1405,6 +1402,8 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .shaft-end { position: relative; z-index: 1; background: var(--jw-dark); color: var(--jw-dark-text); padding: 8px; border-radius: 6px; font-size: 11px; }
     #jackup-wireframe .bearing-node { position: relative; z-index: 2; max-width: 104px; border: 2px solid var(--jw-accent); background: var(--jw-surface); color: var(--jw-text); padding: 7px 6px; border-radius: 12px 12px 5px 5px; cursor: pointer; font: inherit; font-size: 10px; text-align: center; overflow-wrap: anywhere; }
     #jackup-wireframe .bearing-node[aria-pressed=&quot;true&quot;] { background: var(--jw-accent); color: var(--jw-dark-text); }
+    #jackup-wireframe .bearing-choice[aria-pressed=&quot;true&quot;] { background: var(--jw-dark); color: var(--jw-dark-text); }
+    #jackup-wireframe .bearing-choice &gt; span { display: inline-block; margin-top: 4px; padding: 2px 6px; border-radius: 4px; background: var(--jw-surface-2); line-height: 1.4; }
     #jackup-wireframe .layout-controls { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
     #jackup-wireframe .layout-controls .sub { flex: 1; }
     #jackup-wireframe .layout-controls.bearing-toolbar { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; }
@@ -1556,7 +1555,7 @@ html&gt;body{padding:0}&lt;/style&gt;
 
 
         &lt;section class=&quot;screen&quot; data-panel=&quot;setup&quot;&gt;
-          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;장치 설정&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;선종·베어링 구성 → 장치 연결·게이지 지정&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action primary&quot; id=&quot;setup-complete-button&quot; type=&quot;button&quot; data-jw-tooltip=&quot;베어링 구성을 확인하고 장치 연결·게이지 지정으로 이동&quot;&gt;장치 연결 설정 →&lt;/button&gt;&lt;/div&gt;
+          &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h2&gt;장치 설정&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;선종·베어링 구성 → 장치 연결·게이지 지정&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action primary&quot; id=&quot;setup-complete-button&quot; type=&quot;button&quot; data-jw-tooltip=&quot;베어링별 게이지 지정을 확인하고 선택 장치를 연결한 뒤 베어링 선택으로 이동&quot;&gt;설정완료&lt;/button&gt;&lt;/div&gt;
           &lt;div class=&quot;setup-tabs&quot; role=&quot;tablist&quot; aria-label=&quot;장치 설정 단계&quot;&gt;
             &lt;button class=&quot;action primary&quot; type=&quot;button&quot; id=&quot;setup-conditions-tab&quot; role=&quot;tab&quot; data-setup-tab=&quot;conditions&quot; aria-controls=&quot;setup-conditions-content&quot; aria-selected=&quot;true&quot;&gt;1 · 기본 정보·베어링 구성&lt;/button&gt;
             &lt;button class=&quot;action&quot; type=&quot;button&quot; id=&quot;setup-devices-tab&quot; role=&quot;tab&quot; data-setup-tab=&quot;devices&quot; aria-controls=&quot;setup-devices-content&quot; aria-selected=&quot;false&quot;&gt;2 · 장치 연결·게이지 지정&lt;/button&gt;
@@ -1575,6 +1574,7 @@ html&gt;body{padding:0}&lt;/style&gt;
           &lt;div class=&quot;grid setup-stack&quot; style=&quot;margin-top:12px&quot;&gt;
             &lt;div class=&quot;panel setup-bearing-panel&quot; data-help=&quot;축계 도형에서 베어링을 선택해 순서와 명칭을 편집합니다. 목표 반력과 허용범위는 베어링 선택 메뉴에서 입력합니다.&quot;&gt;
               &lt;h3&gt;베어링 구성&lt;/h3&gt;
+              &lt;p class=&quot;sub&quot; id=&quot;bearing-rename-hint&quot;&gt;베어링을 더블클릭하면 명칭을 변경할 수 있습니다.&lt;/p&gt;
               &lt;div class=&quot;shaft-layout&quot; data-help=&quot;축계를 왼쪽 선미측(AFT)에서 오른쪽 기관측(FWD) 방향으로 단순화한 개략 배치입니다. 베어링을 선택한 뒤 앞·뒤 이동 버튼으로 표시 순서를 조정합니다. 실제 위치 확정은 승인 도면을 기준으로 합니다.&quot;&gt;
                 &lt;div class=&quot;shaft-direction&quot;&gt;&lt;span&gt;AFT · 선미측&lt;/span&gt;&lt;span&gt;FWD · 기관측&lt;/span&gt;&lt;/div&gt;
                 &lt;div class=&quot;shaft-track&quot; id=&quot;shaft-track&quot;&gt;&lt;span class=&quot;shaft-end&quot;&gt;AFT&lt;/span&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;FWD S/TUBE&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;I/S(AFT)&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;I/S(FWD)&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;FLY WHEEL&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;M/E(AFT)&lt;/button&gt;&lt;button class=&quot;bearing-node&quot; type=&quot;button&quot; aria-pressed=&quot;true&quot;&gt;M/E(FWD)&lt;/button&gt;&lt;span class=&quot;shaft-end&quot;&gt;FWD&lt;/span&gt;&lt;/div&gt;
@@ -1584,8 +1584,8 @@ html&gt;body{padding:0}&lt;/style&gt;
           &lt;/div&gt;
           &lt;/div&gt;
           &lt;div id=&quot;setup-devices-content&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;setup-devices-tab&quot; data-setup-panel=&quot;devices&quot; hidden&gt;
-          &lt;div class=&quot;headline connection-headline&quot;&gt;&lt;div&gt;&lt;h3&gt;장치 연결&lt;/h3&gt;&lt;p class=&quot;sub&quot;&gt;베어링별 게이지 선택 → 선택 장치 연결 · 매핑과 연결을 한 번에 적용&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action&quot; id=&quot;rescan-modules&quot; type=&quot;button&quot; data-order=&quot;1&quot; data-jw-tooltip=&quot;주변에서 연결 요청 중인 BLE 압력·변위 모듈을 다시 검색&quot;&gt;주변 장치 다시 검색&lt;/button&gt;&lt;button class=&quot;action primary&quot; id=&quot;connect-selected-devices&quot; type=&quot;button&quot; data-order=&quot;5&quot; data-jw-tooltip=&quot;선택한 압력계와 베어링별 게이지의 매핑·연결을 한 번에 적용&quot;&gt;선택 장치 연결&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
-          &lt;div class=&quot;panel&quot; data-help=&quot;베어링별로 설치된 게이지를 지정한 뒤 상단 선택 장치 연결을 한 번 누르면 매핑과 연결이 함께 적용됩니다. 연결 동작은 화면 시연입니다. 압력계 구성은 HW 협의 후 확정합니다.&quot;&gt;
+          &lt;div class=&quot;headline connection-headline&quot;&gt;&lt;div&gt;&lt;h3&gt;장치 연결&lt;/h3&gt;&lt;p class=&quot;sub&quot;&gt;최초 지정 후 설정완료 · 이전 연결 장치는 감지 시 자동 재연결&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action&quot; id=&quot;rescan-modules&quot; type=&quot;button&quot; aria-label=&quot;주변 장치 검색&quot; data-jw-tooltip=&quot;주변 장치를 다시 검색합니다. 한 번 연결한 지정 장치는 감지 시 자동 재연결하며, 새 장치나 지정 변경은 설정완료로 적용합니다.&quot;&gt;&lt;i data-lucide=&quot;refresh-cw&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;
+          &lt;div class=&quot;panel&quot; data-help=&quot;베어링별로 설치된 게이지를 지정한 뒤 상단 설정완료 버튼을 한 번 누르면 매핑과 연결이 함께 적용됩니다. 연결 동작은 화면 시연입니다. 압력계 구성은 HW 협의 후 확정합니다.&quot;&gt;
             &lt;div class=&quot;field&quot; style=&quot;margin-bottom:14px&quot;&gt;&lt;label for=&quot;mapped-pressure-module&quot;&gt;공통 압력계&lt;/label&gt;&lt;select id=&quot;mapped-pressure-module&quot;&gt;
               &lt;option value=&quot;PRS-A-014&quot; data-rssi=&quot;-48&quot; selected&gt;PRS-A-014 · 1,000 bar · RSSI -48 dBm&lt;/option&gt;
               &lt;option value=&quot;PRS-A-021&quot; data-rssi=&quot;-61&quot;&gt;PRS-A-021 · 700 bar · RSSI -61 dBm&lt;/option&gt;
@@ -1593,7 +1593,7 @@ html&gt;body{padding:0}&lt;/style&gt;
             &lt;/select&gt;&lt;span class=&quot;sub&quot; id=&quot;mapped-pressure-state&quot;&gt;연결 대기&lt;/span&gt;&lt;/div&gt;
             &lt;h3&gt;베어링별 디지털 게이지&lt;/h3&gt;
             &lt;div class=&quot;gauge-assignment-grid&quot; id=&quot;gauge-assignment-grid&quot;&gt;&lt;/div&gt;
-            &lt;div class=&quot;connection-status&quot;&gt;&lt;span class=&quot;status warn&quot; id=&quot;device-connection-status&quot;&gt;게이지 지정 후 선택 장치 연결&lt;/span&gt;&lt;span class=&quot;sub&quot; id=&quot;device-connection-detail&quot;&gt;장치 연결과 베어링 매핑을 한 번에 적용합니다.&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;connection-status&quot;&gt;&lt;span class=&quot;status warn&quot; id=&quot;device-connection-status&quot;&gt;게이지 지정 후 설정완료&lt;/span&gt;&lt;span class=&quot;sub&quot; id=&quot;device-connection-detail&quot;&gt;장치 연결과 베어링 매핑을 한 번에 적용합니다.&lt;/span&gt;&lt;/div&gt;
           &lt;/div&gt;
           &lt;/div&gt;
         &lt;/section&gt;
@@ -1673,7 +1673,7 @@ html&gt;body{padding:0}&lt;/style&gt;
                 &lt;div class=&quot;panel&quot; data-help=&quot;L·D 분석선의 0 변위 압력 교점 평균 × RAM AREA로 계산합니다. 압력(bar) × 면적(cm²) × 0.01 ÷ 9.80665 = 톤(tf)이며 별도 보정계수는 현재 적용하지 않습니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;최종 반력&lt;/span&gt;&lt;div class=&quot;metric&quot; id=&quot;analysis-final-reaction&quot;&gt;—&lt;/div&gt;&lt;/div&gt;
                 &lt;div class=&quot;panel&quot; id=&quot;analysis-ratio-panel&quot; data-help=&quot;최종 반력 ÷ 선택한 베어링의 목표 반력 × 100입니다. 일반 베어링은 100% ± 허용오차, M/E는 최소·최대 반력으로 판정합니다.&quot;&gt;&lt;span class=&quot;label&quot;&gt;목표 대비 비율 &lt;span id=&quot;analysis-verdict&quot;&gt;판정 대기&lt;/span&gt;&lt;/span&gt;&lt;div class=&quot;metric&quot; id=&quot;analysis-error-rate&quot;&gt;—&lt;/div&gt;&lt;/div&gt;
               &lt;/div&gt;
-              &lt;div class=&quot;panel&quot; data-help=&quot;기본 10 bar 간격이며 압력이 증가하면 기본 행이 확장됩니다. Lifting은 상승 통과, Lowering은 하강 통과 시 최초 수신 변위를 기록합니다. 1/100 mm로 환산하며 셀을 누르면 실제 수신 압력과 시간을 확인할 수 있습니다. 미수신 구간은 빈칸으로 남기고 보간하지 않습니다. 현재는 가상 수신 데모입니다.&quot;&gt;
+              &lt;div class=&quot;panel&quot; id=&quot;live-bar-panel&quot; data-help=&quot;기본 10 bar 간격이며 압력이 증가하면 기본 행이 확장됩니다. Lifting은 상승 통과, Lowering은 하강 통과 시 최초 수신 변위를 기록합니다. 1/100 mm로 환산하며 셀을 누르면 실제 수신 압력과 시간을 확인할 수 있습니다. 미수신 구간은 빈칸으로 남기고 보간하지 않습니다. 현재는 가상 수신 데모입니다.&quot;&gt;
                 &lt;div class=&quot;bar-table-head&quot;&gt;&lt;h3&gt;Bar별 변위값 &lt;span class=&quot;sub&quot;&gt;[1/100 mm]&lt;/span&gt;&lt;/h3&gt;&lt;span class=&quot;status&quot; id=&quot;bar-reading-count&quot;&gt;5개 행&lt;/span&gt;&lt;/div&gt;
                 &lt;div class=&quot;bar-custom-row&quot;&gt;
                   &lt;label for=&quot;custom-bar-pressure&quot;&gt;추가 압력&lt;/label&gt;
@@ -1687,7 +1687,7 @@ html&gt;body{padding:0}&lt;/style&gt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
-          &lt;div class=&quot;panel&quot; data-help=&quot;원본 측정값은 바꾸지 않고 대표 직선 계산에 포함할 시작점과 종료점만 조정합니다. 조정 후 재분석을 누르면 대표 직선과 Lift-off를 다시 계산합니다.&quot; style=&quot;margin-top:12px&quot;&gt;
+          &lt;div class=&quot;panel&quot; id=&quot;analysis-range-editor&quot; data-help=&quot;원본 측정값은 바꾸지 않고 대표 직선 계산에 포함할 시작점과 종료점만 조정합니다. 조정 후 재분석을 누르면 대표 직선과 Lift-off를 다시 계산합니다.&quot; style=&quot;margin-top:12px&quot;&gt;
             &lt;div class=&quot;headline&quot;&gt;&lt;div&gt;&lt;h3&gt;직선 분석구간 조정&lt;/h3&gt;&lt;p class=&quot;sub&quot;&gt;대표 직선 계산에 사용할 시작점·종료점 지정&lt;/p&gt;&lt;/div&gt;&lt;span class=&quot;status good&quot;&gt;&lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;축 자동 조정 · &lt;span id=&quot;analysis-generation-method&quot;&gt;기본 분석선&lt;/span&gt; · &lt;span id=&quot;analysis-axis-range&quot;&gt;X 0~800 Bar / Y 0~60 (1/100 mm)&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;
             &lt;div class=&quot;curve-range-grid&quot;&gt;
               &lt;div class=&quot;curve-range-card lifting&quot; data-help=&quot;Lifting 가압 곡선의 직선 분석구간만 별도로 지정합니다.&quot;&gt;
@@ -1788,35 +1788,32 @@ html&gt;body{padding:0}&lt;/style&gt;
 
         &lt;section class=&quot;screen&quot; data-panel=&quot;alarms&quot;&gt;
           &lt;div class=&quot;headline&quot;&gt;
-            &lt;div&gt;&lt;h2&gt;Alarms &amp;amp; Alerts&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;장치·통신·측정 이상을 등급별로 확인하고 작업자 확인 이력을 관리&lt;/p&gt;&lt;/div&gt;
-            &lt;button class=&quot;action primary&quot; id=&quot;safety-stop-button&quot; type=&quot;button&quot; data-jw-tooltip=&quot;Safety Stop을 누르면 요청 완료 상태로 바뀌며, 요청 완료를 다시 누르면 초기 Safety Stop 버튼으로 돌아갑니다. 실제 설비 정지 연동 범위는 킥오프에서 확정합니다.&quot;&gt;Safety Stop&lt;/button&gt;
+            &lt;div&gt;&lt;h2&gt;Alarms &amp;amp; Alerts&lt;/h2&gt;&lt;p class=&quot;sub&quot;&gt;장치·통신·측정 이상 발생 내역 조회&lt;/p&gt;&lt;/div&gt;
           &lt;/div&gt;
-          &lt;div class=&quot;alarm-summary&quot; data-help=&quot;현재 미확인 상태인 알람을 CRITICAL, ALERT, WARNING 등급별로 집계합니다.&quot;&gt;
-            &lt;div class=&quot;panel&quot;&gt;&lt;span class=&quot;label&quot;&gt;CRITICAL · 미확인&lt;/span&gt;&lt;div class=&quot;alarm-summary-value&quot;&gt;&lt;strong class=&quot;bad&quot; id=&quot;critical-alarm-count&quot;&gt;1&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;즉시 확인&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
-            &lt;div class=&quot;panel&quot;&gt;&lt;span class=&quot;label&quot;&gt;ALERT · 미확인&lt;/span&gt;&lt;div class=&quot;alarm-summary-value&quot;&gt;&lt;strong class=&quot;warn&quot; id=&quot;alert-alarm-count&quot;&gt;1&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;조치 필요&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
-            &lt;div class=&quot;panel&quot;&gt;&lt;span class=&quot;label&quot;&gt;WARNING · 미확인&lt;/span&gt;&lt;div class=&quot;alarm-summary-value&quot;&gt;&lt;strong id=&quot;warning-alarm-count&quot;&gt;0&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;상태 확인&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;alarm-summary&quot; data-help=&quot;전체 발생 내역을 CRITICAL, ALERT, WARNING 등급별로 집계합니다.&quot;&gt;
+            &lt;div class=&quot;panel&quot;&gt;&lt;span class=&quot;label&quot;&gt;CRITICAL · 발생 건수&lt;/span&gt;&lt;div class=&quot;alarm-summary-value&quot;&gt;&lt;strong class=&quot;bad&quot; id=&quot;critical-alarm-count&quot;&gt;1&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;건&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;panel&quot;&gt;&lt;span class=&quot;label&quot;&gt;ALERT · 발생 건수&lt;/span&gt;&lt;div class=&quot;alarm-summary-value&quot;&gt;&lt;strong class=&quot;warn&quot; id=&quot;alert-alarm-count&quot;&gt;1&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;건&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;panel&quot;&gt;&lt;span class=&quot;label&quot;&gt;WARNING · 발생 건수&lt;/span&gt;&lt;div class=&quot;alarm-summary-value&quot;&gt;&lt;strong id=&quot;warning-alarm-count&quot;&gt;2&lt;/strong&gt;&lt;span class=&quot;sub&quot;&gt;건&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
           &lt;/div&gt;
-          &lt;div class=&quot;panel&quot; data-help=&quot;발생일시, 등급, 대상 장치, 원인, 발생값과 기준값, ACK 처리 상태를 최소 관리 항목으로 표시합니다.&quot;&gt;
-            &lt;h3&gt;알람 통합 목록&lt;/h3&gt;
+          &lt;div class=&quot;panel&quot; data-help=&quot;발생일시, 등급, 대상 장치, 원인, 발생값과 기준값을 조회합니다.&quot;&gt;
+            &lt;h3&gt;알람 발생 내역&lt;/h3&gt;
             &lt;div class=&quot;alarm-filter-grid&quot;&gt;
               &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;alarm-level-filter&quot;&gt;등급&lt;/label&gt;&lt;select id=&quot;alarm-level-filter&quot;&gt;&lt;option value=&quot;all&quot;&gt;전체 등급&lt;/option&gt;&lt;option value=&quot;critical&quot;&gt;CRITICAL&lt;/option&gt;&lt;option value=&quot;alert&quot;&gt;ALERT&lt;/option&gt;&lt;option value=&quot;warning&quot;&gt;WARNING&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
-              &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;alarm-status-filter&quot;&gt;처리 상태&lt;/label&gt;&lt;select id=&quot;alarm-status-filter&quot;&gt;&lt;option value=&quot;all&quot;&gt;전체 상태&lt;/option&gt;&lt;option value=&quot;open&quot;&gt;미확인&lt;/option&gt;&lt;option value=&quot;acked&quot;&gt;확인 완료&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
               &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;alarm-device-filter&quot;&gt;장치 종류&lt;/label&gt;&lt;select id=&quot;alarm-device-filter&quot;&gt;&lt;option value=&quot;all&quot;&gt;전체 장치&lt;/option&gt;&lt;option value=&quot;pressure&quot;&gt;압력 모듈&lt;/option&gt;&lt;option value=&quot;displacement&quot;&gt;변위 모듈&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
             &lt;/div&gt;
             &lt;div class=&quot;alarm-table-wrap&quot;&gt;
               &lt;table class=&quot;alarm-table&quot;&gt;
-                &lt;thead&gt;&lt;tr&gt;&lt;th&gt;발생일시&lt;/th&gt;&lt;th&gt;등급&lt;/th&gt;&lt;th&gt;장치&lt;/th&gt;&lt;th&gt;원인&lt;/th&gt;&lt;th&gt;발생값 / 기준&lt;/th&gt;&lt;th&gt;처리 상태&lt;/th&gt;&lt;th&gt;조치&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+                &lt;thead&gt;&lt;tr&gt;&lt;th&gt;발생일시&lt;/th&gt;&lt;th&gt;등급&lt;/th&gt;&lt;th&gt;장치&lt;/th&gt;&lt;th&gt;원인&lt;/th&gt;&lt;th&gt;발생값 / 기준&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
                 &lt;tbody id=&quot;alarm-table-body&quot;&gt;
-                  &lt;tr data-alarm-row data-level=&quot;critical&quot; data-status=&quot;open&quot; data-device=&quot;displacement&quot;&gt;&lt;td&gt;08-25 14:34:18&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;alarm-level bad&quot;&gt;CRITICAL&lt;/span&gt;&lt;/td&gt;&lt;td&gt;DIS-B-014&lt;/td&gt;&lt;td&gt;변위 모듈 통신 두절&lt;/td&gt;&lt;td&gt;5.0초 / 3.0초&lt;/td&gt;&lt;td data-alarm-state class=&quot;bad&quot;&gt;미확인&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;action alarm-ack&quot; type=&quot;button&quot; data-alarm-ack&gt;ACK&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
-                  &lt;tr data-alarm-row data-level=&quot;alert&quot; data-status=&quot;open&quot; data-device=&quot;pressure&quot;&gt;&lt;td&gt;08-25 14:33:42&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;alarm-level warn&quot;&gt;ALERT&lt;/span&gt;&lt;/td&gt;&lt;td&gt;PRS-A-014&lt;/td&gt;&lt;td&gt;압력 상한 기준 초과&lt;/td&gt;&lt;td&gt;865 bar / 850 bar&lt;/td&gt;&lt;td data-alarm-state class=&quot;warn&quot;&gt;미확인&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;action alarm-ack&quot; type=&quot;button&quot; data-alarm-ack&gt;ACK&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
-                  &lt;tr data-alarm-row data-level=&quot;warning&quot; data-status=&quot;acked&quot; data-device=&quot;pressure&quot;&gt;&lt;td&gt;08-25 14:30:11&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;alarm-level&quot;&gt;WARNING&lt;/span&gt;&lt;/td&gt;&lt;td&gt;PRS-A-014&lt;/td&gt;&lt;td&gt;RSSI 저하 · 환경 개선 검토&lt;/td&gt;&lt;td&gt;-79 dBm / ≤ -76 dBm&lt;/td&gt;&lt;td data-alarm-state class=&quot;good&quot;&gt;확인 완료&lt;br&gt;&lt;span class=&quot;sub&quot;&gt;홍길동 14:31&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;action alarm-ack&quot; type=&quot;button&quot; data-alarm-ack disabled&gt;완료&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
-                  &lt;tr data-alarm-row data-level=&quot;warning&quot; data-status=&quot;acked&quot; data-device=&quot;pressure&quot;&gt;&lt;td&gt;08-25 14:28:06&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;alarm-level&quot;&gt;WARNING&lt;/span&gt;&lt;/td&gt;&lt;td&gt;PRS-A-014&lt;/td&gt;&lt;td&gt;통신 주기 지연&lt;/td&gt;&lt;td&gt;2.4초 / 1.0초&lt;/td&gt;&lt;td data-alarm-state class=&quot;good&quot;&gt;확인 완료&lt;br&gt;&lt;span class=&quot;sub&quot;&gt;홍길동 14:29&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;action alarm-ack&quot; type=&quot;button&quot; data-alarm-ack disabled&gt;완료&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr data-alarm-row data-level=&quot;critical&quot; data-device=&quot;displacement&quot;&gt;&lt;td&gt;08-25 14:34:18&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;alarm-level bad&quot;&gt;CRITICAL&lt;/span&gt;&lt;/td&gt;&lt;td&gt;DIS-B-014&lt;/td&gt;&lt;td&gt;변위 모듈 통신 두절&lt;/td&gt;&lt;td&gt;5.0초 / 3.0초&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr data-alarm-row data-level=&quot;alert&quot; data-device=&quot;pressure&quot;&gt;&lt;td&gt;08-25 14:33:42&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;alarm-level warn&quot;&gt;ALERT&lt;/span&gt;&lt;/td&gt;&lt;td&gt;PRS-A-014&lt;/td&gt;&lt;td&gt;압력 상한 기준 초과&lt;/td&gt;&lt;td&gt;865 bar / 850 bar&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr data-alarm-row data-level=&quot;warning&quot; data-device=&quot;pressure&quot;&gt;&lt;td&gt;08-25 14:30:11&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;alarm-level&quot;&gt;WARNING&lt;/span&gt;&lt;/td&gt;&lt;td&gt;PRS-A-014&lt;/td&gt;&lt;td&gt;RSSI 저하 · 환경 개선 검토&lt;/td&gt;&lt;td&gt;-79 dBm / ≤ -76 dBm&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr data-alarm-row data-level=&quot;warning&quot; data-device=&quot;pressure&quot;&gt;&lt;td&gt;08-25 14:28:06&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;alarm-level&quot;&gt;WARNING&lt;/span&gt;&lt;/td&gt;&lt;td&gt;PRS-A-014&lt;/td&gt;&lt;td&gt;통신 주기 지연&lt;/td&gt;&lt;td&gt;2.4초 / 1.0초&lt;/td&gt;&lt;/tr&gt;
                 &lt;/tbody&gt;
               &lt;/table&gt;
             &lt;/div&gt;
             &lt;p class=&quot;sub&quot; id=&quot;alarm-filter-status&quot; role=&quot;status&quot;&gt;전체 알람 4건 표시&lt;/p&gt;
           &lt;/div&gt;
-          &lt;div class=&quot;banner alarm-safety-state&quot; id=&quot;alarm-safety-state&quot; role=&quot;status&quot; data-help=&quot;Safety Stop 실행 여부와 작업자 확인 결과를 기록합니다. 실제 유압설비 제어 연동 여부는 별도 확정이 필요합니다.&quot;&gt;Safety Stop 대기 · 실제 설비 정지 연동 범위는 킥오프 확인 필요&lt;/div&gt;
         &lt;/section&gt;
 
         &lt;section class=&quot;screen&quot; data-panel=&quot;report&quot;&gt;
@@ -2052,14 +2049,11 @@ html&gt;body{padding:0}&lt;/style&gt;
       const dataEditActions = [...dataPanel.querySelectorAll(&#x27;.data-edit-action&#x27;)];
       const alarmRows = [...root.querySelectorAll(&#x27;[data-alarm-row]&#x27;)];
       const alarmLevelFilter = root.querySelector(&#x27;#alarm-level-filter&#x27;);
-      const alarmStatusFilter = root.querySelector(&#x27;#alarm-status-filter&#x27;);
       const alarmDeviceFilter = root.querySelector(&#x27;#alarm-device-filter&#x27;);
       const alarmFilterStatus = root.querySelector(&#x27;#alarm-filter-status&#x27;);
       const criticalAlarmCount = root.querySelector(&#x27;#critical-alarm-count&#x27;);
       const alertAlarmCount = root.querySelector(&#x27;#alert-alarm-count&#x27;);
       const warningAlarmCount = root.querySelector(&#x27;#warning-alarm-count&#x27;);
-      const safetyStopButton = root.querySelector(&#x27;#safety-stop-button&#x27;);
-      const alarmSafetyState = root.querySelector(&#x27;#alarm-safety-state&#x27;);
       const newTestButton = root.querySelector(&#x27;#new-test-button&#x27;);
       const setupCompleteButton = root.querySelector(&#x27;#setup-complete-button&#x27;);
       const startBearingButton = root.querySelector(&#x27;#start-bearing-button&#x27;);
@@ -2087,7 +2081,6 @@ html&gt;body{padding:0}&lt;/style&gt;
         [&#x27;DIS-B-014&#x27;, -52], [&#x27;DIS-B-008&#x27;, -63], [&#x27;DIS-B-026&#x27;, -78],
         [&#x27;DIS-B-031&#x27;, -55], [&#x27;DIS-B-032&#x27;, -58], [&#x27;DIS-B-033&#x27;, -62]
       ].map(([value,rssi]) =&gt; ({ value, dataset: { rssi: String(rssi) } }));
-      const connectSelectedDevices = root.querySelector(&#x27;#connect-selected-devices&#x27;);
       const deviceConnectionStatus = root.querySelector(&#x27;#device-connection-status&#x27;);
       const deviceConnectionDetail = root.querySelector(&#x27;#device-connection-detail&#x27;);
       const reactionTolerance = root.querySelector(&#x27;#reaction-tolerance&#x27;);
@@ -2344,7 +2337,7 @@ html&gt;body{padding:0}&lt;/style&gt;
           if (previousCaptureSample === null) captureBarReadings({ ...currentDemoSample(), phase: measurementPhase, time: new Date().toISOString() });
         }
         liveSampleIndex += liveDemoDirection;
-        const sample = { ...currentDemoSample(), phase: measurementPhase, time: new Date().toISOString(), bearingName: measurementDeviceSnapshot?.bearingName, pressureId: measurementDeviceSnapshot?.pressureId, gaugeId: measurementDeviceSnapshot?.gaugeId };
+        const sample = { ...currentDemoSample(), phase: measurementPhase, segment: measurementSegment, time: new Date().toISOString(), bearingName: measurementDeviceSnapshot?.bearingName, pressureId: measurementDeviceSnapshot?.pressureId, gaugeId: measurementDeviceSnapshot?.gaugeId };
         updateLiveSample(sample);
         if (!measurementIsFinished()) {
           measurementRecords.push(sample);
@@ -2775,7 +2768,7 @@ html&gt;body{padding:0}&lt;/style&gt;
         if (window.lucide) window.lucide.createIcons({ attrs: { width: 20, height: 20 } });
       }, 0);
 
-      openAnalysisGraph.addEventListener(&#x27;click&#x27;, () =&gt; showGraphFullscreen(analysisPlot, &#x27;압력-변위 분석 그래프&#x27;, openAnalysisGraph));
+      openAnalysisGraph.addEventListener(&#x27;click&#x27;, () =&gt; showGraphFullscreen(analysisPlot, &#x27;압력-변위 분석 그래프 · &#x27; + (activeMeasurementBearing?.position || &#x27;현재 측정&#x27;), openAnalysisGraph));
       openSagGraph.addEventListener(&#x27;click&#x27;, () =&gt; showGraphFullscreen(sagPlot, &#x27;SAG Bedplate Deflection&#x27;, openSagGraph));
       closeGraphFullscreen.addEventListener(&#x27;click&#x27;, exitGraphFullscreen);
       let currentPdfPage = 0;
@@ -2827,7 +2820,7 @@ html&gt;body{padding:0}&lt;/style&gt;
           const error = measurementDeviceError(activeMeasurementBearing);
           if (error) { showValidationNotice(error, &#x27;devices&#x27;); return; }
         }
-        if (button.dataset.screen === &#x27;bearing-select&#x27;) renderMeasurementBearingChoices();
+        if (button.dataset.screen === &#x27;bearing-select&#x27;) renderMeasurementBearingChoices(true);
         if (button.dataset.screen === &#x27;setup&#x27;) {
           renderGaugeAssignments();
         }
@@ -2839,45 +2832,19 @@ html&gt;body{padding:0}&lt;/style&gt;
         let visibleCount = 0;
         alarmRows.forEach((row) =&gt; {
           const levelMatch = alarmLevelFilter.value === &#x27;all&#x27; || row.dataset.level === alarmLevelFilter.value;
-          const statusMatch = alarmStatusFilter.value === &#x27;all&#x27; || row.dataset.status === alarmStatusFilter.value;
           const deviceMatch = alarmDeviceFilter.value === &#x27;all&#x27; || row.dataset.device === alarmDeviceFilter.value;
-          const visible = levelMatch &amp;&amp; statusMatch &amp;&amp; deviceMatch;
+          const visible = levelMatch &amp;&amp; deviceMatch;
           row.hidden = !visible;
           if (visible) visibleCount += 1;
         });
-        const openCount = (level) =&gt; alarmRows.filter((row) =&gt; row.dataset.level === level &amp;&amp; row.dataset.status === &#x27;open&#x27;).length;
-        criticalAlarmCount.textContent = String(openCount(&#x27;critical&#x27;));
-        alertAlarmCount.textContent = String(openCount(&#x27;alert&#x27;));
-        warningAlarmCount.textContent = String(openCount(&#x27;warning&#x27;));
+        const totalCount = (level) =&gt; alarmRows.filter((row) =&gt; row.dataset.level === level).length;
+        criticalAlarmCount.textContent = String(totalCount(&#x27;critical&#x27;));
+        alertAlarmCount.textContent = String(totalCount(&#x27;alert&#x27;));
+        warningAlarmCount.textContent = String(totalCount(&#x27;warning&#x27;));
         alarmFilterStatus.textContent = `조건에 맞는 알람 ${visibleCount}건 표시`;
       };
-      [alarmLevelFilter, alarmStatusFilter, alarmDeviceFilter].forEach((control) =&gt; control.addEventListener(&#x27;change&#x27;, updateAlarmView));
-      alarmRows.forEach((row) =&gt; {
-        const ackButton = row.querySelector(&#x27;[data-alarm-ack]&#x27;);
-        ackButton.addEventListener(&#x27;click&#x27;, () =&gt; {
-          row.dataset.status = &#x27;acked&#x27;;
-          const state = row.querySelector(&#x27;[data-alarm-state]&#x27;);
-          state.className = &#x27;good&#x27;;
-          state.innerHTML = &#x27;확인 완료&lt;br&gt;&lt;span class=&quot;sub&quot;&gt;홍길동 · 방금&lt;/span&gt;&#x27;;
-          ackButton.textContent = &#x27;완료&#x27;;
-          ackButton.disabled = true;
-          updateAlarmView();
-        });
-      });
-      safetyStopButton.addEventListener(&#x27;click&#x27;, () =&gt; {
-        const requested = safetyStopButton.dataset.requested === &#x27;true&#x27;;
-        if (requested) {
-          safetyStopButton.dataset.requested = &#x27;false&#x27;;
-          safetyStopButton.textContent = &#x27;Safety Stop&#x27;;
-          alarmSafetyState.classList.remove(&#x27;warn&#x27;);
-          alarmSafetyState.textContent = &#x27;Safety Stop 대기 · 실제 설비 정지 연동 범위는 킥오프 확인 필요&#x27;;
-          return;
-        }
-        safetyStopButton.dataset.requested = &#x27;true&#x27;;
-        safetyStopButton.textContent = &#x27;요청 완료&#x27;;
-        alarmSafetyState.classList.add(&#x27;warn&#x27;);
-        alarmSafetyState.textContent = &#x27;Safety Stop 요청 기록 · 측정 데이터 수집 일시정지 · 실제 설비 정지 연동은 미확정&#x27;;
-      });
+      [alarmLevelFilter, alarmDeviceFilter].forEach((control) =&gt; control.addEventListener(&#x27;change&#x27;, updateAlarmView));
+      updateAlarmView();
       reportTabs.forEach((tab) =&gt; tab.addEventListener(&#x27;click&#x27;, () =&gt; {
         reportTabs.forEach((item) =&gt; item.setAttribute(&#x27;aria-selected&#x27;, String(item === tab)));
         reportTabPanels.forEach((panel) =&gt; panel.classList.toggle(&#x27;active&#x27;, panel.dataset.reportPanel === tab.dataset.reportTab));
@@ -2909,23 +2876,12 @@ html&gt;body{padding:0}&lt;/style&gt;
           tab.classList.toggle(&#x27;primary&#x27;, active);
         });
         root.querySelectorAll(&#x27;[data-setup-panel]&#x27;).forEach(panel =&gt; { panel.hidden = panel.dataset.setupPanel !== key; });
-        setupCompleteButton.textContent = key === &#x27;conditions&#x27; ? &#x27;장치 연결 설정 →&#x27; : &#x27;설정 완료 · 베어링 선택&#x27;;
-        setupCompleteButton.setAttribute(&#x27;data-jw-tooltip&#x27;, key === &#x27;conditions&#x27; ? &#x27;베어링 구성을 확인하고 장치 연결·게이지 지정으로 이동&#x27; : &#x27;베어링별 게이지 지정을 확인하고 측정할 베어링의 판정 조건 설정으로 이동&#x27;);
+        setupCompleteButton.textContent = &#x27;설정완료&#x27;;
         root.querySelector(&#x27;.main&#x27;).scrollTo({ top: 0, left: 0 });
       }
       root.querySelectorAll(&#x27;[data-setup-tab]&#x27;).forEach(tab =&gt; tab.addEventListener(&#x27;click&#x27;, () =&gt; showSetupTab(tab.dataset.setupTab)));
       setupCompleteButton.addEventListener(&#x27;click&#x27;, () =&gt; {
-        if (!root.querySelector(&#x27;#setup-conditions-content&#x27;).hidden) {
-          showSetupTab(&#x27;devices&#x27;);
-          return;
-        }
-        const missingIndex = bearingItems.findIndex(item =&gt; !mappingIsApplied(item));
-        if (missingIndex !== -1) {
-          showValidationNotice(bearingItems[missingIndex].position + &#x27;: 게이지를 지정한 후 선택 장치 연결을 눌러 주세요.&#x27;, &#x27;devices&#x27;);
-          root.querySelector(&#x27;#bearing-gauge-&#x27; + missingIndex).focus();
-          return;
-        }
-        renderMeasurementBearingChoices();
+        if (!applyDeviceConnections()) return;
         root.querySelector(&#x27;[data-screen=&quot;bearing-select&quot;]&#x27;).click();
       });
       startBearingButton.addEventListener(&#x27;click&#x27;, () =&gt; {
@@ -2935,6 +2891,10 @@ html&gt;body{padding:0}&lt;/style&gt;
         if (error) { showValidationNotice(error, &#x27;devices&#x27;); return; }
         archiveBearingSession();
         activeMeasurementBearing = pendingMeasurementBearing;
+        Object.keys(slopeStates).forEach(key =&gt; {
+          slopeStates[key] = JSON.parse(JSON.stringify(slopeDefaults[key]));
+        });
+        analysisHasManualChange = false;
         captureMeasurementDevices(activeMeasurementBearing);
         resetMeasurementSession();
         renderActiveDeviceStatus();
@@ -2997,10 +2957,58 @@ html&gt;body{padding:0}&lt;/style&gt;
       // Demo telemetry; native BLE integration must supply connection and reception independently of RSSI.
       const moduleTelemetry = new Map([...pressureModules, ...displacementModules].map((input) =&gt; [input.value, {
         rssi: input.dataset.rssi !== undefined ? Number(input.dataset.rssi) : null,
-        connected: false, receiving: false
+        connected: false, receiving: false, detected: true
       }]));
       let activeModuleIds = [];
       const appliedGaugeAssignments = new Map();
+      const rememberedConnectionKey = &#x27;shaft-monitor-device-mapping-v1&#x27;;
+      let rememberedConnection = null;
+      let connectionMemoryAvailable = true;
+      try {
+        const saved = JSON.parse(localStorage.getItem(rememberedConnectionKey) || &#x27;null&#x27;);
+        if (saved?.version === 1 &amp;&amp; typeof saved.pressureId === &#x27;string&#x27; &amp;&amp; Array.isArray(saved.bearings)
+          &amp;&amp; saved.bearings.every(item =&gt; typeof item.position === &#x27;string&#x27; &amp;&amp; typeof item.gaugeId === &#x27;string&#x27;)) rememberedConnection = saved;
+      } catch (_) { connectionMemoryAvailable = false; }
+      function rememberDeviceConnections() {
+        rememberedConnection = { version: 1, pressureId: mappedPressureModule.value,
+          bearings: bearingItems.map(item =&gt; ({ position: item.position, gaugeId: item.gaugeId })) };
+        try { localStorage.setItem(rememberedConnectionKey, JSON.stringify(rememberedConnection)); }
+        catch (_) { connectionMemoryAvailable = false; }
+      }
+      function restoreRememberedAssignments() {
+        const saved = rememberedConnection;
+        // Restore only the same bearing layout; never attach an old mapping to a different vessel layout.
+        if (!saved || saved.bearings.length !== bearingItems.length
+          || saved.bearings.some((item, index) =&gt; item.position !== bearingItems[index].position)
+          || !pressureModules.some(device =&gt; device.value === saved.pressureId)
+          || saved.bearings.some(item =&gt; !displacementModules.some(device =&gt; device.value === item.gaugeId))
+          || new Set(saved.bearings.map(item =&gt; item.gaugeId)).size !== saved.bearings.length) return;
+        mappedPressureModule.value = saved.pressureId;
+        activeModuleIds = [saved.pressureId, ...saved.bearings.map(item =&gt; item.gaugeId)];
+        bearingItems.forEach((item, index) =&gt; {
+          item.gaugeId = saved.bearings[index].gaugeId;
+          appliedGaugeAssignments.set(item, item.gaugeId);
+        });
+      }
+      function reconnectDetectedDevices() {
+        if (!rememberedConnection) return;
+        const knownIds = new Set([rememberedConnection.pressureId, ...rememberedConnection.bearings.map(item =&gt; item.gaugeId)]);
+        let changed = false;
+        activeModuleIds.forEach(id =&gt; {
+          const telemetry = moduleTelemetry.get(id);
+          if (!knownIds.has(id) || !telemetry?.detected || telemetry.connected) return;
+          // Prototype only: detection + successful connection + first sample are simulated together.
+          // Native BLE must await connection/service discovery and an actual notification separately.
+          telemetry.connected = true;
+          telemetry.receiving = true;
+          changed = true;
+        });
+        if (changed) {
+          renderGaugeAssignments();
+          renderMeasurementBearingChoices();
+          renderActiveDeviceStatus();
+        }
+      }
       function mappingIsApplied(item) {
         return Boolean(item?.gaugeId) &amp;&amp; appliedGaugeAssignments.get(item) === item.gaugeId
           &amp;&amp; mappedPressureModule.value === activeModuleIds[0] &amp;&amp; activeModuleIds.includes(item.gaugeId);
@@ -3020,7 +3028,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       };
       function sessionRunning() { return Boolean(activeMeasurementBearing) &amp;&amp; !measurementIsFinished(); }
       function measurementDeviceError(item) {
-        if (!mappingIsApplied(item)) return &#x27;장치 설정에서 해당 베어링의 게이지를 지정한 후 선택 장치 연결을 눌러 주세요.&#x27;;
+        if (!mappingIsApplied(item)) return &#x27;장치 설정에서 해당 베어링의 게이지를 지정한 후 설정완료 버튼을 눌러 주세요.&#x27;;
         if (!describeModule(activeModuleIds[0]).connected || !describeModule(activeModuleIds[0]).receiving) return &#x27;공통 압력계 연결과 수신 상태를 확인해 주세요.&#x27;;
         if (!describeModule(item.gaugeId).connected || !describeModule(item.gaugeId).receiving) return item.position + &#x27;: 디지털 게이지 연결과 수신 상태를 확인해 주세요.&#x27;;
         return &#x27;&#x27;;
@@ -3048,9 +3056,11 @@ html&gt;body{padding:0}&lt;/style&gt;
         deviceConnectionStatus.textContent = applied
           ? (receiving ? &#x27;연결·매핑 적용 완료&#x27; : &#x27;연결·수신 확인 필요&#x27;)
           : &#x27;게이지 지정 &#x27; + configured + &#x27; / &#x27; + bearingItems.length + &#x27; · 연결 적용 전&#x27;;
-        deviceConnectionDetail.textContent = &#x27;지정한 압력계와 게이지만 연결 · 측정은 베어링별로 하나씩 진행&#x27;;
-        connectSelectedDevices.textContent = receiving ? &#x27;연결 적용 완료&#x27; : &#x27;선택 장치 연결&#x27;;
-        connectSelectedDevices.disabled = sessionRunning();
+        deviceConnectionDetail.textContent = connectionMemoryAvailable
+          ? &#x27;이전 연결 장치 자동 재연결 · 새 장치·지정 변경은 설정완료로 적용&#x27;
+          : &#x27;이전 연결 장치 자동 재연결 · 이 미리보기에서는 새로고침 후 연결 기억이 제한될 수 있습니다.&#x27;;
+        setupCompleteButton.disabled = sessionRunning();
+        rescanModules.disabled = sessionRunning();
         mappedPressureModule.disabled = sessionRunning();
         const p = describeModule(mappedPressureModule.value);
         const pressureState = root.querySelector(&#x27;#mapped-pressure-state&#x27;);
@@ -3066,31 +3076,45 @@ html&gt;body{padding:0}&lt;/style&gt;
         renderMeasurementBearingChoices();
       });
       rescanModules.addEventListener(&#x27;click&#x27;, () =&gt; {
+        if (sessionRunning()) { showValidationNotice(&#x27;측정 종료 후 장치를 검색해 주세요.&#x27;, &#x27;devices&#x27;); return; }
+        showSetupTab(&#x27;devices&#x27;);
+        reconnectDetectedDevices();
         renderGaugeAssignments();
-        rescanModules.textContent = &#x27;압력 3대 · 디지털 게이지 6대 검색 완료&#x27;;
+        deviceConnectionDetail.textContent = &#x27;검색 완료 · 이전 연결 장치 자동 재연결 · 새 장치는 지정 후 설정완료&#x27;;
       });
-      connectSelectedDevices.addEventListener(&#x27;click&#x27;, () =&gt; {
-        if (sessionRunning()) { showValidationNotice(&#x27;측정 종료 후 연결 장치를 변경해 주세요.&#x27;, &#x27;devices&#x27;); return; }
+      function applyDeviceConnections() {
+        if (sessionRunning()) { showValidationNotice(&#x27;측정 종료 후 연결 장치를 변경해 주세요.&#x27;, &#x27;devices&#x27;); return false; }
         const gaugeIds = bearingItems.map(item =&gt; item.gaugeId);
         const missingIndex = bearingItems.findIndex(item =&gt; !displacementModules.some(device =&gt; device.value === item.gaugeId));
         if (missingIndex !== -1) {
+          showSetupTab(&#x27;devices&#x27;);
           showValidationNotice(bearingItems[missingIndex].position + &#x27;: 디지털 게이지를 먼저 지정해 주세요.&#x27;, &#x27;devices&#x27;);
           root.querySelector(&#x27;#bearing-gauge-&#x27; + missingIndex).focus();
-          return;
+          return false;
         }
         if (new Set(gaugeIds).size !== gaugeIds.length) {
-          showValidationNotice(&#x27;같은 디지털 게이지를 여러 베어링에 지정할 수 없습니다.&#x27;, &#x27;devices&#x27;); return;
+          showSetupTab(&#x27;devices&#x27;);
+          showValidationNotice(&#x27;같은 디지털 게이지를 여러 베어링에 지정할 수 없습니다.&#x27;, &#x27;devices&#x27;); return false;
+        }
+        if (!pressureModules.some(device =&gt; device.value === mappedPressureModule.value)) {
+          showSetupTab(&#x27;devices&#x27;);
+          showValidationNotice(&#x27;압력계를 지정해 주세요.&#x27;, &#x27;devices&#x27;); mappedPressureModule.focus(); return false;
+        }
+        if ([mappedPressureModule.value, ...gaugeIds].some(id =&gt; !moduleTelemetry.get(id)?.detected)) {
+          showValidationNotice(&#x27;감지되지 않은 장치가 있습니다. 장치 전원과 통신 범위를 확인해 주세요.&#x27;, &#x27;devices&#x27;); return false;
         }
         activeModuleIds = [mappedPressureModule.value, ...gaugeIds];
         // Mock connection success. Native BLE must apply each mapping only after connection succeeds.
         activeModuleIds.forEach(id =&gt; { const telemetry = moduleTelemetry.get(id); telemetry.connected = true; telemetry.receiving = true; });
         appliedGaugeAssignments.clear();
         bearingItems.forEach(item =&gt; appliedGaugeAssignments.set(item, item.gaugeId));
+        rememberDeviceConnections();
         clearValidationNotice(&#x27;devices&#x27;);
         renderGaugeAssignments();
         renderMeasurementBearingChoices();
         renderActiveDeviceStatus();
-      });
+        return true;
+      }
       function renderGaugeAssignments() {
         const grid = root.querySelector(&#x27;#gauge-assignment-grid&#x27;);
         grid.replaceChildren();
@@ -3125,7 +3149,7 @@ html&gt;body{padding:0}&lt;/style&gt;
           const status = document.createElement(&#x27;span&#x27;);
           const telemetry = describeModule(item.gaugeId);
           status.className = &#x27;sub &#x27; + (mappingIsApplied(item) &amp;&amp; telemetry.connected ? telemetry.signal.color : &#x27;warn&#x27;);
-          status.textContent = !item.gaugeId ? &#x27;게이지 미지정&#x27; : !mappingIsApplied(item) ? &#x27;연결 적용 대기&#x27; : telemetry.reception + &#x27; · RSSI &#x27; + telemetry.rssiText;
+          status.textContent = !item.gaugeId ? &#x27;게이지 미지정&#x27; : !mappingIsApplied(item) ? &#x27;최초 연결·지정 적용 대기&#x27; : !telemetry.connected ? &#x27;자동 재연결 대기 · 장치 감지 시 연결&#x27; : telemetry.reception + &#x27; · RSSI &#x27; + telemetry.rssiText;
           field.append(label,select,status);
           grid.append(field);
         });
@@ -3134,7 +3158,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       function captureMeasurementDevices(item) {
         measurementDeviceSnapshot = {
           bearingName: item.position, gaugeId: item.gaugeId,
-          pressureId: activeModuleIds[0]
+          pressureId: activeModuleIds[0], area: Number(effectiveArea.value), condition: {...item}
         };
         renderActiveDeviceStatus();
       }
@@ -3144,7 +3168,9 @@ html&gt;body{padding:0}&lt;/style&gt;
         bearingSessions.set(currentSessionId, {
           ...measurementDeviceSnapshot, id: currentSessionId,
           endedAt: new Date().toLocaleTimeString(&#x27;ko-KR&#x27;),
-          records: measurementRecords.map(sample =&gt; ({...sample}))
+          records: measurementRecords.map(sample =&gt; ({...sample})),
+          slopes: JSON.parse(JSON.stringify(slopeStates)),
+          barReadings: [...barReadingBody.rows].map(row =&gt; [...row.querySelectorAll(&#x27;input&#x27;)].map((input,index) =&gt; index % 2 ? input.value : input.dataset.pressureBar))
         });
         renderBearingSessionHistory();
       }
@@ -3375,7 +3401,9 @@ html&gt;body{padding:0}&lt;/style&gt;
         return { ratio, verdict: passed ? &#x27;OK&#x27; : &#x27;NG&#x27;, reason: `허용 반력 ${(minimum / KN_PER_TF).toFixed(2)}~${(maximum / KN_PER_TF).toFixed(2)} 톤(tf), 경계 포함` };
       }
       const updateSlopeResults = () =&gt; {
-        Object.entries(slopeStates).forEach(([key, state]) =&gt; {
+        const displayedSlopes = slopeStates;
+        const recordedContext = measurementRecords.length ? measurementDeviceSnapshot : null;
+        Object.entries(displayedSlopes).forEach(([key, state]) =&gt; {
           const line = slopeLineElements[key];
           line.setAttribute(&#x27;x1&#x27;, state.start.x);
           line.setAttribute(&#x27;y1&#x27;, state.start.y);
@@ -3387,14 +3415,14 @@ html&gt;body{padding:0}&lt;/style&gt;
             handle.setAttribute(&#x27;cy&#x27;, point.y);
           });
         });
-        const meanStartX = (slopeStates.lifting.start.x + slopeStates.lowering.start.x) / 2;
-        const meanEndX = (slopeStates.lifting.end.x + slopeStates.lowering.end.x) / 2;
+        const meanStartX = (displayedSlopes.lifting.start.x + displayedSlopes.lowering.start.x) / 2;
+        const meanEndX = (displayedSlopes.lifting.end.x + displayedSlopes.lowering.end.x) / 2;
         meanAnalysisLine.setAttribute(&#x27;x1&#x27;, meanStartX);
         meanAnalysisLine.setAttribute(&#x27;y1&#x27;, 354);
         meanAnalysisLine.setAttribute(&#x27;x2&#x27;, meanEndX);
         meanAnalysisLine.setAttribute(&#x27;y2&#x27;, 84);
-        const finalReaction = reactionFromPressure(xToBar(meanStartX), Number(effectiveArea.value));
-        const result = evaluateBearingReaction(finalReaction, activeMeasurementBearing);
+        const finalReaction = reactionFromPressure(xToBar(meanStartX), recordedContext ? recordedContext.area : Number(effectiveArea.value));
+        const result = evaluateBearingReaction(finalReaction, recordedContext ? recordedContext.condition : activeMeasurementBearing);
         analysisFinalReaction.textContent = Number.isFinite(finalReaction) ? `${(finalReaction / KN_PER_TF).toFixed(2)} 톤(tf)` : &#x27;—&#x27;;
         analysisErrorRate.textContent = result.ratio === null ? &#x27;—&#x27; : `${result.ratio.toFixed(2)}%`;
         const verdict = root.querySelector(&#x27;#analysis-verdict&#x27;);
@@ -3404,7 +3432,7 @@ html&gt;body{padding:0}&lt;/style&gt;
           node.classList.remove(&#x27;good&#x27;, &#x27;warn&#x27;, &#x27;bad&#x27;);
           if (color) node.classList.add(color);
         });
-        const item = activeMeasurementBearing;
+        const item = recordedContext ? recordedContext.condition : activeMeasurementBearing;
         root.querySelector(&#x27;#analysis-ratio-panel&#x27;).setAttribute(&#x27;data-help&#x27;, `${item ? item.position : &#x27;측정 베어링 미선택&#x27;} · 목표 ${item &amp;&amp; Number(item.target) &gt; 0 ? (Number(item.target) / KN_PER_TF).toFixed(2) + &#x27; 톤(tf) = 100%&#x27; : &#x27;미입력&#x27;} · ${result.reason}`);
       };
       let activeSlopeDrag = null;
@@ -3719,6 +3747,7 @@ html&gt;body{padding:0}&lt;/style&gt;
         });
         correctionHistoryBody.appendChild(row);
         analysisHasManualChange = false;
+        archiveBearingSession();
         analysisRangeStatus.textContent = `이력 저장 완료 · ${worker} · ${reason}`;
       });
       applyAnalysisResult.addEventListener(&#x27;click&#x27;, () =&gt; {
@@ -3757,6 +3786,7 @@ html&gt;body{padding:0}&lt;/style&gt;
         });
         correctionHistoryBody.appendChild(row);
         analysisHasManualChange = false;
+        archiveBearingSession();
         analysisRangeStatus.textContent = `최종 적용 완료 · ${worker} · 데이터 이력 반영`;
         historyContextLabel.textContent = &#x27;최종 적용 완료&#x27;;
         historyContextDetail.textContent = `H2678-20260825-02 · 통신 주기 1초 · ${worker} · ${time} · ${reason}`;
@@ -3797,6 +3827,8 @@ html&gt;body{padding:0}&lt;/style&gt;
         pendingMeasurementBearing = item;
         selectedBearingIndex = bearingItems.indexOf(item);
         root.querySelector(&#x27;[data-screen=&quot;bearing-select&quot;]&#x27;).click();
+        pendingMeasurementBearing = item;
+        renderMeasurementBearingChoices();
         renderSelectedBearing();
         const targetInvalid = Boolean(targetReactionError(item));
         renderTargetReactionError(targetInvalid);
@@ -3908,7 +3940,7 @@ html&gt;body{padding:0}&lt;/style&gt;
         renderSelectedBearing();
         renderActiveDeviceStatus();
       };
-      const renderMeasurementBearingChoices = () =&gt; {
+      const renderMeasurementBearingChoices = (resetSelection = false) =&gt; {
         const forwardEnd = document.createElement(&#x27;span&#x27;);
         forwardEnd.className = &#x27;shaft-end&#x27;;
         forwardEnd.textContent = &#x27;FWD&#x27;;
@@ -3930,11 +3962,11 @@ html&gt;body{padding:0}&lt;/style&gt;
           node.dataset.rangeSummary = isMainEngineBearing(item)
             ? (bearingRangeError(item) ? &#x27;입력 확인 필요&#x27; : item.minReaction === &#x27;&#x27; ? &#x27;미입력&#x27; : `${Number((Number(item.minReaction) / 9.80665).toFixed(4))} ~ ${Number((Number(item.maxReaction) / 9.80665).toFixed(4))} 톤(tf)`)
             : `±${item.tolerance}%`;
-          node.setAttribute(&#x27;aria-pressed&#x27;, String(index === 0));
+          node.setAttribute(&#x27;aria-pressed&#x27;, &#x27;false&#x27;);
           const assigned = mappingIsApplied(item);
           const device = describeModule(item.gaugeId);
           const state = document.createElement(&#x27;span&#x27;);
-          state.className = assigned &amp;&amp; device.connected ? device.signal.color : &#x27;warn&#x27;;
+          state.className = assigned ? (device.connected ? &#x27;good&#x27; : &#x27;bad&#x27;) : &#x27;warn&#x27;;
           state.textContent = !item.gaugeId ? &#x27;미지정&#x27; : !assigned ? &#x27;연결 대기&#x27; : device.connected ? &#x27;연결&#x27; : &#x27;연결 끊김&#x27;;
           node.append(document.createTextNode(item.position), document.createElement(&#x27;br&#x27;), state);
           node.setAttribute(&#x27;aria-label&#x27;, item.position + &#x27;, &#x27; + (item.gaugeId || &#x27;게이지 미지정&#x27;) + &#x27;, &#x27; + state.textContent);
@@ -3943,7 +3975,7 @@ html&gt;body{padding:0}&lt;/style&gt;
         measurementShaftTrack.replaceChildren(aftEnd, ...nodes.slice().reverse(), forwardEnd);
         bearingChoices = [...measurementShaftTrack.querySelectorAll(&#x27;.bearing-choice&#x27;)];
         bearingChoices.forEach((choice) =&gt; choice.addEventListener(&#x27;click&#x27;, () =&gt; selectMeasurementBearing(choice)));
-        const selected = nodes.find(node =&gt; bearingItems[Number(node.dataset.bearingIndex)] === pendingMeasurementBearing) || nodes[0];
+        const selected = (!resetSelection &amp;&amp; nodes.find(node =&gt; bearingItems[Number(node.dataset.bearingIndex)] === pendingMeasurementBearing)) || bearingChoices[0];
         if (selected) selectMeasurementBearing(selected);
       };
       shipType.addEventListener(&#x27;change&#x27;, () =&gt; {
@@ -3959,6 +3991,10 @@ html&gt;body{padding:0}&lt;/style&gt;
         activeMeasurementBearing = null;
         pendingMeasurementBearing = null;
         measurementDeviceSnapshot = null;
+        measurementRecords.length = 0;
+        currentSessionId = null;
+        resetLiveAnalysisGraph();
+        resetBarCaptures();
         customShipType.value = &#x27;&#x27;;
         const template = shipTypeTemplates[shipType.value];
         selectedBearingIndex = 0;
@@ -4037,8 +4073,11 @@ html&gt;body{padding:0}&lt;/style&gt;
         selectedBearingIndex = Math.min(selectedBearingIndex, bearingItems.length - 1);
         renderShaftLayout();
       });
+      restoreRememberedAssignments();
       renderShaftLayout();
       renderMeasurementBearingChoices();
+      reconnectDetectedDevices();
+      window.setInterval(reconnectDetectedDevices, 3000);
       const correctedPressure = root.querySelector(&#x27;#corrected-pressure&#x27;);
       correctedPressure.addEventListener(&#x27;input&#x27;, () =&gt; {
         if (correctedPressure.value !== &#x27;&#x27; &amp;&amp; Number(correctedPressure.value) &lt; 0) correctedPressure.value = &#x27;0&#x27;;
