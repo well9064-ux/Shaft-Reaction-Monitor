@@ -5,18 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
-<title>Jackup Tablet Wireframe</title>
+<title>Shaft Reaction Monitor</title>
 <style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
 </head>
 <body>
-<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="Jackup Tablet Wireframe" srcdoc="&lt;!doctype html&gt;
+<iframe id="codex-visualization" sandbox="allow-scripts" referrerpolicy="no-referrer" title="Shaft Reaction Monitor" data-srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot; data-visualize-standalone&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
 &lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
 &lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
-&lt;title&gt;Jackup Tablet Wireframe&lt;/title&gt;
+&lt;title&gt;Shaft Reaction Monitor&lt;/title&gt;
 &lt;style&gt;:root {
   color-scheme: light dark;
   background-color: var(
@@ -185,9 +185,13 @@ html &gt; body {
   line-height: var(--line-height-normal);
 }
 
+.cursor-interaction {
+  cursor: var(--cursor-interaction, pointer);
+}
+
 a {
   color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
-  cursor: pointer;
+  cursor: var(--cursor-interaction, pointer);
   font-weight: var(--font-weight-medium, 500);
   text-decoration: none;
   text-underline-offset: 2px;
@@ -538,7 +542,7 @@ small,
 }
 
 a.btn {
-  cursor: pointer;
+  cursor: var(--cursor-interaction, pointer);
   text-decoration: none;
 }
 
@@ -1035,9 +1039,298 @@ svg.lucide {
 html&gt;body{padding:0}&lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
+&lt;script type=&quot;application/json&quot; id=&quot;codex-visualization-widget-state&quot;&gt;__CODEX_VISUALIZATION_WIDGET_STATE__&lt;/script&gt;
+&lt;script&gt;(() =&gt; {
+  const root = document.documentElement;
+  const mediaQuery = globalThis.matchMedia(&quot;(prefers-color-scheme: dark)&quot;);
+  const apply = Reflect.apply;
+  const isArray = Array.isArray;
+  const hasOwn = Object.hasOwn;
+  const parentWindow = globalThis.parent;
+  const stringify = JSON.stringify;
+  const parse = JSON.parse;
+  const encode = TextEncoder.prototype.encode.bind(new TextEncoder());
+  const initialStateElement = document.getElementById(
+    &quot;codex-visualization-widget-state&quot;,
+  );
+  const initialGlobals = parse(initialStateElement?.textContent ?? &quot;{}&quot;);
+  initialStateElement?.remove();
+  /** @type {Record&lt;string, unknown&gt; | null} */
+  let state = initialGlobals.widgetState ?? null;
+  const statePersistence = initialGlobals.statePersistence ?? &quot;none&quot;;
+  let nextStateRequestId = 0;
+  /** @type {Map&lt;number, { resolve: () =&gt; void; reject: (error: Error) =&gt; void; timeout: ReturnType&lt;typeof globalThis.setTimeout&gt;; serializedState: string }&gt;} */
+  const pendingStateWrites = new Map();
+  const persistenceError = () =&gt;
+    Object.assign(
+      new Error(&quot;The host could not persist the widget state update&quot;),
+      {
+        code: -32000,
+        data: { code: &quot;widget_state_persistence_failed&quot;, retryable: false },
+      },
+    );
+  /**
+   * @param {object} prototype
+   * @param {string} property
+   */
+  const getPrototypeGetter = (prototype, property) =&gt; {
+    // oxlint-disable-next-line typescript/unbound-method -- invoked through captured Reflect.apply
+    const getter = Object.getOwnPropertyDescriptor(prototype, property)?.get;
+    if (getter == null) {
+      throw new Error(`Missing ${property} getter`);
+    }
+    return getter;
+  };
+  const getMessageData = getPrototypeGetter(MessageEvent.prototype, &quot;data&quot;);
+  const getMessagePorts = getPrototypeGetter(MessageEvent.prototype, &quot;ports&quot;);
+  const getMessageSource = getPrototypeGetter(MessageEvent.prototype, &quot;source&quot;);
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const addHostMessageListener = MessagePort.prototype.addEventListener;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const postHostMessage = MessagePort.prototype.postMessage;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const startHostPort = MessagePort.prototype.start;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const stopMessagePropagation = Event.prototype.stopImmediatePropagation;
+  /** @type {MessagePort | null} */
+  let hostPort = null;
+  const postToHost = (type, payload) =&gt; {
+    if (hostPort != null) {
+      apply(postHostMessage, hostPort, [{ type, ...payload }]);
+    }
+  };
+  const openExternal = ({ href }) =&gt; {
+    if (globalThis.navigator.userActivation?.isActive === true) {
+      postToHost(&quot;open-external&quot;, { href });
+    }
+  };
+  const sendFollowUpMessage = ({ context, prompt, title }) =&gt; {
+    if (globalThis.navigator.userActivation?.isActive === true) {
+      postToHost(&quot;follow-up&quot;, { context, prompt, title });
+    }
+    return Promise.resolve();
+  };
+  /**
+   * @param {Record&lt;string, unknown&gt; | ((previous: Record&lt;string, unknown&gt; | null) =&gt; Record&lt;string, unknown&gt;)} next
+   * @returns {Promise&lt;void&gt;}
+   */
+  const setWidgetState = async (next) =&gt; {
+    const nextState = typeof next === &quot;function&quot; ? next(state) : next;
+    if (
+      nextState == null ||
+      typeof nextState !== &quot;object&quot; ||
+      isArray(nextState)
+    ) {
+      throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+    }
+    const inputState = stringify(
+      nextState,
+      (_key, /** @type {unknown} */ value) =&gt; {
+        if (
+          typeof value === &quot;undefined&quot; ||
+          typeof value === &quot;function&quot; ||
+          typeof value === &quot;symbol&quot; ||
+          (typeof value === &quot;number&quot; &amp;&amp; !Number.isFinite(value))
+        ) {
+          throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+        }
+        return value;
+      },
+    );
+    const parsedState = parse(inputState);
+    if (
+      parsedState == null ||
+      typeof parsedState !== &quot;object&quot; ||
+      isArray(parsedState)
+    ) {
+      throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+    }
+    const storedState = {
+      modelContent: null,
+      privateContent: null,
+      ...parsedState,
+    };
+    const serializedState = stringify(storedState);
+    if (encode(serializedState).length &gt; 16 * 1024) {
+      throw new TypeError(
+        &quot;Widget state must be a JSON object of at most 16 KiB&quot;,
+      );
+    }
+    if (
+      hasOwn(storedState, &quot;imageIds&quot;) &amp;&amp;
+      (!isArray(storedState.imageIds) ||
+        storedState.imageIds.some(
+          (/** @type {unknown} */ id) =&gt; typeof id !== &quot;string&quot;,
+        ))
+    ) {
+      throw new TypeError(&quot;Widget state imageIds must be an array of strings&quot;);
+    }
+    if (storedState.imageIds?.length &gt; 0) {
+      throw Object.assign(
+        new TypeError(&quot;Visualization state does not support image attachments&quot;),
+        { code: -32602, data: { code: &quot;images_unsupported&quot; } },
+      );
+    }
+    state = storedState;
+    globalThis.openai.widgetState = state;
+    globalThis.dispatchEvent(
+      new CustomEvent(&quot;openai:set_globals&quot;, {
+        detail: { globals: { widgetState: state } },
+      }),
+    );
+    if (statePersistence === &quot;none&quot;) {
+      throw persistenceError();
+    }
+    const id = ++nextStateRequestId;
+    return new Promise((resolve, reject) =&gt; {
+      const timeout = globalThis.setTimeout(() =&gt; {
+        pendingStateWrites.delete(id);
+        reject(persistenceError());
+      }, 30_000);
+      pendingStateWrites.set(id, { resolve, reject, timeout, serializedState });
+      postToHost(&quot;widget-state-write&quot;, { id, state: serializedState });
+    });
+  };
+  const syncTheme = () =&gt; {
+    const theme = mediaQuery.matches ? &quot;dark&quot; : &quot;light&quot;;
+    root.dataset.theme = theme;
+    globalThis.openai = {
+      ...globalThis.openai,
+      openExternal,
+      sendFollowUpMessage,
+      setWidgetState,
+      theme,
+      visualizationStyleVariables: {},
+      visualizationTheme: theme,
+      widgetState: state,
+      statePersistence,
+      stateModelContext: &quot;none&quot;,
+    };
+    globalThis.dispatchEvent(
+      new CustomEvent(&quot;openai:set_globals&quot;, {
+        detail: { globals: globalThis.openai },
+      }),
+    );
+  };
+  const sendHeight = () =&gt; {
+    postToHost(&quot;height&quot;, {
+      height: Math.ceil(
+        Math.max(
+          document.body.scrollHeight,
+          document.body.getBoundingClientRect().height,
+        ),
+      ),
+    });
+  };
+
+  globalThis.addEventListener(
+    &quot;message&quot;,
+    (event) =&gt; {
+      const data = apply(getMessageData, event, []);
+      const ports = apply(getMessagePorts, event, []);
+      const source = apply(getMessageSource, event, []);
+      if (
+        hostPort != null ||
+        source !== parentWindow ||
+        typeof data !== &quot;object&quot; ||
+        data?.type !== &quot;codex-visualization-initialize&quot; ||
+        !isArray(ports) ||
+        ports.length !== 1
+      ) {
+        return;
+      }
+      apply(stopMessagePropagation, event, []);
+      const nextHostPort = ports[0];
+      try {
+        apply(addHostMessageListener, nextHostPort, [
+          &quot;message&quot;,
+          (event) =&gt; {
+            const data = apply(getMessageData, event, []);
+            if (typeof data === &quot;object&quot; &amp;&amp; data?.type === &quot;measure&quot;) {
+              sendHeight();
+            } else if (
+              typeof data === &quot;object&quot; &amp;&amp;
+              data?.type === &quot;widget-state-result&quot;
+            ) {
+              /** @type {unknown} */
+              const id = data.id;
+              if (typeof id !== &quot;number&quot;) {
+                return;
+              }
+              const pending = pendingStateWrites.get(id);
+              if (pending != null) {
+                pendingStateWrites.delete(id);
+                globalThis.clearTimeout(pending.timeout);
+                if (data.ok === true) {
+                  pending.resolve();
+                } else {
+                  pending.reject(persistenceError());
+                }
+              }
+            }
+          },
+        ]);
+        apply(startHostPort, nextHostPort, []);
+      } catch {
+        return;
+      }
+      hostPort = nextHostPort;
+      for (const [id, { serializedState }] of pendingStateWrites) {
+        postToHost(&quot;widget-state-write&quot;, { id, state: serializedState });
+      }
+      sendHeight();
+    },
+    { capture: true },
+  );
+  document.currentScript?.remove();
+  mediaQuery.addEventListener(&quot;change&quot;, syncTheme);
+  globalThis.addEventListener(&quot;click&quot;, (event) =&gt; {
+    if (event.defaultPrevented) {
+      return;
+    }
+    let element = null;
+    if (event.target instanceof globalThis.Element) {
+      element = event.target;
+    } else if (event.target instanceof globalThis.Node) {
+      element = event.target.parentElement;
+    }
+    const link = element?.closest(&quot;a[href]&quot;);
+    const href = link?.getAttribute(&quot;href&quot;);
+    if (href == null) {
+      return;
+    }
+    if (href.startsWith(&quot;#&quot;)) {
+      let id;
+      try {
+        id = decodeURIComponent(href.slice(1));
+      } catch {
+        return;
+      }
+      const target = id.length === 0 ? root : document.getElementById(id);
+      if (
+        target == null ||
+        globalThis.navigator.userActivation?.isActive !== true
+      ) {
+        return;
+      }
+      event.preventDefault();
+      postToHost(&quot;scroll-to&quot;, {
+        top: target.getBoundingClientRect().top + globalThis.scrollY,
+      });
+      return;
+    }
+    event.preventDefault();
+    openExternal({ href });
+  });
+  new ResizeObserver(sendHeight).observe(document.body);
+  syncTheme();
+})();
+&lt;/script&gt;
 &lt;div id=&quot;jackup-wireframe&quot;&gt;
   &lt;style&gt;
     #jackup-wireframe {
+      --jw-header-height: 56px;
+      --jw-sidebar-width: 156px;
       --jw-bg: light-dark(#e7ebef, #171a1e);
       --jw-surface: light-dark(#ffffff, #23272d);
       --jw-surface-2: light-dark(#f5f7f9, #2c3138);
@@ -1052,17 +1345,18 @@ html&gt;body{padding:0}&lt;/style&gt;
       --jw-bad: light-dark(#a93e3e, #ed7777);
       color: var(--jw-text);
       font-family: Arial, &quot;Noto Sans KR&quot;, sans-serif;
+      font-size: 13px;
       position: relative;
     }
     #jackup-wireframe * { box-sizing: border-box; }
-    #jackup-wireframe .device { width: min(100%, 1007px); max-width: 1007px; max-height: 601px; aspect-ratio: 1007 / 601; margin: 0 auto; background: var(--jw-bg); border: 1px solid var(--jw-line); border-radius: 14px; overflow: hidden; }
-    #jackup-wireframe .topbar { height: 52px; min-height: 52px; padding: 6px 14px; background: var(--jw-dark); color: var(--jw-dark-text); display: flex; gap: 12px; align-items: center; justify-content: space-between; }
+    #jackup-wireframe .device { position: relative; width: min(100%, 1056px); height: min(660px, calc(100dvh - 32px)); margin: 0 auto; background: var(--jw-bg); border: 1px solid var(--jw-line); border-radius: 14px; overflow: hidden; }
+    #jackup-wireframe .topbar { height: var(--jw-header-height); min-height: var(--jw-header-height); padding: 6px 14px; background: var(--jw-dark); color: var(--jw-dark-text); display: flex; gap: 12px; align-items: center; justify-content: space-between; }
     #jackup-wireframe .brand { display: flex; align-items: center; gap: 9px; font-weight: 500; }
     #jackup-wireframe .brand-mark { width: 24px; height: 24px; border: 2px solid currentColor; border-radius: 50%; display: grid; place-items: center; }
     #jackup-wireframe .device-profile { color: #b8c4cc; border-left: 1px solid #66737d; padding-left: 9px; font-size: 11px; font-weight: 400; white-space: nowrap; }
     #jackup-wireframe .top-status { display: flex; gap: 14px; align-items: center; color: #dce4e9; font-size: 12px; }
     #jackup-wireframe .guide-toggle { min-height: 40px; border: 1px solid #82909a; background: transparent; color: #f7f9fa; border-radius: 6px; padding: 7px 10px; cursor: pointer; font: inherit; }
-    #jackup-wireframe .shell { display: grid; grid-template-columns: 142px minmax(0, 1fr); height: calc(100% - 52px); min-height: 0; }
+    #jackup-wireframe .shell { display: grid; grid-template-columns: var(--jw-sidebar-width) minmax(0, 1fr); height: calc(100% - var(--jw-header-height)); min-height: 0; }
     #jackup-wireframe .nav { display: block; min-height: 0; overflow-y: auto; background: var(--jw-surface); border-right: 1px solid var(--jw-line); padding: 8px 6px; }
     #jackup-wireframe .nav button { width: 100%; min-height: 42px; border: 0; background: transparent; color: var(--jw-muted); text-align: left; padding: 8px 9px; margin: 1px 0; border-radius: 7px; cursor: pointer; font: inherit; display: flex; gap: 8px; align-items: center; }
     #jackup-wireframe .nav button[aria-selected=&quot;true&quot;] { background: var(--jw-surface-2); color: var(--jw-text); font-weight: 500; box-shadow: inset 3px 0 0 var(--jw-accent); }
@@ -1090,7 +1384,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .warn { color: var(--jw-warn); }
     #jackup-wireframe .bad { color: var(--jw-bad); }
     #jackup-wireframe .btnrow { display: flex; gap: 8px; flex-wrap: wrap; }
-    #jackup-wireframe .action { min-height: 44px; border: 1px solid var(--jw-line); background: var(--jw-surface); color: var(--jw-text); padding: 9px 13px; border-radius: 7px; cursor: pointer; font: inherit; }
+    #jackup-wireframe .action { min-height: 44px; border: 1px solid var(--jw-line); background: var(--jw-surface); color: var(--jw-text); padding: 9px 13px; border-radius: 7px; cursor: pointer; font: inherit; font-size: 14px; }
     #jackup-wireframe .action.primary { background: var(--jw-dark); color: var(--jw-dark-text); border-color: var(--jw-dark); }
     #jackup-wireframe :is([data-jw-tooltip], [data-help], [data-order]) { position: relative; }
     #jackup-wireframe .guide-tooltip { position: absolute; z-index: 300; width: max-content; max-width: min(310px, calc(100% - 24px)); padding: 9px 11px; border-radius: 7px; background: var(--jw-dark); color: var(--jw-dark-text); font-size: 11px; line-height: 1.5; text-align: left; pointer-events: none; opacity: 0; visibility: hidden; box-shadow: 0 6px 18px rgba(0,0,0,.22); }
@@ -1299,7 +1593,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .analysis-range-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
     #jackup-wireframe .analysis-meta-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
     #jackup-wireframe .analysis-reason-field { grid-column: 1 / -1; }
-    #jackup-wireframe .graph-fullscreen { position: absolute; z-index: 200; top: 52px; right: max(0px, calc((100vw - 1007px) / 2)); bottom: 0; left: max(142px, calc((100vw - 1007px) / 2 + 142px)); display: none; grid-template-rows: auto minmax(0, 1fr) auto; gap: 10px; padding: 12px; overflow: hidden; background: var(--jw-surface); color: var(--jw-text); }
+    #jackup-wireframe .graph-fullscreen { position: absolute; z-index: 200; top: var(--jw-header-height); right: 0; bottom: 0; left: var(--jw-sidebar-width); display: none; grid-template-rows: auto minmax(0, 1fr) auto; gap: 10px; padding: 12px; overflow: hidden; background: var(--jw-surface); color: var(--jw-text); }
     #jackup-wireframe .graph-fullscreen.open { display: grid; }
     #jackup-wireframe .graph-fullscreen.has-analysis-summary { grid-template-rows: auto auto minmax(0, 1fr) auto; }
     #jackup-wireframe #graph-fullscreen-summary &gt; .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -1310,7 +1604,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .graph-fullscreen-body { min-width: 0; min-height: 0; display: grid; place-items: stretch; overflow: hidden; }
     #jackup-wireframe .graph-fullscreen-body .plot { width: 100%; height: 100%; min-width: 0; min-height: 0; max-width: 100%; max-height: 100%; }
     #jackup-wireframe .graph-fullscreen .legend { margin-top: 0; min-height: 18px; }
-    #jackup-wireframe .pdf-preview { position: fixed; z-index: 210; top: 52px; right: max(0px, calc((100vw - 1007px) / 2)); bottom: max(0px, calc((100vh - 601px) / 2)); left: max(142px, calc((100vw - 1007px) / 2 + 142px)); display: none; grid-template-rows: auto minmax(0, 1fr) auto; gap: 10px; padding: 12px; background: var(--jw-bg); color: var(--jw-text); }
+    #jackup-wireframe .pdf-preview { position: absolute; z-index: 210; top: var(--jw-header-height); right: 0; bottom: 0; left: var(--jw-sidebar-width); display: none; grid-template-rows: auto minmax(0, 1fr) auto; gap: 10px; padding: 12px; background: var(--jw-bg); color: var(--jw-text); }
     #jackup-wireframe .pdf-preview.open { display: grid; }
     #jackup-wireframe .pdf-preview-head, #jackup-wireframe .pdf-preview-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     #jackup-wireframe .pdf-preview-head h2 { margin: 0; }
@@ -1417,7 +1711,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .bearing-status-chip.measuring { color: var(--jw-good); background: color-mix(in srgb, var(--jw-good) 12%, var(--jw-surface)); }
     #jackup-wireframe .bearing-name-editor { position: relative; z-index: 3; max-width: 118px; padding: 6px; font-size: 10px; text-align: center; }
     @media (max-width: 1050px) and (orientation: landscape) {
-      #jackup-wireframe .shell { grid-template-columns: 142px minmax(0, 1fr); }
+      #jackup-wireframe .shell { grid-template-columns: var(--jw-sidebar-width) minmax(0, 1fr); }
       #jackup-wireframe .main { padding: 12px; }
       #jackup-wireframe .nav { padding-inline: 6px; }
       #jackup-wireframe .top-status { gap: 9px; }
@@ -1430,8 +1724,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       #jackup-wireframe .result-confirmation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       #jackup-wireframe .result-confirmation-grid .remeasure-reason-field { grid-column: 1 / -1; }
       #jackup-wireframe .overview-history-grid { grid-template-columns: 1fr; }
-      #jackup-wireframe .graph-fullscreen { left: 142px; right: 0; bottom: 0; }
-      #jackup-wireframe .pdf-preview { left: 142px; right: 0; bottom: 0; }
+      #jackup-wireframe .graph-fullscreen, #jackup-wireframe .pdf-preview { left: var(--jw-sidebar-width); right: 0; bottom: 0; }
     }
     @media (max-width: 700px) {
       #jackup-wireframe .shell { grid-template-columns: 1fr; }
@@ -1447,8 +1740,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       #jackup-wireframe .connection-builder .field, #jackup-wireframe .connection-builder .action { grid-column: auto; }
       #jackup-wireframe .analysis-meta-grid { grid-template-columns: 1fr; }
       #jackup-wireframe .analysis-reason-field { grid-column: 1; }
-      #jackup-wireframe .graph-fullscreen { top: 124px; left: 0; right: 0; }
-      #jackup-wireframe .pdf-preview { top: 124px; left: 0; right: 0; }
+      #jackup-wireframe .graph-fullscreen, #jackup-wireframe .pdf-preview { top: calc(var(--jw-header-height) + 56px); left: 0; right: 0; }
       #jackup-wireframe .pdf-preview-body { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); }
       #jackup-wireframe .pdf-page-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       #jackup-wireframe .pdf-page-choice { text-align: center; }
@@ -1486,17 +1778,17 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .bar-reading-scroll { max-height: 285px; overflow: auto; }
     #jackup-wireframe .bar-reading-table { width: 100%; table-layout: fixed; }
     #jackup-wireframe .bar-reading-table thead { position: sticky; top: 0; background: var(--jw-surface); z-index: 1; }
-    #jackup-wireframe #end-data-measurement { flex-shrink: 0; min-height: 44px; }
+    #jackup-wireframe #end-data-measurement { flex-shrink: 0; box-sizing: border-box; width: 150px; height: 44px; min-height: 44px; font-size: 13px; white-space: nowrap; }
     #jackup-wireframe #end-data-measurement:disabled { opacity: .55; cursor: default; }
     #jackup-wireframe #analysis-verdict { display: inline-block; margin-left: 5px; font-size: 11px; }
-    #jackup-wireframe .analysis-action-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 0 0 12px; }
-    #jackup-wireframe .analysis-action-row .action { width: 100%; min-height: 44px; padding: 8px; }
+    #jackup-wireframe .analysis-action-row { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+    #jackup-wireframe .analysis-action-row .action { box-sizing: border-box; flex: 0 0 150px; width: 150px; height: 44px; min-height: 44px; font-size: 13px; white-space: nowrap; }
     #jackup-wireframe .reset-measurement-dialog { box-sizing: border-box; width: 420px; max-width: calc(100% - 32px); max-height: calc(100% - 32px); overflow: auto; margin: auto; padding: 20px; border: 1px solid var(--jw-line); border-radius: 10px; background: var(--jw-surface); color: var(--jw-text); }
     #jackup-wireframe .reset-measurement-dialog::backdrop { background: rgb(0 0 0 / .45); }
     #jackup-wireframe .reset-measurement-dialog p { font-size: 13px; line-height: 1.6; }
     #jackup-wireframe .reset-dialog-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
     #jackup-wireframe .device { position: relative; }
-    #jackup-wireframe .validation-notice { position: absolute; top: 56px; right: 14px; z-index: 450; box-sizing: border-box; width: 360px; max-width: calc(100% - 28px); max-height: calc(100% - 80px); overflow: auto; display: grid; gap: 10px; padding: 12px 14px; border: 1px solid var(--jw-line); border-radius: 9px; background: var(--jw-surface); color: var(--jw-text); box-shadow: 0 5px 18px rgb(0 0 0 / .22); }
+    #jackup-wireframe .validation-notice { position: absolute; top: var(--jw-header-height); right: 14px; z-index: 450; box-sizing: border-box; width: 360px; max-width: calc(100% - 28px); max-height: calc(100% - 80px); overflow: auto; display: grid; gap: 10px; padding: 12px 14px; border: 1px solid var(--jw-line); border-radius: 9px; background: var(--jw-surface); color: var(--jw-text); box-shadow: 0 5px 18px rgb(0 0 0 / .22); }
     #jackup-wireframe .validation-notice[hidden] { display: none; }
     #jackup-wireframe #validation-notice-message { min-width: 0; max-width: 560px; overflow-wrap: anywhere; font-size: 13px; line-height: 1.5; }
     #jackup-wireframe #dismiss-validation-notice { flex-shrink: 0; min-width: 44px; min-height: 44px; padding: 6px; border: 0; border-radius: 5px; background: transparent; color: inherit; font: inherit; cursor: pointer; }
@@ -1516,6 +1808,23 @@ html&gt;body{padding:0}&lt;/style&gt;
     #jackup-wireframe .notification-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     #jackup-wireframe .notification-heading strong { font-size: 14px; font-weight: 500; }
     #jackup-wireframe #view-header-alarms { width: 100%; min-height: 40px; }
+    @media (orientation: portrait) {
+      #jackup-wireframe .device { width: min(100%, 660px); height: min(1056px, calc(100dvh - 32px)); }
+      #jackup-wireframe .shell { grid-template-columns: minmax(0, 1fr); grid-template-rows: 56px minmax(0, 1fr); }
+      #jackup-wireframe .nav { display: flex; align-items: center; overflow-x: auto; overflow-y: hidden; white-space: nowrap; border-right: 0; border-bottom: 1px solid var(--jw-line); }
+      #jackup-wireframe .nav button { flex: 0 0 auto; width: auto; min-height: 44px; }
+      #jackup-wireframe .device-profile, #jackup-wireframe .top-status .hide-small { display: none; }
+      #jackup-wireframe .formgrid, #jackup-wireframe .analysis-meta-grid, #jackup-wireframe .measurement-instruments { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #jackup-wireframe .measurement-instruments .instrument-wide { grid-column: 1 / -1; }
+      #jackup-wireframe .analysis-main-grid, #jackup-wireframe .curve-range-grid, #jackup-wireframe .sag-result-layout, #jackup-wireframe .gauge-assignment-grid, #jackup-wireframe .result-confirmation-grid { grid-template-columns: minmax(0, 1fr); }
+      #jackup-wireframe .report-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #jackup-wireframe .graph-fullscreen, #jackup-wireframe .pdf-preview { top: calc(var(--jw-header-height) + 56px); right: 0; bottom: 0; left: 0; }
+      #jackup-wireframe .pdf-preview-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+    }
+    @media (max-width: 520px) and (orientation: portrait) {
+      #jackup-wireframe .formgrid, #jackup-wireframe .analysis-meta-grid, #jackup-wireframe .measurement-instruments { grid-template-columns: minmax(0, 1fr); }
+      #jackup-wireframe .measurement-instruments .instrument-wide { grid-column: auto; }
+    }
   &lt;/style&gt;
   &lt;div class=&quot;device&quot;&gt;
     &lt;div class=&quot;validation-notice&quot; id=&quot;validation-notice&quot; role=&quot;region&quot; aria-label=&quot;알림 안내&quot; hidden&gt;
@@ -1524,7 +1833,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       &lt;button class=&quot;action&quot; id=&quot;view-header-alarms&quot; type=&quot;button&quot;&gt;알람·경고 보기&lt;/button&gt;
     &lt;/div&gt;
     &lt;header class=&quot;topbar&quot;&gt;
-      &lt;div class=&quot;brand&quot;&gt;&lt;span class=&quot;brand-mark&quot;&gt;J&lt;/span&gt; Shaft Reaction Monitor &lt;span class=&quot;device-profile&quot;&gt;Galaxy Tab 11 · 1007×601 · 가로&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;brand&quot;&gt;&lt;span class=&quot;brand-mark&quot;&gt;J&lt;/span&gt; Shaft Reaction Monitor &lt;span class=&quot;device-profile&quot;&gt;Galaxy Tab S10 Lite · 10.9″ · 가로&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;top-status&quot;&gt;&lt;button class=&quot;guide-toggle&quot; id=&quot;guide-toggle&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;가이드 모드 켜기&lt;/button&gt;&lt;span class=&quot;hide-small&quot;&gt;TEST: H2678-20260825-02&lt;/span&gt;&lt;span&gt;14:32&lt;/span&gt;&lt;button class=&quot;header-notification-button&quot; id=&quot;header-notification-button&quot; type=&quot;button&quot; aria-label=&quot;알림 열기&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;validation-notice&quot;&gt;&lt;i data-lucide=&quot;bell&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;notification-dot&quot; id=&quot;header-notification-dot&quot; hidden&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;
     &lt;/header&gt;
     &lt;div class=&quot;shell&quot;&gt;
@@ -1849,7 +2158,6 @@ html&gt;body{padding:0}&lt;/style&gt;
         &lt;/section&gt;
       &lt;/main&gt;
     &lt;/div&gt;
-  &lt;/div&gt;
   &lt;dialog id=&quot;reset-measurement-dialog&quot; class=&quot;reset-measurement-dialog&quot; aria-labelledby=&quot;reset-measurement-title&quot; aria-describedby=&quot;reset-measurement-description&quot;&gt;
     &lt;h3 id=&quot;reset-measurement-title&quot;&gt;측정 데이터를 초기화할까요?&lt;/h3&gt;
     &lt;p id=&quot;reset-measurement-description&quot;&gt;현재 측정의 수신 기록, L·D 변위값과 그래프 수신 곡선이 삭제됩니다. 이 작업은 되돌릴 수 없습니다.&lt;/p&gt;
@@ -1913,6 +2221,7 @@ html&gt;body{padding:0}&lt;/style&gt;
       &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&quot;pdf-preview-foot&quot;&gt;&lt;span class=&quot;pdf-preview-status&quot; id=&quot;pdf-preview-status&quot; role=&quot;status&quot;&gt;6 / 6 페이지 변환 완료&lt;/span&gt;&lt;div class=&quot;btnrow&quot;&gt;&lt;button class=&quot;action&quot; id=&quot;pdf-previous-page&quot; type=&quot;button&quot;&gt;이전 페이지&lt;/button&gt;&lt;button class=&quot;action&quot; id=&quot;pdf-next-page&quot; type=&quot;button&quot;&gt;다음 페이지&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
   &lt;/div&gt;
   &lt;div class=&quot;guide-tooltip&quot; id=&quot;guide-tooltip&quot; role=&quot;tooltip&quot;&gt;&lt;/div&gt;
   &lt;script&gt;
@@ -4454,5 +4763,204 @@ html&gt;body{padding:0}&lt;/style&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 "></iframe>
+<script>(() => {
+  const frame = document.getElementById("codex-visualization");
+  if (!(frame instanceof HTMLIFrameElement)) {
+    return;
+  }
+  let viewportHeight = globalThis.innerHeight;
+  const storageKey = `codex:visualization-widget-state-v2:${JSON.stringify([
+    globalThis.location.pathname,
+    globalThis.location.search,
+  ])}`;
+  const parseState = (serializedState) => {
+    if (
+      typeof serializedState !== "string" ||
+      new TextEncoder().encode(serializedState).length > 16 * 1024
+    ) {
+      throw new TypeError(
+        "Widget state must be a JSON object of at most 16 KiB",
+      );
+    }
+    /** @type {unknown} */
+    const state = JSON.parse(serializedState);
+    if (
+      state == null ||
+      typeof state !== "object" ||
+      Array.isArray(state) ||
+      ("imageIds" in state &&
+        (!Array.isArray(state.imageIds) || state.imageIds.length > 0))
+    ) {
+      throw new TypeError("Widget state must be a JSON object");
+    }
+    const storedState = { modelContent: null, privateContent: null, ...state };
+    const canonicalState = JSON.stringify(
+      storedState,
+      (_key, /** @type {unknown} */ value) => {
+        if (typeof value === "number" && !Number.isFinite(value)) {
+          throw new TypeError("Widget state must contain finite numbers");
+        }
+        return value;
+      },
+    );
+    if (new TextEncoder().encode(canonicalState).length > 16 * 1024) {
+      throw new TypeError(
+        "Widget state must be a JSON object of at most 16 KiB",
+      );
+    }
+    return storedState;
+  };
+  let storage = null;
+  let state = null;
+  try {
+    const localStorage = globalThis.localStorage;
+    const probeKey = `${storageKey}:probe`;
+    localStorage.setItem(probeKey, "1");
+    localStorage.removeItem(probeKey);
+    storage = localStorage;
+    const savedState = storage.getItem(storageKey);
+    if (savedState != null) {
+      try {
+        state = parseState(savedState);
+      } catch {
+        // Invalid saved state does not disable future writes.
+      }
+    }
+  } catch {
+    storage = null;
+  }
+  const initialGlobals = {
+    widgetState: state,
+    statePersistence: storage == null ? "none" : "local",
+  };
+
+  const channel = new MessageChannel();
+  channel.port1.addEventListener("message", (event) => {
+    const data = event.data;
+    if (typeof data !== "object" || data == null) {
+      return;
+    }
+    if (data.type === "widget-state-write") {
+      if (!Number.isSafeInteger(data.id) || data.id <= 0) {
+        return;
+      }
+      let ok = false;
+      try {
+        if (storage != null) {
+          const state = parseState(data.state);
+          storage.setItem(storageKey, JSON.stringify(state));
+          ok = true;
+        }
+      } catch {
+        // Storage denial, quota limits, and invalid state return a failed receipt.
+      }
+      channel.port1.postMessage({
+        type: "widget-state-result",
+        id: data.id,
+        ok,
+      });
+      return;
+    }
+    if (data.type === "height") {
+      const height = data.height;
+      if (
+        typeof height === "number" &&
+        Number.isFinite(height) &&
+        height >= 0 &&
+        height <= 10_000
+      ) {
+        frame.style.height = Math.ceil(height) + "px";
+      }
+      return;
+    }
+    if (data.type === "scroll-to") {
+      const top = data.top;
+      if (
+        typeof top === "number" &&
+        Number.isFinite(top) &&
+        top >= 0 &&
+        globalThis.navigator.userActivation?.isActive === true
+      ) {
+        globalThis.scrollTo({
+          top: Math.ceil(
+            globalThis.scrollY + frame.getBoundingClientRect().top + top,
+          ),
+        });
+      }
+      return;
+    }
+    if (data.type === "open-external") {
+      const rawHref = data.href;
+      if (typeof rawHref !== "string") {
+        return;
+      }
+      let href;
+      try {
+        const url = new URL(rawHref, document.baseURI);
+        if (url.protocol !== "https:") {
+          return;
+        }
+        href = url.href;
+      } catch {
+        return;
+      }
+      if (globalThis.navigator.userActivation?.isActive === true) {
+        const anchor = document.createElement("a");
+        anchor.href = href;
+        anchor.rel = "noopener noreferrer";
+        anchor.target = "_blank";
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+      }
+      return;
+    }
+    if (data.type === "follow-up") {
+      const prompt = data.prompt;
+      if (
+        typeof prompt !== "string" ||
+        globalThis.navigator.userActivation?.isActive !== true
+      ) {
+        return;
+      }
+      const title = data.title;
+      globalThis.prompt(typeof title === "string" ? title : prompt, prompt);
+    }
+  });
+  channel.port1.start();
+  const srcdoc = frame.dataset.srcdoc;
+  if (srcdoc == null) {
+    return;
+  }
+  globalThis.addEventListener("resize", () => {
+    const height = Number.parseFloat(frame.style.height);
+    if (!Number.isFinite(height) || height <= viewportHeight) {
+      frame.style.removeProperty("height");
+    }
+    viewportHeight = globalThis.innerHeight;
+    channel.port1.postMessage({ type: "measure" });
+  });
+  frame.addEventListener(
+    "load",
+    () => {
+      frame.contentWindow?.postMessage(
+        { type: "codex-visualization-initialize" },
+        "*",
+        [channel.port2],
+      );
+    },
+    { once: true },
+  );
+  // Match the trusted bootstrap element, not the same text in an authored title.
+  frame.srcdoc = srcdoc.replace(
+    '<script type="application/json" id="codex-visualization-widget-state">__CODEX_VISUALIZATION_WIDGET_STATE__<\/script>',
+    () =>
+      '<script type="application/json" id="codex-visualization-widget-state">' +
+      JSON.stringify(initialGlobals).replaceAll("<", "\\u003c") +
+      "<\/script>",
+  );
+  delete frame.dataset.srcdoc;
+})();
+</script>
 </body>
 </html>
