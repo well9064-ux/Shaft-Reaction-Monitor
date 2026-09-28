@@ -651,14 +651,14 @@
           </div>
 
           <div id="measurement-analysis" class="measurement-analysis">
-          <div class="headline"><div><h2>그래프 분석 · 작업자 보정</h2><p class="sub">압력-변위 원시 곡선을 확인하고 분석선 끝점을 손가락으로 움직여 기울기를 보정</p></div><button class="action" id="open-analysis-graph" type="button" data-jw-tooltip="압력-변위 분석 그래프를 태블릿 화면 전체로 확대">그래프 전체 화면</button></div>
+          <div class="headline"><div><h2>그래프 분석 · 작업자 보정</h2><p class="sub">수신값으로 L·D 분석선을 잠정 계산하고, 구간·끝점을 손가락으로 조정</p></div><button class="action" id="open-analysis-graph" type="button" data-jw-tooltip="압력-변위 분석 그래프를 태블릿 화면 전체로 확대">그래프 전체 화면</button></div>
           <div class="analysis-action-row" role="group" aria-label="분석 및 측정 데이터 관리">
             <button class="action" id="restore-analysis-auto" type="button" data-jw-tooltip="분석 구간·기울기·기준 변위를 기본값으로 초기화합니다. 수신 기록과 Bar별 변위값은 유지합니다.">분석 보정 초기화</button>
             <button class="action" id="reset-measurement-data" type="button" data-jw-tooltip="확인 후 현재 측정 기록과 L·D 변위값, 그래프 수신 곡선을 초기화합니다. 압력 설정 행과 베어링 조건은 유지합니다.">측정 데이터 초기화</button>
             <button class="action primary" id="apply-analysis-result" type="button" data-jw-tooltip="작업자와 보정 사유를 확인하고 현재 분석 결과를 최종값으로 저장한 뒤 데이터·이력 화면으로 이동">최종 적용</button>
           </div>
           <div class="grid two analysis-main-grid">
-            <div class="panel" data-help="가로축은 유압 압력 Bar, 세로축은 디지털 게이지 변위 1/100 mm입니다. 청록색·자주색 분석선의 양 끝점을 손가락으로 끌어 기울기를 조정합니다.">
+            <div class="panel" data-help="가로축은 유압 압력 Bar, 세로축은 디지털 게이지 변위 1/100 mm입니다. 수신값이 충분하면 L·D 분석선이 각 곡선에서 잠정 계산됩니다. 구간 선택 또는 끝점 드래그로 보정할 수 있습니다.">
               <div class="analysis-graph-head"><h3>압력-변위 분석 그래프</h3><span class="status good"><span class="dot"></span>끝점 드래그로 기울기 조정</span></div>
               <svg class="plot" id="analysis-plot" viewBox="0 0 500 400" role="img" aria-label="Lifting과 Lowering 압력-변위 곡선, 가로축 0에서 800 Bar, 가상 예시 데이터, 세로축 0에서 60 단위 1/100 밀리미터"><path class="gridline" d="M48 354H480M48 300H480M48 246H480M48 192H480M48 138H480M48 84H480M48 30H480M156 30V354M264 30V354M372 30V354"/><path class="axis" d="M48 30V354H480"/><g class="axis-ticks"><text x="42" y="358" text-anchor="end">0</text><text x="42" y="304" text-anchor="end">10</text><text x="42" y="250" text-anchor="end">20</text><text x="42" y="196" text-anchor="end">30</text><text x="42" y="142" text-anchor="end">40</text><text x="42" y="88" text-anchor="end">50</text><text x="42" y="34" text-anchor="end">60</text><text x="48" y="374" text-anchor="start">0</text><text x="156" y="374" text-anchor="middle">200</text><text x="264" y="374" text-anchor="middle">400</text><text x="372" y="374" text-anchor="middle">600</text><text x="480" y="374" text-anchor="end">800</text></g><path class="lift" d=""/><path class="lower" d=""/><line class="analysis-line-lifting" id="slope-line-lifting" x1="246.6" y1="354" x2="397.4" y2="84"/><line class="analysis-line-lowering" id="slope-line-lowering" x1="304.2" y1="354" x2="456.5" y2="84"/><line class="mean-analysis-line" id="mean-analysis-line" x1="275.4" y1="354" x2="427" y2="84"/><g aria-label="손가락으로 조정하는 분석선 끝점"><circle class="slope-adjust-handle" data-slope-line="lifting" data-slope-end="start" cx="246.6" cy="354" r="10"/><circle class="slope-adjust-handle" data-slope-line="lifting" data-slope-end="end" cx="397.4" cy="84" r="10"/><circle class="slope-adjust-handle" data-slope-line="lowering" data-slope-end="start" cx="304.2" cy="354" r="10"/><circle class="slope-adjust-handle" data-slope-line="lowering" data-slope-end="end" cx="456.5" cy="84" r="10"/></g><g class="analysis-selection analysis-selection-lifting" id="analysis-lifting-selection" aria-label="Lifting 시작점과 종료점"><line class="range-line" id="lifting-start-line" x1="246.6" y1="32" x2="246.6" y2="354"/><line class="range-line" id="lifting-end-line" x1="397.4" y1="32" x2="397.4" y2="354"/><circle class="range-handle" id="lifting-start-handle" cx="246.6" cy="354" r="8"/><circle class="range-handle" id="lifting-end-handle" cx="397.4" cy="84" r="8"/><text class="range-label" id="lifting-start-label" x="224.6" y="25">L 시작</text><text class="range-label" id="lifting-end-label" x="375.4" y="25">L 종료</text></g><g class="analysis-selection analysis-selection-lowering" id="analysis-lowering-selection" aria-label="Lowering 시작점과 종료점"><line class="range-line" id="lowering-start-line" x1="456.5" y1="48" x2="456.5" y2="354"/><line class="range-line" id="lowering-end-line" x1="304.2" y1="48" x2="304.2" y2="354"/><circle class="range-handle" id="lowering-start-handle" cx="456.5" cy="84" r="8"/><circle class="range-handle" id="lowering-end-handle" cx="304.2" cy="354" r="8"/><text class="range-label" id="lowering-start-label" x="434.5" y="42">D 시작</text><text class="range-label" id="lowering-end-label" x="282.2" y="42">D 종료</text></g><text x="220" y="396">압력 (Bar)</text><text x="8" y="20">변위 (1/100 mm)</text><rect class="analysis-touch-target" id="analysis-touch-target" x="48" y="30" width="432" height="324" aria-label="분석구간 터치 선택 영역"/></svg><div class="legend"><span style="color:var(--jw-accent)">Lifting · 가압</span><span style="color:var(--jw-warn)">Lowering · 감압</span><span style="color:var(--jw-good)">L 분석선</span><span style="color:var(--jw-bad)">D 분석선</span><span>평균선</span></div>
             </div>
@@ -681,16 +681,16 @@
               </div>
             </div>
           </div>
-          <div class="panel" id="analysis-range-editor" data-help="원본 측정값은 바꾸지 않고 대표 직선 계산에 포함할 시작점과 종료점만 조정합니다. 조정 후 재분석을 누르면 대표 직선과 Lift-off를 다시 계산합니다." style="margin-top:12px">
-            <div class="headline"><div><h3>직선 분석구간 조정</h3><p class="sub">대표 직선 계산에 사용할 시작점·종료점 지정</p></div><span class="status good"><span class="dot"></span>축 자동 조정 · <span id="analysis-generation-method">기본 분석선</span> · <span id="analysis-axis-range">X 0~800 Bar / Y 0~60 (1/100 mm)</span></span></div>
+            <div class="panel" id="analysis-range-editor" data-help="원본 측정값은 바꾸지 않고 L·D 직선 계산에 포함할 시작점과 종료점을 조정합니다. 구간을 선택하면 분석선과 반력이 즉시 재계산됩니다." style="margin-top:12px">
+            <div class="headline"><div><h3>직선 분석구간 조정</h3><p class="sub">수신 곡선의 시작점·종료점을 선택하면 분석선 재계산</p></div><span class="status good"><span class="dot"></span>축 자동 조정 · <span id="analysis-generation-method">수신값 대기</span> · <span id="analysis-axis-range">X 0~800 Bar / Y 0~60 (1/100 mm)</span></span></div>
             <div class="curve-range-grid">
               <div class="curve-range-card lifting" data-help="Lifting 가압 곡선의 직선 분석구간만 별도로 지정합니다.">
                 <div class="curve-range-head"><strong>Lifting 시작점 / 종료점</strong><button class="action" id="select-lifting-range" type="button" aria-pressed="false" data-jw-tooltip="그래프에서 Lifting 시작점과 종료점을 순서대로 터치">그래프에서 Lifting 선택</button></div>
-                <div class="curve-range-values"><div class="field"><label for="analysis-lifting-range">선택 Step</label><input id="analysis-lifting-range" value="Step 04 / Step 10" readonly></div><div class="field"><label for="analysis-lifting-displacement">변위 범위</label><input id="analysis-lifting-displacement" value="0.00 mm / 0.50 mm" readonly></div></div>
+                <div class="curve-range-values"><div class="field"><label for="analysis-lifting-range">선택 Step</label><input id="analysis-lifting-range" value="수신 대기" readonly></div><div class="field"><label for="analysis-lifting-displacement">변위 범위</label><input id="analysis-lifting-displacement" value="—" readonly></div></div>
               </div>
               <div class="curve-range-card lowering" data-help="Lowering 감압 곡선의 직선 분석구간만 별도로 지정합니다. 측정 진행 방향 때문에 시작점이 그래프 오른쪽에 있을 수 있습니다.">
                 <div class="curve-range-head"><strong>Lowering 시작점 / 종료점</strong><button class="action" id="select-lowering-range" type="button" aria-pressed="false" data-jw-tooltip="그래프에서 Lowering 시작점과 종료점을 순서대로 터치">그래프에서 Lowering 선택</button></div>
-                <div class="curve-range-values"><div class="field"><label for="analysis-lowering-range">선택 Step</label><input id="analysis-lowering-range" value="Step 03 / Step 09" readonly></div><div class="field"><label for="analysis-lowering-displacement">변위 범위</label><input id="analysis-lowering-displacement" value="0.50 mm / 0.00 mm" readonly></div></div>
+                <div class="curve-range-values"><div class="field"><label for="analysis-lowering-range">선택 Step</label><input id="analysis-lowering-range" value="수신 대기" readonly></div><div class="field"><label for="analysis-lowering-displacement">변위 범위</label><input id="analysis-lowering-displacement" value="—" readonly></div></div>
               </div>
             </div>
             <div class="analysis-meta-grid">
@@ -701,7 +701,7 @@
               <div class="field analysis-reason-field" data-help="곡선 구간이나 기준 변위를 수정한 이유를 입력하며 수정 이력과 결과 리포트에 함께 저장됩니다."><label for="analysis-correction-reason">보정 사유</label><input id="analysis-correction-reason" placeholder="예: 직선성 검토를 위한 분석구간 조정" required></div>
             </div>
             <div class="analysis-range-actions"><button class="action primary" id="analysis-rerun" type="button" data-jw-tooltip="곡선별 지정 구간, 기준 변위, 작업자·보정 사유를 수정 이력에 저장">이력 저장</button></div>
-            <div class="banner" id="analysis-range-status">원본 측정 데이터는 변경되지 않으며 선택한 구간만 계산에 적용됩니다.</div>
+            <div class="banner" id="analysis-range-status">L·D 수신값이 쌓이면 분석선이 잠정 계산됩니다. 측정 종료 후 구간과 기울기를 확인하세요.</div>
           </div>
           </div>
         </section>
@@ -1254,7 +1254,9 @@
           measurementPhase = liveDemoDirection > 0 ? 'lifting' : 'lowering';
           measurementSegment += 1;
           previousCaptureSample = null;
+          analysisFinalApplied = false;
           renderMeasurementControls();
+          updateSlopeResults();
           barReadingStatus.textContent = '측정 중 · L값은 가압 시, D값은 감압 시 설정 압력을 통과하면 자동 기록됩니다.';
           return;
         }
@@ -1262,6 +1264,7 @@
         previousCaptureSample = null;
         archiveBearingSession();
         renderMeasurementControls();
+        updateSlopeResults();
         barReadingStatus.textContent = '데이터 측정 종료 · 기록된 L·D 값은 유지됩니다. 아래에서 분석·보정을 진행하세요.';
       });
       renderMeasurementControls();
@@ -1885,9 +1888,6 @@
         if (error) { showValidationNotice(error, 'devices'); return; }
         archiveBearingSession();
         activeMeasurementBearing = pendingMeasurementBearing;
-        Object.keys(slopeStates).forEach(key => {
-          slopeStates[key] = JSON.parse(JSON.stringify(slopeDefaults[key]));
-        });
         analysisHasManualChange = false;
         captureMeasurementDevices(activeMeasurementBearing);
         resetMeasurementSession();
@@ -2207,6 +2207,7 @@
       reactionTolerance.addEventListener('change', () => {
         bearingItems[selectedBearingIndex].tolerance = reactionTolerance.value;
         updateAcceptanceCriteria();
+        analysisFinalApplied = false;
         updateSlopeResults();
       });
       acceptanceCriteria.addEventListener('change', () => {
@@ -2217,6 +2218,20 @@
       // Store plot displacement in 1/100 mm; preserve acquisition order and stop/start gaps.
       const analysisY = (value) => 354 - value * 5.4;
       const analysisSamples = { lifting: [], lowering: [] };
+      const emptyAnalysisStats = () => ({ count: 0, sumPressure: 0, sumDisplacement: 0, sumPressureSquared: 0, sumProduct: 0, minPressure: Infinity, maxPressure: -Infinity, minDisplacement: Infinity, maxDisplacement: -Infinity });
+      const analysisStats = { lifting: emptyAnalysisStats(), lowering: emptyAnalysisStats() };
+      const autoFitBounds = { lifting: null, lowering: null };
+      const addAnalysisStat = (stats, sample) => {
+        stats.count += 1;
+        stats.sumPressure += sample.pressure;
+        stats.sumDisplacement += sample.displacement;
+        stats.sumPressureSquared += sample.pressure ** 2;
+        stats.sumProduct += sample.pressure * sample.displacement;
+        stats.minPressure = Math.min(stats.minPressure, sample.pressure);
+        stats.maxPressure = Math.max(stats.maxPressure, sample.pressure);
+        stats.minDisplacement = Math.min(stats.minDisplacement, sample.displacement);
+        stats.maxDisplacement = Math.max(stats.maxDisplacement, sample.displacement);
+      };
       const sampleToPlot = (sample) => [48 + sample.pressure * 0.54, analysisY(sample.displacement)];
       const liftingCurvePoints = [];
       const loweringCurvePoints = [];
@@ -2248,26 +2263,50 @@
         });
       };
       const appendLiveAnalysisSample = (sample) => {
-        analysisSamples[sample.phase].push({
+        const point = {
           pressure: sample.pressure,
           displacement: sample.displacement * 100,
           step: analysisSamples[sample.phase].length + 1,
           time: sample.time,
           segment: measurementSegment
-        });
+        };
+        analysisSamples[sample.phase].push(point);
+        // The zero-displacement plateau belongs to the raw trace, not the provisional moving-range fit.
+        if (point.displacement > 0) {
+          addAnalysisStat(analysisStats[sample.phase], point);
+          if (!autoFitBounds[sample.phase]) autoFitBounds[sample.phase] = { first: point, last: point };
+          else autoFitBounds[sample.phase].last = point;
+        }
         drawLiveAnalysisGraph();
+        if (!manualRangeKeys.has(sample.phase)) recalculateAnalysisLine(sample.phase);
       };
       const resetLiveAnalysisGraph = () => {
         analysisSamples.lifting.length = 0;
         analysisSamples.lowering.length = 0;
+        analysisStats.lifting = emptyAnalysisStats();
+        analysisStats.lowering = emptyAnalysisStats();
+        autoFitBounds.lifting = null;
+        autoFitBounds.lowering = null;
         drawLiveAnalysisGraph();
+        Object.keys(slopeStates).forEach((key) => { slopeStates[key] = null; });
+        manualRangeKeys.clear();
+        manualSlopeKeys.clear();
+        analysisFinalApplied = false;
+        Object.values(analysisCurves).forEach((curve) => {
+          curve.start = null;
+          curve.end = null;
+          curve.rangeInput.value = '수신 대기';
+          curve.displacementInput.value = '—';
+          curve.group.classList.remove('is-visible');
+        });
+        updateExcludedRange();
+        updateSlopeResults();
         if (activeAnalysisCurve) {
           activeAnalysisCurve = null;
           analysisSelectionPhase = -1;
           analysisPlot.classList.remove('is-adjusting');
           resetCurveButtons();
         }
-        Object.values(analysisCurves).forEach(curve => curve.group.classList.remove('is-visible'));
       };
       drawLiveAnalysisGraph();
       const analysisCurves = {
@@ -2279,8 +2318,8 @@
           startLabel: root.querySelector('#lifting-start-label'), endLabel: root.querySelector('#lifting-end-label'),
           rangeInput: analysisLiftingRange, displacementInput: analysisLiftingDisplacement,
           curvePoints: liftingCurvePoints,
-          start: { x: 246.6, y: 354, step: 4, displacement: 0.00 },
-          end: { x: 397.4, y: 84, step: 10, displacement: 0.50 }
+          start: null,
+          end: null
         },
         lowering: {
           label: 'Lowering', shortLabel: 'D', button: selectLoweringRange,
@@ -2290,8 +2329,8 @@
           startLabel: root.querySelector('#lowering-start-label'), endLabel: root.querySelector('#lowering-end-label'),
           rangeInput: analysisLoweringRange, displacementInput: analysisLoweringDisplacement,
           curvePoints: loweringCurvePoints,
-          start: { x: 456.5, y: 84, step: 3, displacement: 0.50 },
-          end: { x: 304.2, y: 354, step: 9, displacement: 0.00 }
+          start: null,
+          end: null
         }
       };
       let activeAnalysisCurve = null;
@@ -2314,6 +2353,7 @@
         return { x, y, step: sample.step, displacement: sample.displacement / 100 };
       };
       const excludedSteps = (curve) => {
+        if (!curve.start || !curve.end) return '없음';
         const first = Math.min(curve.start.step, curve.end.step);
         const last = Math.max(curve.start.step, curve.end.step);
         const total = analysisSamples[curve.shortLabel === 'L' ? 'lifting' : 'lowering'].length;
@@ -2332,6 +2372,13 @@
       };
       const updateCurveSelection = (curveKey) => {
         const curve = analysisCurves[curveKey];
+        if (!curve.start || !curve.end) {
+          curve.rangeInput.value = '수신 대기';
+          curve.displacementInput.value = '—';
+          curve.group.classList.remove('is-visible');
+          updateExcludedRange();
+          return;
+        }
         curve.startLine.setAttribute('x1', curve.start.x);
         curve.startLine.setAttribute('x2', curve.start.x);
         curve.endLine.setAttribute('x1', curve.end.x);
@@ -2346,7 +2393,7 @@
         curve.endLabel.textContent = `${curve.shortLabel} 종료`;
         curve.rangeInput.value = `${analysisStepLabel(curve.start.step)} / ${analysisStepLabel(curve.end.step)}`;
         curve.displacementInput.value = `${curve.start.displacement.toFixed(2)} mm / ${curve.end.displacement.toFixed(2)} mm`;
-        curve.group.classList.add('is-visible');
+        curve.group.classList.toggle('is-visible', manualRangeKeys.has(curveKey) || activeAnalysisCurve === curveKey);
         updateExcludedRange();
       };
       const resetCurveButtons = () => {
@@ -2358,18 +2405,65 @@
       let analysisHasManualChange = false;
       const markManualAnalysis = () => {
         analysisHasManualChange = true;
-        analysisGenerationMethod.textContent = '기본 분석선 + 작업자 조정';
+        analysisFinalApplied = false;
+        updateAnalysisMethod();
       };
-      const slopeDefaults = {
-        lifting: { start: { x: 246.6, y: 354 }, end: { x: 397.4, y: 84 } },
-        lowering: { start: { x: 304.2, y: 354 }, end: { x: 456.5, y: 84 } }
-      };
-      const slopeStates = {
-        lifting: { start: { ...slopeDefaults.lifting.start }, end: { ...slopeDefaults.lifting.end } },
-        lowering: { start: { ...slopeDefaults.lowering.start }, end: { ...slopeDefaults.lowering.end } }
-      };
+      const slopeStates = { lifting: null, lowering: null };
+      const manualRangeKeys = new Set();
+      const manualSlopeKeys = new Set();
+      let analysisFinalApplied = false;
       const slopeLineElements = { lifting: slopeLineLifting, lowering: slopeLineLowering };
       const xToBar = (x) => ((x - 48) / 432) * 800;
+      const barToX = (bar) => 48 + bar * 0.54;
+      const samplePoint = (sample) => ({
+        x: barToX(sample.pressure), y: analysisY(sample.displacement),
+        step: sample.step, displacement: sample.displacement / 100
+      });
+      // Prototype estimate: least-squares displacement vs pressure for the selected received samples.
+      // The site is a wireframe; the accepted fitting window and outlier policy require field validation.
+      const fitReceivedLine = (stats) => {
+        if (stats.count < 4 || stats.maxDisplacement - stats.minDisplacement < 4 || stats.maxPressure - stats.minPressure < 20) return null;
+        const meanPressure = stats.sumPressure / stats.count;
+        const meanDisplacement = stats.sumDisplacement / stats.count;
+        const variance = stats.sumPressureSquared - stats.count * meanPressure ** 2;
+        const covariance = stats.sumProduct - stats.count * meanPressure * meanDisplacement;
+        if (variance <= 0) return null;
+        const slope = covariance / variance;
+        if (!Number.isFinite(slope) || slope <= 0.001) return null;
+        const zeroBar = meanPressure - meanDisplacement / slope;
+        if (!Number.isFinite(zeroBar) || zeroBar < 0 || zeroBar >= 800) return null;
+        const endBar = Math.min(800, (Math.min(60, stats.maxDisplacement) - meanDisplacement) / slope + meanPressure);
+        const endDisplacement = meanDisplacement + slope * (endBar - meanPressure);
+        if (endBar <= zeroBar + 1 || endDisplacement < 4) return null;
+        return { start: { x: barToX(zeroBar), y: 354 }, end: { x: barToX(endBar), y: analysisY(endDisplacement) } };
+      };
+      const updateAnalysisMethod = () => {
+        if (analysisFinalApplied) { analysisGenerationMethod.textContent = '최종 적용 완료'; return; }
+        if (manualSlopeKeys.size || manualRangeKeys.size) { analysisGenerationMethod.textContent = '수신값 기반 · 작업자 보정'; return; }
+        if (slopeStates.lifting || slopeStates.lowering) { analysisGenerationMethod.textContent = '수신값 기반 잠정선'; return; }
+        analysisGenerationMethod.textContent = '수신값 대기';
+      };
+      const recalculateAnalysisLine = (curveKey) => {
+        if (manualSlopeKeys.has(curveKey)) return;
+        const samples = analysisSamples[curveKey];
+        const curve = analysisCurves[curveKey];
+        if (!manualRangeKeys.has(curveKey)) {
+          const bounds = autoFitBounds[curveKey];
+          curve.start = bounds ? samplePoint(bounds.first) : null;
+          curve.end = bounds ? samplePoint(bounds.last) : null;
+          updateCurveSelection(curveKey);
+        }
+        const first = manualRangeKeys.has(curveKey) ? Math.min(curve.start.step, curve.end.step) : 1;
+        const last = manualRangeKeys.has(curveKey) ? Math.max(curve.start.step, curve.end.step) : samples.length;
+        let stats = analysisStats[curveKey];
+        if (manualRangeKeys.has(curveKey)) {
+          stats = emptyAnalysisStats();
+          samples.filter((sample) => sample.step >= first && sample.step <= last).forEach((sample) => addAnalysisStat(stats, sample));
+        }
+        slopeStates[curveKey] = fitReceivedLine(stats);
+        analysisFinalApplied = false;
+        updateSlopeResults();
+      };
       function reactionFromPressure(bar, area) {
         return Number.isFinite(bar) && bar >= 0 && Number.isFinite(area) && area > 0 ? bar * area * 0.01 : NaN;
       }
@@ -2399,6 +2493,11 @@
         const recordedContext = measurementRecords.length ? measurementDeviceSnapshot : null;
         Object.entries(displayedSlopes).forEach(([key, state]) => {
           const line = slopeLineElements[key];
+          line.style.display = state ? '' : 'none';
+          slopeAdjustHandles.filter((handle) => handle.dataset.slopeLine === key).forEach((handle) => {
+            handle.style.display = state ? '' : 'none';
+          });
+          if (!state) return;
           line.setAttribute('x1', state.start.x);
           line.setAttribute('y1', state.start.y);
           line.setAttribute('x2', state.end.x);
@@ -2409,18 +2508,32 @@
             handle.setAttribute('cy', point.y);
           });
         });
+        const bothReady = Boolean(displayedSlopes.lifting && displayedSlopes.lowering);
+        meanAnalysisLine.style.display = bothReady ? '' : 'none';
+        if (!bothReady) {
+          analysisFinalReaction.textContent = '—';
+          analysisErrorRate.textContent = '—';
+          const verdict = root.querySelector('#analysis-verdict');
+          verdict.textContent = '분석 대기';
+          [analysisErrorRate, verdict].forEach((node) => node.classList.remove('good', 'warn', 'bad'));
+          root.querySelector('#analysis-ratio-panel').setAttribute('data-help', 'Lifting과 Lowering 수신 데이터가 모두 충분해야 반력과 목표 대비 비율을 잠정 계산할 수 있습니다.');
+          updateAnalysisMethod();
+          return;
+        }
         const meanStartX = (displayedSlopes.lifting.start.x + displayedSlopes.lowering.start.x) / 2;
-        const meanEndX = (displayedSlopes.lifting.end.x + displayedSlopes.lowering.end.x) / 2;
+        const meanEndY = Math.max(displayedSlopes.lifting.end.y, displayedSlopes.lowering.end.y);
+        const xAtY = (state, y) => state.start.x + (state.end.x - state.start.x) * (y - state.start.y) / (state.end.y - state.start.y);
+        const meanEndX = (xAtY(displayedSlopes.lifting, meanEndY) + xAtY(displayedSlopes.lowering, meanEndY)) / 2;
         meanAnalysisLine.setAttribute('x1', meanStartX);
         meanAnalysisLine.setAttribute('y1', 354);
         meanAnalysisLine.setAttribute('x2', meanEndX);
-        meanAnalysisLine.setAttribute('y2', 84);
+        meanAnalysisLine.setAttribute('y2', meanEndY);
         const finalReaction = reactionFromPressure(xToBar(meanStartX), recordedContext ? recordedContext.area : Number(effectiveArea.value));
         const result = evaluateBearingReaction(finalReaction, recordedContext ? recordedContext.condition : activeMeasurementBearing);
         analysisFinalReaction.textContent = Number.isFinite(finalReaction) ? `${(finalReaction / KN_PER_TF).toFixed(2)} 톤(tf)` : '—';
         analysisErrorRate.textContent = result.ratio === null ? '—' : `${result.ratio.toFixed(2)}%`;
         const verdict = root.querySelector('#analysis-verdict');
-        verdict.textContent = result.verdict;
+        verdict.textContent = result.verdict === '판정 대기' ? result.verdict : `${analysisFinalApplied ? '' : '잠정 '}${result.verdict}`;
         const color = result.verdict === 'OK' ? 'good' : result.verdict === 'NG' ? 'bad' : '';
         [analysisErrorRate, verdict].forEach(node => {
           node.classList.remove('good', 'warn', 'bad');
@@ -2428,12 +2541,15 @@
         });
         const item = recordedContext ? recordedContext.condition : activeMeasurementBearing;
         root.querySelector('#analysis-ratio-panel').setAttribute('data-help', `${item ? item.position : '측정 베어링 미선택'} · 목표 ${item && Number(item.target) > 0 ? (Number(item.target) / KN_PER_TF).toFixed(2) + ' 톤(tf) = 100%' : '미입력'} · ${result.reason}`);
+        updateAnalysisMethod();
       };
       let activeSlopeDrag = null;
       slopeAdjustHandles.forEach((handle) => {
         handle.addEventListener('pointerdown', (event) => {
           if (analysisPlot.classList.contains('is-adjusting')) return;
           event.preventDefault();
+          manualSlopeKeys.add(handle.dataset.slopeLine);
+          analysisFinalApplied = false;
           activeSlopeDrag = { lineKey: handle.dataset.slopeLine, endKey: handle.dataset.slopeEnd, pointerId: event.pointerId, handle };
           handle.setPointerCapture(event.pointerId);
           analysisRangeStatus.textContent = `${handle.dataset.slopeLine === 'lifting' ? 'Lifting' : 'Lowering'} 분석선 끝점을 좌우로 움직여 기울기를 조정합니다.`;
@@ -2461,27 +2577,17 @@
         handle.addEventListener('pointercancel', endSlopeDrag);
       });
       restoreAnalysisAuto.addEventListener('click', () => {
-        Object.keys(slopeStates).forEach((key) => {
-          slopeStates[key].start = { ...slopeDefaults[key].start };
-          slopeStates[key].end = { ...slopeDefaults[key].end };
-        });
-        analysisCurves.lifting.start = { x: 246.6, y: 354, step: 4, displacement: 0.00 };
-        analysisCurves.lifting.end = { x: 397.4, y: 84, step: 10, displacement: 0.50 };
-        analysisCurves.lowering.start = { x: 456.5, y: 84, step: 3, displacement: 0.50 };
-        analysisCurves.lowering.end = { x: 304.2, y: 354, step: 9, displacement: 0.00 };
-        Object.keys(analysisCurves).forEach((key) => {
-          updateCurveSelection(key);
-          analysisCurves[key].group.classList.remove('is-visible');
-        });
+        manualRangeKeys.clear();
+        manualSlopeKeys.clear();
+        analysisFinalApplied = false;
         analysisReferenceDisplacement.value = '0.60';
         activeAnalysisCurve = null;
         analysisSelectionPhase = -1;
         analysisPlot.classList.remove('is-adjusting');
         resetCurveButtons();
-        updateSlopeResults();
+        Object.keys(analysisCurves).forEach(recalculateAnalysisLine);
         analysisHasManualChange = false;
-        analysisGenerationMethod.textContent = '기본 분석선';
-        analysisRangeStatus.textContent = '분석 보정 초기화 완료 · 구간·기울기·기준 변위를 기본값으로 복원했습니다. 측정 기록은 유지됩니다.';
+        analysisRangeStatus.textContent = '분석 보정 초기화 완료 · 변위 0 구간을 제외한 수신값으로 잠정 분석선을 다시 계산했습니다. 측정 기록은 유지됩니다.';
       });
       updateSlopeResults();
       const customBarPressure = root.querySelector('#custom-bar-pressure');
@@ -2708,13 +2814,17 @@
           return;
         }
         curve.end = selectedPoint;
+        manualRangeKeys.add(curveKey);
+        manualSlopeKeys.delete(curveKey);
+        markManualAnalysis();
         updateCurveSelection(curveKey);
+        recalculateAnalysisLine(curveKey);
         activeAnalysisCurve = null;
         analysisSelectionPhase = -1;
         analysisPlot.classList.remove('is-adjusting');
         resetCurveButtons();
         curve.button.textContent = `${curve.label} 다시 선택`;
-        analysisRangeStatus.textContent = `${curve.label} 선택 완료 · ${analysisStepLabel(curve.start.step)}부터 ${analysisStepLabel(curve.end.step)}까지 적용 예정입니다.`;
+        analysisRangeStatus.textContent = `${curve.label} 선택 완료 · ${analysisStepLabel(curve.start.step)}부터 ${analysisStepLabel(curve.end.step)}까지 분석선을 재계산했습니다.`;
       });
       analysisReferenceDisplacement.addEventListener('input', markManualAnalysis);
       analysisRerun.addEventListener('click', () => {
@@ -2761,6 +2871,19 @@
         analysisRangeStatus.textContent = `이력 저장 완료 · ${worker} · ${reason}`;
       });
       applyAnalysisResult.addEventListener('click', () => {
+        if (!measurementIsFinished()) {
+          analysisRangeStatus.textContent = '데이터 측정을 종료한 후 최종 적용할 수 있습니다.';
+          return;
+        }
+        if (!slopeStates.lifting || !slopeStates.lowering) {
+          analysisRangeStatus.textContent = 'Lifting과 Lowering 분석선이 모두 계산된 후 최종 적용할 수 있습니다.';
+          return;
+        }
+        if (!activeMeasurementBearing || targetReactionError(activeMeasurementBearing) || bearingRangeError(activeMeasurementBearing)
+            || analysisFinalReaction.textContent === '—' || analysisErrorRate.textContent === '—') {
+          analysisRangeStatus.textContent = '베어링의 목표 반력·판정 조건·RAM AREA를 확인한 후 최종 적용할 수 있습니다.';
+          return;
+        }
         const worker = analysisCorrectionWorker.value.trim();
         const reason = analysisCorrectionReason.value.trim();
         if (!worker) {
@@ -2796,6 +2919,8 @@
         });
         correctionHistoryBody.appendChild(row);
         analysisHasManualChange = false;
+        analysisFinalApplied = true;
+        updateSlopeResults();
         archiveBearingSession();
         analysisRangeStatus.textContent = `최종 적용 완료 · ${worker} · 데이터 이력 반영`;
         historyContextLabel.textContent = '최종 적용 완료';
@@ -3024,6 +3149,7 @@
         }
         customRamType.value = '';
         effectiveArea.value = ramAreas[ramType.value];
+        analysisFinalApplied = false;
         updateSlopeResults();
         updateLiveSample(currentDemoSample());
       });
@@ -3034,6 +3160,7 @@
         shipType.focus();
       });
       effectiveArea.addEventListener('input', () => {
+        analysisFinalApplied = false;
         updateSlopeResults();
         updateLiveSample(currentDemoSample());
       });
@@ -3054,6 +3181,7 @@
         root.querySelector('#bearing-reaction-' + side).addEventListener('input', (event) => {
           bearingItems[selectedBearingIndex][side + 'Reaction'] = event.target.value === '' ? '' : String(Number(event.target.value) * 9.80665);
           renderBearingRangeError(true);
+          analysisFinalApplied = false;
           updateSlopeResults();
         });
       });
@@ -3063,6 +3191,7 @@
         // Store canonical kN; the editor and selected-location summary display tonne-force.
         bearingItems[selectedBearingIndex].target = value === '' ? '' : String(Number(selectedBearingReaction.value) * KN_PER_TF);
         renderTargetReactionError(true);
+        analysisFinalApplied = false;
         updateSlopeResults();
       });
       moveBearingForward.addEventListener('click', () => {
