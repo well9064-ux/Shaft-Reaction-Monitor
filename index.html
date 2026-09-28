@@ -81,7 +81,7 @@
     #jackup-wireframe .field label { color: var(--jw-muted); font-size: 12px; }
     #jackup-wireframe input, #jackup-wireframe select, #jackup-wireframe textarea { width: 100%; min-height: 44px; border: 1px solid var(--jw-line); background: var(--jw-surface-2); color: var(--jw-text); border-radius: 6px; padding: 9px; font: inherit; }
     #jackup-wireframe [hidden] { display: none !important; }
-    #jackup-wireframe input[readonly] { color: var(--jw-muted); background: color-mix(in srgb, var(--jw-surface-2) 72%, var(--jw-line)); }
+    #jackup-wireframe input[readonly], #jackup-wireframe textarea[readonly] { color: var(--jw-muted); background: color-mix(in srgb, var(--jw-surface-2) 72%, var(--jw-line)); cursor: default; }
     #jackup-wireframe .field-note { color: var(--jw-muted); font-size: 11px; }
     #jackup-wireframe .editable-select-control { position: relative; }
     #jackup-wireframe .editable-select-control > input { padding-right: 48px; }
@@ -299,7 +299,7 @@
     #jackup-wireframe .pdf-page-choice { min-height: 44px; border: 1px solid var(--jw-line); border-radius: 7px; background: var(--jw-surface); color: var(--jw-muted); padding: 8px 10px; cursor: pointer; font: inherit; text-align: left; }
     #jackup-wireframe .pdf-page-choice[aria-selected="true"] { border-color: var(--jw-accent); color: var(--jw-text); box-shadow: inset 3px 0 0 var(--jw-accent); }
     #jackup-wireframe .pdf-page-stage { min-width: 0; min-height: 0; display: grid; place-items: center; }
-    #jackup-wireframe .pdf-page { display: none; height: 100%; max-height: 560px; max-width: 100%; aspect-ratio: 210 / 297; padding: 24px; overflow: hidden; background: light-dark(#ffffff, #f3f4f5); color: light-dark(#1c252c, #1c252c); border: 1px solid light-dark(#c5cbd0, #c5cbd0); box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+    #jackup-wireframe .pdf-page { display: none; height: 100%; max-height: 560px; max-width: 100%; aspect-ratio: 210 / 297; padding: 24px; overflow: auto; background: light-dark(#ffffff, #f3f4f5); color: light-dark(#1c252c, #1c252c); border: 1px solid light-dark(#c5cbd0, #c5cbd0); box-shadow: 0 8px 24px rgba(0,0,0,.18); }
     #jackup-wireframe .pdf-page.active { display: flex; flex-direction: column; }
     #jackup-wireframe .pdf-page h3 { margin: 0 0 12px; font-size: 18px; }
     #jackup-wireframe .pdf-page h4 { margin: 12px 0 7px; font-size: 11px; font-weight: 500; }
@@ -366,8 +366,11 @@
     #jackup-wireframe .report-tab-panel.active { display: block; }
     #jackup-wireframe .report-tab-panel > :first-child { margin-top: 0; }
     #jackup-wireframe .result-confirmation { margin-top: 12px; }
-    #jackup-wireframe .result-confirmation-grid { display: grid; grid-template-columns: minmax(150px, .7fr) minmax(180px, .8fr) minmax(240px, 1.5fr); gap: 12px; align-items: start; }
-    #jackup-wireframe .result-verdict { min-height: 70px; padding: 10px 12px; border-radius: 7px; background: var(--jw-surface-2); }
+    #jackup-wireframe .result-confirmation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
+    #jackup-wireframe .result-verdict, #jackup-wireframe .result-confirmation-grid > .field { box-sizing: border-box; min-height: 108px; padding: 10px 12px; border-radius: 7px; background: var(--jw-surface-2); }
+    #jackup-wireframe .result-confirmation-grid > .field { align-content: start; }
+    #jackup-wireframe .result-confirmation-grid > .field select { background: var(--jw-surface); }
+    #jackup-wireframe .result-confirmation-grid .remeasure-reason-field { grid-column: 1 / -1; min-height: auto; }
     #jackup-wireframe .result-verdict strong { display: block; margin-top: 7px; font-size: 18px; font-weight: 500; }
     #jackup-wireframe .result-opinion-field { margin-top: 12px; }
     #jackup-wireframe .result-confirmation-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
@@ -449,7 +452,6 @@
     #jackup-wireframe .measurement-instruments #live-load-value { font-size: 22px; line-height: 1.2; }
     #jackup-wireframe .measurement-instruments .instrument-meta { text-align: left; min-height: 18px; line-height: 18px; }
     #jackup-wireframe #live-displacement-fill { background: var(--jw-accent); width: 42%; }
-    #jackup-wireframe #live-displacement-meter .bar-target { left: 60%; }
     #jackup-wireframe .measurement-instruments .bar-reading { margin-top: 22px; }
     #jackup-wireframe .measurement-instruments .bar-labels { flex-wrap: wrap; gap: 4px 8px; }
     #jackup-wireframe .measurement-analysis { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--jw-line); scroll-margin-top: 12px; }
@@ -520,7 +522,7 @@
     </div>
     <header class="topbar">
         <div class="brand"><span class="brand-mark">J</span> Shaft Reaction Monitor <span class="device-profile">Galaxy Tab S10 Lite · 10.9″ · 가로</span></div>
-      <div class="top-status"><button class="guide-toggle" id="guide-toggle" type="button" aria-pressed="false">가이드 모드 켜기</button><span class="hide-small">TEST: H2678-20260825-02</span><span>14:32</span><button class="header-notification-button" id="header-notification-button" type="button" aria-label="알림 열기" aria-expanded="false" aria-controls="validation-notice"><i data-lucide="bell" aria-hidden="true"></i><span class="notification-dot" id="header-notification-dot" hidden></span></button></div>
+      <div class="top-status"><button class="guide-toggle" id="guide-toggle" type="button" aria-pressed="false">가이드 모드 켜기</button><span class="hide-small" id="header-test-id">TEST: —</span><span id="header-test-time">—</span><button class="header-notification-button" id="header-notification-button" type="button" aria-label="알림 열기" aria-expanded="false" aria-controls="validation-notice"><i data-lucide="bell" aria-hidden="true"></i><span class="notification-dot" id="header-notification-dot" hidden></span></button></div>
     </header>
     <div class="shell">
       <nav class="nav" aria-label="와이어프레임 화면 선택">
@@ -538,12 +540,12 @@
         <section class="screen active" data-panel="overview">
           <div class="headline"><div><h2>작업 홈</h2><p class="sub">장치 설정 → 베어링별 유압잭·판정 조건 → 순차 측정</p></div><button class="action primary" id="new-test-button" type="button" data-jw-tooltip="신규 시험을 생성하고 장치 설정 화면으로 이동">새 시험 시작</button></div>
           <div class="grid three">
-            <div class="panel" data-help="현재 선택된 호선·설비와 작업 회차입니다. H2678은 프로젝트 식별값, 2차는 현재 측정 회차를 뜻합니다."><span class="label">진행 중 프로젝트</span><div class="metric">H2678</div><p class="sub">ME Shaft / 2차</p></div>
-            <div class="panel" data-help="시험 조건에서 설정한 전체 4개 베어링 중 2개 측정을 완료했으며, 현재 No.4 위치를 측정한다는 의미입니다."><span class="label">측정 진행</span><div class="metric">2 / 4</div><p class="sub">현재 No.4 베어링</p></div>
+            <div class="panel" data-help="장치 설정에서 입력한 프로젝트·호선과 현재 시험 회차입니다."><span class="label">진행 중 프로젝트</span><div class="metric" id="home-project">—</div><p class="sub" id="home-round">—</p></div>
+            <div class="panel" data-help="현재 시험에서 분석 결과를 저장한 베어링 수와 구성한 전체 베어링 수입니다."><span class="label">측정 진행</span><div class="metric" id="home-progress">0 / 0</div><p class="sub" id="home-current-bearing">측정 대기</p></div>
             <div class="panel" data-help="압력계의 상태와 디지털 게이지의 연결 대수를 표시합니다. 장치별 상세 상태는 장치 설정의 장치 연결 탭에서 확인할 수 있습니다."><span class="label">장치 상태</span><div class="home-device-grid"><div class="home-device-row"><div>압력계</div><div class="home-device-state" id="home-pressure-state"><strong class="good">양호</strong></div></div><div class="home-device-row"><div>디지털 게이지</div><div class="home-device-state" id="home-displacement-state"><strong class="good">연결 6 / 6대</strong></div></div></div></div>
           </div>
           <div class="overview-history-grid">
-            <div class="panel" data-help="태블릿에 저장된 시험 내역이 최신순으로 누적됩니다. Test ID를 선택하면 해당 시험의 원시값·최종값·보정 이력을 조회합니다."><h3>최근 시험 · 누적 저장 내역</h3><div class="history-table-wrap"><table class="history-table"><thead><tr><th>Test ID</th><th>회차</th><th>판정</th><th>시험일</th><th>작업자</th></tr></thead><tbody><tr><td><button class="history-link" type="button" data-history-open data-current="true" data-test-id="H2678-20260825-02" data-test-date="2026-08-25" data-device-ids="PRS-A-014 + DIS-B-014" data-worker="홍길동" data-round="2차" data-status="진행 중" aria-label="H2678-20260825-02 현재 시험 데이터 보기">H2678-20260825-02</button></td><td>2차</td><td class="warn">진행 중</td><td>2026-08-25</td><td>홍길동</td></tr><tr><td><button class="history-link" type="button" data-history-open data-test-id="H2678-20260821-01" data-test-date="2026-08-21" data-device-ids="PRS-A-009 + DIS-B-008" data-worker="김민수" data-round="1차" data-status="재측정" aria-label="H2678-20260821-01 과거 데이터 이력 보기">H2678-20260821-01</button></td><td>1차</td><td class="bad">재측정</td><td>2026-08-21</td><td>김민수</td></tr><tr><td><button class="history-link" type="button" data-history-open data-test-id="H2611-20260817-03" data-test-date="2026-08-17" data-device-ids="PRS-A-021 + DIS-B-026" data-worker="박지훈" data-round="3차" data-status="완료" aria-label="H2611-20260817-03 과거 데이터 이력 보기">H2611-20260817-03</button></td><td>3차</td><td class="good">완료</td><td>2026-08-17</td><td>박지훈</td></tr><tr><td><button class="history-link" type="button" data-history-open data-test-id="H2542-20260810-01" data-test-date="2026-08-10" data-device-ids="PRS-A-006 + DIS-B-004" data-worker="이서준" data-round="1차" data-status="완료" aria-label="H2542-20260810-01 과거 데이터 이력 보기">H2542-20260810-01</button></td><td>1차</td><td class="good">완료</td><td>2026-08-10</td><td>이서준</td></tr></tbody></table></div><p class="sub">시험 완료 시 날짜·작업자·사용 장치 ID가 태블릿 저장공간에 계속 누적됩니다.</p></div>
+            <div class="panel" data-help="이 시안에서 생성한 시험 목록입니다. Test ID를 누르면 해당 시험의 측정값과 분석 이력을 조회하고, 삭제 버튼으로 해당 시험 기록만 확인 후 삭제합니다. 실제 앱 저장소 연동은 개발 범위입니다."><h3>최근 시험 · 현재 시연 기록</h3><div class="history-table-wrap"><table class="history-table"><thead><tr><th>Test ID</th><th>회차</th><th>판정</th><th>시험일</th><th>작업자</th><th>관리</th></tr></thead><tbody id="home-test-history"></tbody></table></div><p class="sub">시안에서는 새로고침 시 시험 기록이 초기화됩니다. 실제 앱에서는 태블릿 저장소에 보관합니다.</p></div>
           </div>
         </section>
 
@@ -559,11 +561,11 @@
           <div class="panel" data-help="시험 식별, 책임자, 대상 장비와 저장 기준을 등록합니다. 시험 수행일시는 새 시험 시작 시 자동 기록되므로 입력란에서 제외합니다.">
             <h3>기본 정보</h3>
             <div class="formgrid">
-              <div class="field" data-order="1" data-help="시험을 구분하는 고유번호입니다. 호선·날짜·회차 조합으로 자동 생성한 뒤 필요 시 수정합니다."><label>Test ID</label><input value="H2678-20260825-02"></div>
-              <div class="field" data-order="2" data-help="계측 대상 선박 또는 프로젝트 식별번호를 입력합니다."><label>프로젝트 / 호선</label><input value="H2678"></div>
-              <div class="field" data-order="3" data-help="측정 수행자 또는 책임자를 입력하며 보정·수정 이력과 연결됩니다."><label>작업자</label><input value="홍길동"></div>
+              <div class="field" data-order="1" data-help="새 시험 시작 시 프로젝트·날짜·일련번호로 자동 생성되며 필요하면 수정할 수 있습니다."><label for="setup-test-id">Test ID</label><input id="setup-test-id" value=""></div>
+              <div class="field" data-order="2" data-help="계측 대상 선박 또는 프로젝트 식별번호를 입력합니다."><label for="setup-project">프로젝트 / 호선</label><input id="setup-project" value="H2678"></div>
+              <div class="field" data-order="3" data-help="현재 시험의 작업자입니다. 결과 확정 시 이 이름을 기록합니다."><label for="setup-worker">작업자</label><input id="setup-worker" value="홍길동"></div>
               <div class="field" data-order="4" data-help="선종을 선택하면 표준 베어링 수량·명칭·순서가 화면 왼쪽 AFT(선미측)에서 오른쪽 FWD(기관측) 방향으로 자동 배치됩니다. 직접 입력을 선택하면 같은 박스에서 선종명을 입력할 수 있습니다."><label for="ship-type">선종 / 베어링 구성</label><div class="editable-select-control"><select id="ship-type"><option value="lngc" selected>LNGC · 6개</option><option value="cont">CONT · 6개</option><option value="lpgc">LPGC · 5개</option><option value="vlcc">VLCC · 5개</option><option value="custom">직접 입력</option></select><input id="custom-ship-type" aria-label="선종 직접 입력" placeholder="선종명을 입력하세요" hidden><button class="custom-select-return" id="ship-type-return" type="button" aria-label="선종 목록 다시 열기" data-jw-tooltip="선종 목록 다시 열기" hidden><i data-lucide="chevron-down" aria-hidden="true"></i></button></div></div>
-              <div class="field" data-order="6" data-help="현재 시험의 측정 회차를 1차부터 5차까지 선택합니다."><label>측정 회차</label><select><option>1차</option><option selected>2차</option><option>3차</option><option>4차</option><option>5차</option></select></div>
+              <div class="field" data-order="6" data-help="현재 시험의 측정 회차를 1차부터 5차까지 선택합니다."><label for="setup-round">측정 회차</label><select id="setup-round"><option>1차</option><option selected>2차</option><option>3차</option><option>4차</option><option>5차</option></select></div>
             </div>
           </div>
           <div class="grid setup-stack" style="margin-top:12px">
@@ -595,6 +597,7 @@
 
         <section class="screen" data-panel="bearing-select">
           <div class="headline"><div><h2>측정 베어링 선택</h2><p class="sub">측정할 베어링을 선택하고 유압잭·판정 조건을 입력하세요.</p></div><button class="action primary" id="start-bearing-button" type="button" data-jw-tooltip="선택한 베어링의 목표 반력·허용범위와 센서 연결을 확인하고 측정 시작">선택 베어링 측정 시작</button></div>
+          <p class="sub" id="bearing-switch-guidance" role="status">이전 베어링에서 저장한 측정·분석 이력은 다음 베어링을 시작해도 유지됩니다. 저장하지 않은 분석 결과가 있으면 전환 전에 확인합니다.</p>
           <div class="panel" data-help="왼쪽 선미측(AFT)에서 오른쪽 기관측(FWD) 방향으로 배치된 베어링의 진행 상태를 확인합니다. 완료 위치도 재측정 회차로 다시 선택할 수 있습니다.">
             <div class="shaft-layout">
               <div class="shaft-direction"><span>AFT · 선미측</span><span>FWD · 기관측</span></div>
@@ -619,7 +622,7 @@
         </section>
 
         <section class="screen" data-panel="measure">
-          <div class="headline"><div><h2 id="measurement-bearing-title">M/E(FWD) · Jack-up 측정·분석</h2><p class="sub" id="measurement-device-context">측정 베어링을 선택하세요</p><p class="sub" id="measurement-phase-status" role="status" aria-live="polite">세션 RUN-02 · Lifting 기록 중 · 측정점 0개</p></div></div>
+          <div class="headline"><div><h2 id="measurement-bearing-title">Jack-up 측정·분석</h2><p class="sub" id="measurement-device-context">측정 베어링을 선택하세요</p><p class="sub" id="measurement-phase-status" role="status" aria-live="polite">데이터 측정 대기</p></div></div>
           <div class="stepper" data-help="현재 베어링 측정의 단계 진행도입니다. 완료 단계는 녹색, 현재 단계는 청색, 대기 단계는 회색으로 표시합니다." aria-label="측정 진행 상태"><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span></div>
           <div class="instrument-grid measurement-instruments">
               <div class="instrument" data-help="현재 데모는 0.5초마다 예시 압력·변위를 갱신합니다. 계기·그래프·Bar별 기록이 같은 수신값을 사용하며 실제 장치의 통신 주기를 변경하는 설정은 아닙니다.">
@@ -633,12 +636,12 @@
                   <text class="dial-value" id="live-pressure-dial-value" x="120" y="103" text-anchor="middle">486.3</text>
                 </svg>
               </div>
-              <div class="instrument" data-help="디지털 게이지가 측정한 샤프트의 수직 이동 거리입니다. 단위는 mm이며 기준선은 분석 참고값입니다.">
+              <div class="instrument" data-help="디지털 게이지가 측정한 샤프트의 수직 이동 거리입니다. 현재 변위만 표시하며 별도의 기준 변위 판정은 적용하지 않습니다.">
                 <div class="instrument-title"><span>디지털 게이지(변위)</span><strong id="live-displacement-value">0.42 mm</strong></div>
                 <div class="instrument-meta" aria-hidden="true"></div>
                 <div class="bar-reading" id="live-displacement-meter" role="img" aria-label="현재 변위 0.42 밀리미터, 표시 범위 0에서 1 밀리미터">
-                  <div class="bar-track"><span class="bar-fill" id="live-displacement-fill"></span><span class="bar-target" aria-hidden="true"></span></div>
-                  <div class="bar-labels"><span>0</span><span id="live-displacement-current">현재 0.42</span><span class="warn">기준 0.60</span><span>1.00 mm</span></div>
+                  <div class="bar-track"><span class="bar-fill" id="live-displacement-fill"></span></div>
+                  <div class="bar-labels"><span>0</span><span id="live-displacement-current">현재 0.42</span><span>1.00 mm</span></div>
                 </div>
               </div>
               <div class="instrument instrument-wide" data-help="현재 압력에 유압 잭 유효면적을 적용한 하중입니다. 최대 환산 하중은 현재 측정 세션에서 기록된 가장 큰 값입니다.">
@@ -655,7 +658,7 @@
           <div class="headline"><div><h2>그래프 분석 · 작업자 보정</h2><p class="sub">수신값으로 L·D 분석선을 잠정 계산하고, 구간·끝점을 손가락으로 조정</p></div><button class="action" id="open-analysis-graph" type="button" data-jw-tooltip="압력-변위 분석 그래프를 태블릿 화면 전체로 확대">그래프 전체 화면</button></div>
           <div class="analysis-action-row" role="group" aria-label="분석 및 측정 데이터 관리">
             <button class="action" id="restore-analysis-auto" type="button" data-jw-tooltip="분석 구간과 기울기를 수신값 기반 잠정선으로 초기화합니다. 수신 기록과 Bar별 변위값은 유지합니다.">분석 보정 초기화</button>
-            <button class="action" id="reset-measurement-data" type="button" data-jw-tooltip="확인 후 현재 측정 기록과 L·D 변위값, 그래프 수신 곡선을 초기화합니다. 압력 설정 행과 베어링 조건은 유지합니다.">측정 데이터 초기화</button>
+            <button class="action" id="reset-measurement-data" type="button" data-jw-tooltip="확인 후 현재 Test ID에 저장된 베어링 측정 기록과 분석 결과를 삭제합니다. 다른 시험 기록과 장치 매핑은 유지합니다.">현재 시험 기록 삭제</button>
             <button class="action primary" id="end-data-measurement" type="button" data-jw-tooltip="현재 베어링의 데이터 기록을 종료합니다. 수신 표시는 유지되며 유압장치는 제어하지 않습니다.">데이터 측정 종료</button>
             <button class="action primary" id="apply-analysis-result" type="button" data-jw-tooltip="작업자와 보정 사유를 확인하고 현재 분석 결과를 최종값으로 저장한 뒤 데이터·이력 화면으로 이동">데이터 저장</button>
           </div>
@@ -761,25 +764,24 @@
 
         <section class="screen" data-panel="data">
           <div class="panel" style="margin-bottom:12px"><h3>베어링별 수신 기록 · 현재 시연 세션</h3><p class="sub">측정 종료 시 보관 · 실제 앱 저장소 연동 전에는 새로고침 시 초기화됩니다.</p><div class="history-table-wrap"><table><thead><tr><th>베어링</th><th>공통 압력계</th><th>디지털 게이지</th><th>수신 수</th><th>종료 시각</th></tr></thead><tbody id="bearing-session-history"><tr><td colspan="5">아직 종료된 측정이 없습니다.</td></tr></tbody></table></div><div id="bearing-session-detail" hidden></div></div>
-          <div class="headline"><div><h2>데이터 로그 · 보정 이력</h2><p class="sub">원시값을 보존하면서 최종 적용값과 수정 근거를 추적</p></div></div>
-          <div class="banner history-context" id="history-context" data-help="현재 또는 과거 시험과 시험일을 표시합니다. 완료된 과거 시험은 원본 보호를 위해 읽기 전용으로 표시합니다."><strong id="history-context-label">현재 시험</strong><span id="history-context-detail">시험일 2026-08-25</span></div>
-          <div class="panel" data-help="압력·변위 원시값과 보정 후 최종 적용값을 Step별로 비교합니다. 하중은 최종 압력과 잭 유효면적으로 다시 계산됩니다.">
-            <h3>Step별 원시값 / 최종 적용값</h3>
-            <table><thead><tr><th>Step</th><th>구간</th><th>원시 압력</th><th>최종 압력</th><th>원시 변위</th><th>최종 변위</th><th>환산 하중</th></tr></thead><tbody><tr><td>07</td><td>Lifting</td><td>486.3 bar</td><td>486.3 bar</td><td>0.42 mm</td><td class="warn">0.44 mm</td><td>616.1 kN</td></tr><tr><td>08</td><td>Lifting</td><td>512.8 bar</td><td>512.8 bar</td><td>0.51 mm</td><td>0.51 mm</td><td>649.7 kN</td></tr><tr><td>09</td><td>Lowering</td><td>498.1 bar</td><td>498.1 bar</td><td>0.48 mm</td><td>0.48 mm</td><td>631.0 kN</td></tr></tbody></table>
+          <div class="headline"><div><h2>데이터 로그 · 보정 이력</h2><p class="sub">압력·변위 수신값과 분석선 보정 결과를 분리하여 조회</p></div></div>
+          <div class="banner history-context" id="history-context" data-help="현재 또는 과거 시험과 시험일을 표시합니다. 데이터 이력의 측정값과 보정 기록은 모두 조회 전용이며 이 화면에서 수정할 수 없습니다."><strong id="history-context-label">현재 시험</strong><span id="history-context-detail">시험일 —</span></div>
+          <div class="panel" data-help="측정·분석에서 기록된 압력계와 디지털 게이지의 수신값을 그대로 조회합니다. 분석선의 구간·기울기 조정은 이 수신값을 바꾸지 않습니다.">
+            <h3>측정 수신값</h3><p class="sub" id="data-source-status">측정 기록을 선택하면 수신값이 표시됩니다.</p>
+            <div class="history-table-wrap" style="max-height:260px;overflow:auto"><table><thead><tr><th>순번</th><th>수신 시각</th><th>구간</th><th>압력</th><th>변위</th><th>환산 하중</th></tr></thead><tbody id="data-records-body"><tr><td colspan="6">저장된 수신값이 없습니다.</td></tr></tbody></table></div>
           </div>
           <div class="grid two" style="margin-top:12px">
-            <div class="panel" data-help="선택한 Step의 보정값과 사유를 입력합니다. 원시값은 변경하지 않고 최종 적용값만 별도로 저장합니다.">
-              <h3>선택 Step 07 보정</h3>
-              <div class="formgrid" style="grid-template-columns:1fr 1fr"><div class="field"><label>보정 압력</label><div class="input-unit"><input id="corrected-pressure" type="number" min="0" step="any" value="486.3" data-pressure-bar="486.3"><span class="unit-suffix">bar</span></div></div><div class="field"><label>보정 변위</label><input value="0.44 mm"></div><div class="field"><label>보정 작업자</label><input value="홍길동"></div><div class="field"><label>수정 시각</label><input value="2026-08-25 14:41:22" readonly></div></div>
-              <div class="field" style="margin-top:10px"><label>보정 사유</label><textarea>압력 반응 후 디지털 게이지 지연값 확인, 현장 기록과 대조하여 +0.02 mm 보정</textarea></div>
+            <div class="panel" data-help="선택한 수신값은 압력계·디지털 게이지에서 온 원시 기록입니다. 분석선 보정은 원시값을 바꾸지 않으며 아래 수정 이력에 별도로 표시합니다.">
+              <h3>선택 수신값 · 조회 전용</h3>
+              <div class="formgrid" style="grid-template-columns:1fr 1fr"><div class="field"><label>압력계 수신값</label><input id="data-selected-pressure" value="—" readonly></div><div class="field"><label>디지털 게이지 수신값</label><input id="data-selected-displacement" value="—" readonly></div><div class="field"><label>측정 구간</label><input id="data-selected-phase" value="—" readonly></div><div class="field"><label>수신 시각</label><input id="data-selected-time" value="—" readonly></div></div>
+              <p class="sub" id="data-selected-source">측정·분석에서 기록한 압력·변위를 선택해 조회합니다. 측정값 직접 보정 기능은 아직 없습니다.</p>
             </div>
-            <div class="panel" data-help="최종 계산값, Lift-off 판정, 평균 대표 하중, 알람과 작업 메모를 시험 이력에 함께 저장합니다.">
-              <h3>계산 결과 · 작업 기록</h3>
-              <table><tbody><tr><td>Lift-off 판정값</td><td>598.4 kN</td></tr><tr><td>평균 대표 하중</td><td>754.2 kN</td></tr><tr><td>최종 반력값</td><td class="good">754.2 kN · OK</td></tr><tr><td>알람</td><td class="warn">Step 07 센서 응답 지연</td></tr><tr><td>결과 확정</td><td id="final-result-history">저장 전 · 작업자 승인 대기</td></tr></tbody></table>
-              <div class="field" style="margin-top:10px"><label>작업 메모</label><textarea>No.4 위치 JIG 고정상태 재확인. 보정 후 분석선 재실행 완료.</textarea></div>
+            <div class="panel" data-help="측정·분석에서 계산하고 데이터 저장한 분석선 결과를 조회합니다. 이 값은 개별 압력·변위 측정값의 보정값이 아닙니다.">
+              <h3>분석선 계산 결과 · 조회 전용</h3>
+              <table><tbody><tr><td>Test ID</td><td id="data-test-id">—</td></tr><tr><td>선택 베어링</td><td id="data-result-bearing">—</td></tr><tr><td>최종 반력</td><td id="data-final-reaction">—</td></tr><tr><td>목표 대비 비율</td><td id="data-final-ratio">—</td></tr><tr><td>판정</td><td id="data-final-verdict">—</td></tr></tbody></table>
             </div>
           </div>
-          <div class="panel" data-help="원시값 변경 없이 누가 언제 어떤 값을 어떤 사유로 보정했는지 회차별로 조회합니다." style="margin-top:12px"><h3>수정 이력</h3><table><thead><tr><th>시각</th><th>작업자</th><th>대상</th><th>변경</th><th>사유</th></tr></thead><tbody id="correction-history-body"><tr><td>14:41:22</td><td>홍길동</td><td>Step 07 변위</td><td>0.42 → 0.44 mm</td><td>센서 응답 지연 보정</td></tr><tr><td>14:45:03</td><td>홍길동</td><td>분석 구간</td><td>L 04~09 → 04~10</td><td>직선성 검토</td></tr></tbody></table></div>
+          <div class="panel" data-help="측정·분석에서 사용자가 조정한 분석 구간·기울기와 작업자·사유를 조회합니다. 압력·변위 원시값은 변경하지 않습니다." style="margin-top:12px"><h3>분석선 보정 이력</h3><table><thead><tr><th>시각</th><th>작업자</th><th>대상</th><th>변경</th><th>사유</th></tr></thead><tbody id="correction-history-body"><tr><td colspan="5">저장된 분석선 보정 이력이 없습니다.</td></tr></tbody></table></div>
         </section>
 
         <section class="screen" data-panel="alarms">
@@ -813,7 +815,7 @@
         </section>
 
         <section class="screen" data-panel="report">
-          <div class="headline"><div><h2>결과 요약 · 리포트</h2><p class="sub">베어링별 판정과 회차 이력을 통합 확인</p></div><div class="btnrow"><button class="action" type="button" data-jw-tooltip="최종 적용값과 계산 근거를 Excel 또는 CSV로 내보내기">Excel / CSV</button><button class="action primary" id="generate-pdf-report" type="button" data-jw-tooltip="리포트 전체 6개 페이지를 PDF로 변환한 뒤 미리보기 화면 열기">PDF 생성</button></div></div>
+          <div class="headline"><div><h2>결과 요약 · 리포트</h2><p class="sub">베어링별 판정과 회차 이력을 통합 확인</p></div><div class="btnrow"><button class="action" type="button" data-jw-tooltip="최종 적용값과 계산 근거의 Excel/CSV 내보내기는 앱 개발 시 연동">Excel / CSV</button><button class="action primary" id="generate-pdf-report" type="button" data-jw-tooltip="현재 Test ID의 저장 데이터로 6개 영역의 PDF 형식 미리보기를 엽니다. 실제 파일 출력은 앱 개발 시 연동합니다.">PDF 생성</button></div></div>
           <div class="report-tabs" role="tablist" aria-label="결과 리포트 영역" data-help="내용을 한 영역씩 확인할 수 있습니다. 탭을 선택하면 해당 결과만 화면에 표시됩니다.">
             <button class="report-tab" id="report-tab-summary" type="button" role="tab" data-report-tab="summary" aria-controls="report-panel-summary" aria-selected="true">종합 판정</button>
             <button class="report-tab" id="report-tab-confirm" type="button" role="tab" data-report-tab="confirm" aria-controls="report-panel-confirm" aria-selected="false">결과 확정</button>
@@ -821,35 +823,41 @@
             <button class="report-tab" id="report-tab-history" type="button" role="tab" data-report-tab="history" aria-controls="report-panel-history" aria-selected="false">회차·적용 데이터</button>
           </div>
           <div class="report-tab-panel active" id="report-panel-summary" role="tabpanel" aria-labelledby="report-tab-summary" data-report-panel="summary">
-            <div class="grid three"><div class="panel" data-help="장치 설정에서 등록한 전체 베어링 4개가 모두 한 회차 이상 측정 완료되었다는 의미입니다."><span class="label">측정 완료</span><div class="metric">4 / 4</div></div><div class="panel" data-help="일부 위치가 허용범위를 벗어나 조정·재측정이 필요하지만 나머지 위치는 만족하는 상태입니다."><span class="label">종합 판정</span><div class="metric warn">조건부 OK</div></div><div class="panel" data-help="허용오차를 벗어나 다시 측정해야 하는 베어링 위치의 수입니다."><span class="label">재측정</span><div class="metric">1 위치</div></div></div>
-            <div class="panel" data-help="베어링별 목표 반력과 최종 측정 반력, 목표 대비 비율(측정 반력 ÷ 목표 반력 × 100), 허용오차에 따른 OK·재측정 판정, 적용 회차를 비교합니다." style="margin-top:12px"><h3>정적 베어링 하중 요약</h3><table><thead><tr><th>베어링</th><th>목표</th><th>측정</th><th>목표 대비 비율</th><th>판정</th><th>회차</th></tr></thead><tbody><tr><td>No.6</td><td>820 kN</td><td>815 kN</td><td>99.4%</td><td class="good">OK</td><td>2차</td></tr><tr><td>No.5</td><td>790 kN</td><td>802 kN</td><td>101.5%</td><td class="good">OK</td><td>2차</td></tr><tr><td>No.4</td><td>760 kN</td><td>754 kN</td><td>99.2%</td><td class="good">OK</td><td>2차</td></tr><tr><td>No.3</td><td>720 kN</td><td>676 kN</td><td>93.9%</td><td class="bad">재측정</td><td>2차</td></tr></tbody></table></div>
+            <div class="grid three"><div class="panel" data-help="현재 시험의 전체 베어링 중 분석 결과를 저장한 베어링 수입니다."><span class="label">측정 완료</span><div class="metric" id="report-completed">0 / 0</div></div><div class="panel" data-help="저장된 베어링별 판정을 종합합니다. 미측정 위치가 있으면 확정 전 상태입니다."><span class="label">종합 판정</span><div class="metric" id="report-overall">측정 대기</div></div><div class="panel" data-help="저장된 결과 중 허용범위를 벗어난 베어링 위치 수입니다."><span class="label">재측정</span><div class="metric" id="report-remeasure-count">0 위치</div></div></div>
+            <div class="panel" data-help="베어링 선택의 목표 반력과 측정·분석에서 저장한 최종 반력을 비교합니다. 저장 전에는 측정값·판정이 표시되지 않습니다." style="margin-top:12px"><h3>베어링별 반력 요약</h3><table><thead><tr><th>베어링</th><th>목표</th><th>측정</th><th>목표 대비 비율</th><th>판정</th><th>회차</th></tr></thead><tbody id="report-bearing-body"></tbody></table></div>
           </div>
           <div class="report-tab-panel" id="report-panel-confirm" role="tabpanel" aria-labelledby="report-tab-confirm" data-report-panel="confirm">
             <div class="panel result-confirmation" data-help="모든 베어링 측정이 끝난 뒤 시스템의 종합 판정을 확인하고, 작업자가 재측정 여부와 최종 의견을 확정하여 현재 Test ID의 이력으로 저장합니다.">
               <h3>결과 확정</h3>
               <div class="result-confirmation-grid">
-                <div class="result-verdict" data-help="허용오차와 베어링별 판정을 종합한 시스템 계산 결과입니다. 작업자가 직접 수정하는 값이 아닙니다."><span class="label">1 · 종합 판정</span><strong class="warn">조건부 OK</strong><p class="sub">No.3 허용범위 초과</p></div>
-                <div class="field" data-help="시스템은 No.3의 재측정을 권장합니다. 작업자가 현장 상태를 확인한 뒤 필요 또는 불필요를 최종 선택합니다."><label for="remeasure-decision">2 · 재측정 여부</label><select id="remeasure-decision"><option value="required" selected>필요 · 시스템 권장</option><option value="not-required">불필요 · 작업자 확인</option></select></div>
-                <div class="field remeasure-reason-field" id="remeasure-reason-field" data-help="재측정이 필요한 대상과 현장 조치 계획을 기록합니다. 재측정 필요 선택 시 필수 입력 항목입니다."><label for="remeasure-reason">재측정 사유</label><input id="remeasure-reason" value="No.3 베어링 허용오차 초과 · Shim 조정 후 재측정" placeholder="대상 베어링과 재측정 사유 입력"></div>
+                <div class="result-verdict" data-help="저장된 베어링별 판정의 종합 결과입니다. 미측정 위치가 있으면 확정할 수 없습니다."><span class="label">1 · 종합 판정</span><strong id="report-confirm-verdict">측정 대기</strong><p class="sub" id="report-confirm-detail">저장된 결과가 없습니다.</p></div>
+                <div class="field" data-help="베어링별 저장 결과와 현장 상태를 확인한 뒤 재측정 필요 또는 불필요를 작업자가 선택합니다."><label for="remeasure-decision">2 · 재측정 여부</label><select id="remeasure-decision"><option value="required">필요</option><option value="not-required" selected>불필요</option></select></div>
+                <div class="field remeasure-reason-field" id="remeasure-reason-field" data-help="재측정이 필요한 대상과 현장 조치 계획을 기록합니다. 재측정 필요 선택 시 필수 입력 항목입니다."><label for="remeasure-reason">재측정 사유</label><input id="remeasure-reason" value="" placeholder="대상 베어링과 재측정 사유 입력"></div>
               </div>
-              <div class="field result-opinion-field" data-help="측정 결과, 현장 확인 내용과 후속 조치에 대한 작업자의 최종 판단을 기록합니다. PDF 리포트와 데이터 이력에 함께 저장됩니다."><label for="final-opinion">3 · 최종 의견</label><textarea id="final-opinion" placeholder="측정 결과와 후속 조치에 대한 작업자 의견 입력">No.3 베어링 Shim 조정 후 재측정 필요. 나머지 위치는 허용범위 만족.</textarea></div>
-              <div class="result-confirmation-footer"><span class="result-save-status" id="result-save-status" role="status">저장 전 · 작업자 승인 대기</span><button class="action primary" id="save-final-result" type="button" data-jw-tooltip="재측정 여부와 최종 의견을 현재 Test ID의 데이터 이력으로 저장">4 · 결과 저장</button></div>
+              <div class="field result-opinion-field" data-help="현재 Test ID에 대한 작업자의 최종 판단입니다. 저장하면 결과 리포트와 PDF 미리보기에 표시됩니다."><label for="final-opinion">3 · 최종 의견</label><textarea id="final-opinion" placeholder="측정 결과와 후속 조치에 대한 작업자 의견 입력"></textarea></div>
+              <div class="result-confirmation-footer"><span class="result-save-status" id="result-save-status" role="status">저장 전 · 작업자 승인 대기</span><button class="action primary" id="save-final-result" type="button" data-jw-tooltip="재측정 여부와 최종 의견을 현재 Test ID의 결과 리포트에 저장">4 · 결과 저장</button></div>
             </div>
           </div>
           <div class="report-tab-panel" id="report-panel-info" role="tabpanel" aria-labelledby="report-tab-info" data-report-panel="info">
-            <div class="panel" data-help="리포트 표지와 모든 상세 페이지에 공통으로 표시할 시험 식별정보입니다."><h3>표지·기본정보</h3><table><tbody><tr><td>Test ID</td><td>H2678-20260825-02</td></tr><tr><td>호선 / 엔진</td><td>H2678 / ME 6G70ME-C</td></tr><tr><td>작업자 / 일시</td><td>홍길동 / 2026-08-25 14:32</td></tr></tbody></table></div>
+            <div class="panel" data-help="장치 설정에서 입력한 현재 시험의 식별정보입니다."><h3>표지·기본정보</h3><table><tbody id="report-info-body"></tbody></table></div>
           </div>
           <div class="report-tab-panel" id="report-panel-history" role="tabpanel" aria-labelledby="report-tab-history" data-report-panel="history">
-            <div class="grid two"><div class="panel" data-help="각 회차의 측정 반력, Shim 조정과 재측정 결과를 리포트에 포함합니다."><h3>회차별 조정 이력</h3><table><thead><tr><th>회차</th><th>조정</th><th>결과</th></tr></thead><tbody><tr><td>1차</td><td>No.3 Shim +0.20 mm</td><td class="bad">NG</td></tr><tr><td>2차</td><td>조정 후 재측정</td><td class="warn">재검토</td></tr></tbody></table></div><div class="panel" data-help="최종 적용 데이터에는 원시값이 아니라 승인된 보정값과 계산값을 사용하되 원시값·수정 이력은 별도 부록으로 보존합니다."><h3>최종 적용 데이터</h3><p class="sub">Step별 압력·변위·환산 하중 / Lift-off / 평균 대표 하중 / 최종 반력 / 보정값·사유 / 알람·메모</p></div></div>
+            <div class="grid two"><div class="panel" data-help="현재 프로젝트에서 만든 시험 회차와 각 시험의 결과 확정 상태를 조회합니다."><h3>회차별 시험 이력</h3><table><thead><tr><th>회차</th><th>Test ID</th><th>결과</th></tr></thead><tbody id="report-round-body"></tbody></table></div><div class="panel" data-help="데이터 이력과 동일한 분석선 저장 결과를 표시합니다. 압력·변위 원시값의 직접 보정은 포함하지 않습니다."><h3>최종 적용 데이터</h3><p class="sub" id="report-applied-summary">저장된 베어링별 분석 결과가 없습니다.</p></div></div>
           </div>
         </section>
       </main>
     </div>
   <dialog id="reset-measurement-dialog" class="reset-measurement-dialog" aria-labelledby="reset-measurement-title" aria-describedby="reset-measurement-description">
-    <h3 id="reset-measurement-title">측정 데이터를 초기화할까요?</h3>
-    <p id="reset-measurement-description">현재 측정의 수신 기록, L·D 변위값과 그래프 수신 곡선이 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</p>
-    <p>10 bar 기본 행·직접 추가한 압력 설정·목표 반력·허용오차는 유지됩니다. 초기화 후에는 ‘데이터 측정 시작’을 눌러 다시 기록할 수 있습니다.</p>
-    <div class="reset-dialog-actions"><button class="action" id="cancel-measurement-reset" type="button" autofocus>취소</button><button class="action primary" id="confirm-measurement-reset" type="button">초기화</button></div>
+    <h3 id="reset-measurement-title">시험 기록을 삭제할까요?</h3>
+    <p id="reset-measurement-description">선택한 Test ID의 수신 기록, 분석선 보정 이력과 결과 확정 내용이 삭제됩니다. 이 시안에서는 복구할 수 없습니다.</p>
+    <p>다른 Test ID의 기록과 장치 지정·베어링 구성·목표 반력 조건은 유지됩니다.</p>
+    <div class="reset-dialog-actions"><button class="action" id="cancel-measurement-reset" type="button" autofocus>취소</button><button class="action primary" id="confirm-measurement-reset" type="button">기록 삭제</button></div>
+  </dialog>
+  <dialog id="bearing-switch-dialog" class="reset-measurement-dialog" aria-labelledby="bearing-switch-title" aria-describedby="bearing-switch-description">
+    <h3 id="bearing-switch-title">저장하지 않은 분석 결과가 있습니다</h3>
+    <p id="bearing-switch-description">다른 베어링을 시작하면 현재 화면의 분석선·Bar별 임시 값은 초기화됩니다.</p>
+    <p>수신 원시값은 데이터 이력에 남지만, 분석 결과는 먼저 <strong>데이터 저장</strong>을 눌러야 완료 이력에 반영됩니다.</p>
+    <div class="reset-dialog-actions"><button class="action" id="cancel-bearing-switch" type="button" autofocus>돌아가서 저장</button><button class="action primary" id="confirm-bearing-switch" type="button">저장 없이 전환</button></div>
   </dialog>
   <div class="graph-fullscreen" id="graph-fullscreen" role="dialog" aria-modal="true" aria-labelledby="graph-fullscreen-title">
     <div class="graph-fullscreen-head"><h2 id="graph-fullscreen-title">그래프 전체 화면</h2><button class="action" id="close-graph-fullscreen" type="button">전체 화면 닫기</button></div>
@@ -860,7 +868,7 @@
   <div class="pdf-preview" id="pdf-preview" role="dialog" aria-modal="true" aria-labelledby="pdf-preview-title">
     <div class="pdf-preview-head">
       <div><h2 id="pdf-preview-title">PDF 미리보기</h2><p class="sub">Shaft Reaction Report · 전체 6페이지</p></div>
-      <div class="btnrow"><button class="action primary" id="save-pdf-file" type="button" data-jw-tooltip="미리보기 전체 6페이지를 하나의 PDF 파일로 저장">PDF 파일 저장</button><button class="action" id="close-pdf-preview" type="button">미리보기 닫기</button></div>
+      <div class="btnrow"><button class="action primary" id="save-pdf-file" type="button" data-jw-tooltip="실제 PDF 파일 저장은 Android 앱 개발 시 연동됩니다.">PDF 파일 저장</button><button class="action" id="close-pdf-preview" type="button">미리보기 닫기</button></div>
     </div>
     <div class="pdf-preview-body">
       <div class="pdf-page-list" role="tablist" aria-label="PDF 페이지 선택">
@@ -874,40 +882,40 @@
       <div class="pdf-page-stage">
         <article class="pdf-page pdf-cover active" data-pdf-preview-page="0" aria-label="PDF 1페이지 표지와 기본정보">
           <div class="pdf-cover-mark">J</div><h3>Main Engine Shaft<br>Reaction Measurement Report</h3><p>메인 엔진 샤프트 반력 계측 결과 리포트</p>
-          <table class="pdf-cover-info"><tbody><tr><th>Test ID</th><td>H2678-20260825-02</td></tr><tr><th>호선 / 엔진</th><td>H2678 / ME 6G70ME-C</td></tr><tr><th>시험 수행일시</th><td>2026-08-25 14:32</td></tr><tr><th>작업자</th><td>홍길동</td></tr></tbody></table>
+          <table class="pdf-cover-info"><tbody></tbody></table>
           <p class="pdf-page-number">1 / 6</p>
         </article>
         <article class="pdf-page" data-pdf-preview-page="1" aria-label="PDF 2페이지 종합 판정">
-          <div class="pdf-page-header"><strong>Shaft Reaction Report</strong><span>H2678-20260825-02</span></div><h3>종합 판정</h3>
-          <div class="pdf-kpi-grid"><div class="pdf-kpi"><span>측정 완료</span><strong>4 / 4</strong></div><div class="pdf-kpi"><span>종합 판정</span><strong>조건부 OK</strong></div><div class="pdf-kpi"><span>재측정</span><strong>1 위치</strong></div></div>
-          <h4>정적 베어링 하중 요약</h4><table><thead><tr><th>베어링</th><th>목표</th><th>측정</th><th>목표 대비 비율</th><th>판정</th><th>회차</th></tr></thead><tbody><tr><td>No.6</td><td>820 kN</td><td>815 kN</td><td>99.4%</td><td>OK</td><td>2차</td></tr><tr><td>No.5</td><td>790 kN</td><td>802 kN</td><td>101.5%</td><td>OK</td><td>2차</td></tr><tr><td>No.4</td><td>760 kN</td><td>754 kN</td><td>99.2%</td><td>OK</td><td>2차</td></tr><tr><td>No.3</td><td>720 kN</td><td>676 kN</td><td>93.9%</td><td>재측정</td><td>2차</td></tr></tbody></table>
-          <h4>판정 근거</h4><p class="pdf-opinion-box">No.3 베어링은 목표 대비 비율 93.9%로 허용범위 95~105%(목표 대비 ±5%)를 벗어났습니다. 나머지 3개 위치는 허용범위를 만족합니다.</p><p class="pdf-page-number">2 / 6</p>
+          <div class="pdf-page-header"><strong>Shaft Reaction Report</strong><span>—</span></div><h3>종합 판정</h3>
+          <div class="pdf-kpi-grid"><div class="pdf-kpi"><span>측정 완료</span><strong>0 / 0</strong></div><div class="pdf-kpi"><span>종합 판정</span><strong>측정 대기</strong></div><div class="pdf-kpi"><span>재측정</span><strong>0 위치</strong></div></div>
+          <h4>정적 베어링 하중 요약</h4><table><thead><tr><th>베어링</th><th>목표</th><th>측정</th><th>목표 대비 비율</th><th>판정</th><th>회차</th></tr></thead><tbody></tbody></table>
+          <h4>판정 근거</h4><p class="pdf-opinion-box">저장된 분석 결과가 없습니다.</p><p class="pdf-page-number">2 / 6</p>
         </article>
         <article class="pdf-page" data-pdf-preview-page="2" aria-label="PDF 3페이지 베어링별 곡선">
-          <div class="pdf-page-header"><strong>Shaft Reaction Report</strong><span>H2678-20260825-02</span></div><h3>베어링별 하중–변위 곡선</h3>
-          <svg class="pdf-curve" viewBox="0 0 460 250" role="img" aria-label="4개 베어링 하중 변위 곡선"><title>베어링별 하중 변위 곡선</title><desc>가로축 변위 0에서 1밀리미터, 세로축 환산 하중 0에서 800 킬로뉴턴 범위의 네 곡선</desc><path class="frame" d="M48 20V214H444M48 165H444M48 116H444M48 68H444"/><g><text x="43" y="218" text-anchor="end">0</text><text x="43" y="169" text-anchor="end">200</text><text x="43" y="120" text-anchor="end">400</text><text x="43" y="72" text-anchor="end">600</text><text x="43" y="24" text-anchor="end">800</text><text x="48" y="228">0.00</text><text x="147" y="228">0.25</text><text x="246" y="228">0.50</text><text x="345" y="228">0.75</text><text x="410" y="228">1.00 mm</text><text x="4" y="12">kN</text></g><path class="line-a" d="M66.4 211.1L74.5 183.6L97 156.7L146 129.7L215.4 102.3L292.9 74.9L372.6 47.4L411.3 22.9"/><path class="line-b" d="M62.3 211.1L68.4 183.6L88.8 156.7L129.6 129.7L195 102.3L266.4 74.9L337.9 47.4L380.7 22.9"/><path class="line-c" d="M58.2 211.1L64.3 183.6L80.7 156.7L115.4 129.7L172.5 102.3L241.9 74.9L313.4 47.4L358.3 22.9"/><path class="line-d" d="M56.2 211.1L60.2 183.6L72.5 156.7L99 129.7L141.9 102.3L195 74.9L254.2 47.4L299.1 22.9"/></svg>
-          <div class="legend"><span style="color:var(--jw-accent)">No.6</span><span style="color:var(--jw-good)">No.5</span><span style="color:var(--jw-warn)">No.4</span><span style="color:var(--jw-bad)">No.3</span></div><p class="pdf-opinion-box">각 곡선은 최종 적용된 Lifting·Lowering 분석 구간과 Lift-off 판정값을 기준으로 생성되었습니다.</p><p class="pdf-page-number">3 / 6</p>
+          <div class="pdf-page-header"><strong>Shaft Reaction Report</strong><span>—</span></div><h3>베어링별 하중–변위 곡선</h3>
+          <svg class="pdf-curve" viewBox="0 0 460 250" role="img" aria-label="저장된 곡선 없음"></svg>
+          <div class="legend"></div><p class="pdf-opinion-box">저장된 베어링별 수신 곡선이 없습니다.</p><p class="pdf-page-number">3 / 6</p>
         </article>
         <article class="pdf-page" data-pdf-preview-page="3" aria-label="PDF 4페이지 최종 적용 데이터">
-          <div class="pdf-page-header"><strong>Shaft Reaction Report</strong><span>H2678-20260825-02</span></div><h3>최종 적용 데이터</h3>
-          <table><thead><tr><th>Step</th><th>구간</th><th>압력</th><th>변위</th><th>환산 하중</th><th>적용</th></tr></thead><tbody><tr><td>07</td><td>Lifting</td><td>486.3 bar</td><td>0.44 mm</td><td>616.1 kN</td><td>보정</td></tr><tr><td>08</td><td>Lifting</td><td>512.8 bar</td><td>0.51 mm</td><td>649.7 kN</td><td>원시값</td></tr><tr><td>09</td><td>Lowering</td><td>498.1 bar</td><td>0.48 mm</td><td>631.0 kN</td><td>원시값</td></tr></tbody></table>
-          <h4>계산 결과</h4><table><tbody><tr><th>Lift-off 판정값</th><td>598.4 kN</td></tr><tr><th>평균 대표 하중</th><td>754.2 kN</td></tr><tr><th>최종 반력값</th><td>754.2 kN · OK</td></tr><tr><th>분석 구간</th><td>L Step 04~10 / D Step 03~09</td></tr></tbody></table>
-          <p class="pdf-opinion-box">원시 데이터는 별도 보존되며, 본 페이지에는 승인된 보정값과 최종 계산값이 표시됩니다.</p><p class="pdf-page-number">4 / 6</p>
+          <div class="pdf-page-header"><strong>Shaft Reaction Report</strong><span>—</span></div><h3>최종 적용 데이터</h3>
+          <table><thead><tr><th>베어링 · 기록</th><th>구간</th><th>압력</th><th>변위</th><th>환산 하중</th><th>구분</th></tr></thead><tbody></tbody></table>
+          <h4>계산 결과</h4><table><tbody></tbody></table>
+          <p class="pdf-opinion-box">측정·분석에서 데이터를 저장한 후 표시됩니다.</p><p class="pdf-page-number">4 / 6</p>
         </article>
         <article class="pdf-page" data-pdf-preview-page="4" aria-label="PDF 5페이지 회차와 보정 이력">
-          <div class="pdf-page-header"><strong>Shaft Reaction Report</strong><span>H2678-20260825-02</span></div><h3>회차·보정 이력</h3>
-          <h4>회차별 조정 결과</h4><table><thead><tr><th>회차</th><th>조정</th><th>결과</th></tr></thead><tbody><tr><td>1차</td><td>No.3 Shim +0.20 mm</td><td>NG</td></tr><tr><td>2차</td><td>조정 후 재측정</td><td>재검토</td></tr></tbody></table>
-          <h4>작업자 보정 이력</h4><table><thead><tr><th>시각</th><th>작업자</th><th>대상</th><th>변경</th><th>사유</th></tr></thead><tbody><tr><td>14:41:22</td><td>홍길동</td><td>Step 07 변위</td><td>0.42 → 0.44 mm</td><td>센서 응답 지연</td></tr><tr><td>14:45:03</td><td>홍길동</td><td>분석 구간</td><td>L 04~09 → 04~10</td><td>직선성 검토</td></tr></tbody></table>
-          <p class="pdf-opinion-box">모든 보정은 원시값을 변경하지 않고 최종 적용값으로 별도 저장되며 작업자·시각·사유가 함께 기록됩니다.</p><p class="pdf-page-number">5 / 6</p>
+          <div class="pdf-page-header"><strong>Shaft Reaction Report</strong><span>—</span></div><h3>회차·보정 이력</h3>
+          <h4>회차별 시험 결과</h4><table><thead><tr><th>회차</th><th>Test ID</th><th>결과</th></tr></thead><tbody></tbody></table>
+          <h4>작업자 보정 이력</h4><table><thead><tr><th>시각</th><th>작업자</th><th>대상</th><th>변경</th><th>사유</th></tr></thead><tbody></tbody></table>
+          <p class="pdf-opinion-box">분석선 보정 이력이 없습니다.</p><p class="pdf-page-number">5 / 6</p>
         </article>
         <article class="pdf-page" data-pdf-preview-page="5" aria-label="PDF 6페이지 작업자 의견">
-          <div class="pdf-page-header"><strong>Shaft Reaction Report</strong><span>H2678-20260825-02</span></div><h3>작업자 의견 · 재측정 확인</h3>
-          <h4>재측정 여부</h4><p class="pdf-opinion-box" id="pdf-remeasure-decision">필요 · 시스템 권장</p><h4>재측정 사유</h4><p class="pdf-opinion-box" id="pdf-remeasure-reason">No.3 베어링 허용오차 초과 · Shim 조정 후 재측정</p><h4>최종 의견</h4><p class="pdf-opinion-box" id="pdf-final-opinion">No.3 베어링 Shim 조정 후 재측정 필요. 나머지 위치는 허용범위 만족.</p>
-          <h4>작업자 승인</h4><table><tbody><tr><th>작업자</th><td>홍길동</td></tr><tr><th>확정 상태</th><td>승인 대기</td></tr><tr><th>시험 수행일시</th><td>2026-08-25 14:32</td></tr></tbody></table><p class="pdf-page-number">6 / 6</p>
+          <div class="pdf-page-header"><strong>Shaft Reaction Report</strong><span>—</span></div><h3>작업자 의견 · 재측정 확인</h3>
+          <h4>재측정 여부</h4><p class="pdf-opinion-box" id="pdf-remeasure-decision">미확정</p><h4>재측정 사유</h4><p class="pdf-opinion-box" id="pdf-remeasure-reason">미입력</p><h4>최종 의견</h4><p class="pdf-opinion-box" id="pdf-final-opinion">최종 의견 미입력</p>
+          <h4>작업자 승인</h4><table><tbody></tbody></table><p class="pdf-page-number">6 / 6</p>
         </article>
       </div>
     </div>
-    <div class="pdf-preview-foot"><span class="pdf-preview-status" id="pdf-preview-status" role="status">6 / 6 페이지 변환 완료</span><div class="btnrow"><button class="action" id="pdf-previous-page" type="button">이전 페이지</button><button class="action" id="pdf-next-page" type="button">다음 페이지</button></div></div>
+    <div class="pdf-preview-foot"><span class="pdf-preview-status" id="pdf-preview-status" role="status">6페이지 미리보기</span><div class="btnrow"><button class="action" id="pdf-previous-page" type="button">이전 페이지</button><button class="action" id="pdf-next-page" type="button">다음 페이지</button></div></div>
   </div>
   </div>
   <div class="guide-tooltip" id="guide-tooltip" role="tooltip"></div>
@@ -1063,11 +1071,10 @@
       const panels = [...root.querySelectorAll('[data-panel]')];
       const reportTabs = [...root.querySelectorAll('[data-report-tab]')];
       const reportTabPanels = [...root.querySelectorAll('[data-report-panel]')];
-      const historyLinks = [...root.querySelectorAll('[data-history-open]')];
+      const homeTestHistory = root.querySelector('#home-test-history');
       const historyContext = root.querySelector('#history-context');
       const historyContextLabel = root.querySelector('#history-context-label');
       const historyContextDetail = root.querySelector('#history-context-detail');
-      const dataPanel = root.querySelector('[data-panel="data"]');
       const alarmRows = [...root.querySelectorAll('[data-alarm-row]')];
       const alarmLevelFilter = root.querySelector('#alarm-level-filter');
       const alarmDeviceFilter = root.querySelector('#alarm-device-filter');
@@ -1082,6 +1089,10 @@
       let bearingChoices = [...root.querySelectorAll('.bearing-choice')];
       const measurementBearingTitle = root.querySelector('#measurement-bearing-title');
       const guideToggle = root.querySelector('#guide-toggle');
+      const setupTestId = root.querySelector('#setup-test-id');
+      const setupProject = root.querySelector('#setup-project');
+      const setupWorker = root.querySelector('#setup-worker');
+      const setupRound = root.querySelector('#setup-round');
       const shipType = root.querySelector('#ship-type');
       const customShipType = root.querySelector('#custom-ship-type');
       const shipTypeReturn = root.querySelector('#ship-type-return');
@@ -1190,7 +1201,6 @@
       const finalOpinion = root.querySelector('#final-opinion');
       const saveFinalResult = root.querySelector('#save-final-result');
       const resultSaveStatus = root.querySelector('#result-save-status');
-      const finalResultHistory = root.querySelector('#final-result-history');
       const livePressureValue = root.querySelector('#live-pressure-value');
       const livePressureDial = root.querySelector('#live-pressure-dial');
       const livePressureArc = root.querySelector('#live-pressure-arc');
@@ -1226,6 +1236,10 @@
       const measurementPhaseStatus = root.querySelector('#measurement-phase-status');
       let measurementPhase = 'ended';
       const bearingSessions = new Map();
+      const correctionEvents = [];
+      let selectedDataSessionId = null;
+      let selectedDataRecordIndex = null;
+      let viewingPastTest = false;
       let currentSessionId = null;
       let measurementDeviceSnapshot = null;
       let liveDemoDirection = 1;
@@ -1242,7 +1256,7 @@
       const renderMeasurementControls = () => {
         const finished = measurementIsFinished();
         const status = finished ? '데이터 측정 종료' : `${measurementPhase === 'lifting' ? 'Lifting' : 'Lowering'} 기록 중`;
-        measurementPhaseStatus.textContent = `세션 RUN-02 · ${status} · 수신 기록 ${measurementRecords.length}개`;
+        measurementPhaseStatus.textContent = `${activeTest.id} · ${status} · 수신 기록 ${measurementRecords.length}개`;
         endDataMeasurement.disabled = false;
         endDataMeasurement.textContent = finished ? '데이터 측정 시작' : '데이터 측정 종료';
         endDataMeasurement.setAttribute('data-jw-tooltip', finished
@@ -1255,6 +1269,9 @@
       };
       const resetMeasurementSession = () => {
         measurementPhase = 'lifting';
+        correctionEvents.length = 0;
+        selectedDataSessionId = null;
+        selectedDataRecordIndex = null;
         liveDemoDirection = 1;
         measurementRecords.length = 0;
         measurementSegment = 0;
@@ -1294,7 +1311,6 @@
         updateSlopeResults();
         barReadingStatus.textContent = '데이터 측정 종료 · 기록된 L·D 값은 유지됩니다. 아래에서 분석·보정을 진행하세요.';
       });
-      renderMeasurementControls();
       let peakLoadValue = 0;
       let peakPressureBar = 0;
       const updateLiveSample = (sample) => {
@@ -1815,7 +1831,7 @@
         pdfPages.forEach((page, pageIndex) => page.classList.toggle('active', pageIndex === currentPdfPage));
         pdfPreviousPage.disabled = currentPdfPage === 0;
         pdfNextPage.disabled = currentPdfPage === pdfPages.length - 1;
-        pdfPreviewStatus.textContent = `${pdfPages.length} / ${pdfPages.length} 페이지 변환 완료 · ${currentPdfPage + 1}페이지 표시`;
+        pdfPreviewStatus.textContent = `${pdfPages.length}페이지 미리보기 · ${currentPdfPage + 1}페이지 표시`;
       };
       const exitPdfPreview = () => {
         pdfPreview.classList.remove('open');
@@ -1825,9 +1841,7 @@
       generatePdfReport.setAttribute('aria-expanded', 'false');
       generatePdfReport.addEventListener('click', () => {
         if (fullscreenGraphState) exitGraphFullscreen();
-        pdfRemeasureDecision.textContent = remeasureDecision.selectedOptions[0].textContent;
-        pdfRemeasureReason.textContent = remeasureDecision.value === 'required' ? (remeasureReason.value.trim() || '미입력') : '해당 없음';
-        pdfFinalOpinion.textContent = finalOpinion.value.trim() || '최종 의견 미입력';
+        renderReport();
         savePdfFile.textContent = 'PDF 파일 저장';
         pdfPreview.classList.add('open');
         generatePdfReport.setAttribute('aria-expanded', 'true');
@@ -1839,8 +1853,7 @@
       pdfPreviousPage.addEventListener('click', () => showPdfPage(currentPdfPage - 1));
       pdfNextPage.addEventListener('click', () => showPdfPage(currentPdfPage + 1));
       savePdfFile.addEventListener('click', () => {
-        savePdfFile.textContent = 'PDF 저장 완료';
-        pdfPreviewStatus.textContent = 'H2678-20260825-02_Shaft-Reaction-Report.pdf · 6페이지 저장 완료';
+        pdfPreviewStatus.textContent = 'PDF 파일 저장은 Android 앱 구현 시 연결됩니다. 이 화면은 미리보기입니다.';
       });
       root.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && fullscreenGraphState) exitGraphFullscreen();
@@ -1852,6 +1865,10 @@
         if (sessionRunning() && ['setup','bearing-select'].includes(button.dataset.screen)) {
           showValidationNotice('데이터 측정 종료 후 베어링이나 장치 설정을 변경해 주세요.', 'devices'); return;
         }
+        if (['setup', 'bearing-select', 'measure', 'home'].includes(button.dataset.screen)) {
+          viewedTestKey = activeTest.key;
+          syncTestChrome();
+        }
         if (button.dataset.screen === 'measure') {
           if (!requireTargetReactions()) return;
           const error = measurementDeviceError(activeMeasurementBearing);
@@ -1861,6 +1878,9 @@
         if (button.dataset.screen === 'setup') {
           renderGaugeAssignments();
         }
+        if (button.dataset.screen === 'data') renderDataHistory();
+        if (button.dataset.screen === 'report') renderReport();
+        if (button.dataset.screen === 'home') { viewedTestKey = activeTest.key; renderOverview(); }
         buttons.forEach((item) => item.setAttribute('aria-selected', String(item === button)));
         panels.forEach((panel) => panel.classList.toggle('active', panel.dataset.panel === button.dataset.screen));
         root.querySelector('.main').scrollTo({ top: 0, left: 0 });
@@ -1886,20 +1906,39 @@
         reportTabs.forEach((item) => item.setAttribute('aria-selected', String(item === tab)));
         reportTabPanels.forEach((panel) => panel.classList.toggle('active', panel.dataset.reportPanel === tab.dataset.reportTab));
       }));
-      historyLinks.forEach((link) => link.addEventListener('click', () => {
-        const isCurrent = link.dataset.current === 'true';
-        historyContext.classList.toggle('readonly', !isCurrent);
-        historyContextLabel.textContent = isCurrent ? '현재 시험' : '과거 시험';
-        historyContextDetail.textContent = `시험일 ${link.dataset.testDate}`;
-        dataPanel.querySelectorAll('input, textarea').forEach((control) => {
-          control.disabled = !isCurrent;
-        });
+      homeTestHistory.addEventListener('click', (event) => {
+        const deleteButton = event.target.closest('[data-test-delete]');
+        if (deleteButton) { openTestDeleteDialog(Number(deleteButton.dataset.testDelete)); return; }
+        const link = event.target.closest('[data-test-key]');
+        if (!link) return;
+        const key = Number(link.dataset.testKey);
+        if (!testRecords.has(key)) return;
+        viewedTestKey = key;
+        viewingPastTest = key !== activeTest.key;
+        selectedDataSessionId = null;
+        selectedDataRecordIndex = null;
         root.querySelector('[data-screen="data"]').click();
-      }));
+      });
       const requestedPanel = window.location.hash.replace('#', '');
       const requestedButton = buttons.find((button) => button.dataset.screen === (requestedPanel === 'connect' ? 'setup' : requestedPanel));
 
       newTestButton.addEventListener('click', () => {
+        if (sessionRunning()) { showValidationNotice('현재 데이터 측정을 종료한 후 새 시험을 시작해 주세요.', 'devices'); return; }
+        if (measurementRecords.length && (!currentSessionId || !bearingSessions.has(currentSessionId))) archiveBearingSession();
+        activeTest.bearings = bearingItems.map(item => ({...item}));
+        activeTest = makeTestRecord();
+        viewedTestKey = activeTest.key;
+        viewingPastTest = false;
+        resetMeasurementSession();
+        measurementPhase = 'ended';
+        activeMeasurementBearing = null;
+        measurementDeviceSnapshot = null;
+        lastReportViewKey = null;
+        renderMeasurementControls();
+        syncTestChrome();
+        renderOverview();
+        renderDataHistory();
+        renderReport();
         root.querySelector('[data-screen="setup"]').click();
         if (!sessionRunning()) showSetupTab('conditions');
       });
@@ -1916,13 +1955,12 @@
       root.querySelectorAll('[data-setup-tab]').forEach(tab => tab.addEventListener('click', () => showSetupTab(tab.dataset.setupTab)));
       setupCompleteButton.addEventListener('click', () => {
         if (!applyDeviceConnections()) return;
+        syncActiveTestMetadata();
+        renderOverview();
         root.querySelector('[data-screen="bearing-select"]').click();
       });
-      startBearingButton.addEventListener('click', () => {
-        if (!requireTargetReactions(pendingMeasurementBearing)) return;
-        if (sessionRunning()) { showValidationNotice('현재 데이터 측정을 종료한 후 다음 베어링을 선택해 주세요.', 'devices'); return; }
-        const error = measurementDeviceError(pendingMeasurementBearing);
-        if (error) { showValidationNotice(error, 'devices'); return; }
+      const bearingSwitchDialog = root.querySelector('#bearing-switch-dialog');
+      const beginSelectedBearingMeasurement = () => {
         archiveBearingSession();
         activeMeasurementBearing = pendingMeasurementBearing;
         analysisHasManualChange = false;
@@ -1932,7 +1970,25 @@
         updateSlopeResults();
         measurementBearingTitle.textContent = `${activeMeasurementBearing.position} · Jack-up 측정·분석`;
         root.querySelector('[data-screen="measure"]').click();
+      };
+      startBearingButton.addEventListener('click', () => {
+        if (!requireTargetReactions(pendingMeasurementBearing)) return;
+        if (sessionRunning()) { showValidationNotice('현재 데이터 측정을 종료한 후 다음 베어링을 선택해 주세요.', 'devices'); return; }
+        const error = measurementDeviceError(pendingMeasurementBearing);
+        if (error) { showValidationNotice(error, 'devices'); return; }
+        if (measurementRecords.length && !analysisFinalApplied) {
+          root.querySelector('#bearing-switch-description').textContent = `${activeMeasurementBearing?.position || '현재 베어링'}에서 ${pendingMeasurementBearing.position}(으)로 전환하면 저장하지 않은 분석선·Bar별 임시 값이 초기화됩니다. 수신 원시값은 데이터 이력에 남습니다.`;
+          bearingSwitchDialog.showModal();
+          return;
+        }
+        beginSelectedBearingMeasurement();
       });
+      root.querySelector('#cancel-bearing-switch').addEventListener('click', () => bearingSwitchDialog.close());
+      root.querySelector('#confirm-bearing-switch').addEventListener('click', () => {
+        bearingSwitchDialog.close();
+        if (!sessionRunning()) beginSelectedBearingMeasurement();
+      });
+      bearingSwitchDialog.addEventListener('close', () => startBearingButton.focus());
       guideToggle.addEventListener('click', () => {
         const enabled = root.classList.toggle('guide-on');
         hideTooltip();
@@ -1954,6 +2010,14 @@
       remeasureReason.addEventListener('input', markFinalResultUnsaved);
       finalOpinion.addEventListener('input', markFinalResultUnsaved);
       saveFinalResult.addEventListener('click', () => {
+        const test = viewedTest();
+        if (test.key !== activeTest.key) return;
+        const summary = summaryForTest(test);
+        if (!summary.rows.length || summary.completed !== summary.rows.length) {
+          resultSaveStatus.className = 'result-save-status bad';
+          resultSaveStatus.textContent = '모든 베어링의 분석 결과를 먼저 저장해 주세요.';
+          return;
+        }
         const requiresRemeasure = remeasureDecision.value === 'required';
         if (requiresRemeasure && !remeasureReason.value.trim()) {
           resultSaveStatus.className = 'result-save-status bad';
@@ -1970,12 +2034,12 @@
         const now = new Date();
         const pad = (value) => String(value).padStart(2, '0');
         const savedTime = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
-        const decisionLabel = requiresRemeasure ? '재측정 필요' : '재측정 불필요';
+        test.final = { decision: remeasureDecision.value, reason: remeasureReason.value.trim(), opinion: finalOpinion.value.trim(), worker: test.worker || analysisCorrectionWorker.value.trim() || '작업자 미입력', at: now };
         resultSaveStatus.className = 'result-save-status saved';
-        resultSaveStatus.textContent = `저장 완료 · 홍길동 · ${savedTime} · 데이터 이력 반영`;
-        finalResultHistory.className = requiresRemeasure ? 'warn' : 'good';
-        finalResultHistory.textContent = `${decisionLabel} · 최종 의견 저장됨 · 홍길동 ${savedTime}`;
+        resultSaveStatus.textContent = `저장 완료 · ${test.final.worker} · ${savedTime} · Test ID ${test.id}`;
         saveFinalResult.textContent = '결과 저장 완료';
+        renderOverview();
+        renderReport();
       });
       syncRemeasureReason();
       // POC Report (2026-09-09), p.3: integer BLE RSSI and actual reception are separate signals.
@@ -2197,23 +2261,40 @@
         if (!activeMeasurementBearing || !measurementRecords.length || !measurementDeviceSnapshot) return;
         if (!currentSessionId) currentSessionId = 'RUN-' + Date.now();
         bearingSessions.set(currentSessionId, {
-          ...measurementDeviceSnapshot, id: currentSessionId,
+          ...measurementDeviceSnapshot, id: currentSessionId, testKey: activeTest.key,
           endedAt: new Date().toLocaleTimeString('ko-KR'),
           records: measurementRecords.map(sample => ({...sample})),
           slopes: JSON.parse(JSON.stringify(slopeStates)),
+          corrections: correctionEvents.map(event => ({...event})),
+          analysisResult: {
+            reaction: analysisFinalReaction.textContent,
+            ratio: analysisErrorRate.textContent,
+            verdict: root.querySelector('#analysis-verdict').textContent,
+            finalApplied: analysisFinalApplied
+          },
           barReadings: [...barReadingBody.rows].map(row => [...row.querySelectorAll('input')].map((input,index) => index % 2 ? input.value : input.dataset.pressureBar))
         });
+        selectedDataSessionId = currentSessionId;
+        selectedDataRecordIndex = null;
+        if (activeTest.final) activeTest.final = null;
         renderBearingSessionHistory();
+        if (root.querySelector('[data-panel="data"]').classList.contains('active')) renderDataHistory();
+        renderOverview();
+        renderReport();
       }
       function renderBearingSessionHistory() {
         const body = root.querySelector('#bearing-session-history');
         body.replaceChildren();
-        [...bearingSessions.values()].reverse().forEach(session => {
+        const sessions = sessionsForTest(viewedTest());
+        sessions.reverse().forEach(session => {
           const row = document.createElement('tr');
           const nameCell = document.createElement('td');
           const open = document.createElement('button');
           open.type = 'button'; open.className = 'history-link'; open.textContent = session.bearingName;
           open.addEventListener('click', () => {
+            selectedDataSessionId = session.id;
+            selectedDataRecordIndex = null;
+            renderDataHistory();
             const detail = root.querySelector('#bearing-session-detail');
             detail.hidden = false; detail.replaceChildren();
             const heading = document.createElement('h3');
@@ -2234,7 +2315,97 @@
           [session.pressureId,session.gaugeId,session.records.length,session.endedAt].forEach(value => {const td=document.createElement('td');td.textContent=value;row.append(td);});
           body.append(row);
         });
-        if (!bearingSessions.size) { const row=body.insertRow();const cell=row.insertCell();cell.colSpan=5;cell.textContent='아직 종료된 측정이 없습니다.'; }
+        if (!sessions.length) { const row=body.insertRow();const cell=row.insertCell();cell.colSpan=5;cell.textContent='이 시험에서 종료된 측정이 없습니다.'; }
+      }
+      function renderDataHistory() {
+        const recordsBody = root.querySelector('#data-records-body');
+        const sourceStatus = root.querySelector('#data-source-status');
+        const test = viewedTest();
+        viewingPastTest = test.key !== activeTest.key;
+        const sessions = sessionsForTest(test);
+        const lastSession = sessions.at(-1);
+        const activeSession = !viewingPastTest && measurementRecords.length && measurementDeviceSnapshot ? {
+          ...measurementDeviceSnapshot,
+          records: measurementRecords,
+          corrections: correctionEvents,
+          analysisResult: {
+            reaction: analysisFinalReaction.textContent,
+            ratio: analysisErrorRate.textContent,
+            verdict: root.querySelector('#analysis-verdict').textContent,
+            finalApplied: analysisFinalApplied
+          }
+        } : null;
+        const selectedSession = selectedDataSessionId ? bearingSessions.get(selectedDataSessionId) : null;
+        const session = selectedSession?.testKey === test.key ? selectedSession : activeSession || lastSession;
+        historyContext.classList.toggle('readonly', viewingPastTest);
+        historyContextLabel.textContent = viewingPastTest ? '과거 시험' : '현재 시험';
+        historyContextDetail.textContent = `시험일 ${localDateText(test.startedAt)}`;
+        root.querySelector('#data-test-id').textContent = test.id;
+        root.querySelector('#data-result-bearing').textContent = session?.bearingName || '—';
+        const records = session?.records || [];
+        recordsBody.replaceChildren();
+        if (!records.length) {
+          const row = recordsBody.insertRow();
+          const cell = row.insertCell();
+          cell.colSpan = 6;
+          cell.textContent = '이 시험에서 측정·분석 데이터를 기록하면 압력·변위 수신값이 여기에 표시됩니다.';
+        } else {
+          if (selectedDataRecordIndex === null || selectedDataRecordIndex >= records.length) selectedDataRecordIndex = records.length - 1;
+          records.forEach((sample, index) => {
+            const row = recordsBody.insertRow();
+            const numberCell = row.insertCell();
+            const open = document.createElement('button');
+            open.type = 'button';
+            open.className = 'history-link';
+            open.textContent = String(index + 1).padStart(3, '0');
+            open.setAttribute('aria-label', `${index + 1}번 수신값 조회`);
+            open.setAttribute('aria-pressed', String(index === selectedDataRecordIndex));
+            open.addEventListener('click', () => {
+              selectedDataRecordIndex = index;
+              renderDataHistory();
+            });
+            numberCell.append(open);
+            const load = reactionFromPressure(sample.pressure, Number(session.area));
+            [new Date(sample.time).toLocaleTimeString('ko-KR'), sample.phase === 'lifting' ? 'Lifting' : 'Lowering',
+              pressureText(sample.pressure), `${Number(sample.displacement).toFixed(3)} mm`,
+              Number.isFinite(load) ? `${load.toFixed(2)} kN` : '—'].forEach(value => {
+              const cell = row.insertCell();
+              cell.textContent = value;
+            });
+          });
+        }
+        sourceStatus.textContent = session
+          ? `${session.bearingName} · 압력계 ${session.pressureId} / 디지털 게이지 ${session.gaugeId} · ${records.length}건 · 측정·분석 수신 기록`
+          : '이 시험에 저장된 측정 기록이 없습니다.';
+        const selected = records[selectedDataRecordIndex];
+        root.querySelector('#data-selected-pressure').value = selected ? pressureText(selected.pressure) : '—';
+        root.querySelector('#data-selected-displacement').value = selected ? `${Number(selected.displacement).toFixed(3)} mm` : '—';
+        root.querySelector('#data-selected-phase').value = selected ? (selected.phase === 'lifting' ? 'Lifting · 가압' : 'Lowering · 감압') : '—';
+        root.querySelector('#data-selected-time').value = selected ? new Date(selected.time).toLocaleString('ko-KR') : '—';
+        root.querySelector('#data-selected-source').textContent = selected
+          ? '압력·변위는 측정·분석의 수신 기록입니다. 분석선 기울기·구간 조정은 아래 이력에 별도로 남으며 이 원시값을 수정하지 않습니다.'
+          : '측정값 직접 보정 기능은 없습니다. 수신값과 분석선 보정 이력은 별도로 관리합니다.';
+        const result = session?.analysisResult;
+        root.querySelector('#data-final-reaction').textContent = result?.reaction && result.reaction !== '—' ? result.reaction : '—';
+        root.querySelector('#data-final-ratio').textContent = result?.ratio && result.ratio !== '—' ? result.ratio : '—';
+        root.querySelector('#data-final-verdict').textContent = result?.verdict && result.verdict !== '분석 대기' ? result.verdict : '—';
+        renderBearingSessionHistory();
+        correctionHistoryBody.replaceChildren();
+        const corrections = session?.corrections || [];
+        if (!corrections.length) {
+          const row = correctionHistoryBody.insertRow();
+          const cell = row.insertCell();
+          cell.colSpan = 5;
+          cell.textContent = '저장된 분석선 보정 이력이 없습니다.';
+        } else {
+          corrections.forEach(event => {
+            const row = correctionHistoryBody.insertRow();
+            [event.time, event.worker, event.target, event.change, event.reason].forEach(value => {
+              const cell = row.insertCell();
+              cell.textContent = value;
+            });
+          });
+        }
       }
       const updateAcceptanceCriteria = () => {
         acceptanceCriteria.value = 'lte';
@@ -2245,6 +2416,7 @@
         bearingItems[selectedBearingIndex].tolerance = reactionTolerance.value;
         updateAcceptanceCriteria();
         analysisFinalApplied = false;
+        invalidateStoredResultsForActiveTest(bearingItems[selectedBearingIndex].position);
         updateSlopeResults();
       });
       acceptanceCriteria.addEventListener('change', () => {
@@ -2858,19 +3030,47 @@
       ensureDefaultBarRows(40);
       const resetMeasurementData = root.querySelector('#reset-measurement-data');
       const resetMeasurementDialog = root.querySelector('#reset-measurement-dialog');
-      resetMeasurementData.addEventListener('click', () => {
+      let pendingDeleteTestKey = null;
+      function openTestDeleteDialog(key) {
+        const test = testRecords.get(key);
+        if (!test) return;
+        if (key === activeTest.key && sessionRunning()) { showValidationNotice('데이터 측정을 종료한 뒤 현재 시험 기록을 삭제해 주세요.', 'devices'); return; }
+        pendingDeleteTestKey = key;
+        root.querySelector('#reset-measurement-title').textContent = `${test.id} 기록을 삭제할까요?`;
+        root.querySelector('#reset-measurement-description').textContent = `이 시험의 모든 베어링 수신 기록, 분석선 보정 이력과 결과 확정 내용을 삭제합니다. 이 시안에서는 복구할 수 없습니다.`;
         hideTooltip();
         resetMeasurementDialog.showModal();
+      }
+      resetMeasurementData.addEventListener('click', () => {
+        openTestDeleteDialog(activeTest.key);
       });
       root.querySelector('#cancel-measurement-reset').addEventListener('click', () => resetMeasurementDialog.close());
       resetMeasurementDialog.addEventListener('close', () => resetMeasurementData.focus());
       root.querySelector('#confirm-measurement-reset').addEventListener('click', () => {
-        resetMeasurementSession();
-        measurementPhase = 'ended';
-        renderMeasurementControls();
-        barReadingStatus.textContent = '측정 데이터 초기화 완료 · 압력 설정 행 유지 · 데이터 측정 시작 대기';
-        analysisRangeStatus.textContent = '수신 곡선과 L·D 기록을 초기화했습니다. 압력 설정과 베어링 조건은 유지됩니다.';
+        const key = pendingDeleteTestKey;
+        if (!testRecords.has(key)) { resetMeasurementDialog.close(); return; }
+        if (key === activeTest.key && sessionRunning()) { resetMeasurementDialog.close(); showValidationNotice('데이터 측정을 종료한 뒤 시험 기록을 삭제해 주세요.', 'devices'); return; }
+        for (const [id, session] of bearingSessions) if (session.testKey === key) bearingSessions.delete(id);
+        testRecords.delete(key);
+        if (key === activeTest.key) {
+          resetMeasurementSession();
+          measurementPhase = 'ended';
+          activeMeasurementBearing = null;
+          measurementDeviceSnapshot = null;
+          activeTest = makeTestRecord();
+          renderMeasurementControls();
+        }
+        viewedTestKey = activeTest.key;
+        lastReportViewKey = null;
+        selectedDataSessionId = null;
+        selectedDataRecordIndex = null;
+        barReadingStatus.textContent = '선택한 시험 기록 삭제 완료 · 다른 시험 기록과 압력 설정 행은 유지됩니다.';
+        analysisRangeStatus.textContent = '선택한 Test ID의 수신 곡선·L·D 기록·보정 이력·결과 확정을 삭제했습니다.';
+        renderOverview();
+        renderDataHistory();
+        renderReport();
         resetMeasurementDialog.close();
+        pendingDeleteTestKey = null;
       });
       const startCurveSelection = (curveKey) => {
         if (analysisSamples[curveKey].length < 2) {
@@ -2959,20 +3159,11 @@
         const now = new Date();
         const padTime = (value) => String(value).padStart(2, '0');
         const time = `${padTime(now.getHours())}:${padTime(now.getMinutes())}:${padTime(now.getSeconds())}`;
-        const row = document.createElement('tr');
-        const values = [
-          time,
-          worker,
-          '분석 조건',
-          `L ${analysisLiftingRange.value.replaceAll('Step ', '')} / D ${analysisLoweringRange.value.replaceAll('Step ', '')} / 목표 ${analysisTargetReaction.value} 톤(tf)`,
+        correctionEvents.push({
+          time, worker, target: '분석선 구간·기울기',
+          change: `L ${analysisLiftingRange.value.replaceAll('Step ', '')} / D ${analysisLoweringRange.value.replaceAll('Step ', '')} / 목표 ${analysisTargetReaction.value} 톤(tf)`,
           reason
-        ];
-        values.forEach((value) => {
-          const cell = document.createElement('td');
-          cell.textContent = value;
-          row.appendChild(cell);
         });
-        correctionHistoryBody.appendChild(row);
         analysisHasManualChange = false;
         archiveBearingSession();
         analysisRangeStatus.textContent = `이력 저장 완료 · ${worker} · ${reason}`;
@@ -3011,27 +3202,20 @@
         const now = new Date();
         const padTime = (value) => String(value).padStart(2, '0');
         const time = `${padTime(now.getHours())}:${padTime(now.getMinutes())}:${padTime(now.getSeconds())}`;
-        const row = document.createElement('tr');
-        const values = [
-          time,
-          worker,
-          '최종 적용',
-          `L ${analysisLiftingRange.value.replaceAll('Step ', '')} / D ${analysisLoweringRange.value.replaceAll('Step ', '')} / 목표 ${analysisTargetReaction.value} 톤(tf)`,
+        correctionEvents.push({
+          time, worker, target: '분석 결과 저장',
+          change: `L ${analysisLiftingRange.value.replaceAll('Step ', '')} / D ${analysisLoweringRange.value.replaceAll('Step ', '')} / 목표 ${analysisTargetReaction.value} 톤(tf)`,
           reason
-        ];
-        values.forEach((value) => {
-          const cell = document.createElement('td');
-          cell.textContent = value;
-          row.appendChild(cell);
         });
-        correctionHistoryBody.appendChild(row);
         analysisHasManualChange = false;
         analysisFinalApplied = true;
         updateSlopeResults();
         archiveBearingSession();
         analysisRangeStatus.textContent = `최종 적용 완료 · ${worker} · 데이터 이력 반영`;
+        viewingPastTest = false;
+        historyContext.classList.remove('readonly');
         historyContextLabel.textContent = '현재 시험';
-        historyContextDetail.textContent = `시험일 ${historyLinks.find((link) => link.dataset.current === 'true')?.dataset.testDate || '2026-08-25'}`;
+        historyContextDetail.textContent = `시험일 ${localDateText(activeTest.startedAt)}`;
         root.querySelector('[data-screen="data"]').click();
       });
       updateExcludedRange();
@@ -3044,6 +3228,211 @@
       const ramAreas = { '50': '70.85', '150': '153.90' };
       let selectedBearingIndex = 0;
       let bearingItems = shipTypeTemplates.lngc.map((position, index) => ({ position, gaugeId: displacementModules[index]?.value || '', target: '', tolerance: '5', criteria: 'lte', minReaction: '', maxReaction: '', status: '대기' }));
+      const localDateText = (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+      const localTimeText = (date) => `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+      const testRecords = new Map();
+      let testSerial = 0;
+      const makeTestRecord = () => {
+        const startedAt = new Date();
+        const project = setupProject.value.trim() || 'PROJECT';
+        const serial = ++testSerial;
+        const test = {
+          key: serial, id: `${project}-${localDateText(startedAt).replaceAll('-', '')}-${String(serial).padStart(2, '0')}`,
+          idAuto: true, project, worker: setupWorker.value.trim(), round: setupRound.value,
+          startedAt, bearings: bearingItems.map(item => ({...item})), final: null
+        };
+        testRecords.set(test.key, test);
+        return test;
+      };
+      let activeTest = makeTestRecord();
+      let viewedTestKey = activeTest.key;
+      const viewedTest = () => testRecords.get(viewedTestKey) || activeTest;
+      const sessionsForTest = (test) => [...bearingSessions.values()].filter(session => session.testKey === test.key);
+      const bearingConfigFor = (test) => test.key === activeTest.key ? bearingItems : test.bearings;
+      const summaryForTest = (test) => {
+        const positions = bearingConfigFor(test);
+        const latestByBearing = new Map();
+        sessionsForTest(test).forEach(session => {
+          if (session.analysisResult?.finalApplied) latestByBearing.set(session.bearingName, session);
+        });
+        const rows = positions.map(item => {
+          const session = latestByBearing.get(item.position);
+          const reactionTf = Number.parseFloat(session?.analysisResult?.reaction);
+          const reactionKn = Number.isFinite(reactionTf) ? reactionTf * KN_PER_TF : null;
+          const ratio = Number.parseFloat(session?.analysisResult?.ratio);
+          const verdict = session?.analysisResult?.verdict?.replace(/^잠정\s*/, '') || '미측정';
+          return { item, session, reactionKn, ratio: Number.isFinite(ratio) ? ratio : null, verdict };
+        });
+        const completed = rows.filter(row => row.session).length;
+        const failed = rows.filter(row => row.verdict === 'NG').length;
+        const overall = !completed ? '측정 대기' : completed < rows.length ? '측정 중' : failed ? '재측정 필요' : 'OK';
+        return { rows, completed, failed, overall };
+      };
+      function syncActiveTestMetadata() {
+        const project = setupProject.value.trim() || 'PROJECT';
+        if (activeTest.idAuto && project !== activeTest.project) {
+          activeTest.id = `${project}-${localDateText(activeTest.startedAt).replaceAll('-', '')}-${String(activeTest.key).padStart(2, '0')}`;
+          setupTestId.value = activeTest.id;
+        }
+        activeTest.project = project;
+        activeTest.worker = setupWorker.value.trim();
+        activeTest.round = setupRound.value;
+        const editedId = setupTestId.value.trim();
+        if (editedId && editedId !== activeTest.id) { activeTest.id = editedId; activeTest.idAuto = false; }
+        syncTestChrome();
+      }
+      function syncTestChrome() {
+        setupTestId.value = activeTest.id;
+        const test = viewedTest();
+        root.querySelector('#header-test-id').textContent = `TEST: ${test.id}`;
+        root.querySelector('#header-test-time').textContent = `${localDateText(test.startedAt)} ${localTimeText(test.startedAt)}`;
+      }
+      function addCells(row, values, firstHeader = false) {
+        values.forEach((value, index) => {
+          const cell = document.createElement(firstHeader && index === 0 ? 'th' : 'td');
+          cell.textContent = value == null ? '—' : String(value);
+          row.append(cell);
+        });
+      }
+      function fillRows(body, rows, emptyText, columnCount) {
+        body.replaceChildren();
+        if (!rows.length) {
+          const row = body.insertRow();
+          const cell = row.insertCell();
+          cell.colSpan = columnCount;
+          cell.textContent = emptyText;
+          return;
+        }
+        rows.forEach(values => addCells(body.insertRow(), values));
+      }
+      function renderOverview() {
+        const summary = summaryForTest(activeTest);
+        root.querySelector('#home-project').textContent = activeTest.project;
+        root.querySelector('#home-round').textContent = `${activeTest.id} · ${activeTest.round}`;
+        root.querySelector('#home-progress').textContent = `${summary.completed} / ${summary.rows.length}`;
+        root.querySelector('#home-current-bearing').textContent = summary.rows.length && summary.completed === summary.rows.length ? summary.overall : activeMeasurementBearing?.position || summary.overall;
+        homeTestHistory.replaceChildren();
+        [...testRecords.values()].reverse().forEach(test => {
+          const row = homeTestHistory.insertRow();
+          const idCell = row.insertCell();
+          const link = document.createElement('button');
+          link.type = 'button'; link.className = 'history-link'; link.dataset.testKey = String(test.key); link.textContent = test.id;
+          idCell.append(link);
+          const result = summaryForTest(test);
+          [test.round, test.final ? (test.final.decision === 'required' ? '재측정 필요' : result.overall) : result.completed ? '진행 중' : '대기', localDateText(test.startedAt), test.worker || '—'].forEach(value => {
+            const cell = row.insertCell(); cell.textContent = value;
+          });
+          const manageCell = row.insertCell();
+          const remove = document.createElement('button');
+          remove.type = 'button'; remove.className = 'history-link'; remove.dataset.testDelete = String(test.key); remove.textContent = '삭제';
+          remove.setAttribute('aria-label', `${test.id} 시험 기록 삭제`);
+          manageCell.append(remove);
+        });
+        syncTestChrome();
+      }
+      let lastReportViewKey = null;
+      function renderReport() {
+        const test = viewedTest();
+        const summary = summaryForTest(test);
+        const sessions = sessionsForTest(test);
+        const finalized = summary.rows.map(row => row.session).filter(Boolean);
+        root.querySelector('#report-completed').textContent = `${summary.completed} / ${summary.rows.length}`;
+        root.querySelector('#report-overall').textContent = summary.overall;
+        root.querySelector('#report-remeasure-count').textContent = `${summary.failed} 위치`;
+        const bearingRows = summary.rows.map(row => [row.item.position,
+          row.item.target ? `${(Number(row.item.target) / KN_PER_TF).toFixed(2)} 톤(tf)` : '미입력',
+          row.session?.analysisResult?.reaction || '—',
+          row.session?.analysisResult?.ratio || '—', row.session ? row.verdict : '미측정', test.round]);
+        fillRows(root.querySelector('#report-bearing-body'), bearingRows, '구성된 베어링이 없습니다.', 6);
+        root.querySelector('#report-confirm-verdict').textContent = summary.overall;
+        root.querySelector('#report-confirm-detail').textContent = `${summary.completed} / ${summary.rows.length} 베어링 분석 결과 저장 · 허용범위 외 ${summary.failed} 위치`;
+        const past = test.key !== activeTest.key;
+        [remeasureDecision, remeasureReason, finalOpinion, saveFinalResult].forEach(control => { control.disabled = past; });
+        if (lastReportViewKey !== test.key) {
+          remeasureDecision.value = test.final?.decision || (summary.failed ? 'required' : 'not-required');
+          remeasureReason.value = test.final?.reason || '';
+          finalOpinion.value = test.final?.opinion || '';
+          lastReportViewKey = test.key;
+        }
+        remeasureReasonField.hidden = remeasureDecision.value !== 'required';
+        remeasureReason.disabled = past || remeasureDecision.value !== 'required';
+        resultSaveStatus.textContent = test.final ? `저장 완료 · ${test.final.worker} · ${localDateText(test.final.at)} ${localTimeText(test.final.at)}` : '저장 전 · 작업자 승인 대기';
+        resultSaveStatus.className = `result-save-status${test.final ? ' saved' : ''}`;
+        saveFinalResult.textContent = test.final ? '결과 저장 완료' : '4 · 결과 저장';
+        const infoRows = [['Test ID', test.id], ['프로젝트 / 호선', test.project], ['측정 회차', test.round], ['시험 수행일시', `${localDateText(test.startedAt)} ${localTimeText(test.startedAt)}`], ['작업자', test.worker || '—'], ['베어링 수', `${summary.rows.length}개`]];
+        fillRows(root.querySelector('#report-info-body'), infoRows, '시험 정보 없음', 2);
+        const projectTests = [...testRecords.values()].filter(item => item.project === test.project);
+        const roundRows = projectTests.map(item => [item.round, item.id, item.final ? (item.final.decision === 'required' ? '재측정 필요' : summaryForTest(item).overall) : '확정 전']);
+        fillRows(root.querySelector('#report-round-body'), roundRows, '시험 이력 없음', 3);
+        root.querySelector('#report-applied-summary').textContent = finalized.length ? finalized.map(session => `${session.bearingName}: ${session.analysisResult.reaction} · ${session.analysisResult.ratio} · ${session.analysisResult.verdict}`).join(' / ') : '저장된 베어링별 분석 결과가 없습니다.';
+        pdfPages.forEach(page => { const id = page.querySelector('.pdf-page-header span'); if (id) id.textContent = test.id; });
+        fillRows(pdfPages[0].querySelector('.pdf-cover-info tbody'), infoRows, '시험 정보 없음', 2);
+        const pdfKpis = pdfPages[1].querySelectorAll('.pdf-kpi strong');
+        [`${summary.completed} / ${summary.rows.length}`, summary.overall, `${summary.failed} 위치`].forEach((value, index) => { pdfKpis[index].textContent = value; });
+        fillRows(pdfPages[1].querySelector('table tbody'), bearingRows, '분석 결과 없음', 6);
+        pdfPages[1].querySelector('.pdf-opinion-box').textContent = summary.completed ? `목표 반력과 저장된 분석 결과를 비교했습니다. 판정: ${summary.overall}. 허용범위 외 ${summary.failed} 위치.` : '저장된 분석 결과가 없습니다.';
+        renderPdfCurves(finalized);
+        const latest = finalized.at(-1);
+        const sampleRows = finalized.flatMap(session => session.records.slice(-3).map((sample, index) => [
+          `${session.bearingName} · ${session.records.length - Math.min(3, session.records.length) + index + 1}`, sample.phase === 'lifting' ? 'Lifting' : 'Lowering', pressureText(sample.pressure), `${Number(sample.displacement).toFixed(3)} mm`,
+          Number.isFinite(reactionFromPressure(sample.pressure, Number(session.area))) ? `${reactionFromPressure(sample.pressure, Number(session.area)).toFixed(2)} kN` : '—', '수신 원시값']));
+        fillRows(pdfPages[3].querySelectorAll('table')[0].querySelector('tbody'), sampleRows, '저장된 원시 수신값이 없습니다.', 6);
+        fillRows(pdfPages[3].querySelectorAll('table')[1].querySelector('tbody'), finalized.map(session => [session.bearingName, `${session.analysisResult.reaction} · ${session.analysisResult.ratio} · ${session.analysisResult.verdict}`]), '저장된 계산 결과가 없습니다.', 2);
+        pdfPages[3].querySelector('.pdf-opinion-box').textContent = latest ? '표는 베어링별 최근 수신 원시값 3건이며, 전체 원시값은 데이터 이력에서 확인합니다. 결과는 저장된 분석선 계산값입니다.' : '측정·분석에서 데이터를 저장한 후 표시됩니다.';
+        fillRows(pdfPages[4].querySelectorAll('table')[0].querySelector('tbody'), roundRows, '회차 이력 없음', 3);
+        const correctionRows = sessions.flatMap(session => (session.corrections || []).map(event => [event.time, event.worker, `${session.bearingName} · ${event.target}`, event.change, event.reason]));
+        fillRows(pdfPages[4].querySelectorAll('table')[1].querySelector('tbody'), correctionRows, '저장된 분석선 보정 이력이 없습니다.', 5);
+        pdfPages[4].querySelector('.pdf-opinion-box').textContent = correctionRows.length ? '분석선 조정 이력은 원시 수신값과 분리해 표시합니다.' : '분석선 보정 이력이 없습니다.';
+        pdfRemeasureDecision.textContent = test.final ? (test.final.decision === 'required' ? '재측정 필요' : '재측정 불필요') : '미확정';
+        pdfRemeasureReason.textContent = test.final?.reason || (test.final?.decision === 'not-required' ? '해당 없음' : '미입력');
+        pdfFinalOpinion.textContent = test.final?.opinion || '최종 의견 미입력';
+        fillRows(pdfPages[5].querySelector('table tbody'), [['작업자', test.final?.worker || test.worker || '—'], ['확정 상태', test.final ? '결과 저장 완료' : '승인 대기'], ['시험 수행일시', `${localDateText(test.startedAt)} ${localTimeText(test.startedAt)}`]], '시험 정보 없음', 2);
+        syncTestChrome();
+      }
+      function renderPdfCurves(sessions) {
+        const svg = pdfPages[2].querySelector('svg.pdf-curve');
+        svg.replaceChildren();
+        const ns = 'http://www.w3.org/2000/svg';
+        const add = (tag, attrs, value) => { const node = document.createElementNS(ns, tag); Object.entries(attrs).forEach(([key, entry]) => node.setAttribute(key, String(entry))); if (value != null) node.textContent = value; svg.append(node); return node; };
+        add('path', { class: 'frame', d: 'M48 20V214H444' });
+        const points = sessions.flatMap(session => session.records.map(sample => ({ x: Number(sample.displacement), y: reactionFromPressure(sample.pressure, Number(session.area)) })).filter(point => Number.isFinite(point.x) && Number.isFinite(point.y)));
+        const maxX = Math.max(1, ...points.map(point => point.x));
+        const maxY = Math.max(100, ...points.map(point => point.y));
+        for (let index = 0; index <= 4; index += 1) {
+          const y = 214 - index * 48.5;
+          add('path', { class: 'frame', d: `M48 ${y}H444` });
+          add('text', { x: 43, y: y + 4, 'text-anchor': 'end' }, (maxY * index / 4).toFixed(0));
+          add('text', { x: 48 + index * 99, y: 230, 'text-anchor': 'middle' }, (maxX * index / 4).toFixed(2));
+        }
+        add('text', { x: 4, y: 12 }, 'kN');
+        add('text', { x: 388, y: 246 }, '변위 mm');
+        const colors = ['#b75e3f', '#2e8d69', '#bc8b36', '#bd4b53', '#4f76af', '#8b62a8'];
+        sessions.forEach((session, index) => {
+          const samples = session.records.filter(sample => Number.isFinite(Number(sample.displacement)) && Number.isFinite(Number(sample.pressure)));
+          const stride = Math.max(1, Math.ceil(samples.length / 150));
+          const path = samples.filter((_, offset) => offset % stride === 0).map((sample, offset) => `${offset ? 'L' : 'M'}${(48 + Number(sample.displacement) / maxX * 396).toFixed(1)} ${(214 - reactionFromPressure(sample.pressure, Number(session.area)) / maxY * 194).toFixed(1)}`).join('');
+          if (path) add('path', { d: path, stroke: colors[index % colors.length], fill: 'none', 'stroke-width': 2 });
+        });
+        svg.setAttribute('aria-label', sessions.length ? `${sessions.length}개 베어링의 저장된 수신값 곡선` : '저장된 곡선 없음');
+        const legend = pdfPages[2].querySelector('.legend');
+        legend.replaceChildren();
+        sessions.forEach((session, index) => { const label = document.createElement('span'); label.style.color = colors[index % colors.length]; label.textContent = session.bearingName; legend.append(label); });
+        pdfPages[2].querySelector('.pdf-opinion-box').textContent = sessions.length ? '곡선은 저장된 압력·변위 원시 수신값으로 그렸습니다. 분석선 보정 결과와는 구분됩니다.' : '저장된 베어링별 수신 곡선이 없습니다.';
+      }
+      function invalidateStoredResultsForActiveTest(bearingName = null) {
+        analysisFinalApplied = false;
+        let changed = false;
+        sessionsForTest(activeTest).forEach(session => {
+          if (bearingName && session.bearingName !== bearingName) return;
+          if (session.analysisResult?.finalApplied) { session.analysisResult.finalApplied = false; changed = true; }
+        });
+        if (activeTest.final) { activeTest.final = null; changed = true; }
+        if (changed) { renderOverview(); renderReport(); renderDataHistory(); }
+      }
+      setupTestId.addEventListener('change', () => { syncActiveTestMetadata(); renderOverview(); renderReport(); });
+      setupProject.addEventListener('change', () => { syncActiveTestMetadata(); renderOverview(); renderReport(); });
+      setupWorker.addEventListener('change', () => { syncActiveTestMetadata(); renderOverview(); renderReport(); });
+      setupRound.addEventListener('change', () => { syncActiveTestMetadata(); renderOverview(); renderReport(); });
       const isMainEngineBearing = (item) => /^M\s*\/\s*E(?=\s|\(|$)/i.test(item.position.trim());
       const targetReactionError = (item) => {
         if (!item || item.target === '' || item.target == null || !Number.isFinite(Number(item.target)) || Number(item.target) <= 0) {
@@ -3135,7 +3524,22 @@
         const finish = (save) => {
           if (finished) return;
           finished = true;
-          if (save) bearingItems[index].position = editor.value.trim() || bearingItems[index].position;
+          if (save) {
+            const oldName = bearingItems[index].position;
+            const newName = editor.value.trim() || oldName;
+            if (newName !== oldName) {
+              bearingItems[index].position = newName;
+              sessionsForTest(activeTest).forEach(session => {
+                if (session.bearingName === oldName) {
+                  session.bearingName = newName;
+                  if (session.condition) session.condition.position = newName;
+                }
+              });
+              if (measurementDeviceSnapshot?.bearingName === oldName) measurementDeviceSnapshot.bearingName = newName;
+              renderOverview();
+              renderReport();
+            }
+          }
           renderShaftLayout();
         };
         editor.addEventListener('blur', () => finish(true));
@@ -3183,6 +3587,10 @@
         renderActiveDeviceStatus();
       };
       const renderMeasurementBearingChoices = (resetSelection = false) => {
+        const savedBearings = [...new Set(sessionsForTest(activeTest).filter(session => session.analysisResult?.finalApplied).map(session => session.bearingName))];
+        root.querySelector('#bearing-switch-guidance').textContent = savedBearings.length
+          ? `저장 완료: ${savedBearings.join(', ')}. 다른 베어링을 측정·저장해도 이 기록은 유지됩니다. 저장 전 분석 결과가 있으면 전환 전에 확인합니다.`
+          : '이전 베어링에서 저장한 측정·분석 이력은 다음 베어링을 시작해도 유지됩니다. 저장하지 않은 분석 결과가 있으면 전환 전에 확인합니다.';
         const forwardEnd = document.createElement('span');
         forwardEnd.className = 'shaft-end';
         forwardEnd.textContent = 'FWD';
@@ -3195,8 +3603,8 @@
           node.className = 'bearing-node bearing-choice';
           node.dataset.bearingIndex = String(index);
           node.dataset.bearingName = item.position;
-          node.dataset.target = item.target !== '' ? `${Number((Number(item.target) / 9.80665).toFixed(4))} 톤(tf)` : '미입력';
-          const past = [...bearingSessions.values()].filter(session => session.bearingName === item.position);
+          node.dataset.target = item.target !== '' ? `${(Number(item.target) / KN_PER_TF).toFixed(2)} 톤(tf)` : '미입력';
+          const past = sessionsForTest(activeTest).filter(session => session.bearingName === item.position);
           node.dataset.previous = past.length ? '측정 종료 · ' + past.length + '회 기록' : '미측정';
           node.dataset.tolerance = item.tolerance;
           node.dataset.criteria = item.criteria;
@@ -3230,6 +3638,7 @@
           return;
         }
         archiveBearingSession();
+        invalidateStoredResultsForActiveTest();
         activeMeasurementBearing = null;
         pendingMeasurementBearing = null;
         measurementDeviceSnapshot = null;
@@ -3256,6 +3665,7 @@
         }
         customRamType.value = '';
         effectiveArea.value = ramAreas[ramType.value];
+        invalidateStoredResultsForActiveTest();
         analysisFinalApplied = false;
         updateSlopeResults();
         updateLiveSample(currentDemoSample());
@@ -3267,6 +3677,7 @@
         shipType.focus();
       });
       effectiveArea.addEventListener('input', () => {
+        invalidateStoredResultsForActiveTest();
         analysisFinalApplied = false;
         updateSlopeResults();
         updateLiveSample(currentDemoSample());
@@ -3278,6 +3689,7 @@
         ramType.focus();
       });
       bearingCount.addEventListener('change', () => {
+        invalidateStoredResultsForActiveTest();
         const count = Math.max(1, Math.min(20, Number(bearingCount.value) || 1));
         while (bearingItems.length < count) bearingItems.push({ position: `Bearing ${bearingItems.length + 1}`, target: '', tolerance: '5', criteria: 'lte', minReaction: '', maxReaction: '', status: '대기' });
         bearingItems = bearingItems.slice(0, count);
@@ -3288,6 +3700,7 @@
         root.querySelector('#bearing-reaction-' + side).addEventListener('input', (event) => {
           bearingItems[selectedBearingIndex][side + 'Reaction'] = event.target.value === '' ? '' : String(Number(event.target.value) * 9.80665);
           renderBearingRangeError(true);
+          invalidateStoredResultsForActiveTest(bearingItems[selectedBearingIndex].position);
           analysisFinalApplied = false;
           updateSlopeResults();
         });
@@ -3298,6 +3711,7 @@
         // Store canonical kN; the editor and selected-location summary display tonne-force.
         bearingItems[selectedBearingIndex].target = value === '' ? '' : String(Number(selectedBearingReaction.value) * KN_PER_TF);
         renderTargetReactionError(true);
+        invalidateStoredResultsForActiveTest(bearingItems[selectedBearingIndex].position);
         analysisFinalApplied = false;
         updateSlopeResults();
       });
@@ -3315,24 +3729,21 @@
       });
       removeBearing.addEventListener('click', () => {
         if (bearingItems.length === 1) return;
+        invalidateStoredResultsForActiveTest();
         bearingItems.splice(selectedBearingIndex, 1);
         selectedBearingIndex = Math.min(selectedBearingIndex, bearingItems.length - 1);
         renderShaftLayout();
       });
       restoreRememberedAssignments();
+      renderMeasurementControls();
       renderShaftLayout();
       renderMeasurementBearingChoices();
       reconnectDetectedDevices();
       window.setInterval(reconnectDetectedDevices, 3000);
-      const correctedPressure = root.querySelector('#corrected-pressure');
-      correctedPressure.addEventListener('input', () => {
-        if (correctedPressure.value !== '' && Number(correctedPressure.value) < 0) correctedPressure.value = '0';
-        correctedPressure.dataset.pressureBar = correctedPressure.value === '' ? '' : String(pressureToBar(Number(correctedPressure.value)));
-      });
       const applyPressureUnit = () => {
         renderPressureTemplates();
         updateBarReadingRows();
-        correctedPressure.value = correctedPressure.dataset.pressureBar === '' ? '' : String(Number(pressureFromBar(Number(correctedPressure.dataset.pressureBar)).toFixed(3)));
+        renderDataHistory();
 
         customBarPressure.value = '';
         barReadingStatus.textContent = `표시 단위 ${pressureUnitLabel()} · 측정 시작 후 L값은 가압 시, D값은 감압 시 자동 기록됩니다.`;
@@ -3341,6 +3752,8 @@
       };
       pressureUnitSelect.addEventListener('change', applyPressureUnit);
       applyPressureUnit();
+      renderOverview();
+      renderReport();
       if (requestedButton) requestedButton.click();
       if (requestedPanel === 'connect') showSetupTab('devices');
     })();
