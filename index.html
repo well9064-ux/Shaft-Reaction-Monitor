@@ -216,9 +216,10 @@
     #jackup-wireframe .bar-reading-table input[type="number"] { appearance: textfield; -moz-appearance: textfield; padding-inline: 4px; }
     #jackup-wireframe .bar-reading-table input::-webkit-inner-spin-button, #jackup-wireframe .bar-reading-table input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     #jackup-wireframe .bar-reading-table input[readonly] { background: var(--jw-surface-2); color: var(--jw-muted); cursor: default; }
+    #jackup-wireframe .bar-reading-table input.recent-capture { background: color-mix(in srgb, var(--jw-good) 18%, var(--jw-surface)); border-color: var(--jw-good); color: var(--jw-text); font-weight: 500; }
     #jackup-wireframe .bar-reading-table .bar-row-delete { min-height: 40px; padding: 6px 9px; }
     #jackup-wireframe .bar-reading-table th:last-child, #jackup-wireframe .bar-reading-table td:last-child { width: 64px; text-align: center; }
-    #jackup-wireframe .bar-reading-status { margin-top: 7px; min-height: 18px; color: var(--jw-muted); font-size: 11px; }
+    #jackup-wireframe .bar-reading-status { margin: 0 0 8px; min-height: 18px; color: var(--jw-text); font-size: 12px; }
     #jackup-wireframe .sag-table-wrap { max-width: 100%; overflow-x: auto; }
     #jackup-wireframe .sag-table { min-width: 720px; table-layout: fixed; }
     #jackup-wireframe .sag-table :is(th, td) { padding: 5px; text-align: center; }
@@ -673,10 +674,10 @@
                   <div class="input-unit"><input id="custom-bar-pressure" type="number" min="0" step="any" inputmode="decimal" placeholder="예: 15"><span class="unit-suffix" id="custom-bar-unit">bar</span></div>
                   <button class="action" id="add-bar-reading" type="button" data-jw-tooltip="10 bar 기본 지점 사이에 원하는 압력의 행을 추가합니다. L·D 설정은 행에서 각각 수정할 수 있습니다.">행 추가</button>
                 </div>
+                <div class="bar-reading-status" id="bar-reading-status" role="status" aria-live="polite">측정 시작 후 L값은 가압 시, D값은 감압 시 자동 기록됩니다.</div>
                 <div class="bar-reading-scroll">
                 <table class="bar-reading-table"><thead><tr><th>L Bar</th><th>L 값 (자동)</th><th>D Bar</th><th>D 값 (자동)</th><th>관리</th></tr></thead><tbody id="bar-reading-body"></tbody></table>
                 </div>
-                <div class="bar-reading-status" id="bar-reading-status" role="status" aria-live="polite">10 bar 간격 · 설정 압력을 처음 통과한 실제 수신 변위를 기록합니다.</div>
               </div>
             </div>
           </div>
@@ -1254,7 +1255,7 @@
           measurementSegment += 1;
           previousCaptureSample = null;
           renderMeasurementControls();
-          barReadingStatus.textContent = '데이터 측정 시작 · 기존 기록에 이어서 기록합니다.';
+          barReadingStatus.textContent = '측정 중 · L값은 가압 시, D값은 감압 시 설정 압력을 통과하면 자동 기록됩니다.';
           return;
         }
         measurementPhase = 'ended';
@@ -2563,7 +2564,8 @@
             input.removeAttribute('data-jw-tooltip');
           });
         });
-        barReadingStatus.textContent = '새 세션 · 10 bar 간격 자동 기록 대기';
+        barReadingBody.querySelectorAll('input.recent-capture').forEach(input => input.classList.remove('recent-capture'));
+        barReadingStatus.textContent = '새 세션 · L값은 가압 시, D값은 감압 시 자동 기록됩니다.';
       };
       const crossedBarTarget = (target, previous, current, phase) => {
         if (!Number.isFinite(target)) return false;
@@ -2577,6 +2579,8 @@
         ensureDefaultBarRows(sample.pressure);
         const offset = sample.phase === 'lifting' ? 0 : 2;
         let captured = 0;
+        let latestOutput = null;
+        let latestTarget = null;
         [...barReadingBody.rows].forEach((row) => {
           const inputs = row.querySelectorAll('input');
           const output = inputs[offset + 1];
@@ -2585,12 +2589,22 @@
           output.dataset.actualPressure = String(sample.pressure);
           output.dataset.displacement = String(sample.displacement);
           output.dataset.capturedAt = sample.time;
+          latestOutput = output;
+          latestTarget = pressureOf(inputs[offset]);
           captured += 1;
         });
         previousCaptureSample = sample;
         if (captured) {
+          barReadingBody.querySelectorAll('input.recent-capture').forEach(input => input.classList.remove('recent-capture'));
+          latestOutput.classList.add('recent-capture');
           updateBarReadingRows();
-          barReadingStatus.textContent = `${sample.phase === 'lifting' ? 'Lifting' : 'Lowering'} ${captured}개 지점 기록 · 실제 수신 ${pressureText(sample.pressure)} / ${sample.displacement.toFixed(2)} mm`;
+          const scroll = barReadingBody.closest('.bar-reading-scroll');
+          const rowBounds = latestOutput.closest('tr').getBoundingClientRect();
+          const scrollBounds = scroll.getBoundingClientRect();
+          if (rowBounds.bottom > scrollBounds.bottom) scroll.scrollTop += rowBounds.bottom - scrollBounds.bottom + 4;
+          else if (rowBounds.top < scrollBounds.top) scroll.scrollTop -= scrollBounds.top - rowBounds.top + 4;
+          const phaseLabel = sample.phase === 'lifting' ? 'Lifting · L값' : 'Lowering · D값';
+          barReadingStatus.textContent = `${phaseLabel} ${pressureText(latestTarget)} 행 자동 기록 · 실제 수신 ${pressureText(sample.pressure)} / ${sample.displacement.toFixed(2)} mm`;
         }
       };
       addBarReading.addEventListener('click', () => {
@@ -2629,7 +2643,10 @@
         input.dataset.pressureBar = input.value === '' ? '' : String(pressureToBar(Number(input.value)));
         const output = input.closest('td').nextElementSibling.querySelector('input');
         output.value = '';
+        output.classList.remove('recent-capture');
         delete output.dataset.actualPressure;
+        delete output.dataset.displacement;
+        delete output.dataset.capturedAt;
         output.removeAttribute('data-jw-tooltip');
         previousCaptureSample = null;
       });
@@ -3082,7 +3099,7 @@
         correctedPressure.value = correctedPressure.dataset.pressureBar === '' ? '' : String(Number(pressureFromBar(Number(correctedPressure.dataset.pressureBar)).toFixed(3)));
 
         customBarPressure.value = '';
-        barReadingStatus.textContent = `기본 10 bar 간격 · 표시 단위 ${pressureUnitLabel()} · 최초 통과 수신값 기록`;
+        barReadingStatus.textContent = `표시 단위 ${pressureUnitLabel()} · 측정 시작 후 L값은 가압 시, D값은 감압 시 자동 기록됩니다.`;
         updateLiveSample(currentDemoSample());
         renderAnalysisAxes();
       };
