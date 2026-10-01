@@ -250,7 +250,6 @@
     #jackup-wireframe .sag-output-table .sag-col-result { width: 96px; }
     #jackup-wireframe .sag-output-table .sag-section-heading th { background: color-mix(in srgb, var(--jw-accent) 18%, var(--jw-surface)); color: var(--jw-text); text-align: center; }
     #jackup-wireframe .sag-output-table .sag-column-labels th { background: var(--jw-surface-2); color: var(--jw-muted); text-align: center; }
-    #jackup-wireframe .sag-output-table .sag-curve-label { background: color-mix(in srgb, var(--jw-accent) 12%, var(--jw-surface)); color: var(--jw-text); font-weight: 500; }
     #jackup-wireframe .sag-output-table .sag-judge-cell.good { background: color-mix(in srgb, var(--jw-good) 12%, var(--jw-surface)); }
     #jackup-wireframe .sag-output-table .sag-judge-cell.bad { background: color-mix(in srgb, var(--jw-bad) 13%, var(--jw-surface)); }
     #jackup-wireframe .sag-output-table .sag-result-value { font-weight: 500; white-space: nowrap; }
@@ -751,11 +750,6 @@
                   <tr class="sag-column-labels"><th>측정 측면</th><th>1–2</th><th>2–3</th><th>3–4</th><th>4–5</th><th>5–6</th><th>6–7</th><th>—</th><th>허용값</th><th>종합 판정</th></tr>
                   <tr><th>Exhaust side</th><td class="sag-judge-cell" data-sag-vertical="exhaust"></td><td class="sag-judge-cell" data-sag-vertical="exhaust"></td><td class="sag-judge-cell" data-sag-vertical="exhaust"></td><td class="sag-judge-cell" data-sag-vertical="exhaust"></td><td class="sag-judge-cell" data-sag-vertical="exhaust"></td><td class="sag-judge-cell" data-sag-vertical="exhaust"></td><td class="sag-empty-cell"></td><td>0.10 mm</td><td class="sag-result-value" id="sag-vertical-result-exhaust"></td></tr>
                   <tr><th>Man. side</th><td class="sag-judge-cell" data-sag-vertical="man"></td><td class="sag-judge-cell" data-sag-vertical="man"></td><td class="sag-judge-cell" data-sag-vertical="man"></td><td class="sag-judge-cell" data-sag-vertical="man"></td><td class="sag-judge-cell" data-sag-vertical="man"></td><td class="sag-judge-cell" data-sag-vertical="man"></td><td class="sag-empty-cell"></td><td>0.10 mm</td><td class="sag-result-value" id="sag-vertical-result-man"></td></tr>
-                  <tr><th class="sag-curve-label">Max</th><td data-sag-curve="maximum"></td><td data-sag-curve="maximum"></td><td data-sag-curve="maximum"></td><td data-sag-curve="maximum"></td><td data-sag-curve="maximum"></td><td data-sag-curve="maximum"></td><td data-sag-curve="maximum"></td><td class="sag-empty-cell" colspan="2" rowspan="5"></td></tr>
-                  <tr><th class="sag-curve-label">Nominal</th><td data-sag-curve="nominal"></td><td data-sag-curve="nominal"></td><td data-sag-curve="nominal"></td><td data-sag-curve="nominal"></td><td data-sag-curve="nominal"></td><td data-sag-curve="nominal"></td><td data-sag-curve="nominal"></td></tr>
-                  <tr><th class="sag-curve-label">Min</th><td data-sag-curve="minimum"></td><td data-sag-curve="minimum"></td><td data-sag-curve="minimum"></td><td data-sag-curve="minimum"></td><td data-sag-curve="minimum"></td><td data-sag-curve="minimum"></td><td data-sag-curve="minimum"></td></tr>
-                  <tr><th class="sag-curve-label">Bedplate curve · Exhaust</th><td data-sag-curve="exhaust"></td><td data-sag-curve="exhaust"></td><td data-sag-curve="exhaust"></td><td data-sag-curve="exhaust"></td><td data-sag-curve="exhaust"></td><td data-sag-curve="exhaust"></td><td data-sag-curve="exhaust"></td></tr>
-                  <tr><th class="sag-curve-label">Bedplate curve · Man.</th><td data-sag-curve="man"></td><td data-sag-curve="man"></td><td data-sag-curve="man"></td><td data-sag-curve="man"></td><td data-sag-curve="man"></td><td data-sag-curve="man"></td><td data-sag-curve="man"></td></tr>
                 </tbody>
               </table>
             </div>
@@ -1173,7 +1167,6 @@
         exhaust: root.querySelector('#sag-vertical-result-exhaust'),
         man: root.querySelector('#sag-vertical-result-man')
       };
-      const sagCurveCells = Object.fromEntries(['maximum', 'nominal', 'minimum', 'exhaust', 'man'].map((name) => [name, [...root.querySelectorAll(`[data-sag-curve="${name}"]`)]]));
       const sagCalcStatus = root.querySelector('#sag-calc-status');
       const graphFullscreen = root.querySelector('#graph-fullscreen');
       const graphFullscreenTitle = root.querySelector('#graph-fullscreen-title');
@@ -1407,9 +1400,6 @@
         resultNode.classList.toggle('bad', !allOkay);
         return allOkay;
       };
-      const updateSagCurveRow = (cells, values) => {
-        cells.forEach((cell, index) => { cell.textContent = values[index].toFixed(2); });
-      };
       const updateSagCalculation = () => {
         const readSide = (side) => sagInputs.filter((input) => input.dataset.side === side).map((input) => {
           const value = Number(input.value);
@@ -1427,11 +1417,6 @@
         sagLimitMin.setAttribute('d', sagPath(minimumCurve));
         sagExhaust.setAttribute('d', sagPath(exhaustCurve));
         sagMan.setAttribute('d', sagPath(manCurve));
-        updateSagCurveRow(sagCurveCells.maximum, maximumCurve);
-        updateSagCurveRow(sagCurveCells.nominal, nominalCurve);
-        updateSagCurveRow(sagCurveCells.minimum, minimumCurve);
-        updateSagCurveRow(sagCurveCells.exhaust, exhaustCurve);
-        updateSagCurveRow(sagCurveCells.man, manCurve);
         sagPoints.replaceChildren();
         [
           { values: exhaustCurve, className: 'sag-exhaust-point' },
