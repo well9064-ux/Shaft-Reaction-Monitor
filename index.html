@@ -220,6 +220,7 @@
     #jackup-wireframe .sag-table input { min-width: 0; min-height: 38px; padding: 5px; text-align: center; }
     #jackup-wireframe .sag-table input[data-sag-input] { background: color-mix(in srgb, var(--jw-warn) 22%, var(--jw-surface)); border-color: color-mix(in srgb, var(--jw-warn) 60%, var(--jw-line)); }
     #jackup-wireframe .sag-table input[data-sag-reference] { background: var(--jw-surface); }
+    #jackup-wireframe .sag-table input[data-sag-reference][readonly] { background: var(--jw-surface-2); color: var(--jw-muted); cursor: default; }
     #jackup-wireframe .sag-table input[data-sag-reference][aria-invalid="true"] { border-color: var(--jw-bad); }
     #jackup-wireframe .crank-table-wrap { max-width: 100%; overflow-x: auto; }
     #jackup-wireframe .crank-table { min-width: 720px; table-layout: fixed; }
@@ -724,17 +725,16 @@
         </section>
 
         <section class="screen" data-panel="sag">
-          <div class="headline"><div><h2>SAG Alignment</h2><p class="sub">Piano Wire 기준과 양측 측정값으로 베드플레이트 처짐 곡선 및 허용범위를 계산</p></div><div class="btnrow"><button class="action" id="generate-sag-pdf" type="button" data-jw-tooltip="현재 SAG 입력값·판정·그래프를 PDF로 미리본 뒤 저장">PDF 저장</button><button class="action" id="open-sag-graph" type="button" data-jw-tooltip="SAG 계산 그래프를 태블릿 화면 전체로 확대">그래프 전체 화면</button></div></div>
-          <div class="panel" data-help="상단 네 기준 행은 초기값을 직접 수정할 수 있습니다. 노란색 셀에는 배기측과 조작측의 베어링별 측정 SAG를 입력합니다. 기준값이나 측정값을 바꾸면 베드플레이트 곡선과 판정이 자동 갱신됩니다.">
-            <div class="headline"><div><h3>SAG 기준 및 측정값</h3><p class="sub">단위 mm · Main Bearing No.1~7 · Fore → Aft · 선종별 확정값 수령 전 공통 예시값</p></div><span class="status good"><span class="dot"></span>자동 계산</span></div>
+          <div class="headline"><div><h2>SAG Alignment</h2><p class="sub">Preferred SAG와 양측 측정값으로 베드플레이트 처짐 곡선 및 허용범위를 계산</p></div><div class="btnrow"><button class="action" id="generate-sag-pdf" type="button" data-jw-tooltip="현재 SAG 입력값·판정·그래프를 PDF로 미리본 뒤 저장">PDF 저장</button><button class="action" id="open-sag-graph" type="button" data-jw-tooltip="SAG 계산 그래프를 태블릿 화면 전체로 확대">그래프 전체 화면</button></div></div>
+          <div class="panel" data-help="Preferred SAG를 입력하면 기존 베어링별 허용 폭인 ±0.10 mm를 적용해 Maximum·Minimum SAG가 자동 계산됩니다. 노란색 셀에는 배기측과 조작측의 베어링별 측정 SAG를 입력합니다. 기준값이나 측정값을 바꾸면 베드플레이트 곡선과 판정이 자동 갱신됩니다.">
+            <div class="headline"><div><h3>SAG 기준 및 측정값</h3><p class="sub">단위 mm · Main Bearing No.1~7 · Fore → Aft · Preferred 기준 ±0.10 mm 자동 계산</p></div><span class="status good"><span class="dot"></span>자동 계산</span></div>
             <div class="sag-table-wrap">
               <table class="sag-table">
                 <thead><tr><th>항목</th><th>No.1</th><th>No.2</th><th>No.3</th><th>No.4</th><th>No.5</th><th>No.6</th><th>No.7</th></tr></thead>
                 <tbody>
-                  <tr class="sag-reference-row"><th>Piano Wire 곡선</th><td>0.00</td><td>-0.19</td><td>-0.30</td><td>-0.33</td><td>-0.30</td><td>-0.19</td><td>0.00</td></tr>
-                  <tr class="sag-reference-row"><th>Maximum SAG</th><td>0.10</td><td>0.03</td><td>-0.02</td><td>-0.03</td><td>-0.02</td><td>0.03</td><td>0.10</td></tr>
-                  <tr class="sag-reference-row"><th>Preferred SAG<span class="sag-rule-help-slot"><button type="button" class="sag-rule-help" aria-label="Preferred SAG 기준 설명" data-help="베어링별 권장 목표값이며 측정값의 평균이 아닙니다. 초기값은 Maximum·Minimum의 중간값이며 직접 수정할 수 있습니다. Nominal 곡선 = Piano Wire − Preferred SAG. OK/OUT은 Minimum~Maximum 허용 범위로 판정합니다.">?</button></span></th><td>0.00</td><td>-0.07</td><td>-0.12</td><td>-0.13</td><td>-0.12</td><td>-0.07</td><td>0.00</td></tr>
-                  <tr class="sag-reference-row"><th>Minimum SAG</th><td>-0.10</td><td>-0.17</td><td>-0.22</td><td>-0.23</td><td>-0.22</td><td>-0.17</td><td>-0.10</td></tr>
+                  <tr class="sag-reference-row" data-sag-reference-row="maximum"><th>Maximum SAG · 자동</th><td>0.10</td><td>0.03</td><td>-0.02</td><td>-0.03</td><td>-0.02</td><td>0.03</td><td>0.10</td></tr>
+                  <tr class="sag-reference-row" data-sag-reference-row="preferred"><th>Preferred SAG<span class="sag-rule-help-slot"><button type="button" class="sag-rule-help" aria-label="Preferred SAG 기준 설명" data-help="베어링별 권장 목표값을 입력합니다. Maximum SAG = Preferred SAG + 0.10 mm, Minimum SAG = Preferred SAG − 0.10 mm로 자동 계산합니다. 따라서 Preferred SAG = (Maximum SAG + Minimum SAG) / 2입니다. 판정은 Minimum~Maximum 범위를 사용합니다.">?</button></span></th><td>0.00</td><td>-0.07</td><td>-0.12</td><td>-0.13</td><td>-0.12</td><td>-0.07</td><td>0.00</td></tr>
+                  <tr class="sag-reference-row" data-sag-reference-row="minimum"><th>Minimum SAG · 자동</th><td>-0.10</td><td>-0.17</td><td>-0.22</td><td>-0.23</td><td>-0.22</td><td>-0.17</td><td>-0.10</td></tr>
                   <tr><th>Measurement · Exhaust</th><td><input type="number" step="0.01" value="0.00" data-sag-input data-side="exhaust" aria-label="배기측 No.1 SAG"></td><td><input type="number" step="0.01" value="-0.10" data-sag-input data-side="exhaust" aria-label="배기측 No.2 SAG"></td><td><input type="number" step="0.01" value="-0.13" data-sag-input data-side="exhaust" aria-label="배기측 No.3 SAG"></td><td><input type="number" step="0.01" value="-0.17" data-sag-input data-side="exhaust" aria-label="배기측 No.4 SAG"></td><td><input type="number" step="0.01" value="-0.14" data-sag-input data-side="exhaust" aria-label="배기측 No.5 SAG"></td><td><input type="number" step="0.01" value="-0.09" data-sag-input data-side="exhaust" aria-label="배기측 No.6 SAG"></td><td><input type="number" step="0.01" value="0.00" data-sag-input data-side="exhaust" aria-label="배기측 No.7 SAG"></td></tr>
                   <tr><th>Measurement · Man.</th><td><input type="number" step="0.01" value="0.00" data-sag-input data-side="man" aria-label="조작측 No.1 SAG"></td><td><input type="number" step="0.01" value="-0.14" data-sag-input data-side="man" aria-label="조작측 No.2 SAG"></td><td><input type="number" step="0.01" value="-0.17" data-sag-input data-side="man" aria-label="조작측 No.3 SAG"></td><td><input type="number" step="0.01" value="-0.18" data-sag-input data-side="man" aria-label="조작측 No.4 SAG"></td><td><input type="number" step="0.01" value="-0.15" data-sag-input data-side="man" aria-label="조작측 No.5 SAG"></td><td><input type="number" step="0.01" value="-0.12" data-sag-input data-side="man" aria-label="조작측 No.6 SAG"></td><td><input type="number" step="0.01" value="0.00" data-sag-input data-side="man" aria-label="조작측 No.7 SAG"></td></tr>
                 </tbody>
@@ -1101,28 +1101,36 @@
       const openSagGraph = root.querySelector('#open-sag-graph');
       const sagPlot = root.querySelector('#sag-plot');
       const sagInputs = [...root.querySelectorAll('[data-sag-input]')];
-      const sagReferenceDefaults = {
-        piano: ['0.00', '-0.19', '-0.30', '-0.33', '-0.30', '-0.19', '0.00'],
-        maximum: ['0.10', '0.03', '-0.02', '-0.03', '-0.02', '0.03', '0.10'],
-        preferred: ['0.00', '-0.07', '-0.12', '-0.13', '-0.12', '-0.07', '0.00'],
-        minimum: ['-0.10', '-0.17', '-0.22', '-0.23', '-0.22', '-0.17', '-0.10']
-      };
+      // The Piano Wire baseline remains an internal demo reference, not a SAG input.
+      const sagPianoWireDefaults = [0, -0.19, -0.30, -0.33, -0.30, -0.19, 0];
+      const sagPreferredDefaults = ['0.00', '-0.07', '-0.12', '-0.13', '-0.12', '-0.07', '0.00'];
+      const sagHalfRange = 0.10;
       const sagReferenceInputs = {};
-      const sagReferenceLabels = { piano: 'Piano Wire 곡선', maximum: 'Maximum SAG', preferred: 'Preferred SAG', minimum: 'Minimum SAG' };
-      [...root.querySelectorAll('.sag-reference-row')].forEach((row, rowIndex) => {
-        const key = Object.keys(sagReferenceDefaults)[rowIndex];
+      const sagReferenceLabels = { maximum: 'Maximum SAG', preferred: 'Preferred SAG', minimum: 'Minimum SAG' };
+      [...root.querySelectorAll('.sag-reference-row')].forEach((row) => {
+        const key = row.dataset.sagReferenceRow;
         sagReferenceInputs[key] = [...row.querySelectorAll('td')].map((cell, index) => {
           const input = document.createElement('input');
           input.type = 'number';
           input.step = '0.01';
           input.value = cell.textContent.trim();
+          input.readOnly = key !== 'preferred';
           input.dataset.sagReference = key;
-          input.setAttribute('aria-label', `${sagReferenceLabels[key]} No.${index + 1} 기준값 (mm)`);
+          input.setAttribute('aria-label', `${sagReferenceLabels[key]} No.${index + 1} ${input.readOnly ? '자동 계산값' : '입력값'} (mm)`);
           cell.replaceChildren(input);
           return input;
         });
       });
       const allSagReferenceInputs = Object.values(sagReferenceInputs).flat();
+      const updateSagDerivedLimits = () => {
+        sagReferenceInputs.preferred.forEach((input, index) => {
+          const raw = input.value.trim();
+          const value = raw === '' ? NaN : Number(raw);
+          const digits = Math.max(2, Math.min(6, (raw.split('.')[1] || '').length));
+          sagReferenceInputs.maximum[index].value = Number.isFinite(value) ? (value + sagHalfRange).toFixed(digits) : '';
+          sagReferenceInputs.minimum[index].value = Number.isFinite(value) ? (value - sagHalfRange).toFixed(digits) : '';
+        });
+      };
       const sagLimitMax = root.querySelector('#sag-limit-max');
       const sagNominal = root.querySelector('#sag-nominal');
       const sagLimitMin = root.querySelector('#sag-limit-min');
@@ -1417,17 +1425,18 @@
         return allOkay;
       };
       const updateSagCalculation = () => {
+        updateSagDerivedLimits();
         const readReference = (key) => sagReferenceInputs[key].map((input) => {
           const value = input.value.trim() === '' ? NaN : Number(input.value);
           input.setAttribute('aria-invalid', String(!Number.isFinite(value)));
           return value;
         });
-        const sagPianoWire = readReference('piano');
+        const sagPianoWire = sagPianoWireDefaults;
         const sagMaximum = readReference('maximum');
         const sagPreferred = readReference('preferred');
         const sagMinimum = readReference('minimum');
         if ([...sagPianoWire, ...sagMaximum, ...sagPreferred, ...sagMinimum].some((value) => !Number.isFinite(value))) {
-          sagCalcStatus.textContent = 'SAG 기준값 네 행의 빈칸이나 잘못된 수치를 확인해 주세요.';
+          sagCalcStatus.textContent = 'Preferred SAG 입력값의 빈칸이나 잘못된 수치를 확인해 주세요.';
           return;
         }
         if (sagMaximum.some((value, index) => value < sagMinimum[index])) {
@@ -1476,11 +1485,9 @@
         sagPlot.setAttribute('aria-label', `SAG 계산 그래프, 배기측 ${rangeExhaustOk && verticalExhaustOk ? 'OK' : 'OUT'}, 조작측 ${rangeManOk && verticalManOk ? 'OK' : 'OUT'}`);
       };
       sagInputs.forEach((input) => input.addEventListener('input', updateSagCalculation));
-      allSagReferenceInputs.forEach((input) => input.addEventListener('input', updateSagCalculation));
+      sagReferenceInputs.preferred.forEach((input) => input.addEventListener('input', updateSagCalculation));
       const resetSagReferences = () => {
-        Object.entries(sagReferenceDefaults).forEach(([key, values]) => values.forEach((value, index) => {
-          sagReferenceInputs[key][index].value = value;
-        }));
+        sagPreferredDefaults.forEach((value, index) => { sagReferenceInputs.preferred[index].value = value; });
         updateSagCalculation();
         renderSagZoom();
       };
@@ -1967,7 +1974,7 @@
       const finishSagPan = () => { sagPan = null; sagPlot.classList.remove('is-panning'); };
       ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((event) => sagPlot.addEventListener(event, finishSagPan));
       sagInputs.forEach((input) => input.addEventListener('input', renderSagZoom));
-      allSagReferenceInputs.forEach((input) => input.addEventListener('input', renderSagZoom));
+      sagReferenceInputs.preferred.forEach((input) => input.addEventListener('input', renderSagZoom));
       renderSagZoom();
       new ResizeObserver(renderSagZoom).observe(sagPlot);
       renderInlineIcons();
@@ -2074,13 +2081,13 @@
         const referenceValid = allSagReferenceInputs.every((input) => input.value.trim() !== '' && Number.isFinite(Number(input.value)))
           && sagReferenceInputs.maximum.every((input, index) => Number(input.value) >= Number(sagReferenceInputs.minimum[index].value));
         if (!referenceValid) {
-          showValidationNotice('SAG 기준값의 빈칸과 Maximum·Minimum 범위를 확인한 뒤 PDF를 저장해 주세요.', 'sag', 'warning');
+          showValidationNotice('Preferred SAG 입력값을 확인한 뒤 PDF를 저장해 주세요.', 'sag', 'warning');
           return;
         }
         clearSnapshotPdfPages();
         const headers = ['항목', ...Array.from({ length: 7 }, (_, index) => `No.${index + 1}`)];
         const referenceRows = [
-          ['Piano Wire 곡선', 'piano'], ['Maximum SAG', 'maximum'],
+          ['Maximum SAG', 'maximum'],
           ['Preferred SAG', 'preferred'], ['Minimum SAG', 'minimum']
         ].map(([label, key]) => [label, ...sagReferenceInputs[key].map((input) => input.value || '—')]);
         const measurementRows = ['exhaust', 'man'].map((side) => [side === 'exhaust' ? 'Measurement · Exhaust' : 'Measurement · Man.', ...sagInputs.filter((input) => input.dataset.side === side).map((input) => input.value || '—')]);
