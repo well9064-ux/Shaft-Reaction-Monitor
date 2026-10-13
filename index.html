@@ -517,12 +517,12 @@
     #jackup-wireframe .gauge-offset-settings { width: min(100%, 380px); margin: 12px 0 0 auto; border-top: 1px solid var(--jw-line); padding-top: 8px; }
     #jackup-wireframe .gauge-offset-settings summary { width: fit-content; margin-left: auto; color: var(--jw-muted); font-size: 11px; cursor: pointer; }
     #jackup-wireframe .gauge-offset-settings > .sub { margin: 10px 0; }
-    #jackup-wireframe .gauge-offset-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    #jackup-wireframe .gauge-offset-grid label { font-size: 11px; }
-    #jackup-wireframe .gauge-offset-grid input { width: 100%; }
+    #jackup-wireframe .gauge-offset-settings .field { margin-top: 10px; }
+    #jackup-wireframe .gauge-offset-settings .field label { font-size: 11px; }
+    #jackup-wireframe .gauge-offset-settings input { width: 100%; }
     #jackup-wireframe .module-list { max-height:245px; overflow:auto; }
     #jackup-wireframe #selected-displacement-meta { overflow-wrap:anywhere; }
-    @media (max-width:650px) { #jackup-wireframe .gauge-assignment-grid { grid-template-columns:1fr; } #jackup-wireframe .gauge-offset-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:650px) { #jackup-wireframe .gauge-assignment-grid { grid-template-columns:1fr; } }
     #jackup-wireframe .notification-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     #jackup-wireframe .notification-heading strong { font-size: 14px; font-weight: 500; }
     #jackup-wireframe #dismiss-validation-notice { width: 100%; min-height: 40px; }
@@ -648,7 +648,7 @@
 
               </div>
             </div>
-            <details class="gauge-offset-settings" id="gauge-offset-settings"><summary>고급 · 게이지 표시 보정</summary><p class="sub">게이지별 오프셋(mm)을 측정 전에 설정합니다. 원본 수신값이 정확히 0이면 표시값도 0이며, 그 외에는 원본값에 오프셋을 더합니다.</p><div class="gauge-offset-grid" id="gauge-offset-grid"></div></details>
+            <details class="gauge-offset-settings" id="gauge-offset-settings"><summary>고급 · 게이지 표시 보정</summary><p class="sub" id="gauge-offset-context" role="status">선택 베어링의 디지털 게이지를 확인합니다.</p><div class="field"><label for="selected-gauge-offset">선택 베어링 변위 오프셋</label><div class="input-unit"><input id="selected-gauge-offset" type="number" step="0.01" inputmode="decimal" disabled><span class="unit-suffix">mm</span></div></div><p class="sub">원본 수신값이 정확히 0이면 적용값도 0입니다. 그 외에는 원본값에 오프셋을 더합니다.</p></details>
         </section>
 
         <section class="screen" data-panel="measure">
@@ -1268,7 +1268,7 @@
       const measurementIsFinished = () => measurementPhase === 'ended';
       const renderMeasurementControls = () => {
         const finished = measurementIsFinished();
-        root.querySelectorAll('#gauge-offset-grid input').forEach(input => { input.disabled = !finished; });
+        renderSelectedGaugeOffset();
         const status = finished ? '데이터 측정 종료' : `${measurementPhase === 'lifting' ? 'Lifting' : 'Lowering'} 기록 중`;
         measurementPhaseStatus.textContent = `${activeTest.id} · ${activeTest.round} · ${status} · 수신 기록 ${measurementRecords.length}개`;
         if (activeMeasurementBearing) measurementBearingTitle.textContent = `${activeMeasurementBearing.position} · ${activeTest.round} Jack-up 측정·분석`;
@@ -2476,7 +2476,7 @@
         setupCompleteButton.disabled = sessionRunning();
         rescanModules.disabled = sessionRunning();
         mappedPressureModule.disabled = sessionRunning();
-        root.querySelectorAll('#gauge-offset-grid input').forEach(input => { input.disabled = sessionRunning(); });
+        renderSelectedGaugeOffset();
         const p = describeModule(mappedPressureModule.value);
         const pressureState = root.querySelector('#mapped-pressure-state');
         pressureState.textContent = mappedPressureModule.value === activeModuleIds[0] && p.connected ? '연결 · ' + p.signal.label + ' · RSSI ' + p.rssiText : '연결 대기 · RSSI ' + p.rssiText;
@@ -2530,42 +2530,38 @@
         renderActiveDeviceStatus();
         return true;
       }
-      function renderGaugeOffsetInputs() {
-        const grid = root.querySelector('#gauge-offset-grid');
-        if (grid.childElementCount) return;
-        displacementModules.forEach(({ value: gaugeId }) => {
-          const field = document.createElement('div');
-          field.className = 'field';
-          const label = document.createElement('label');
-          label.htmlFor = `offset-${gaugeId}`;
-          label.textContent = `${gaugeId} · mm`;
-          const input = document.createElement('input');
-          input.id = label.htmlFor;
-          input.type = 'number';
-          input.step = '0.01';
-          input.inputMode = 'decimal';
-          input.value = String(displacementOffsets.get(gaugeId));
-          input.setAttribute('aria-label', `${gaugeId} 디지털 게이지 변위 오프셋 (mm)`);
-          input.addEventListener('change', () => {
-            if (sessionRunning()) { input.value = String(displacementOffsets.get(gaugeId)); return; }
-            const offset = input.value.trim() === '' ? 0 : Number(input.value);
-            if (!Number.isFinite(offset)) {
-              input.value = String(displacementOffsets.get(gaugeId));
-              showValidationNotice('게이지 오프셋을 숫자로 입력해 주세요.', 'devices', 'warning');
-              return;
-            }
-            displacementOffsets.set(gaugeId, offset);
-            input.value = String(offset);
-            try { localStorage.setItem(gaugeOffsetStorageKey, JSON.stringify(Object.fromEntries(displacementOffsets))); }
-            catch (_) { showValidationNotice('오프셋은 현재 화면에 적용되었지만 이 브라우저에는 저장되지 않았습니다.', 'devices', 'warning'); }
-            updateLiveSample(currentDemoSample());
-          });
-          field.append(label, input);
-          grid.append(field);
-        });
+      function renderSelectedGaugeOffset() {
+        const item = bearingItems[selectedBearingIndex];
+        const gaugeId = item?.gaugeId || '';
+        const input = root.querySelector('#selected-gauge-offset');
+        root.querySelector('#gauge-offset-context').textContent = gaugeId
+          ? `${item.position} · 디지털 게이지 ${gaugeId}`
+          : `${item?.position || '선택 베어링'} · 디지털 게이지 미지정 — 장치 설정에서 먼저 지정해 주세요.`;
+        input.dataset.gaugeId = gaugeId;
+        input.value = gaugeId ? String(displacementOffsets.get(gaugeId) || 0) : '';
+        input.placeholder = gaugeId ? '0' : '게이지 지정 후 입력';
+        input.disabled = !gaugeId || sessionRunning();
       }
+      root.querySelector('#selected-gauge-offset').addEventListener('change', (event) => {
+        const input = event.currentTarget;
+        const gaugeId = input.dataset.gaugeId;
+        if (!gaugeId || sessionRunning() || bearingItems[selectedBearingIndex]?.gaugeId !== gaugeId) {
+          renderSelectedGaugeOffset();
+          return;
+        }
+        const offset = input.value.trim() === '' ? 0 : Number(input.value);
+        if (!Number.isFinite(offset)) {
+          renderSelectedGaugeOffset();
+          showValidationNotice('게이지 오프셋을 숫자로 입력해 주세요.', 'devices', 'warning');
+          return;
+        }
+        displacementOffsets.set(gaugeId, offset);
+        input.value = String(offset);
+        try { localStorage.setItem(gaugeOffsetStorageKey, JSON.stringify(Object.fromEntries(displacementOffsets))); }
+        catch (_) { showValidationNotice('오프셋은 현재 화면에 적용되었지만 이 브라우저에는 저장되지 않았습니다.', 'devices', 'warning'); }
+        updateLiveSample(currentDemoSample());
+      });
       function renderGaugeAssignments() {
-        renderGaugeOffsetInputs();
         const grid = root.querySelector('#gauge-assignment-grid');
         grid.replaceChildren();
         bearingItems.forEach((item,index) => {
@@ -4222,6 +4218,7 @@
         updateSlopeResults();
         selectedBearingReaction.value = item.target === '' ? '' : String(Number((Number(item.target) / 9.80665).toFixed(4)));
         renderTargetReactionError();
+        renderSelectedGaugeOffset();
       };
       const beginBearingNameEdit = (node, index) => {
         const editor = document.createElement('input');
