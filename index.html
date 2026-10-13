@@ -514,9 +514,15 @@
     #jackup-wireframe [data-setup-panel][hidden] { display:none; }
     #jackup-wireframe .gauge-assignment-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
     #jackup-wireframe .gauge-assignment-grid select { min-width:0; width:100%; }
+    #jackup-wireframe .gauge-offset-settings { width: min(100%, 380px); margin: 12px 0 0 auto; border-top: 1px solid var(--jw-line); padding-top: 8px; }
+    #jackup-wireframe .gauge-offset-settings summary { width: fit-content; margin-left: auto; color: var(--jw-muted); font-size: 11px; cursor: pointer; }
+    #jackup-wireframe .gauge-offset-settings > .sub { margin: 10px 0; }
+    #jackup-wireframe .gauge-offset-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    #jackup-wireframe .gauge-offset-grid label { font-size: 11px; }
+    #jackup-wireframe .gauge-offset-grid input { width: 100%; }
     #jackup-wireframe .module-list { max-height:245px; overflow:auto; }
     #jackup-wireframe #selected-displacement-meta { overflow-wrap:anywhere; }
-    @media (max-width:650px) { #jackup-wireframe .gauge-assignment-grid { grid-template-columns:1fr; } }
+    @media (max-width:650px) { #jackup-wireframe .gauge-assignment-grid { grid-template-columns:1fr; } #jackup-wireframe .gauge-offset-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     #jackup-wireframe .notification-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     #jackup-wireframe .notification-heading strong { font-size: 14px; font-weight: 500; }
     #jackup-wireframe #dismiss-validation-notice { width: 100%; min-height: 40px; }
@@ -642,6 +648,7 @@
 
               </div>
             </div>
+            <details class="gauge-offset-settings" id="gauge-offset-settings"><summary>고급 · 게이지 표시 보정</summary><p class="sub">게이지별 오프셋(mm)을 측정 전에 설정합니다. 원본 수신값이 정확히 0이면 표시값도 0이며, 그 외에는 원본값에 오프셋을 더합니다.</p><div class="gauge-offset-grid" id="gauge-offset-grid"></div></details>
         </section>
 
         <section class="screen" data-panel="measure">
@@ -781,13 +788,13 @@
           <div class="banner history-context" id="history-context" data-help="현재 또는 과거 시험에서 실제 데이터 측정을 시작한 회차 수, Test ID, 시험일을 표시합니다. 데이터 이력의 측정값과 보정 기록은 모두 조회 전용이며 이 화면에서 수정할 수 없습니다."><strong id="history-context-label">현재 시험</strong><span id="history-context-detail">시험일 —</span></div>
           <div class="panel" data-help="기본으로 저장 당시 그래프에 표시한 수신 구간을 보여줍니다. 전체 원시값 버튼으로 모든 수신 데이터를 조회할 수 있으며 원본과 Excel에는 항상 전체 수신값이 보존됩니다.">
             <div class="headline history-record-head"><h3>측정 수신값</h3><div class="btnrow" role="group" aria-label="수신값 조회 범위"><button class="action" id="data-selected-range-view" type="button" aria-pressed="true" data-jw-tooltip="저장 당시 그래프에 표시한 Lifting·Lowering 구간만 조회합니다. 감압은 높은 압력에서 내려오므로 지정 종료 압력보다 높은 값이 포함될 수 있습니다.">선택 구간</button><button class="action" id="data-all-records-view" type="button" aria-pressed="false" data-jw-tooltip="표시 종료점과 관계없이 저장된 전체 압력·변위 원시 수신값을 조회합니다.">전체 원시값</button></div></div><p class="sub" id="data-source-status">측정 기록을 선택하면 수신값이 표시됩니다.</p>
-            <div class="history-table-wrap" style="max-height:260px;overflow:auto"><table><thead><tr><th>순번</th><th>수신 시각</th><th>구간</th><th>압력</th><th>변위</th><th>환산 하중</th></tr></thead><tbody id="data-records-body"><tr><td colspan="6">저장된 수신값이 없습니다.</td></tr></tbody></table></div>
+            <div class="history-table-wrap" style="max-height:260px;overflow:auto"><table><thead><tr><th>순번</th><th>수신 시각</th><th>구간</th><th>압력</th><th>적용 변위</th><th>환산 하중</th></tr></thead><tbody id="data-records-body"><tr><td colspan="6">저장된 수신값이 없습니다.</td></tr></tbody></table></div>
           </div>
           <div class="grid two" style="margin-top:12px">
-            <div class="panel" data-help="선택한 수신값은 압력계·디지털 게이지에서 온 원시 기록입니다. 분석선 보정은 원시값을 바꾸지 않으며 아래 수정 이력에 별도로 표시합니다.">
+            <div class="panel" data-help="선택한 압력은 수신 원본이며 변위는 측정 시작 전에 지정한 게이지 오프셋이 적용된 값입니다. 변위 원본과 오프셋도 저장되며 Excel·CSV에서 확인할 수 있습니다. 분석선 보정은 측정값을 바꾸지 않습니다.">
               <h3>선택 수신값 · 조회 전용</h3>
-              <div class="formgrid" style="grid-template-columns:1fr 1fr"><div class="field"><label>압력계 수신값</label><input id="data-selected-pressure" value="—" readonly></div><div class="field"><label>디지털 게이지 수신값</label><input id="data-selected-displacement" value="—" readonly></div><div class="field"><label>측정 구간</label><input id="data-selected-phase" value="—" readonly></div><div class="field"><label>수신 시각</label><input id="data-selected-time" value="—" readonly></div></div>
-              <p class="sub" id="data-selected-source">측정·분석에서 기록한 압력·변위를 선택해 조회합니다. 측정값 직접 보정 기능은 아직 없습니다.</p>
+              <div class="formgrid" style="grid-template-columns:1fr 1fr"><div class="field"><label>압력계 수신값</label><input id="data-selected-pressure" value="—" readonly></div><div class="field"><label>디지털 게이지 적용값</label><input id="data-selected-displacement" value="—" readonly></div><div class="field"><label>측정 구간</label><input id="data-selected-phase" value="—" readonly></div><div class="field"><label>수신 시각</label><input id="data-selected-time" value="—" readonly></div></div>
+              <p class="sub" id="data-selected-source">측정·분석에서 기록한 압력과 오프셋 적용 변위를 선택해 조회합니다.</p>
             </div>
             <div class="panel" data-help="측정·분석에서 계산하고 데이터 저장한 분석선 결과를 조회합니다. 이 값은 개별 압력·변위 측정값의 보정값이 아닙니다.">
               <h3>분석선 계산 결과 · 조회 전용</h3>
@@ -1070,6 +1077,15 @@
         ['DIS-B-014', -52], ['DIS-B-008', -63], ['DIS-B-026', -78],
         ['DIS-B-031', -55], ['DIS-B-032', -58], ['DIS-B-033', -62]
       ].map(([value,rssi]) => ({ value, dataset: { rssi: String(rssi) } }));
+      const gaugeOffsetStorageKey = 'shaft-monitor-gauge-offsets-v1';
+      const displacementOffsets = new Map(displacementModules.map(({ value }) => [value, 0]));
+      try {
+        const savedOffsets = JSON.parse(localStorage.getItem(gaugeOffsetStorageKey) || '{}');
+        displacementModules.forEach(({ value }) => {
+          if (Number.isFinite(savedOffsets?.[value])) displacementOffsets.set(value, savedOffsets[value]);
+        });
+      } catch (_) { /* Keep zero offsets if local storage is unavailable. */ }
+      const correctedDisplacement = (rawValue, offset) => rawValue === 0 ? 0 : Number((rawValue + offset).toFixed(3));
       const deviceConnectionStatus = root.querySelector('#device-connection-status');
       const deviceConnectionDetail = root.querySelector('#device-connection-detail');
       const reactionTolerance = root.querySelector('#reaction-tolerance');
@@ -1240,7 +1256,11 @@
         // Mock each sensor channel separately; native BLE will route by the saved gauge ID.
         const gaugeId = measurementDeviceSnapshot?.gaugeId || activeMeasurementBearing?.gaugeId;
         const index = Math.max(0, displacementModules.findIndex(input => input.value === gaugeId));
-        return { ...sample, displacement: Number((sample.displacement * (1 + index * .025)).toFixed(3)) };
+        const rawDisplacement = Number((sample.displacement * (1 + index * .025)).toFixed(3));
+        const displacementOffset = measurementPhase !== 'ended' && measurementDeviceSnapshot?.gaugeId === gaugeId
+          ? measurementDeviceSnapshot.displacementOffset : (displacementOffsets.get(gaugeId) || 0);
+        return { ...sample, rawDisplacement, displacementOffset,
+          displacement: correctedDisplacement(rawDisplacement, displacementOffset) };
       };
       const measurementRecords = [];
       let measurementSegment = 0;
@@ -1248,6 +1268,7 @@
       const measurementIsFinished = () => measurementPhase === 'ended';
       const renderMeasurementControls = () => {
         const finished = measurementIsFinished();
+        root.querySelectorAll('#gauge-offset-grid input').forEach(input => { input.disabled = !finished; });
         const status = finished ? '데이터 측정 종료' : `${measurementPhase === 'lifting' ? 'Lifting' : 'Lowering'} 기록 중`;
         measurementPhaseStatus.textContent = `${activeTest.id} · ${activeTest.round} · ${status} · 수신 기록 ${measurementRecords.length}개`;
         if (activeMeasurementBearing) measurementBearingTitle.textContent = `${activeMeasurementBearing.position} · ${activeTest.round} Jack-up 측정·분석`;
@@ -1761,6 +1782,8 @@
       const analysisAxisTicks = analysisPlot.querySelector('.axis-ticks');
       const analysisGrid = analysisPlot.querySelector('.gridline');
       const analysisAxisRange = root.querySelector('#analysis-axis-range');
+      let analysisYMin = 0;
+      let analysisYMax = 60;
       const zoomAxisValues = (min, max, intervals) => {
         const roughStep = (max - min) / intervals;
         const power = 10 ** Math.floor(Math.log10(roughStep));
@@ -1773,8 +1796,9 @@
         const { scale, x, y } = analysisZoom;
         const xMin = (x - 216 / scale - 48) / .54;
         const xMax = (x + 216 / scale - 48) / .54;
-        const yMin = (354 - y - 162 / scale) / 5.4;
-        const yMax = (354 - y + 162 / scale) / 5.4;
+        const yRange = analysisYMax - analysisYMin;
+        const yMin = analysisYMin + (354 - y - 162 / scale) / 324 * yRange;
+        const yMax = analysisYMin + (354 - y + 162 / scale) / 324 * yRange;
         const screenScale = Math.abs(analysisPlot.getScreenCTM()?.a || 1);
         const fontSize = 12 / screenScale;
         const grid = [];
@@ -2452,6 +2476,7 @@
         setupCompleteButton.disabled = sessionRunning();
         rescanModules.disabled = sessionRunning();
         mappedPressureModule.disabled = sessionRunning();
+        root.querySelectorAll('#gauge-offset-grid input').forEach(input => { input.disabled = sessionRunning(); });
         const p = describeModule(mappedPressureModule.value);
         const pressureState = root.querySelector('#mapped-pressure-state');
         pressureState.textContent = mappedPressureModule.value === activeModuleIds[0] && p.connected ? '연결 · ' + p.signal.label + ' · RSSI ' + p.rssiText : '연결 대기 · RSSI ' + p.rssiText;
@@ -2505,7 +2530,42 @@
         renderActiveDeviceStatus();
         return true;
       }
+      function renderGaugeOffsetInputs() {
+        const grid = root.querySelector('#gauge-offset-grid');
+        if (grid.childElementCount) return;
+        displacementModules.forEach(({ value: gaugeId }) => {
+          const field = document.createElement('div');
+          field.className = 'field';
+          const label = document.createElement('label');
+          label.htmlFor = `offset-${gaugeId}`;
+          label.textContent = `${gaugeId} · mm`;
+          const input = document.createElement('input');
+          input.id = label.htmlFor;
+          input.type = 'number';
+          input.step = '0.01';
+          input.inputMode = 'decimal';
+          input.value = String(displacementOffsets.get(gaugeId));
+          input.setAttribute('aria-label', `${gaugeId} 디지털 게이지 변위 오프셋 (mm)`);
+          input.addEventListener('change', () => {
+            if (sessionRunning()) { input.value = String(displacementOffsets.get(gaugeId)); return; }
+            const offset = input.value.trim() === '' ? 0 : Number(input.value);
+            if (!Number.isFinite(offset)) {
+              input.value = String(displacementOffsets.get(gaugeId));
+              showValidationNotice('게이지 오프셋을 숫자로 입력해 주세요.', 'devices', 'warning');
+              return;
+            }
+            displacementOffsets.set(gaugeId, offset);
+            input.value = String(offset);
+            try { localStorage.setItem(gaugeOffsetStorageKey, JSON.stringify(Object.fromEntries(displacementOffsets))); }
+            catch (_) { showValidationNotice('오프셋은 현재 화면에 적용되었지만 이 브라우저에는 저장되지 않았습니다.', 'devices', 'warning'); }
+            updateLiveSample(currentDemoSample());
+          });
+          field.append(label, input);
+          grid.append(field);
+        });
+      }
       function renderGaugeAssignments() {
+        renderGaugeOffsetInputs();
         const grid = root.querySelector('#gauge-assignment-grid');
         grid.replaceChildren();
         bearingItems.forEach((item,index) => {
@@ -2548,7 +2608,8 @@
       function captureMeasurementDevices(item) {
         measurementDeviceSnapshot = {
           bearingName: item.position, gaugeId: item.gaugeId,
-          pressureId: activeModuleIds[0], area: Number(effectiveArea.value), condition: {...item}
+          pressureId: activeModuleIds[0], displacementOffset: displacementOffsets.get(item.gaugeId) || 0,
+          area: Number(effectiveArea.value), condition: {...item}
         };
         renderActiveDeviceStatus();
       }
@@ -2613,7 +2674,7 @@
         wrap.style.overflow = 'auto';
         const table = document.createElement('table');
         const head = document.createElement('tr');
-        ['시각', '구간', `압력 (${pressureUnitLabel()})`, '변위 (mm)'].forEach(label => {
+        ['시각', '구간', `압력 (${pressureUnitLabel()})`, '오프셋 적용 변위 (mm)'].forEach(label => {
           const th = document.createElement('th');
           th.textContent = label;
           head.append(th);
@@ -2764,8 +2825,8 @@
         root.querySelector('#data-selected-phase').value = selected ? (selected.phase === 'lifting' ? 'Lifting · 가압' : 'Lowering · 감압') : '—';
         root.querySelector('#data-selected-time').value = selected ? new Date(selected.time).toLocaleString('ko-KR') : '—';
         root.querySelector('#data-selected-source').textContent = selected
-          ? '압력·변위는 원시 수신 기록입니다. 수동 기울기 보정은 아래 이력에, 기록 표시 종료점은 위 저장 기록에 남으며 원시값은 바뀌지 않습니다.'
-          : '측정값 직접 보정 기능은 없습니다. 수신값과 분석선 보정 이력은 별도로 관리합니다.';
+          ? `변위 원본 ${Number(selected.rawDisplacement ?? selected.displacement).toFixed(3)} mm · 오프셋 ${Number(selected.displacementOffset ?? 0).toFixed(3)} mm · 적용값 ${Number(selected.displacement).toFixed(3)} mm. 원본이 0이면 적용값도 0입니다. 기울기 보정은 별도 이력입니다.`
+          : '측정 전 설정한 게이지 오프셋을 표시·분석·저장값에 적용하며 원본 수신값도 별도로 보존합니다.';
         const result = session?.analysisResult;
         root.querySelector('#data-final-reaction').textContent = result?.finalApplied && result.reaction && result.reaction !== '—' ? result.reaction : '—';
         root.querySelector('#data-criterion-label').textContent = usesAbsoluteReactionRange(session?.condition) ? '허용 반력 범위' : '목표 대비 비율';
@@ -2821,7 +2882,7 @@
       const analysisStepLabel = (step) => `Step ${String(step).padStart(2, '0')}`;
       // Plot the same received mm values used by the live gauges and pressure table.
       // Store plot displacement in 1/100 mm; preserve acquisition order and stop/start gaps.
-      const analysisY = (value) => 354 - value * 5.4;
+      const analysisY = (value) => 354 - (value - analysisYMin) * 324 / (analysisYMax - analysisYMin);
       const analysisSamples = { lifting: [], lowering: [] };
       const displayEndSteps = { lifting: null, lowering: null };
       const emptyAnalysisStats = () => ({ count: 0, sumPressure: 0, sumDisplacement: 0, sumPressureSquared: 0, sumProduct: 0, minPressure: Infinity, maxPressure: -Infinity, minDisplacement: Infinity, maxDisplacement: -Infinity });
@@ -2888,6 +2949,10 @@
         recalculateAnalysisLine(sample.phase);
       };
       const resetLiveAnalysisGraph = () => {
+        const offsetHundredths = Number(measurementDeviceSnapshot?.displacementOffset || 0) * 100;
+        analysisYMin = Math.min(0, Math.floor(offsetHundredths / 10) * 10);
+        analysisYMax = Math.max(60, Math.ceil((60 + offsetHundredths) / 10) * 10);
+        renderAnalysisZoom();
         analysisSamples.lifting.length = 0;
         analysisSamples.lowering.length = 0;
         displayEndSteps.lifting = null;
@@ -3019,7 +3084,7 @@
         const endBar = Math.min(800, (Math.min(60, stats.maxDisplacement) - meanDisplacement) / slope + meanPressure);
         const endDisplacement = meanDisplacement + slope * (endBar - meanPressure);
         if (endBar <= zeroBar + 1 || endDisplacement < 4) return null;
-        return { start: { x: barToX(zeroBar), y: 354 }, end: { x: barToX(endBar), y: analysisY(endDisplacement) } };
+        return { start: { x: barToX(zeroBar), y: analysisY(0) }, end: { x: barToX(endBar), y: analysisY(endDisplacement) } };
       };
       const updateAnalysisMethod = () => {
         if (analysisFinalApplied) { analysisGenerationMethod.textContent = '분석 결과 저장됨'; return; }
@@ -3102,7 +3167,7 @@
         const xAtY = (state, y) => state.start.x + (state.end.x - state.start.x) * (y - state.start.y) / (state.end.y - state.start.y);
         const meanEndX = (xAtY(displayedSlopes.lifting, meanEndY) + xAtY(displayedSlopes.lowering, meanEndY)) / 2;
         meanAnalysisLine.setAttribute('x1', meanStartX);
-        meanAnalysisLine.setAttribute('y1', 354);
+        meanAnalysisLine.setAttribute('y1', analysisY(0));
         meanAnalysisLine.setAttribute('x2', meanEndX);
         meanAnalysisLine.setAttribute('y2', meanEndY);
         const finalReaction = reactionFromPressure(xToBar(meanStartX), recordedContext ? recordedContext.area : Number(effectiveArea.value));
@@ -3643,8 +3708,8 @@
       const projectSessionsFor = (test) => projectTestsFor(test).flatMap(item => sessionsForTest(item));
       const projectReportSessionsFor = (test) => projectTestsFor(test).flatMap(item => reportSessionsForTest(item));
       const exportTables = (sessions) => {
-        const summary = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '시험일', '베어링', '압력계', '디지털 게이지', '수신 수', '기록 표시 종료 압력 (bar)', '최종 반력 (tf)', '목표 대비 비율 / 허용 범위', '판정', '분석 저장']];
-        const measurements = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '베어링', '순번', '수신 시각 (ISO)', '구간', '압력 (bar)', '변위 (mm)', '환산 하중 (kN)', '압력계', '디지털 게이지']];
+        const summary = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '시험일', '베어링', '압력계', '디지털 게이지', '변위 오프셋 (mm)', '수신 수', '기록 표시 종료 압력 (bar)', '최종 반력 (tf)', '목표 대비 비율 / 허용 범위', '판정', '분석 저장']];
+        const measurements = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '베어링', '순번', '수신 시각 (ISO)', '구간', '압력 (bar)', '오프셋 적용 변위 (mm)', '변위 원본 (mm)', '변위 오프셋 (mm)', '환산 하중 (kN)', '압력계', '디지털 게이지']];
         const barReadings = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '베어링', 'L 압력 (bar)', 'L 변위 (1/100 mm)', 'D 압력 (bar)', 'D 변위 (1/100 mm)']];
         const corrections = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '베어링', '보정 시각', '작업자', '대상', '변경', '사유']];
         sessions.forEach(session => {
@@ -3652,13 +3717,14 @@
           if (!test) return;
           const result = session.analysisResult || {};
           const finalReaction = Number.parseFloat(result.reaction);
-          summary.push([test.project, test.id, session.id, session.savedAt || '', session.round || test.round, localDateText(test.startedAt), session.bearingName, session.pressureId, session.gaugeId,
+          summary.push([test.project, test.id, session.id, session.savedAt || '', session.round || test.round, localDateText(test.startedAt), session.bearingName, session.pressureId, session.gaugeId, Number(session.displacementOffset ?? 0),
             session.records.length, session.displayEndPressureBar ?? null, result.finalApplied && Number.isFinite(finalReaction) ? finalReaction : null, result.finalApplied ? result.ratio || '' : '',
             result.finalApplied ? result.verdict || '' : '분석 전', result.finalApplied ? '분석 저장' : '수신값 저장']);
           session.records.forEach((sample, index) => {
             const load = reactionFromPressure(Number(sample.pressure), Number(session.area));
             measurements.push([test.project, test.id, session.id, session.savedAt || '', session.round || test.round, session.bearingName, index + 1, sample.time || '', sample.phase === 'lifting' ? 'Lifting' : 'Lowering',
-              Number(sample.pressure), Number(sample.displacement), Number.isFinite(load) ? Number(load.toFixed(3)) : null, session.pressureId, session.gaugeId]);
+              Number(sample.pressure), Number(sample.displacement), Number(sample.rawDisplacement ?? sample.displacement), Number(sample.displacementOffset ?? 0),
+              Number.isFinite(load) ? Number(load.toFixed(3)) : null, session.pressureId, session.gaugeId]);
           });
           (session.barReadings || []).forEach(row => barReadings.push([test.project, test.id, session.id, session.savedAt || '', session.round || test.round, session.bearingName,
             row[0] === '' ? null : Number(row[0]), row[1] === '' ? null : Number(row[1]), row[2] === '' ? null : Number(row[2]), row[3] === '' ? null : Number(row[3])]));
@@ -3994,7 +4060,7 @@
             const curvePage = addPage(`${saveLabel} 곡선`, `${session.bearingName} · 압력-변위 곡선`, test.id);
             const displayEnd = Number.isFinite(Number(session.displayEndPressureBar)) && session.displayEndPressureBar !== null
               ? `${Number(session.displayEndPressureBar).toFixed(1)} bar` : '전체';
-            addText(curvePage, `${saveRound} · 저장 ${session.endedAt} · 수신 ${session.records.length}건 · 기록 표시 종료 ${displayEnd} · 압력계 ${session.pressureId} · 디지털 게이지 ${session.gaugeId}`, 'pdf-meta');
+            addText(curvePage, `${saveRound} · 저장 ${session.endedAt} · 수신 ${session.records.length}건 · 기록 표시 종료 ${displayEnd} · 압력계 ${session.pressureId} · 디지털 게이지 ${session.gaugeId} · 변위 오프셋 ${Number(session.displacementOffset ?? 0).toFixed(2)} mm`, 'pdf-meta');
             const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             svg.setAttribute('class', 'pdf-curve'); svg.setAttribute('viewBox', '0 0 460 250');
             svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', `${session.bearingName} Lifting 및 Lowering 압력-변위 곡선`);
