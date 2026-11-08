@@ -157,6 +157,7 @@
     #jackup-wireframe .plot-zoom-controls { position: absolute; z-index: 9; top: 8px; right: 56px; display: flex; gap: 4px; }
     #jackup-wireframe .plot-zoom-controls button { min-width: 44px; height: 44px; padding: 0 8px; border: 1px solid var(--jw-line); border-radius: 7px; background: var(--jw-surface); color: var(--jw-text); font: inherit; font-size: 22px; cursor: pointer; touch-action: manipulation; }
     #jackup-wireframe .plot-zoom-controls button.zoom-reset { min-width: 58px; font-size: 12px; }
+    #jackup-wireframe .plot-zoom-controls button.axis-swap-button { min-width: 76px; font-size: 12px; white-space: nowrap; }
     #jackup-wireframe .plot-zoom-controls button:disabled { opacity: .4; cursor: default; }
     #jackup-wireframe .graph-fullscreen-body { position: relative; }
     #jackup-wireframe .graph-fullscreen-body .plot-zoom-controls { right: 8px; }
@@ -489,11 +490,11 @@
     #jackup-wireframe .bar-reading-scroll { max-height: 285px; overflow: auto; }
     #jackup-wireframe .bar-reading-table { width: 100%; table-layout: fixed; }
     #jackup-wireframe .bar-reading-table thead { position: sticky; top: 0; background: var(--jw-surface); z-index: 1; }
-    #jackup-wireframe #end-data-measurement { flex-shrink: 0; box-sizing: border-box; width: 150px; height: 44px; min-height: 44px; font-size: 13px; white-space: nowrap; }
-    #jackup-wireframe #end-data-measurement:disabled { opacity: .55; cursor: default; }
+    #jackup-wireframe .measurement-phase-button:disabled { opacity: .55; cursor: default; }
     #jackup-wireframe #analysis-verdict { display: inline-block; margin-left: 5px; font-size: 11px; }
     #jackup-wireframe .analysis-action-row { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
     #jackup-wireframe .analysis-action-row .action { box-sizing: border-box; flex: 0 0 150px; width: 150px; height: 44px; min-height: 44px; font-size: 13px; white-space: nowrap; }
+    #jackup-wireframe .analysis-action-row .action.measurement-phase-button { flex-basis: 150px; }
     #jackup-wireframe .reset-measurement-dialog { box-sizing: border-box; width: 420px; max-width: calc(100% - 32px); max-height: calc(100% - 32px); overflow: auto; margin: auto; padding: 20px; border: 1px solid var(--jw-line); border-radius: 10px; background: var(--jw-surface); color: var(--jw-text); }
     #jackup-wireframe .reset-measurement-dialog::backdrop { background: rgb(0 0 0 / .45); }
     #jackup-wireframe .reset-measurement-dialog p { font-size: 13px; line-height: 1.6; }
@@ -625,7 +626,7 @@
         </section>
 
         <section class="screen" data-panel="bearing-select">
-          <div class="headline"><div><h2>측정 베어링 선택</h2><p class="sub">측정할 베어링을 선택하고 유압잭·판정 조건을 입력하세요.</p></div><button class="action primary" id="start-bearing-button" type="button" data-jw-tooltip="선택한 베어링의 반력 판정 조건과 센서 연결을 확인하고 측정 시작">선택 베어링 측정 시작</button></div>
+          <div class="headline"><div><h2>측정 베어링 선택</h2><p class="sub">측정할 베어링을 선택하고 유압잭·판정 조건을 입력하세요.</p></div><button class="action primary" id="start-bearing-button" type="button" data-jw-tooltip="선택한 베어링의 반력 판정 조건과 센서 연결을 확인하고 측정 화면으로 이동">선택 베어링으로 이동</button></div>
           <p class="sub" id="bearing-switch-guidance" role="status">이전 베어링에서 저장한 측정·분석 이력은 다음 베어링을 시작해도 유지됩니다. 저장하지 않은 분석 결과가 있으면 전환 전에 확인합니다.</p>
           <div class="panel" data-help="왼쪽 선미측(AFT)에서 오른쪽 기관측(FWD) 방향으로 배치된 베어링의 진행 상태를 확인합니다. 완료 위치도 재측정 회차로 다시 선택할 수 있습니다.">
             <div class="shaft-layout">
@@ -640,6 +641,7 @@
                 <div class="field" data-order="9" data-help="현장에 설치한 RAM 종류를 선택하면 규정된 RAM AREA가 자동 입력됩니다. 직접 입력을 선택하면 같은 박스에서 잭 종류 또는 정격을 입력할 수 있습니다."><label for="ram-type">잭 종류</label><div class="editable-select-control"><select id="ram-type"><option value="50" selected>50톤 RAM</option><option value="150">150톤 RAM</option><option value="custom">직접 입력</option></select><input id="custom-ram-type" aria-label="잭 종류 직접 입력" placeholder="잭 종류를 입력하세요" hidden><button class="custom-select-return" id="ram-type-return" type="button" aria-label="잭 종류 목록 다시 열기" data-jw-tooltip="잭 종류 목록 다시 열기" hidden><i data-lucide="chevron-down" aria-hidden="true"></i></button></div></div>
                 <div class="field" data-order="10" data-help="50톤 RAM은 70.85 cm², 150톤 RAM은 153.90 cm²가 자동 반영됩니다. 예외적인 경우 숫자를 직접 수정할 수 있으며 압력을 하중으로 환산하는 데 사용됩니다."><label for="effective-area">RAM AREA</label><div class="input-unit"><input id="effective-area" type="number" step="0.01" value="70.85"><span class="unit-suffix" aria-label="단위 제곱센티미터">cm²</span></div></div>
                 <div class="field" data-order="11" data-help="kgf는 킬로그램힘으로, 질량 kg이 아닙니다. 1 kgf/cm² = 0.980665 bar입니다. 이 선택은 화면의 압력 표시·입력 단위만 바꾸며 수신 원본, 하중·최종 반력·판정은 바뀌지 않습니다."><label for="pressure-unit">압력 단위</label><select id="pressure-unit"><option value="bar" selected>bar</option><option value="kg/cm2">kgf/cm²</option></select></div>
+                <div class="field" data-order="11" data-help="선택한 베어링의 최종 반력에 곱하는 무차원 보정계수입니다. 환산 하중과 압력·변위 원시값은 바뀌지 않습니다. 실제 베어링별 Factor를 입력해야 최종 반력을 판정할 수 있습니다."><label for="bearing-factor">Factor <span class="bad">필수</span></label><input id="bearing-factor" type="number" min="0.000001" step="any" inputmode="decimal" placeholder="베어링별 Factor 입력" required aria-required="true"></div>
                 <div class="field" id="bearing-target-field" data-order="12" data-help="M/E와 Fly Wheel을 제외한 베어링의 설계 목표 반력입니다. 톤(tf)으로 입력하며 허용오차(%)의 기준이 됩니다."><label for="selected-bearing-reaction">목표 반력 <span class="bad">필수</span></label><div class="input-unit"><input id="selected-bearing-reaction" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0보다 큰 목표 톤수 입력" required aria-required="true" aria-describedby="validation-notice-message"><span class="unit-suffix" aria-label="단위 톤힘">톤(tf)</span></div></div>
                 <div class="field" id="bearing-percent-field" data-order="13" hidden data-help="선택한 베어링의 목표 반력 대비 허용오차입니다. 다른 베어링의 값에는 영향을 주지 않으며 위치를 다시 선택하면 설정값이 복원됩니다. 초기 5%는 화면 예시값이므로 실제 설계 기준에 맞게 설정하세요."><label for="reaction-tolerance">베어링별 허용오차</label><div class="input-affix"><span class="unit-prefix" aria-label="플러스 마이너스">±</span><select id="reaction-tolerance"><option value="5" selected>5</option><option value="10">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option><option value="30">30</option></select><span class="unit-suffix" aria-label="단위 퍼센트">%</span></div></div>
                 <div class="field" id="bearing-criteria-field" data-order="14" hidden data-help="목표 대비 비율이 100% ± 허용오차 범위이면 OK이며 경계값도 포함합니다."><label for="acceptance-criteria">판정 기준</label><select id="acceptance-criteria" disabled><option value="lte" selected>허용범위 이내 OK (경계 포함)</option></select></div>
@@ -690,21 +692,22 @@
           <div class="analysis-action-row" role="group" aria-label="분석 및 측정 데이터 관리">
             <button class="action" id="restore-analysis-auto" type="button" data-jw-tooltip="분석선 기울기와 그래프 표시 종료점을 초기화합니다. 원본 수신 기록과 Bar별 변위값은 유지합니다.">분석 보정 초기화</button>
             <button class="action" id="reset-measurement-data" type="button" data-jw-tooltip="현재 시험의 데이터·이력 기록만 삭제합니다. 결과 리포트에 저장한 스냅샷은 유지합니다.">현재 시험 기록 삭제</button>
-            <button class="action primary" id="end-data-measurement" type="button" data-jw-tooltip="현재 베어링의 데이터 기록을 종료합니다. 수신 표시는 유지되며 유압장치는 제어하지 않습니다.">데이터 측정 종료</button>
+            <button class="action primary measurement-phase-button" id="lifting-measurement" type="button">Lifting 측정 시작</button>
+            <button class="action primary measurement-phase-button" id="lowering-measurement" type="button">Lowering 측정 시작</button>
             <button class="action primary" id="apply-analysis-result" type="button" data-jw-tooltip="누른 시점까지의 전체 수신값과 현재 분석 상태를 새 기록으로 저장합니다. 기울기를 수동 조절한 경우에만 보정 작업자와 사유가 필요합니다.">데이터 저장</button>
           </div>
           <div class="grid two analysis-main-grid">
-            <div class="panel" data-help="가로축은 유압 압력 Bar, 세로축은 디지털 게이지 변위 1/100 mm입니다. 상단 손잡이는 표시할 원시 기록의 끝만 바꾸며 분석선·반력 계산에는 영향을 주지 않습니다. 곡선 안의 분석선 손잡이로 기울기를 별도 조정합니다.">
+            <div class="panel" data-help="기본 가로축은 유압 압력, 세로축은 디지털 게이지 변위(mm)입니다. X·Y축 전환 버튼으로 위치를 바꿀 수 있습니다. 경계 손잡이는 표시할 원시 기록의 끝만 바꾸며 분석선·반력 계산에는 영향을 주지 않습니다. 곡선 안의 분석선 손잡이로 기울기를 별도 조정합니다.">
               <div class="analysis-graph-head"><h3>압력-변위 분석 그래프</h3><span class="status good"><span class="dot"></span>상단은 기록 표시 · 곡선은 기울기</span></div>
-              <svg class="plot" id="analysis-plot" viewBox="0 0 500 400" role="img" aria-label="Lifting과 Lowering 압력-변위 곡선, 가로축 0에서 800 Bar, 가상 예시 데이터, 세로축 0에서 60 단위 1/100 밀리미터"><path class="gridline" d="M48 354H480M48 300H480M48 246H480M48 192H480M48 138H480M48 84H480M48 30H480M156 30V354M264 30V354M372 30V354"/><path class="axis" d="M48 30V354H480"/><g class="axis-ticks"><text x="42" y="358" text-anchor="end">0</text><text x="42" y="304" text-anchor="end">10</text><text x="42" y="250" text-anchor="end">20</text><text x="42" y="196" text-anchor="end">30</text><text x="42" y="142" text-anchor="end">40</text><text x="42" y="88" text-anchor="end">50</text><text x="42" y="34" text-anchor="end">60</text><text x="48" y="374" text-anchor="start">0</text><text x="156" y="374" text-anchor="middle">200</text><text x="264" y="374" text-anchor="middle">400</text><text x="372" y="374" text-anchor="middle">600</text><text x="480" y="374" text-anchor="end">800</text></g><path class="lift" d=""/><path class="lower" d=""/><line class="analysis-line-lifting" id="slope-line-lifting" x1="246.6" y1="354" x2="397.4" y2="84"/><line class="analysis-line-lowering" id="slope-line-lowering" x1="304.2" y1="354" x2="456.5" y2="84"/><line class="mean-analysis-line" id="mean-analysis-line" x1="275.4" y1="354" x2="427" y2="84"/><g aria-label="손가락으로 조정하는 분석선 끝점"><circle class="slope-adjust-handle" data-slope-line="lifting" data-slope-end="start" cx="246.6" cy="354" r="10"/><circle class="slope-adjust-handle" data-slope-line="lifting" data-slope-end="end" cx="397.4" cy="84" r="10"/><circle class="slope-adjust-handle" data-slope-line="lowering" data-slope-end="start" cx="304.2" cy="354" r="10"/><circle class="slope-adjust-handle" data-slope-line="lowering" data-slope-end="end" cx="456.5" cy="84" r="10"/></g><g class="analysis-selection analysis-selection-lifting" id="analysis-lifting-selection" aria-label="Lifting 시작점과 종료점"><line class="range-line" id="lifting-start-line" x1="246.6" y1="32" x2="246.6" y2="354"/><line class="range-line" id="lifting-end-line" x1="397.4" y1="32" x2="397.4" y2="354"/><circle class="range-handle" id="lifting-start-handle" cx="246.6" cy="354" r="8"/><circle class="range-handle" id="lifting-end-handle" cx="397.4" cy="84" r="8"/><text class="range-label" id="lifting-start-label" x="224.6" y="25">L 시작</text><text class="range-label" id="lifting-end-label" x="375.4" y="25">L 종료</text></g><g class="analysis-selection analysis-selection-lowering" id="analysis-lowering-selection" aria-label="Lowering 시작점과 종료점"><line class="range-line" id="lowering-start-line" x1="456.5" y1="48" x2="456.5" y2="354"/><line class="range-line" id="lowering-end-line" x1="304.2" y1="48" x2="304.2" y2="354"/><circle class="range-handle" id="lowering-start-handle" cx="456.5" cy="84" r="8"/><circle class="range-handle" id="lowering-end-handle" cx="304.2" cy="354" r="8"/><text class="range-label" id="lowering-start-label" x="434.5" y="42">D 시작</text><text class="range-label" id="lowering-end-label" x="282.2" y="42">D 종료</text></g><text x="220" y="396">압력 (Bar)</text><text x="8" y="20">변위 (1/100 mm)</text><rect class="analysis-touch-target" id="analysis-touch-target" x="48" y="30" width="432" height="324" aria-label="분석구간 터치 선택 영역"/></svg><div class="legend"><span style="color:var(--jw-accent)">Lifting · 가압</span><span style="color:var(--jw-warn)">Lowering · 감압</span><span style="color:var(--jw-good)">L 분석선</span><span style="color:var(--jw-bad)">D 분석선</span><span>평균선</span></div>
+              <svg class="plot" id="analysis-plot" viewBox="0 0 500 400" role="img" aria-label="Lifting과 Lowering 압력-변위 곡선, 가로축 압력, 세로축 변위"><path class="gridline" d="M48 354H480M48 300H480M48 246H480M48 192H480M48 138H480M48 84H480M48 30H480M156 30V354M264 30V354M372 30V354"/><path class="axis" d="M48 30V354H480"/><g class="axis-ticks"></g><path class="lift" d=""/><path class="lower" d=""/><line class="analysis-line-lifting" id="slope-line-lifting" x1="246.6" y1="354" x2="397.4" y2="84"/><line class="analysis-line-lowering" id="slope-line-lowering" x1="304.2" y1="354" x2="456.5" y2="84"/><line class="mean-analysis-line" id="mean-analysis-line" x1="275.4" y1="354" x2="427" y2="84"/><g aria-label="손가락으로 조정하는 분석선 끝점"><circle class="slope-adjust-handle" data-slope-line="lifting" data-slope-end="start" cx="246.6" cy="354" r="10"/><circle class="slope-adjust-handle" data-slope-line="lifting" data-slope-end="end" cx="397.4" cy="84" r="10"/><circle class="slope-adjust-handle" data-slope-line="lowering" data-slope-end="start" cx="304.2" cy="354" r="10"/><circle class="slope-adjust-handle" data-slope-line="lowering" data-slope-end="end" cx="456.5" cy="84"/></g><text x="220" y="396">압력 (bar)</text><text x="8" y="20">변위 (mm)</text><rect class="analysis-touch-target" id="analysis-touch-target" x="48" y="30" width="432" height="324" aria-label="분석구간 터치 선택 영역"/></svg><div class="legend"><span style="color:var(--jw-accent)">Lifting · 가압</span><span style="color:var(--jw-warn)">Lowering · 감압</span><span style="color:var(--jw-good)">L 분석선</span><span style="color:var(--jw-bad)">D 분석선</span><span>평균선</span><span style="color:var(--jw-accent)">수동 변위점</span></div>
             </div>
             <div class="analysis-result-column">
               <div class="grid two">
-                <div class="panel" data-help="L·D 분석선의 0 변위 압력 교점 평균 × RAM AREA로 계산합니다. 압력(bar) × 면적(cm²) × 0.01 ÷ 9.80665 = tf이며 별도 보정계수는 현재 적용하지 않습니다."><span class="label">최종 반력</span><div class="metric" id="analysis-final-reaction">—</div></div>
+                <div class="panel" data-help="L·D 분석선의 0 변위 압력 교점 평균 × RAM AREA × 선택 베어링 Factor로 계산합니다. 압력(bar) × 면적(cm²) × 0.01 ÷ 9.80665 × Factor = tf입니다."><span class="label">최종 반력</span><div class="metric" id="analysis-final-reaction">—</div></div>
                 <div class="panel" id="analysis-ratio-panel" data-help="일반 베어링은 목표 대비 비율, M/E와 Fly Wheel은 허용 반력 최소~최대 범위로 판정합니다."><span class="label"><span id="analysis-criterion-label">목표 대비 비율</span> <span id="analysis-verdict">판정 대기</span></span><div class="metric" id="analysis-error-rate">—</div></div>
               </div>
-              <div class="panel" id="live-bar-panel" data-help="기본 압력 간격을 10·20·40·50·100 bar 중 선택합니다. 기본 행과 추가 행 모두 삭제할 수 있으며, 삭제한 기본 행은 간격을 변경하거나 새 측정을 시작할 때 복원됩니다. 압력이 증가하면 기본 행이 확장됩니다. Lifting은 상승 통과, Lowering은 하강 통과 시 최초 수신 변위를 기록합니다. L·D 값은 1/100 mm 단위로 자동 입력된 후 직접 수정할 수 있으며, 원시 수신 기록은 바뀌지 않습니다. 미수신 구간은 빈칸으로 남기고 보간하지 않습니다. 현재는 가상 수신 데모입니다.">
-                <div class="bar-table-head"><h3>Bar별 변위값 <span class="sub">[1/100 mm]</span></h3><div class="bar-table-meta"><label class="bar-interval-control" for="bar-interval">기본 간격 <select id="bar-interval" data-jw-tooltip="기본 고정 행의 간격을 선택합니다. 단위는 bar이며 측정 원본 기록은 유지됩니다."><option value="10">10 bar</option><option value="20">20 bar</option><option value="40">40 bar</option><option value="50">50 bar</option><option value="100">100 bar</option></select></label><span class="status" id="bar-reading-count">5개 행</span></div></div>
+              <div class="panel" id="live-bar-panel" data-help="기본 압력 간격을 10·20·40·50·100 bar 중 선택합니다. 기본 행과 추가 행 모두 삭제할 수 있으며, 삭제한 기본 행은 간격을 변경하거나 새 측정을 시작할 때 복원됩니다. 압력이 증가하면 기본 행이 확장됩니다. Lifting은 상승 통과, Lowering은 하강 통과 시 최초 수신 변위를 기록합니다. L·D 값은 mm 단위로 소수 셋째 자리까지 자동 입력되며 0.302처럼 직접 수정할 수 있습니다. 수동값은 그래프에 별도 점으로 표시하고 원시 수신 곡선은 바뀌지 않습니다. 미수신 구간은 빈칸으로 남기고 보간하지 않습니다. 현재는 가상 수신 데모입니다.">
+                <div class="bar-table-head"><h3>Bar별 변위값 <span class="sub">[mm]</span></h3><div class="bar-table-meta"><label class="bar-interval-control" for="bar-interval">기본 간격 <select id="bar-interval" data-jw-tooltip="기본 고정 행의 간격을 선택합니다. 단위는 bar이며 측정 원본 기록은 유지됩니다."><option value="10">10 bar</option><option value="20">20 bar</option><option value="40">40 bar</option><option value="50">50 bar</option><option value="100">100 bar</option></select></label><span class="status" id="bar-reading-count">5개 행</span></div></div>
                 <div class="bar-custom-row">
                   <label for="custom-bar-pressure">추가 압력</label>
                   <div class="input-unit"><input id="custom-bar-pressure" type="number" min="0" step="any" inputmode="decimal" placeholder="예: 15"><span class="unit-suffix" id="custom-bar-unit">bar</span></div>
@@ -718,7 +721,7 @@
             </div>
           </div>
             <div class="panel" id="analysis-range-editor" data-help="Lifting·Lowering 원시 수신 기록의 그래프 표시 종료점만 선택합니다. 원본 기록과 분석선·최종 반력 계산은 변경하지 않습니다." style="margin-top:12px">
-            <div class="headline"><div><h3>기록 표시 구간</h3><p class="sub">공통 종료점은 그래프 표시 범위만 변경 · 분석선은 유지</p></div><span class="status good"><span class="dot"></span>축 자동 조정 · <span id="analysis-generation-method">수신값 대기</span> · <span id="analysis-axis-range">X 0~800 Bar / Y 0~60 (1/100 mm)</span></span></div>
+            <div class="headline"><div><h3>기록 표시 구간</h3><p class="sub">공통 종료점은 그래프 표시 범위만 변경 · 분석선은 유지</p></div><span class="status good"><span class="dot"></span>축 자동 조정 · <span id="analysis-generation-method">수신값 대기</span> · <span id="analysis-axis-range">X 0~800 bar / Y 0~0.600 mm</span></span></div>
             <div class="curve-range-head"><strong>Lifting · Lowering 표시 종료점</strong><button class="action" id="select-common-end" type="button" aria-pressed="false" data-jw-tooltip="그래프에서 표시 종료 압력을 한 번 터치하거나 상단 손잡이를 좌우로 드래그. 분석선은 바뀌지 않습니다.">그래프에서 종료점 선택</button></div>
             <div class="analysis-meta-grid">
               <div class="field" data-help="그래프에 보여주는 Lifting·Lowering 원시 기록 범위입니다. 원본 저장값과 분석선 계산에는 적용되지 않습니다."><label for="analysis-common-detail">적용 구간</label><input id="analysis-common-detail" value="전체 기록" readonly></div>
@@ -782,7 +785,7 @@
             <p class="sub">Excel 첫 시트 「전체 수신값」에 저장된 모든 압력·변위 수신값이 한 건당 한 행씩 포함됩니다. 최종값 요약은 별도 시트입니다.</p>
             <div class="history-table-wrap"><table><thead><tr><th>베어링</th><th>측정 회차</th><th>저장 기록</th><th>전체 회차 Excel</th></tr></thead><tbody id="bearing-export-body"><tr><td colspan="4">저장된 측정 기록이 없습니다.</td></tr></tbody></table></div>
             <h3 style="margin-top:16px">회차별 측정 기록</h3><p class="sub">측정·분석에서 데이터 저장한 결과와 수신 원시값을 구분해 조회합니다. 이 시안의 기록은 새로고침 시 초기화됩니다.</p>
-            <div class="history-table-wrap"><table><thead><tr><th>베어링</th><th>회차</th><th>Test ID</th><th>전체 수신 수</th><th>기록 표시 종료점</th><th>분석 상태</th><th>저장 시각</th><th>Excel 파일</th></tr></thead><tbody id="bearing-session-history"><tr><td colspan="8">아직 종료된 측정이 없습니다.</td></tr></tbody></table></div><div id="bearing-session-detail" hidden></div>
+            <div class="history-table-wrap"><table><thead><tr><th>베어링</th><th>회차</th><th>Test ID</th><th>최종 반력</th><th>전체 수신 수</th><th>기록 표시 종료점</th><th>분석 상태</th><th>저장 시각</th><th>Excel 파일</th></tr></thead><tbody id="bearing-session-history"><tr><td colspan="9">아직 종료된 측정이 없습니다.</td></tr></tbody></table></div><div id="bearing-session-detail" hidden></div>
           </div>
           <div class="headline"><div><h2>데이터 로그 · 보정 이력</h2><p class="sub">압력·변위 수신값과 분석선 보정 결과를 분리하여 조회</p></div></div>
           <div class="banner history-context" id="history-context" data-help="현재 또는 과거 시험에서 실제 데이터 측정을 시작한 회차 수, Test ID, 시험일을 표시합니다. 데이터 이력의 측정값과 보정 기록은 모두 조회 전용이며 이 화면에서 수정할 수 없습니다."><strong id="history-context-label">현재 시험</strong><span id="history-context-detail">시험일 —</span></div>
@@ -805,7 +808,7 @@
         </section>
 
         <section class="screen" data-panel="report">
-          <div class="headline"><div><h2>결과 요약 · 리포트</h2><p class="sub">데이터 저장을 누른 시점별 이력을 누적합니다. 파일에는 현재 시험의 모든 저장 시점이 포함됩니다.</p></div><div class="btnrow history-export-actions"><button class="action" id="export-all-xlsx" type="button" data-jw-tooltip="현재 시험의 모든 저장 시점·베어링의 요약, 수신값, Bar별 변위값과 보정 이력을 Excel 파일로 저장">전체 Excel</button><button class="action" id="export-all-csv" type="button" data-jw-tooltip="모든 저장 시점의 요약, 수신값, Bar별 변위값과 보정 이력 CSV 4개 파일을 ZIP으로 저장">전체 CSV</button><button class="action primary" id="generate-pdf-report" type="button" data-jw-tooltip="현재 시험의 모든 저장 시점에 대한 결과 리포트를 페이지별로 미리봅니다.">PDF 생성</button></div></div>
+          <div class="headline"><div><h2>결과 요약 · 리포트</h2><p class="sub">데이터 저장을 누른 시점별 이력을 누적합니다. 파일에는 현재 시험의 모든 저장 시점이 포함됩니다.</p></div><div class="btnrow history-export-actions"><button class="action" id="export-all-csv" type="button" data-jw-tooltip="모든 저장 시점의 요약, 수신값, Bar별 변위값과 보정 이력 CSV 4개 파일을 ZIP으로 저장">전체 CSV</button><button class="action primary" id="generate-pdf-report" type="button" data-jw-tooltip="현재 시험의 모든 저장 시점에 대한 결과 리포트를 페이지별로 미리봅니다.">PDF 생성</button></div></div>
           <div class="report-tabs" role="tablist" aria-label="결과 리포트 영역" data-help="내용을 한 영역씩 확인할 수 있습니다. 탭을 선택하면 해당 결과만 화면에 표시됩니다.">
             <button class="report-tab" id="report-tab-summary" type="button" role="tab" data-report-tab="summary" aria-controls="report-panel-summary" aria-selected="true">종합 판정</button>
             <button class="report-tab" id="report-tab-confirm" type="button" role="tab" data-report-tab="confirm" aria-controls="report-panel-confirm" aria-selected="false">결과 확정</button>
@@ -969,7 +972,7 @@
       const pressureWalker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
       while (pressureWalker.nextNode()) {
         const node = pressureWalker.currentNode;
-        if (node.parentElement.closest('script, style, select, #live-pressure-value, #analysis-axis-range')) continue;
+        if (node.parentElement.closest('script, style, select, #live-pressure-value, #analysis-axis-range, #analysis-plot > text')) continue;
         if (/\bbar\b/i.test(node.nodeValue)) pressureTextTemplates.push([node, node.nodeValue]);
       }
       const pressureHelpTemplates = [];
@@ -1042,7 +1045,6 @@
       const bearingExportScope = root.querySelector('#bearing-export-scope');
       const dataSelectedRangeView = root.querySelector('#data-selected-range-view');
       const dataAllRecordsView = root.querySelector('#data-all-records-view');
-      const exportAllXlsx = root.querySelector('#export-all-xlsx');
       const exportAllCsv = root.querySelector('#export-all-csv');
       const historyContext = root.querySelector('#history-context');
       const historyContextLabel = root.querySelector('#history-context-label');
@@ -1085,7 +1087,7 @@
           if (Number.isFinite(savedOffsets?.[value])) displacementOffsets.set(value, savedOffsets[value]);
         });
       } catch (_) { /* Keep zero offsets if local storage is unavailable. */ }
-      const correctedDisplacement = (rawValue, offset) => rawValue === 0 ? 0 : Number((rawValue + offset).toFixed(3));
+      const correctedDisplacement = (rawValue, offset) => rawValue === 0 ? 0 : Number((rawValue + offset).toFixed(4));
       const deviceConnectionStatus = root.querySelector('#device-connection-status');
       const deviceConnectionDetail = root.querySelector('#device-connection-detail');
       const reactionTolerance = root.querySelector('#reaction-tolerance');
@@ -1225,19 +1227,20 @@
 
 
       // Deterministic demo stream shared by the gauges and captured pressure rows.
-      const liveSamples = Array.from({ length: 81 }, (_, index) => ({
-        pressure: index * 7.5,
-        displacement: Number((Math.max(0, index * 7.5 - 150) / 900).toFixed(2))
+      const liveSamples = Array.from({ length: 41 }, (_, index) => ({
+        pressure: index * 15,
+        displacement: Number((Math.max(0, index * 15 - 150) * 1.3 / 450).toFixed(4))
       }));
       // Illustrative unloading hysteresis only, not a physical calibration model.
       // Both phases share the same endpoints; unloading retains a little displacement.
       const loweringLiveSamples = liveSamples.map((sample) => ({
         pressure: sample.pressure,
-        displacement: Number((sample.displacement + 0.05 * Math.sin(Math.PI * sample.pressure / 600)).toFixed(2))
+        displacement: Number((sample.displacement + 0.05 * Math.sin(Math.PI * sample.pressure / 600)).toFixed(4))
       }));
       let liveSampleIndex = 0;
       let previousCaptureSample = null;
-      const endDataMeasurement = root.querySelector('#end-data-measurement');
+      const liftingMeasurement = root.querySelector('#lifting-measurement');
+      const loweringMeasurement = root.querySelector('#lowering-measurement');
       const measurementPhaseStatus = root.querySelector('#measurement-phase-status');
       let measurementPhase = 'ended';
       const bearingSessions = new Map();
@@ -1253,10 +1256,9 @@
       let liveDemoDirection = 1;
       const currentDemoSample = () => {
         const sample = (liveDemoDirection > 0 ? liveSamples : loweringLiveSamples)[liveSampleIndex];
-        // Mock each sensor channel separately; native BLE will route by the saved gauge ID.
+        // The native BLE implementation will route displacement by the saved gauge ID.
         const gaugeId = measurementDeviceSnapshot?.gaugeId || activeMeasurementBearing?.gaugeId;
-        const index = Math.max(0, displacementModules.findIndex(input => input.value === gaugeId));
-        const rawDisplacement = Number((sample.displacement * (1 + index * .025)).toFixed(3));
+        const rawDisplacement = sample.displacement;
         const displacementOffset = measurementPhase !== 'ended' && measurementDeviceSnapshot?.gaugeId === gaugeId
           ? measurementDeviceSnapshot.displacementOffset : (displacementOffsets.get(gaugeId) || 0);
         return { ...sample, rawDisplacement, displacementOffset,
@@ -1269,14 +1271,15 @@
       const renderMeasurementControls = () => {
         const finished = measurementIsFinished();
         renderSelectedGaugeOffset();
-        const status = finished ? '데이터 측정 종료' : `${measurementPhase === 'lifting' ? 'Lifting' : 'Lowering'} 기록 중`;
-        measurementPhaseStatus.textContent = `${activeTest.id} · ${activeTest.round} · ${status} · 수신 기록 ${measurementRecords.length}개`;
-        if (activeMeasurementBearing) measurementBearingTitle.textContent = `${activeMeasurementBearing.position} · ${activeTest.round} Jack-up 측정·분석`;
-        endDataMeasurement.disabled = false;
-        endDataMeasurement.textContent = finished ? '데이터 측정 시작' : '데이터 측정 종료';
-        endDataMeasurement.setAttribute('data-jw-tooltip', finished
-          ? '같은 베어링을 다시 측정할 때 이전 기록을 데이터·이력에 남기고 새 수신 기록을 시작합니다.'
-          : '현재 베어링의 데이터 기록을 종료합니다. 수신 표시는 유지되며 유압장치는 제어하지 않습니다.');
+        const status = finished ? '데이터 측정 대기·종료' : `${measurementPhase === 'lifting' ? 'Lifting' : 'Lowering'} 기록 중`;
+        const roundLabel = measurementRecords.length || !finished ? `${activeTest.round} · ` : '';
+        measurementPhaseStatus.textContent = `${activeTest.id} · ${roundLabel}${status} · 수신 기록 ${measurementRecords.length}개`;
+        if (activeMeasurementBearing) measurementBearingTitle.textContent = `${activeMeasurementBearing.position} · ${roundLabel}Jack-up 측정·분석`;
+        liftingMeasurement.textContent = measurementPhase === 'lifting' ? 'Lifting 측정 종료' : 'Lifting 측정 시작';
+        loweringMeasurement.textContent = measurementPhase === 'lowering' ? 'Lowering 측정 종료' : 'Lowering 측정 시작';
+        liftingMeasurement.setAttribute('aria-pressed', String(measurementPhase === 'lifting'));
+        loweringMeasurement.setAttribute('aria-pressed', String(measurementPhase === 'lowering'));
+        loweringMeasurement.disabled = finished && (!measurementRecords.some(record => record.phase === 'lifting') || measurementRecords.some(record => record.phase === 'lowering'));
         root.querySelectorAll('[data-panel="measure"] .stepper .step').forEach((step, index) => {
           step.classList.toggle('done', finished || index < (measurementPhase === 'lifting' ? 2 : 3));
           step.classList.toggle('current', !finished && index === (measurementPhase === 'lifting' ? 2 : 3));
@@ -1288,7 +1291,7 @@
         activeTest.round = `${measurementStartCount}차`;
       };
       const resetMeasurementSession = () => {
-        measurementPhase = 'lifting';
+        measurementPhase = 'ended';
         correctionEvents.length = 0;
         selectedDataSessionId = null;
         selectedDataRecordIndex = null;
@@ -1305,32 +1308,45 @@
         updateLiveSample(currentDemoSample());
         renderMeasurementControls();
       };
-      endDataMeasurement.addEventListener('click', () => {
-        if (measurementIsFinished()) {
-          if (!requireTargetReactions()) return;
-          const error = measurementDeviceError(activeMeasurementBearing);
-          if (error) { showValidationNotice(error, 'devices'); return; }
-          if (measurementRecords.length && !analysisFinalApplied) archiveBearingSession();
-          captureMeasurementDevices(activeMeasurementBearing);
-          beginMeasurementRound();
-          resetMeasurementSession();
-          measurementPhase = 'lifting';
-          measurementSegment += 1;
-          previousCaptureSample = null;
-          analysisFinalApplied = false;
-          renderMeasurementControls();
-          renderOverview();
-          renderReport();
-          updateSlopeResults();
-          barReadingStatus.textContent = '측정 중 · L값은 가압 시, D값은 감압 시 설정 압력을 통과하면 자동 기록됩니다.';
-          return;
-        }
+      const stopMeasurementPhase = () => {
         measurementPhase = 'ended';
         previousCaptureSample = null;
         archiveBearingSession();
         renderMeasurementControls();
         updateSlopeResults();
-        barReadingStatus.textContent = '데이터 측정 종료 · 기록된 L·D 값은 유지됩니다. 아래에서 분석·보정을 진행하세요.';
+        barReadingStatus.textContent = '측정 구간 종료 · 기록된 L·D 값은 유지됩니다. 아래에서 분석·보정을 진행하세요.';
+      };
+      liftingMeasurement.addEventListener('click', () => {
+        if (measurementPhase === 'lifting') { stopMeasurementPhase(); return; }
+        if (measurementPhase === 'lowering') { showValidationNotice('Lowering 측정을 먼저 종료해 주세요.', 'measurement'); return; }
+        if (!requireTargetReactions()) return;
+        const error = measurementDeviceError(activeMeasurementBearing);
+        if (error) { showValidationNotice(error, 'devices'); return; }
+        if (measurementRecords.length && !analysisFinalApplied) archiveBearingSession();
+        captureMeasurementDevices(activeMeasurementBearing);
+        beginMeasurementRound();
+        resetMeasurementSession();
+        measurementPhase = 'lifting';
+        measurementSegment = 1;
+        analysisFinalApplied = false;
+        renderMeasurementControls();
+        renderOverview();
+        renderReport();
+        updateSlopeResults();
+        barReadingStatus.textContent = 'Lifting 측정 중 · 설정 압력을 상승 통과하면 L값을 기록합니다.';
+      });
+      loweringMeasurement.addEventListener('click', () => {
+        if (measurementPhase === 'lowering') { stopMeasurementPhase(); return; }
+        if (!measurementRecords.some(record => record.phase === 'lifting') || measurementRecords.some(record => record.phase === 'lowering')) {
+          showValidationNotice('같은 회차에서 Lifting 측정 후 Lowering을 시작해 주세요.', 'measurement'); return;
+        }
+        const error = measurementDeviceError(activeMeasurementBearing);
+        if (error) { showValidationNotice(error, 'devices'); return; }
+        measurementPhase = 'lowering';
+        measurementSegment += 1;
+        previousCaptureSample = null;
+        renderMeasurementControls();
+        barReadingStatus.textContent = 'Lowering 측정 중 · 설정 압력을 하강 통과하면 D값을 기록합니다.';
       });
       let peakLoadValue = 0;
       let peakPressureBar = 0;
@@ -1339,7 +1355,7 @@
         peakPressureBar = Math.max(peakPressureBar, sample.pressure);
         peakLoadValue = reactionFromPressure(peakPressureBar, Number(effectiveArea.value));
         const currentPressureText = pressureNumber(sample.pressure, 2);
-        const displacementText = sample.displacement.toFixed(2);
+        const displacementText = sample.displacement.toFixed(4);
         const loadText = Number.isFinite(load) ? load.toFixed(1) : '—';
         livePressureValue.textContent = `${currentPressureText} ${pressureUnitLabel()}`;
         livePressureDialValue.textContent = currentPressureText;
@@ -1348,9 +1364,11 @@
         livePressureNeedle.setAttribute('transform', `rotate(${((sample.pressure / 1000) * 180 - 90).toFixed(1)} 120 120)`);
         livePressureDial.setAttribute('aria-label', `현재 압력 ${currentPressureText} ${pressureUnitLabel()}, 측정 범위 0에서 ${pressureText(1000)}`);
         liveDisplacementValue.textContent = `${displacementText} mm`;
-        liveDisplacementFill.style.width = `${Math.max(0, Math.min(100, sample.displacement * 100))}%`;
+        const displacementScaleMax = Math.max(1.5, Math.ceil(sample.displacement * 2) / 2);
+        liveDisplacementFill.style.width = `${Math.max(0, Math.min(100, sample.displacement / displacementScaleMax * 100))}%`;
         root.querySelector('#live-displacement-current').textContent = `현재 ${displacementText}`;
-        liveDisplacementMeter.setAttribute('aria-label', `현재 변위 ${displacementText} 밀리미터, 표시 범위 0에서 1 밀리미터`);
+        liveDisplacementMeter.querySelector('.bar-labels span:last-child').textContent = `${displacementScaleMax.toFixed(2)} mm`;
+        liveDisplacementMeter.setAttribute('aria-label', `현재 변위 ${displacementText} 밀리미터, 표시 범위 0에서 ${displacementScaleMax.toFixed(2)} 밀리미터`);
         liveLoadValue.textContent = `${loadText} kN`;
         livePeakLoad.textContent = `최대 환산 하중 ${Number.isFinite(peakLoadValue) ? peakLoadValue.toFixed(1) : '—'} kN`;
         const bearing = activeMeasurementBearing;
@@ -1404,19 +1422,11 @@
             return;
           }
         }
-        // Only the mock stream cycles automatically; hardware phase detection is not defined here.
-        if (liveSampleIndex === liveSamples.length - 1) liveDemoDirection = -1;
-        if (liveSampleIndex === 0) liveDemoDirection = 1;
         if (!measurementIsFinished()) {
-          const demoPhase = liveDemoDirection > 0 ? 'lifting' : 'lowering';
-          if (measurementPhase !== demoPhase) {
-            previousCaptureSample = null;
-            measurementSegment += 1;
-          }
-          measurementPhase = demoPhase;
+          liveDemoDirection = measurementPhase === 'lifting' ? 1 : -1;
           if (previousCaptureSample === null) captureBarReadings({ ...currentDemoSample(), phase: measurementPhase, time: new Date().toISOString() });
+          liveSampleIndex = Math.max(0, Math.min(liveSamples.length - 1, liveSampleIndex + liveDemoDirection));
         }
-        liveSampleIndex += liveDemoDirection;
         const sample = { ...currentDemoSample(), phase: measurementPhase, segment: measurementSegment, time: new Date().toISOString(), bearingName: measurementDeviceSnapshot?.bearingName, pressureId: measurementDeviceSnapshot?.pressureId, gaugeId: measurementDeviceSnapshot?.gaugeId };
         updateLiveSample(sample);
         if (!measurementIsFinished()) {
@@ -1651,7 +1661,8 @@
         if (ruleHelp) showTooltip(ruleHelp);
         else if (event.pointerType === 'touch') hideTooltip();
       });
-      root.querySelector('#end-data-measurement').addEventListener('click', hideTooltip);
+      liftingMeasurement.addEventListener('click', hideTooltip);
+      loweringMeasurement.addEventListener('click', hideTooltip);
       let fullscreenGraphState = null;
       let analysisZoomControls = null;
       let sagZoomControls = null;
@@ -1759,6 +1770,10 @@
       };
       positionCommonEndMarker(264);
       analysisZoomLayer.appendChild(commonEndGroup);
+      const analysisDataLayer = document.createElementNS(zoomNamespace, 'g');
+      analysisDataLayer.setAttribute('data-analysis-data-layer', '');
+      while (analysisZoomLayer.firstChild) analysisDataLayer.appendChild(analysisZoomLayer.firstChild);
+      analysisZoomLayer.appendChild(analysisDataLayer);
       analysisClipLayer.appendChild(analysisZoomLayer);
       analysisPlot.insertBefore(analysisClipLayer, analysisTouchTarget);
       analysisZoomLayer.querySelectorAll('path, line, circle').forEach((node) => node.setAttribute('vector-effect', 'non-scaling-stroke'));
@@ -1778,10 +1793,20 @@
         analysisZoomControls.appendChild(button);
       });
       zoomReset.className = 'zoom-reset';
+      const swapAxesFullscreen = document.createElement('button');
+      swapAxesFullscreen.type = 'button';
+      swapAxesFullscreen.textContent = 'X·Y 전환';
+      swapAxesFullscreen.className = 'axis-swap-button';
+      swapAxesFullscreen.setAttribute('aria-label', '압력과 변위 X·Y축 전환');
+      swapAxesFullscreen.setAttribute('aria-pressed', 'false');
+      analysisZoomControls.appendChild(swapAxesFullscreen);
       analysisPlot.parentNode.appendChild(analysisZoomControls);
       const analysisAxisTicks = analysisPlot.querySelector('.axis-ticks');
       const analysisGrid = analysisPlot.querySelector('.gridline');
       const analysisAxisRange = root.querySelector('#analysis-axis-range');
+      const [analysisXAxisLabel, analysisYAxisLabel] = analysisPlot.querySelectorAll(':scope > text');
+      let analysisAxisSwapped = false;
+      let analysisXMax = 800;
       let analysisYMin = 0;
       let analysisYMax = 60;
       const zoomAxisValues = (min, max, intervals) => {
@@ -1794,11 +1819,23 @@
       };
       const renderAnalysisAxes = () => {
         const { scale, x, y } = analysisZoom;
-        const xMin = (x - 216 / scale - 48) / .54;
-        const xMax = (x + 216 / scale - 48) / .54;
         const yRange = analysisYMax - analysisYMin;
-        const yMin = analysisYMin + (354 - y - 162 / scale) / 324 * yRange;
-        const yMax = analysisYMin + (354 - y + 162 / scale) / 324 * yRange;
+        const worldLeft = x - 216 / scale;
+        const worldRight = x + 216 / scale;
+        const worldTop = y - 162 / scale;
+        const worldBottom = y + 162 / scale;
+        const horizontalMin = analysisAxisSwapped
+          ? analysisYMin + (worldLeft - 48) / 432 * yRange
+          : (worldLeft - 48) / 432 * analysisXMax;
+        const horizontalMax = analysisAxisSwapped
+          ? analysisYMin + (worldRight - 48) / 432 * yRange
+          : (worldRight - 48) / 432 * analysisXMax;
+        const verticalMin = analysisAxisSwapped
+          ? (354 - worldBottom) / 324 * analysisXMax
+          : analysisYMin + (354 - worldBottom) / 324 * yRange;
+        const verticalMax = analysisAxisSwapped
+          ? (354 - worldTop) / 324 * analysisXMax
+          : analysisYMin + (354 - worldTop) / 324 * yRange;
         const screenScale = Math.abs(analysisPlot.getScreenCTM()?.a || 1);
         const fontSize = 12 / screenScale;
         const grid = [];
@@ -1809,24 +1846,43 @@
           label.setAttribute('y', py);
           label.setAttribute('text-anchor', anchor);
           label.style.fontSize = `${fontSize}px`;
-          label.textContent = Number(value.toFixed(2)).toString();
+          label.textContent = Number(value.toFixed(3)).toString();
           analysisAxisTicks.appendChild(label);
         };
-        zoomAxisValues(pressureFromBar(xMin), pressureFromBar(xMax), 4).forEach((value) => {
-          const px = 48 + (pressureToBar(value) - xMin) / (xMax - xMin) * 432;
+        const horizontalValues = analysisAxisSwapped
+          ? zoomAxisValues(horizontalMin / 100, horizontalMax / 100, 4)
+          : zoomAxisValues(pressureFromBar(horizontalMin), pressureFromBar(horizontalMax), 4);
+        horizontalValues.forEach((value) => {
+          const canonical = analysisAxisSwapped ? value * 100 : pressureToBar(value);
+          const px = 48 + (canonical - horizontalMin) / (horizontalMax - horizontalMin) * 432;
           grid.push(`M${px} 30V354`);
           addTick(value, px, 354 + 19 / screenScale, px < 70 ? 'start' : px > 456 ? 'end' : 'middle');
         });
-        zoomAxisValues(yMin, yMax, 6).forEach((value) => {
-          const py = 354 - (value - yMin) / (yMax - yMin) * 324;
+        const verticalValues = analysisAxisSwapped
+          ? zoomAxisValues(pressureFromBar(verticalMin), pressureFromBar(verticalMax), 6)
+          : zoomAxisValues(verticalMin / 100, verticalMax / 100, 6);
+        verticalValues.forEach((value) => {
+          const canonical = analysisAxisSwapped ? pressureToBar(value) : value * 100;
+          const py = 354 - (canonical - verticalMin) / (verticalMax - verticalMin) * 324;
           grid.push(`M48 ${py}H480`);
           addTick(value, 48 - 7 / screenScale, py + 4 / screenScale, 'end');
         });
         analysisGrid.setAttribute('d', grid.join(''));
-        const format = (value) => Number(value.toFixed(1));
-        analysisAxisRange.textContent = `X ${pressureNumber(xMin, 1)}~${pressureNumber(xMax, 1)} ${pressureUnitLabel()} / Y ${format(yMin)}~${format(yMax)} (1/100 mm)`;
-        analysisPlot.setAttribute('aria-label', `압력–변위 예시 그래프, ${scale * 100}% 확대, ${analysisAxisRange.textContent}`);
+        const displacementLabel = (value) => (value / 100).toFixed(3);
+        analysisXAxisLabel.textContent = analysisAxisSwapped ? '변위 (mm)' : `압력 (${pressureUnitLabel()})`;
+        analysisYAxisLabel.textContent = analysisAxisSwapped ? `압력 (${pressureUnitLabel()})` : '변위 (mm)';
+        analysisAxisRange.textContent = analysisAxisSwapped
+          ? `X ${displacementLabel(horizontalMin)}~${displacementLabel(horizontalMax)} mm / Y ${pressureNumber(verticalMin, 1)}~${pressureNumber(verticalMax, 1)} ${pressureUnitLabel()}`
+          : `X ${pressureNumber(horizontalMin, 1)}~${pressureNumber(horizontalMax, 1)} ${pressureUnitLabel()} / Y ${displacementLabel(verticalMin)}~${displacementLabel(verticalMax)} mm`;
+        analysisPlot.setAttribute('aria-label', `압력–변위 분석 그래프, ${scale * 100}% 확대, ${analysisAxisRange.textContent}`);
       };
+      const setAnalysisAxisDirection = (swapped) => {
+        analysisAxisSwapped = swapped;
+        analysisDataLayer.setAttribute('transform', swapped ? 'matrix(0 -0.75 -1.333333333 0 520 390)' : '');
+        swapAxesFullscreen.setAttribute('aria-pressed', String(swapped));
+        renderAnalysisZoom();
+      };
+      swapAxesFullscreen.addEventListener('click', () => setAnalysisAxisDirection(!analysisAxisSwapped));
       const renderAnalysisZoom = () => {
         const { scale } = analysisZoom;
         analysisZoom.x = Math.max(48 + 216 / scale, Math.min(480 - 216 / scale, analysisZoom.x));
@@ -1840,10 +1896,11 @@
         const railY = 36;
         const top = (railY - offsetY) / scale;
         const bottom = (354 - offsetY) / scale;
-        commonEndLine.setAttribute('y1', top);
-        commonEndLine.setAttribute('y2', bottom);
-        commonEndHandle.setAttribute('cy', top);
+        commonEndLine.setAttribute('y1', analysisAxisSwapped ? 354 : top);
+        commonEndLine.setAttribute('y2', analysisAxisSwapped ? 30 : bottom);
+        commonEndHandle.setAttribute('cy', analysisAxisSwapped ? 354 : top);
         commonEndLabel.setAttribute('y', (railY - 14 - offsetY) / scale);
+        commonEndLabel.style.display = analysisAxisSwapped ? 'none' : '';
         commonEndLabel.setAttribute('font-size', 11 / scale);
         zoomReset.textContent = `${Math.round(scale * 100)}%`;
         zoomOut.disabled = scale === 1;
@@ -2202,10 +2259,6 @@
         reportTabs.forEach((item) => item.setAttribute('aria-selected', String(item === tab)));
         reportTabPanels.forEach((panel) => panel.classList.toggle('active', panel.dataset.reportPanel === tab.dataset.reportTab));
       }));
-      exportAllXlsx.addEventListener('click', () => {
-        const test = viewedTest();
-        downloadMeasurementXlsx(projectReportSessionsFor(test), `${test.project}_전체회차_저장데이터`);
-      });
       exportAllCsv.addEventListener('click', () => {
         const test = viewedTest();
         downloadMeasurementCsvBundle(projectReportSessionsFor(test), `${test.project}_전체회차_저장데이터`);
@@ -2281,13 +2334,12 @@
         activeMeasurementBearing = pendingMeasurementBearing;
         analysisHasManualChange = false;
         captureMeasurementDevices(activeMeasurementBearing);
-        beginMeasurementRound();
         resetMeasurementSession();
         renderActiveDeviceStatus();
         renderOverview();
         renderReport();
         updateSlopeResults();
-        measurementBearingTitle.textContent = `${activeMeasurementBearing.position} · ${activeTest.round} Jack-up 측정·분석`;
+        measurementBearingTitle.textContent = `${activeMeasurementBearing.position} · Jack-up 측정·분석`;
         root.querySelector('[data-screen="measure"]').click();
       };
       startBearingButton.addEventListener('click', () => {
@@ -2679,7 +2731,7 @@
         visibleHistoryRecords(session).forEach(sample => {
           const row = document.createElement('tr');
           [new Date(sample.time).toLocaleTimeString('ko-KR'), sample.phase,
-            pressureFromBar(sample.pressure).toFixed(2), Number(sample.displacement).toFixed(2)].forEach(value => {
+            pressureFromBar(sample.pressure).toFixed(2), Number(sample.displacement).toFixed(4)].forEach(value => {
             const cell = document.createElement('td');
             cell.textContent = value;
             row.append(cell);
@@ -2733,7 +2785,9 @@
           const sessionTest = testRecords.get(session.testKey);
           const displayEnd = session.displayEndPressureBar == null ? '전체' : `${pressureNumber(session.displayEndPressureBar, 1)} ${pressureUnitLabel()}`;
           const state = sessionHistoryState(session);
-          [session.round || sessionTest?.round || '—', sessionTest?.id || '—', session.records.length, displayEnd, state, session.endedAt].forEach(value => {const td=document.createElement('td');td.textContent=value;row.append(td);});
+          const reaction = session.analysisResult?.finalApplied && session.analysisResult.reaction && session.analysisResult.reaction !== '—'
+            ? session.analysisResult.reaction : '미산출';
+          [session.round || sessionTest?.round || '—', sessionTest?.id || '—', reaction, session.records.length, displayEnd, state, session.endedAt].forEach(value => {const td=document.createElement('td');td.textContent=value;row.append(td);});
           const exportCell = row.insertCell();
           const exportButton = document.createElement('button');
           exportButton.type = 'button';
@@ -2744,7 +2798,7 @@
           exportCell.append(exportButton);
           body.append(row);
         });
-        if (!sessions.length) { const row=body.insertRow();const cell=row.insertCell();cell.colSpan=8;cell.textContent='이 프로젝트에서 종료된 측정이 없습니다.'; }
+        if (!sessions.length) { const row=body.insertRow();const cell=row.insertCell();cell.colSpan=9;cell.textContent='이 프로젝트에서 종료된 측정이 없습니다.'; }
       }
       function renderDataHistory() {
         const recordsBody = root.querySelector('#data-records-body');
@@ -2803,7 +2857,7 @@
             numberCell.append(open);
             const load = reactionFromPressure(sample.pressure, Number(session.area));
             [new Date(sample.time).toLocaleTimeString('ko-KR'), sample.phase === 'lifting' ? 'Lifting' : 'Lowering',
-              pressureText(sample.pressure), `${Number(sample.displacement).toFixed(3)} mm`,
+              pressureText(sample.pressure), `${Number(sample.displacement).toFixed(4)} mm`,
               Number.isFinite(load) ? `${load.toFixed(2)} kN` : '—'].forEach(value => {
               const cell = row.insertCell();
               cell.textContent = value;
@@ -2817,11 +2871,11 @@
           : '이 시험에 저장된 측정 기록이 없습니다.';
         const selected = records[selectedDataRecordIndex];
         root.querySelector('#data-selected-pressure').value = selected ? pressureText(selected.pressure) : '—';
-        root.querySelector('#data-selected-displacement').value = selected ? `${Number(selected.displacement).toFixed(3)} mm` : '—';
+        root.querySelector('#data-selected-displacement').value = selected ? `${Number(selected.displacement).toFixed(4)} mm` : '—';
         root.querySelector('#data-selected-phase').value = selected ? (selected.phase === 'lifting' ? 'Lifting · 가압' : 'Lowering · 감압') : '—';
         root.querySelector('#data-selected-time').value = selected ? new Date(selected.time).toLocaleString('ko-KR') : '—';
         root.querySelector('#data-selected-source').textContent = selected
-          ? `변위 원본 ${Number(selected.rawDisplacement ?? selected.displacement).toFixed(3)} mm · 오프셋 ${Number(selected.displacementOffset ?? 0).toFixed(3)} mm · 적용값 ${Number(selected.displacement).toFixed(3)} mm. 원본이 0이면 적용값도 0입니다. 기울기 보정은 별도 이력입니다.`
+          ? `변위 원본 ${Number(selected.rawDisplacement ?? selected.displacement).toFixed(4)} mm · 오프셋 ${Number(selected.displacementOffset ?? 0).toFixed(4)} mm · 적용값 ${Number(selected.displacement).toFixed(4)} mm. 원본이 0이면 적용값도 0입니다. 기울기 보정은 별도 이력입니다.`
           : '측정 전 설정한 게이지 오프셋을 표시·분석·저장값에 적용하며 원본 수신값도 별도로 보존합니다.';
         const result = session?.analysisResult;
         root.querySelector('#data-final-reaction').textContent = result?.finalApplied && result.reaction && result.reaction !== '—' ? result.reaction : '—';
@@ -2895,7 +2949,7 @@
         stats.minDisplacement = Math.min(stats.minDisplacement, sample.displacement);
         stats.maxDisplacement = Math.max(stats.maxDisplacement, sample.displacement);
       };
-      const sampleToPlot = (sample) => [48 + sample.pressure * 0.54, analysisY(sample.displacement)];
+      const sampleToPlot = (sample) => [48 + sample.pressure / analysisXMax * 432, analysisY(sample.displacement)];
       const liftingCurvePoints = [];
       const loweringCurvePoints = [];
       const liveGraphMarkers = {};
@@ -2905,9 +2959,34 @@
         marker.setAttribute('fill', phase === 'lifting' ? 'var(--jw-accent)' : 'var(--jw-warn)');
         marker.setAttribute('pointer-events', 'none');
         marker.style.display = 'none';
-        analysisZoomLayer.appendChild(marker);
+        analysisDataLayer.appendChild(marker);
         liveGraphMarkers[phase] = marker;
       });
+      const manualBarMarkerGroup = document.createElementNS(zoomNamespace, 'g');
+      manualBarMarkerGroup.setAttribute('aria-label', '작업자가 입력한 Bar별 변위값');
+      manualBarMarkerGroup.setAttribute('pointer-events', 'none');
+      analysisDataLayer.appendChild(manualBarMarkerGroup);
+      const renderManualBarMarkers = () => {
+        manualBarMarkerGroup.replaceChildren();
+        [...barReadingBody.rows].forEach((row) => {
+          const inputs = row.querySelectorAll('input');
+          [1, 3].forEach((column) => {
+            const input = inputs[column];
+            const pressure = Number(inputs[column - 1].dataset.pressureBar);
+            const displacement = Number(input.value);
+            if (input.dataset.manual !== 'true' || input.value === '' || !Number.isFinite(pressure) || !Number.isFinite(displacement)) return;
+            const marker = document.createElementNS(zoomNamespace, 'circle');
+            marker.setAttribute('cx', barToX(pressure));
+            marker.setAttribute('cy', analysisY(displacement * 100));
+            marker.setAttribute('r', '4');
+            marker.setAttribute('fill', column === 1 ? 'var(--jw-accent)' : 'var(--jw-warn)');
+            marker.setAttribute('stroke', 'white');
+            marker.setAttribute('stroke-width', '1.5');
+            marker.setAttribute('vector-effect', 'non-scaling-stroke');
+            manualBarMarkerGroup.appendChild(marker);
+          });
+        });
+      };
       const drawLiveAnalysisGraph = () => {
         [['lifting', '.lift'], ['lowering', '.lower']].forEach(([phase, selector]) => {
           const samples = analysisSamples[phase].slice(0, displayEndSteps[phase] ?? analysisSamples[phase].length);
@@ -2933,6 +3012,25 @@
           time: sample.time,
           segment: measurementSegment
         };
+        const oldXMax = analysisXMax;
+        const oldYMin = analysisYMin;
+        const oldYMax = analysisYMax;
+        if (point.pressure > analysisXMax) analysisXMax = Math.ceil((point.pressure + 50) / 200) * 200;
+        if (point.displacement > analysisYMax) analysisYMax = Math.ceil((point.displacement + 5) / 20) * 20;
+        if (point.displacement < analysisYMin) analysisYMin = Math.floor((point.displacement - 5) / 20) * 20;
+        if (oldXMax !== analysisXMax || oldYMin !== analysisYMin || oldYMax !== analysisYMax) {
+          Object.values(slopeStates).forEach((state) => {
+            if (!state) return;
+            [state.start, state.end].forEach((anchor) => {
+              const pressure = (anchor.x - 48) / 432 * oldXMax;
+              const displacement = oldYMin + (354 - anchor.y) / 324 * (oldYMax - oldYMin);
+              anchor.x = 48 + pressure / analysisXMax * 432;
+              anchor.y = analysisY(displacement);
+            });
+          });
+          if (sharedEndPressure !== null) positionCommonEndMarker(barToX(sharedEndPressure));
+          renderAnalysisZoom();
+        }
         analysisSamples[sample.phase].push(point);
         // The zero-displacement plateau belongs to the raw trace, not the provisional moving-range fit.
         if (point.displacement > 0) {
@@ -2941,10 +3039,12 @@
           else autoFitBounds[sample.phase].last = point;
         }
         drawLiveAnalysisGraph();
+        renderManualBarMarkers();
         updateDisplayedRange();
         recalculateAnalysisLine(sample.phase);
       };
       const resetLiveAnalysisGraph = () => {
+        analysisXMax = 800;
         const offsetHundredths = Number(measurementDeviceSnapshot?.displacementOffset || 0) * 100;
         analysisYMin = Math.min(0, Math.floor(offsetHundredths / 10) * 10);
         analysisYMax = Math.max(60, Math.ceil((60 + offsetHundredths) / 10) * 10);
@@ -2991,15 +3091,16 @@
         }
       };
       // Keep the tap-to-select surface behind the top range handles, including while zoomed.
-      analysisZoomLayer.insertBefore(analysisTouchTarget, commonEndGroup);
+      analysisDataLayer.insertBefore(analysisTouchTarget, commonEndGroup);
       let selectingCommonEnd = false;
       let sharedEndPressure = null;
       const pressureFromPointer = (event) => {
         const svgPoint = analysisPlot.createSVGPoint();
         svgPoint.x = event.clientX;
         svgPoint.y = event.clientY;
-        const localX = svgPoint.matrixTransform(analysisZoomLayer.getScreenCTM().inverse()).x;
-        return Math.max(0, Math.min(800, (localX - 48) / 0.54));
+        const local = svgPoint.matrixTransform(analysisZoomLayer.getScreenCTM().inverse());
+        const pressure = analysisAxisSwapped ? (354 - local.y) / 324 * analysisXMax : (local.x - 48) / 432 * analysisXMax;
+        return Math.max(0, Math.min(analysisXMax, pressure));
       };
       const commonEndText = () => sharedEndPressure === null
         ? '전체 기록'
@@ -3025,8 +3126,8 @@
       const manualSlopeKeys = new Set();
       let analysisFinalApplied = false;
       const slopeLineElements = { lifting: slopeLineLifting, lowering: slopeLineLowering };
-      const xToBar = (x) => ((x - 48) / 432) * 800;
-      const barToX = (bar) => 48 + bar * 0.54;
+      const xToBar = (x) => ((x - 48) / 432) * analysisXMax;
+      const barToX = (bar) => 48 + bar / analysisXMax * 432;
       const samplePoint = (sample) => ({
         x: barToX(sample.pressure), y: analysisY(sample.displacement),
         step: sample.step, displacement: sample.displacement / 100
@@ -3076,8 +3177,8 @@
         const slope = covariance / variance;
         if (!Number.isFinite(slope) || slope <= 0.001) return null;
         const zeroBar = meanPressure - meanDisplacement / slope;
-        if (!Number.isFinite(zeroBar) || zeroBar < 0 || zeroBar >= 800) return null;
-        const endBar = Math.min(800, (Math.min(60, stats.maxDisplacement) - meanDisplacement) / slope + meanPressure);
+        if (!Number.isFinite(zeroBar) || zeroBar < 0 || zeroBar >= analysisXMax) return null;
+        const endBar = Math.min(analysisXMax, (Math.min(analysisYMax, stats.maxDisplacement) - meanDisplacement) / slope + meanPressure);
         const endDisplacement = meanDisplacement + slope * (endBar - meanPressure);
         if (endBar <= zeroBar + 1 || endDisplacement < 4) return null;
         return { start: { x: barToX(zeroBar), y: analysisY(0) }, end: { x: barToX(endBar), y: analysisY(endDisplacement) } };
@@ -3104,7 +3205,7 @@
       function evaluateBearingReaction(reaction, item) {
         const target = item && item.target !== '' ? Number(item.target) : NaN;
         const ratio = Number.isFinite(reaction) && Number.isFinite(target) && target > 0 ? reaction / target * 100 : null;
-        if (!item || !Number.isFinite(reaction)) return { ratio, verdict: '판정 대기', reason: '베어링 또는 RAM AREA를 확인하세요.' };
+        if (!item || !Number.isFinite(reaction)) return { ratio, verdict: '판정 대기', reason: '베어링별 Factor와 RAM AREA를 확인하세요.' };
         const absoluteRange = usesAbsoluteReactionRange(item);
         let minimum, maximum;
         if (absoluteRange) {
@@ -3166,7 +3267,9 @@
         meanAnalysisLine.setAttribute('y1', analysisY(0));
         meanAnalysisLine.setAttribute('x2', meanEndX);
         meanAnalysisLine.setAttribute('y2', meanEndY);
-        const finalReaction = reactionFromPressure(xToBar(meanStartX), recordedContext ? recordedContext.area : Number(effectiveArea.value));
+        const factor = condition?.factor === '' ? NaN : Number(condition?.factor);
+        const uncorrectedReaction = reactionFromPressure(xToBar(meanStartX), recordedContext ? recordedContext.area : Number(effectiveArea.value));
+        const finalReaction = Number.isFinite(factor) && factor > 0 ? uncorrectedReaction * factor : NaN;
         const result = evaluateBearingReaction(finalReaction, condition);
         analysisFinalReaction.textContent = Number.isFinite(finalReaction) ? `${(finalReaction / KN_PER_TF).toFixed(2)} tf` : '—';
         analysisErrorRate.textContent = absoluteRange ? (hasRange ? `${rangeText} tf` : '—') : result.ratio === null ? '—' : `${result.ratio.toFixed(2)}%`;
@@ -3177,7 +3280,7 @@
           node.classList.remove('good', 'warn', 'bad');
           if (color) node.classList.add(color);
         });
-        root.querySelector('#analysis-ratio-panel').setAttribute('data-help', `${condition ? condition.position : '측정 베어링 미선택'} · ${absoluteRange ? `허용 반력 ${hasRange ? rangeText + ' 톤(tf)' : '미입력'}` : `목표 ${condition && Number(condition.target) > 0 ? (Number(condition.target) / KN_PER_TF).toFixed(2) + ' 톤(tf) = 100%' : '미입력'}`} · ${result.reason}`);
+        root.querySelector('#analysis-ratio-panel').setAttribute('data-help', `${condition ? condition.position : '측정 베어링 미선택'} · Factor ${Number.isFinite(factor) && factor > 0 ? factor : '미입력'} · ${absoluteRange ? `허용 반력 ${hasRange ? rangeText + ' 톤(tf)' : '미입력'}` : `목표 ${condition && Number(condition.target) > 0 ? (Number(condition.target) / KN_PER_TF).toFixed(2) + ' 톤(tf) = 100%' : '미입력'}`} · ${result.reason}`);
         updateAnalysisMethod();
       };
       let activeSlopeDrag = null;
@@ -3189,14 +3292,14 @@
           analysisFinalApplied = false;
           activeSlopeDrag = { lineKey: handle.dataset.slopeLine, endKey: handle.dataset.slopeEnd, pointerId: event.pointerId, handle };
           handle.setPointerCapture(event.pointerId);
-          analysisRangeStatus.textContent = `${handle.dataset.slopeLine === 'lifting' ? 'Lifting' : 'Lowering'} 분석선 끝점을 좌우로 움직여 기울기를 조정합니다.`;
+          analysisRangeStatus.textContent = `${handle.dataset.slopeLine === 'lifting' ? 'Lifting' : 'Lowering'} 분석선 끝점을 압력축 방향으로 움직여 기울기를 조정합니다.`;
         });
         handle.addEventListener('pointermove', (event) => {
           if (!activeSlopeDrag || activeSlopeDrag.pointerId !== event.pointerId || activeSlopeDrag.handle !== handle) return;
           const svgPoint = analysisPlot.createSVGPoint();
           svgPoint.x = event.clientX;
           svgPoint.y = event.clientY;
-          const localPoint = svgPoint.matrixTransform(analysisZoomLayer.getScreenCTM().inverse());
+          const localPoint = svgPoint.matrixTransform(analysisDataLayer.getScreenCTM().inverse());
           const state = slopeStates[activeSlopeDrag.lineKey];
           const minX = activeSlopeDrag.endKey === 'start' ? 48 : state.start.x + 36;
           const maxX = activeSlopeDrag.endKey === 'start' ? state.end.x - 36 : 480;
@@ -3263,7 +3366,7 @@
       const manualBarKey = (column, bar) => `${column}:${bar}`;
       const updateBarReadingRows = () => {
         const rows = [...barReadingBody.rows];
-        const labels = [`Lifting ${pressureUnitLabel()}`, 'Lifting 변위 (1/100 mm)', `Lowering ${pressureUnitLabel()}`, 'Lowering 변위 (1/100 mm)'];
+        const labels = [`Lifting ${pressureUnitLabel()}`, 'Lifting 변위 (mm)', `Lowering ${pressureUnitLabel()}`, 'Lowering 변위 (mm)'];
         rows.forEach((row, index) => {
           [...row.querySelectorAll('input')].forEach((input, column) => {
             input.setAttribute('aria-label', `${labels[column]} ${index + 1}행${input.dataset.manual === 'true' ? ' · 수동 수정' : ''}`);
@@ -3277,6 +3380,7 @@
         });
         customBarUnit.textContent = pressureUnitLabel();
         barReadingCount.textContent = `${rows.length}개 행`;
+        renderManualBarMarkers();
       };
       const sortBarReadingRows = () => {
         const rows = [...barReadingBody.rows].sort((a, b) => pressureOf(a.querySelector('input')) - pressureOf(b.querySelector('input')));
@@ -3295,6 +3399,7 @@
           input.inputMode = 'decimal';
           if (column % 2) {
             input.placeholder = '대기';
+            input.step = '0.0001';
           } else {
             input.min = '0';
             input.dataset.pressureBar = String(bar);
@@ -3382,7 +3487,7 @@
             const output = inputs[offset + 1];
             const prior = previous?.segment === sample.segment ? previous : null;
             if (output.value !== '' || !crossedBarTarget(pressureOf(inputs[offset]), prior, sample, sample.phase)) return;
-            output.value = (sample.displacement * 100).toFixed(1);
+            output.value = sample.displacement.toFixed(4);
             output.dataset.actualPressure = String(sample.pressure);
             output.dataset.displacement = String(sample.displacement);
             output.dataset.capturedAt = sample.time;
@@ -3434,7 +3539,7 @@
           const inputs = row.querySelectorAll('input');
           const output = inputs[offset + 1];
           if (output.value !== '' || !crossedBarTarget(pressureOf(inputs[offset]), previousCaptureSample, sample, sample.phase)) return;
-          output.value = (sample.displacement * 100).toFixed(1);
+          output.value = sample.displacement.toFixed(4);
           output.dataset.actualPressure = String(sample.pressure);
           output.dataset.displacement = String(sample.displacement);
           output.dataset.capturedAt = sample.time;
@@ -3453,7 +3558,7 @@
           if (rowBounds.bottom > scrollBounds.bottom) scroll.scrollTop += rowBounds.bottom - scrollBounds.bottom + 4;
           else if (rowBounds.top < scrollBounds.top) scroll.scrollTop -= scrollBounds.top - rowBounds.top + 4;
           const phaseLabel = sample.phase === 'lifting' ? 'Lifting · L값' : 'Lowering · D값';
-          barReadingStatus.textContent = `${phaseLabel} ${pressureText(latestTarget)} 행 자동 기록 · 실제 수신 ${pressureText(sample.pressure)} / ${sample.displacement.toFixed(2)} mm`;
+          barReadingStatus.textContent = `${phaseLabel} ${pressureText(latestTarget)} 행 자동 기록 · 실제 수신 ${pressureText(sample.pressure)} / ${sample.displacement.toFixed(4)} mm`;
         }
       };
       addBarReading.addEventListener('click', () => {
@@ -3648,9 +3753,10 @@
             reason
           });
         }
-        const finalReady = measurementIsFinished() && Boolean(slopeStates.lifting && slopeStates.lowering)
-          && activeMeasurementBearing && !targetReactionError(activeMeasurementBearing)
-          && !bearingRangeError(activeMeasurementBearing)
+        const savedCondition = measurementDeviceSnapshot?.condition || activeMeasurementBearing;
+        const finalReady = Boolean(slopeStates.lifting && slopeStates.lowering)
+          && savedCondition && !factorError(savedCondition) && !targetReactionError(savedCondition)
+          && !bearingRangeError(savedCondition)
           && analysisFinalReaction.textContent !== '—' && analysisErrorRate.textContent !== '—';
         analysisHasManualChange = false;
         analysisFinalApplied = Boolean(finalReady);
@@ -3658,7 +3764,7 @@
         const snapshot = archiveBearingSession({ saveSnapshot: true });
         analysisRangeStatus.textContent = finalReady
           ? '수신값과 분석 결과를 새 저장 기록으로 남겼습니다.'
-          : '수신값과 현재 분석 상태를 저장했습니다. 최종 반력은 계산 가능해지면 다시 저장할 수 있습니다.';
+          : '수신값을 저장했습니다. Lifting·Lowering 분석선과 판정 조건이 갖춰지면 최종 반력을 함께 저장할 수 있습니다.';
         if (!measurementIsFinished()) {
           showValidationNotice(`${snapshot.records.length}건의 수신값을 현재 시점까지 저장했습니다. 측정은 계속 진행됩니다.`, 'measurement');
           return;
@@ -3677,7 +3783,7 @@
       };
       const ramAreas = { '50': '70.85', '150': '153.90' };
       let selectedBearingIndex = 0;
-      let bearingItems = shipTypeTemplates.lngc.map((position, index) => ({ position, reactionMode: usesAbsoluteReactionRange({position}) ? 'absolute' : 'percent', gaugeId: displacementModules[index]?.value || '', target: '', tolerance: '5', criteria: 'lte', minReaction: '', maxReaction: '', status: '대기' }));
+      let bearingItems = shipTypeTemplates.lngc.map((position, index) => ({ position, reactionMode: usesAbsoluteReactionRange({position}) ? 'absolute' : 'percent', gaugeId: displacementModules[index]?.value || '', factor: '', target: '', tolerance: '5', criteria: 'lte', minReaction: '', maxReaction: '', status: '대기' }));
       const localDateText = (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
       const localTimeText = (date) => `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
       const roundLabel = () => `${Math.max(1, measurementStartCount)}차`;
@@ -3704,16 +3810,16 @@
       const projectSessionsFor = (test) => projectTestsFor(test).flatMap(item => sessionsForTest(item));
       const projectReportSessionsFor = (test) => projectTestsFor(test).flatMap(item => reportSessionsForTest(item));
       const exportTables = (sessions) => {
-        const summary = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '시험일', '베어링', '압력계', '디지털 게이지', '변위 오프셋 (mm)', '수신 수', '기록 표시 종료 압력 (bar)', '최종 반력 (tf)', '목표 대비 비율 / 허용 범위', '판정', '분석 저장']];
+        const summary = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '시험일', '베어링', '압력계', '디지털 게이지', '변위 오프셋 (mm)', 'Factor', '수신 수', '기록 표시 종료 압력 (bar)', '최종 반력 (tf)', '목표 대비 비율 / 허용 범위', '판정', '분석 저장']];
         const measurements = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '베어링', '순번', '수신 시각 (ISO)', '구간', '압력 (bar)', '오프셋 적용 변위 (mm)', '변위 원본 (mm)', '변위 오프셋 (mm)', '환산 하중 (kN)', '압력계', '디지털 게이지']];
-        const barReadings = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '베어링', 'L 압력 (bar)', 'L 변위 (1/100 mm)', 'D 압력 (bar)', 'D 변위 (1/100 mm)']];
+        const barReadings = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '베어링', 'L 압력 (bar)', 'L 변위 (mm)', 'D 압력 (bar)', 'D 변위 (mm)']];
         const corrections = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '베어링', '보정 시각', '작업자', '대상', '변경', '사유']];
         sessions.forEach(session => {
           const test = testRecords.get(session.testKey);
           if (!test) return;
           const result = session.analysisResult || {};
           const finalReaction = Number.parseFloat(result.reaction);
-          summary.push([test.project, test.id, session.id, session.savedAt || '', session.round || test.round, localDateText(test.startedAt), session.bearingName, session.pressureId, session.gaugeId, Number(session.displacementOffset ?? 0),
+          summary.push([test.project, test.id, session.id, session.savedAt || '', session.round || test.round, localDateText(test.startedAt), session.bearingName, session.pressureId, session.gaugeId, Number(session.displacementOffset ?? 0), session.condition?.factor ? Number(session.condition.factor) : null,
             session.records.length, session.displayEndPressureBar ?? null, result.finalApplied && Number.isFinite(finalReaction) ? finalReaction : null, result.finalApplied ? result.ratio || '' : '',
             result.finalApplied ? result.verdict || '' : '분석 전', result.finalApplied ? '분석 저장' : '수신값 저장']);
           session.records.forEach((sample, index) => {
@@ -4067,7 +4173,7 @@
             chunks(values, 16).forEach((part, index) => {
               const applied = addPage(`${saveLabel} 적용값${index ? ` ${index + 1}` : ''}`, `${session.bearingName} · 저장 시점 데이터`, test.id);
               addText(applied, `${saveRound} · 저장 ${session.endedAt} · 기록 ID ${session.id} · ${resultLabel}`, 'pdf-meta');
-              addTable(applied, ['L 압력 (bar)', 'L 변위 (1/100 mm)', 'D 압력 (bar)', 'D 변위 (1/100 mm)'], part, '저장된 Bar별 변위값이 없습니다.');
+              addTable(applied, ['L 압력 (bar)', 'L 변위 (mm)', 'D 압력 (bar)', 'D 변위 (mm)'], part, '저장된 Bar별 변위값이 없습니다.');
               if (index === 0 && session.analysisResult?.finalApplied) addText(applied, `목표 대비 비율 / 허용 반력 범위: ${session.analysisResult.ratio || '—'}`, 'pdf-opinion-box');
             });
           });
@@ -4143,6 +4249,8 @@
         }
         return '';
       };
+      const factorError = (item) => !item || item.factor === '' || !Number.isFinite(Number(item.factor)) || Number(item.factor) <= 0
+        ? `${item ? item.position + ': ' : ''}Factor를 0보다 큰 숫자로 입력해 주세요.` : '';
       const renderTargetReactionError = (show = false) => {
         const message = targetReactionError(bearingItems[selectedBearingIndex]);
         selectedBearingReaction.setCustomValidity(message);
@@ -4156,7 +4264,7 @@
           showValidationNotice('측정할 베어링을 먼저 선택해 주세요.', 'target');
           return false;
         }
-        const message = targetReactionError(item) || bearingRangeError(item);
+        const message = factorError(item) || targetReactionError(item) || bearingRangeError(item);
         if (!message) return true;
         pendingMeasurementBearing = item;
         selectedBearingIndex = bearingItems.indexOf(item);
@@ -4164,10 +4272,12 @@
         pendingMeasurementBearing = item;
         renderMeasurementBearingChoices();
         renderSelectedBearing();
+        const factorInvalid = Boolean(factorError(item));
         const targetInvalid = Boolean(targetReactionError(item));
         renderTargetReactionError(targetInvalid);
         renderBearingRangeError(!targetInvalid);
-        const invalidInput = targetInvalid ? selectedBearingReaction : root.querySelector('#bearing-reaction-min');
+        const invalidInput = factorInvalid ? root.querySelector('#bearing-factor') : targetInvalid ? selectedBearingReaction : root.querySelector('#bearing-reaction-min');
+        showValidationNotice(message, factorInvalid ? 'factor' : targetInvalid ? 'target' : 'range');
         invalidInput.scrollIntoView({ block: 'center' });
         invalidInput.focus();
         return false;
@@ -4193,6 +4303,10 @@
         clearValidationNotice();
         const item = bearingItems[selectedBearingIndex];
         root.querySelector('#conditions-bearing-name').textContent = item.position;
+        const factorInput = root.querySelector('#bearing-factor');
+        factorInput.value = item.factor ?? '';
+        factorInput.setCustomValidity(factorError(item));
+        factorInput.setAttribute('aria-invalid', String(Boolean(factorError(item))));
         reactionTolerance.value = item.tolerance;
         acceptanceCriteria.value = item.criteria;
         updateAcceptanceCriteria();
@@ -4357,7 +4471,7 @@
         customShipType.value = '';
         const template = shipTypeTemplates[shipType.value];
         selectedBearingIndex = 0;
-        bearingItems = template.map((position) => ({ position, reactionMode: usesAbsoluteReactionRange({position}) ? 'absolute' : 'percent', gaugeId: '', target: '', tolerance: '5', criteria: 'lte', minReaction: '', maxReaction: '', status: '대기' }));
+        bearingItems = template.map((position) => ({ position, reactionMode: usesAbsoluteReactionRange({position}) ? 'absolute' : 'percent', gaugeId: '', factor: '', target: '', tolerance: '5', criteria: 'lte', minReaction: '', maxReaction: '', status: '대기' }));
         renderShaftLayout();
         renderMeasurementBearingChoices();
         resetSagReferences();
@@ -4400,7 +4514,7 @@
       bearingCount.addEventListener('change', () => {
         invalidateStoredResultsForActiveTest();
         const count = Math.max(1, Math.min(20, Number(bearingCount.value) || 1));
-        while (bearingItems.length < count) bearingItems.push({ position: `Bearing ${bearingItems.length + 1}`, reactionMode: 'percent', target: '', tolerance: '5', criteria: 'lte', minReaction: '', maxReaction: '', status: '대기' });
+        while (bearingItems.length < count) bearingItems.push({ position: `Bearing ${bearingItems.length + 1}`, reactionMode: 'percent', factor: '', target: '', tolerance: '5', criteria: 'lte', minReaction: '', maxReaction: '', status: '대기' });
         bearingItems = bearingItems.slice(0, count);
         selectedBearingIndex = Math.min(selectedBearingIndex, bearingItems.length - 1);
         renderShaftLayout();
@@ -4429,6 +4543,14 @@
           updateSlopeResults();
           updateLiveSample(currentDemoSample());
         }
+      });
+      root.querySelector('#bearing-factor').addEventListener('input', (event) => {
+        const item = bearingItems[selectedBearingIndex];
+        item.factor = event.target.value;
+        event.target.setCustomValidity(factorError(item));
+        event.target.setAttribute('aria-invalid', String(Boolean(factorError(item))));
+        invalidateStoredResultsForActiveTest(item.position);
+        if (activeMeasurementBearing === item) updateSlopeResults();
       });
       moveBearingForward.addEventListener('click', () => {
         if (selectedBearingIndex === 0) return;
