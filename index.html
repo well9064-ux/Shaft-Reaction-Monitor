@@ -354,6 +354,12 @@
     #jackup-wireframe .instrument-wide { grid-column: 1 / -1; }
     #jackup-wireframe .instrument-title { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--jw-muted); font-size: 12px; }
     #jackup-wireframe .instrument-title strong { color: var(--jw-text); font-size: 16px; font-weight: 500; }
+    #jackup-wireframe .instrument-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; }
+    #jackup-wireframe .gauge-zero-button { min-width: 64px; min-height: 32px; padding: 4px 9px; border: 1px solid var(--jw-accent); border-radius: 6px; background: var(--jw-surface); color: var(--jw-accent); font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    #jackup-wireframe .gauge-zero-button:hover, #jackup-wireframe .gauge-zero-button:focus-visible { background: var(--jw-accent); color: var(--jw-surface); }
+    #jackup-wireframe #gauge-zero-status { font-size: 11px; }
+    #jackup-wireframe #gauge-zero-status[data-result="blocked"] { color: var(--jw-warn); }
+    #jackup-wireframe #gauge-zero-status[data-result="success"] { color: var(--jw-good); }
     #jackup-wireframe .instrument-meta { margin-top: 6px; color: var(--jw-muted); font-size: 12px; text-align: right; }
     #jackup-wireframe .dial { display: block; width: 100%; max-height: 160px; margin-top: 4px; }
     #jackup-wireframe .dial .track { stroke: var(--jw-line); stroke-width: 18; fill: none; stroke-linecap: round; }
@@ -669,8 +675,8 @@
                 </svg>
               </div>
               <div class="instrument" data-help="디지털 게이지가 측정한 샤프트의 수직 이동 거리입니다. 현재 변위만 표시하며 별도의 기준 변위 판정은 적용하지 않습니다.">
-                <div class="instrument-title"><span>디지털 게이지(변위)</span><strong id="live-displacement-value">0.42 mm</strong></div>
-                <div class="instrument-meta" aria-hidden="true"></div>
+                <div class="instrument-title"><span class="instrument-heading"><span>디지털 게이지(변위)</span><button class="gauge-zero-button" id="set-gauge-zero" type="button" aria-label="선택 베어링 디지털 게이지 영점 설정">SET 0</button></span><strong id="live-displacement-value">0.42 mm</strong></div>
+                <div class="instrument-meta" id="gauge-zero-status" role="status" aria-live="polite"></div>
                 <div class="bar-reading" id="live-displacement-meter" role="img" aria-label="현재 변위 0.42 밀리미터, 표시 범위 0에서 1 밀리미터">
                   <div class="bar-track"><span class="bar-fill" id="live-displacement-fill"></span></div>
                   <div class="bar-labels"><span>0</span><span id="live-displacement-current">현재 0.42</span><span>1.00 mm</span></div>
@@ -1241,6 +1247,8 @@
       let previousCaptureSample = null;
       const liftingMeasurement = root.querySelector('#lifting-measurement');
       const loweringMeasurement = root.querySelector('#lowering-measurement');
+      const setGaugeZero = root.querySelector('#set-gauge-zero');
+      const gaugeZeroStatus = root.querySelector('#gauge-zero-status');
       const measurementPhaseStatus = root.querySelector('#measurement-phase-status');
       let measurementPhase = 'ended';
       const bearingSessions = new Map();
@@ -1268,6 +1276,22 @@
       let measurementSegment = 0;
       let measurementStartCount = 0;
       const measurementIsFinished = () => measurementPhase === 'ended';
+      const showGaugeZeroStatus = (message, result) => {
+        gaugeZeroStatus.textContent = message;
+        gaugeZeroStatus.dataset.result = result;
+      };
+      setGaugeZero.addEventListener('click', () => {
+        if (sessionRunning()) {
+          showGaugeZeroStatus('측정 중 · 실행 불가', 'blocked');
+          return;
+        }
+        const bearing = activeMeasurementBearing;
+        if (!bearing?.gaugeId || !mappingIsApplied(bearing)) {
+          showGaugeZeroStatus('게이지 연결 필요', 'blocked');
+          return;
+        }
+        showGaugeZeroStatus('BLE 미연동 · 명령 미전송', 'unavailable');
+      });
       const renderMeasurementControls = () => {
         const finished = measurementIsFinished();
         renderSelectedGaugeOffset();
@@ -1292,6 +1316,8 @@
       };
       const resetMeasurementSession = () => {
         measurementPhase = 'ended';
+        gaugeZeroStatus.textContent = '';
+        delete gaugeZeroStatus.dataset.result;
         correctionEvents.length = 0;
         selectedDataSessionId = null;
         selectedDataRecordIndex = null;
