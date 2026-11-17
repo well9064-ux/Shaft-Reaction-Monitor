@@ -279,11 +279,8 @@
     #jackup-wireframe .curve-range-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     #jackup-wireframe .curve-range-head strong { font-weight: 500; }
     #jackup-wireframe .analysis-meta-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
-    #jackup-wireframe .analysis-reason-field { grid-column: 1 / -1; }
     #jackup-wireframe #analysis-range-editor > .curve-range-head { margin-top: 10px; }
     #jackup-wireframe #analysis-range-editor .analysis-meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    #jackup-wireframe #analysis-range-editor .analysis-meta-grid .field:first-child { grid-column: 1 / -1; }
-    #jackup-wireframe #analysis-range-editor .analysis-reason-field { grid-column: auto; }
     #jackup-wireframe .graph-fullscreen { position: absolute; z-index: 200; top: var(--jw-header-height); right: 0; bottom: 0; left: var(--jw-sidebar-width); display: none; grid-template-rows: auto minmax(0, 1fr) auto; gap: 10px; padding: 12px; overflow: hidden; background: var(--jw-surface); color: var(--jw-text); }
     #jackup-wireframe .graph-fullscreen.open { display: grid; }
     #jackup-wireframe .graph-fullscreen.has-analysis-summary { grid-template-rows: auto auto minmax(0, 1fr) auto; }
@@ -459,7 +456,6 @@
       #jackup-wireframe .connection-builder .field, #jackup-wireframe .connection-builder .action { grid-column: auto; }
       #jackup-wireframe .analysis-meta-grid { grid-template-columns: 1fr; }
       #jackup-wireframe #analysis-range-editor .analysis-meta-grid { grid-template-columns: 1fr; }
-      #jackup-wireframe .analysis-reason-field { grid-column: 1; }
       #jackup-wireframe .graph-fullscreen, #jackup-wireframe .pdf-preview { top: calc(var(--jw-header-height) + 56px); left: 0; right: 0; }
       #jackup-wireframe .pdf-preview-body { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); }
       #jackup-wireframe .pdf-page-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -527,6 +523,9 @@
     #jackup-wireframe .gauge-offset-settings .field { margin-top: 10px; }
     #jackup-wireframe .gauge-offset-settings .field label { font-size: 11px; }
     #jackup-wireframe .gauge-offset-settings input { width: 100%; }
+    #jackup-wireframe .gauge-offset-control { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 6px; align-items: center; }
+    #jackup-wireframe .gauge-offset-control .action { min-width: 0; min-height: 44px; padding: 0; font-size: 20px; }
+    #jackup-wireframe .gauge-offset-control .action[aria-pressed="true"] { background: var(--jw-accent); border-color: var(--jw-accent); color: #fff; }
     #jackup-wireframe .module-list { max-height:245px; overflow:auto; }
     #jackup-wireframe #selected-displacement-meta { overflow-wrap:anywhere; }
     @media (max-width:650px) { #jackup-wireframe .gauge-assignment-grid { grid-template-columns:1fr; } }
@@ -617,7 +616,7 @@
           </div>
           </div>
           <div id="setup-devices-content" role="tabpanel" aria-labelledby="setup-devices-tab" data-setup-panel="devices" hidden>
-          <div class="headline connection-headline"><div><h3>장치 연결</h3><p class="sub">최초 지정 후 설정완료 · 이전 연결 장치는 감지 시 자동 재연결</p></div><button class="action" id="rescan-modules" type="button" aria-label="주변 장치 검색" data-jw-tooltip="주변 장치를 다시 검색합니다. 한 번 연결한 지정 장치는 감지 시 자동 재연결하며, 새 장치나 지정 변경은 설정완료로 적용합니다."><i data-lucide="refresh-cw" aria-hidden="true"></i></button></div>
+          <div class="headline connection-headline"><div><h3>장치 연결</h3><p class="sub">최초 지정 후 설정완료 · 이전 연결 장치는 감지 시 자동 재연결</p></div><div class="btnrow"><button class="action" id="disconnect-modules" type="button" data-jw-tooltip="현재 연결된 압력계와 베어링별 디지털 게이지를 모두 연결 해제합니다. 다시 연결하려면 설정완료를 누르세요.">연결 해제</button><button class="action" id="rescan-modules" type="button" aria-label="주변 장치 검색" data-jw-tooltip="주변 장치를 다시 검색합니다. 한 번 연결한 지정 장치는 감지 시 자동 재연결하며, 새 장치나 지정 변경은 설정완료로 적용합니다."><i data-lucide="refresh-cw" aria-hidden="true"></i></button></div></div>
           <div class="panel" data-help="베어링별로 설치된 게이지를 지정한 뒤 상단 설정완료 버튼을 한 번 누르면 매핑과 연결이 함께 적용됩니다. 연결 동작은 화면 시연입니다. 압력계 구성은 HW 협의 후 확정합니다.">
             <div class="field" style="margin-bottom:14px"><label for="mapped-pressure-module">공통 압력계</label><select id="mapped-pressure-module">
               <option value="PRS-A-014" data-rssi="-48" selected>PRS-A-014 · 1,000 bar · RSSI -48 dBm</option>
@@ -656,7 +655,7 @@
 
               </div>
             </div>
-            <details class="gauge-offset-settings" id="gauge-offset-settings"><summary>고급 · 게이지 표시 보정</summary><p class="sub" id="gauge-offset-context" role="status">선택 베어링의 디지털 게이지를 확인합니다.</p><div class="field"><label for="selected-gauge-offset">선택 베어링 변위 오프셋</label><div class="input-unit"><input id="selected-gauge-offset" type="number" step="0.01" inputmode="decimal" disabled><span class="unit-suffix">mm</span></div></div><p class="sub">원본 수신값이 정확히 0이면 적용값도 0입니다. 그 외에는 원본값에 오프셋을 더합니다.</p></details>
+            <details class="gauge-offset-settings" id="gauge-offset-settings"><summary>고급 · 게이지 표시 보정</summary><p class="sub" id="gauge-offset-context" role="status">선택 베어링의 디지털 게이지를 확인합니다.</p><div class="field"><label for="selected-gauge-offset">선택 베어링 변위 오프셋</label><div class="gauge-offset-control"><button class="action" id="decrease-gauge-offset" type="button" aria-label="입력한 오프셋만큼 빼기" aria-pressed="false" disabled>−</button><div class="input-unit"><input id="selected-gauge-offset" type="number" min="0" step="any" inputmode="decimal" disabled><span class="unit-suffix">mm</span></div><button class="action" id="increase-gauge-offset" type="button" aria-label="입력한 오프셋만큼 더하기" aria-pressed="true" disabled>+</button></div></div><p class="sub">보정할 크기를 입력하고 − 또는 + 방향을 선택하세요. 원본이 0이면 0을 유지하며, 적용 결과가 음수여도 0으로 표시합니다.</p></details>
         </section>
 
         <section class="screen" data-panel="measure">
@@ -700,7 +699,7 @@
             <button class="action" id="reset-measurement-data" type="button" data-jw-tooltip="현재 시험의 데이터·이력 기록만 삭제합니다. 결과 리포트에 저장한 스냅샷은 유지합니다.">현재 시험 기록 삭제</button>
             <button class="action primary measurement-phase-button" id="lifting-measurement" type="button">Lifting 측정 시작</button>
             <button class="action primary measurement-phase-button" id="lowering-measurement" type="button">Lowering 측정 시작</button>
-            <button class="action primary" id="apply-analysis-result" type="button" data-jw-tooltip="누른 시점까지의 전체 수신값과 현재 분석 상태를 새 기록으로 저장합니다. 기울기를 수동 조절한 경우에만 보정 작업자와 사유가 필요합니다.">데이터 저장</button>
+            <button class="action primary" id="apply-analysis-result" type="button" data-jw-tooltip="누른 시점까지의 전체 수신값과 현재 분석 상태를 새 기록으로 저장합니다. 기울기를 수동 조절한 경우 보정 작업자를 기록합니다.">데이터 저장</button>
           </div>
           <div class="grid two analysis-main-grid">
             <div class="panel" data-help="기본 가로축은 유압 압력, 세로축은 디지털 게이지 변위(mm)입니다. X·Y축 전환 버튼으로 위치를 바꿀 수 있습니다. 경계 손잡이는 표시할 원시 기록의 끝만 바꾸며 분석선·반력 계산에는 영향을 주지 않습니다. 곡선 안의 분석선 손잡이로 기울기를 별도 조정합니다.">
@@ -731,10 +730,9 @@
             <div class="curve-range-head"><strong>Lifting · Lowering 표시 종료점</strong><button class="action" id="select-common-end" type="button" aria-pressed="false" data-jw-tooltip="그래프에서 표시 종료 압력을 한 번 터치하거나 상단 손잡이를 좌우로 드래그. 분석선은 바뀌지 않습니다.">그래프에서 종료점 선택</button></div>
             <div class="analysis-meta-grid">
               <div class="field" data-help="그래프에 보여주는 Lifting·Lowering 원시 기록 범위입니다. 원본 저장값과 분석선 계산에는 적용되지 않습니다."><label for="analysis-common-detail">적용 구간</label><input id="analysis-common-detail" value="전체 기록" readonly></div>
-              <div class="field analysis-reason-field" data-help="분석선 기울기를 수동 조절한 경우에만 입력이 필요합니다. 기록 표시 종료점 변경만 했다면 입력하지 않아도 저장할 수 있습니다."><label for="analysis-correction-reason">보정 사유</label><input id="analysis-correction-reason" placeholder="예: 직선성 검토를 위한 기울기 조정"></div>
               <div class="field" data-help="분석선 기울기를 수동 조절한 경우에만 보정 작업자를 확인합니다. 자동 분석 결과는 별도 보정 입력 없이 저장됩니다."><label for="analysis-correction-worker">보정 작업자</label><input id="analysis-correction-worker" value="홍길동"></div>
             </div>
-            <p class="sub">기울기·표시 종료점은 선택 사항입니다. 기울기를 수동 조절한 경우에만 작업자와 사유를 입력하고 ‘데이터 저장’을 누르세요.</p>
+            <p class="sub">기울기·표시 종료점은 선택 사항입니다. 기울기를 수동 조절한 경우 보정 작업자를 입력하고 ‘데이터 저장’을 누르세요.</p>
             <div class="banner" id="analysis-range-status"></div>
           </div>
           </div>
@@ -810,7 +808,7 @@
               <table><tbody><tr><td>Test ID</td><td id="data-test-id">—</td></tr><tr><td>선택 베어링</td><td id="data-result-bearing">—</td></tr><tr><td>최종 반력</td><td id="data-final-reaction">—</td></tr><tr><td id="data-criterion-label">목표 대비 비율</td><td id="data-final-ratio">—</td></tr><tr><td>판정</td><td id="data-final-verdict">—</td></tr></tbody></table>
             </div>
           </div>
-          <div class="panel" data-help="측정·분석에서 사용자가 조정한 분석선 기울기와 작업자·사유를 조회합니다. 그래프 표시 종료점과 압력·변위 원시값은 보정 이력이나 계산값을 바꾸지 않습니다." style="margin-top:12px"><h3>분석선 보정 이력</h3><table><thead><tr><th>시각</th><th>작업자</th><th>대상</th><th>변경</th><th>사유</th></tr></thead><tbody id="correction-history-body"><tr><td colspan="5">저장된 분석선 보정 이력이 없습니다.</td></tr></tbody></table></div>
+          <div class="panel" data-help="측정·분석에서 사용자가 조정한 분석선 기울기와 작업자를 조회합니다. 그래프 표시 종료점과 압력·변위 원시값은 보정 이력이나 계산값을 바꾸지 않습니다." style="margin-top:12px"><h3>분석선 보정 이력</h3><table><thead><tr><th>시각</th><th>작업자</th><th>대상</th><th>변경</th></tr></thead><tbody id="correction-history-body"><tr><td colspan="4">저장된 분석선 보정 이력이 없습니다.</td></tr></tbody></table></div>
         </section>
 
         <section class="screen" data-panel="report">
@@ -1093,7 +1091,8 @@
           if (Number.isFinite(savedOffsets?.[value])) displacementOffsets.set(value, savedOffsets[value]);
         });
       } catch (_) { /* Keep zero offsets if local storage is unavailable. */ }
-      const correctedDisplacement = (rawValue, offset) => rawValue === 0 ? 0 : Number((rawValue + offset).toFixed(4));
+      const offsetDirections = new Map(displacementModules.map(({ value }) => [value, displacementOffsets.get(value) < 0 ? -1 : 1]));
+      const correctedDisplacement = (rawValue, offset) => rawValue === 0 ? 0 : Math.max(0, Number((rawValue + offset).toFixed(4)));
       const deviceConnectionStatus = root.querySelector('#device-connection-status');
       const deviceConnectionDetail = root.querySelector('#device-connection-detail');
       const reactionTolerance = root.querySelector('#reaction-tolerance');
@@ -1118,7 +1117,6 @@
       const addBarReading = root.querySelector('#add-bar-reading');
       const analysisGenerationMethod = root.querySelector('#analysis-generation-method');
       const analysisCorrectionWorker = root.querySelector('#analysis-correction-worker');
-      const analysisCorrectionReason = root.querySelector('#analysis-correction-reason');
       const correctionHistoryBody = root.querySelector('#correction-history-body');
 
       const openAnalysisGraph = root.querySelector('#open-analysis-graph');
@@ -2485,10 +2483,11 @@
       function reconnectDetectedDevices() {
         if (!rememberedConnection) return;
         const knownIds = new Set([rememberedConnection.pressureId, ...rememberedConnection.bearings.map(item => item.gaugeId)]);
+        const disconnectedIds = new Set(rememberedConnection.disconnectedIds || []);
         let changed = false;
         activeModuleIds.forEach(id => {
           const telemetry = moduleTelemetry.get(id);
-          if (!knownIds.has(id) || !telemetry?.detected || telemetry.connected) return;
+          if (!knownIds.has(id) || disconnectedIds.has(id) || !telemetry?.detected || telemetry.connected) return;
           // Prototype only: detection + successful connection + first sample are simulated together.
           // Native BLE must await connection/service discovery and an actual notification separately.
           telemetry.connected = true;
@@ -2548,10 +2547,15 @@
         deviceConnectionStatus.textContent = applied
           ? (receiving ? '연결·매핑 적용 완료' : '연결·수신 확인 필요')
           : '게이지 지정 ' + configured + ' / ' + bearingItems.length + ' · 연결 적용 전';
-        deviceConnectionDetail.textContent = connectionMemoryAvailable
-          ? '이전 연결 장치 자동 재연결 · 새 장치·지정 변경은 설정완료로 적용'
-          : '이전 연결 장치 자동 재연결 · 이 미리보기에서는 새로고침 후 연결 기억이 제한될 수 있습니다.';
+        deviceConnectionDetail.textContent = !rememberedConnection && activeModuleIds.length
+          ? '연결 해제됨 · 현재 게이지 지정은 유지 · 설정완료로 다시 연결'
+          : rememberedConnection?.disconnectedIds?.length
+            ? '개별 해제 장치는 자동 재연결하지 않음 · 해당 목록에서 다시 연결'
+          : connectionMemoryAvailable
+            ? '이전 연결 장치 자동 재연결 · 새 장치·지정 변경은 설정완료로 적용'
+            : '이전 연결 장치 자동 재연결 · 이 미리보기에서는 새로고침 후 연결 기억이 제한될 수 있습니다.';
         setupCompleteButton.disabled = sessionRunning();
+        root.querySelector('#disconnect-modules').disabled = sessionRunning() || !activeModuleIds.some(id => moduleTelemetry.get(id)?.connected);
         rescanModules.disabled = sessionRunning();
         mappedPressureModule.disabled = sessionRunning();
         renderSelectedGaugeOffset();
@@ -2573,7 +2577,27 @@
         showSetupTab('devices');
         reconnectDetectedDevices();
         renderGaugeAssignments();
-        deviceConnectionDetail.textContent = '검색 완료 · 이전 연결 장치 자동 재연결 · 새 장치는 지정 후 설정완료';
+        deviceConnectionDetail.textContent = rememberedConnection
+          ? rememberedConnection.disconnectedIds?.length
+            ? '검색 완료 · 개별 해제 장치는 해당 목록에서 다시 연결'
+            : '검색 완료 · 이전 연결 장치 자동 재연결 · 새 장치는 지정 후 설정완료'
+          : activeModuleIds.length ? '검색 완료 · 연결 해제 상태 유지 · 설정완료로 다시 연결'
+            : '검색 완료 · 장치 지정 후 설정완료로 연결';
+      });
+      root.querySelector('#disconnect-modules').addEventListener('click', () => {
+        if (sessionRunning()) { showValidationNotice('현재 측정을 종료한 후 연결을 해제해 주세요.', 'devices'); return; }
+        activeModuleIds.forEach(id => {
+          const telemetry = moduleTelemetry.get(id);
+          if (telemetry) { telemetry.connected = false; telemetry.receiving = false; }
+        });
+        // An explicit disconnect cancels the remembered auto-reconnect until Settings Complete is pressed again.
+        rememberedConnection = null;
+        try { localStorage.removeItem(rememberedConnectionKey); }
+        catch (_) { connectionMemoryAvailable = false; }
+        renderGaugeAssignments();
+        renderMeasurementBearingChoices();
+        renderActiveDeviceStatus();
+        clearValidationNotice('devices');
       });
       function applyDeviceConnections() {
         if (sessionRunning()) { showValidationNotice('측정 종료 후 연결 장치를 변경해 주세요.', 'devices'); return false; }
@@ -2616,28 +2640,44 @@
           ? `${item.position} · 디지털 게이지 ${gaugeId}`
           : `${item?.position || '선택 베어링'} · 디지털 게이지 미지정 — 장치 설정에서 먼저 지정해 주세요.`;
         input.dataset.gaugeId = gaugeId;
-        input.value = gaugeId ? String(displacementOffsets.get(gaugeId) || 0) : '';
+        input.value = gaugeId ? String(Math.abs(displacementOffsets.get(gaugeId) || 0)) : '';
         input.placeholder = gaugeId ? '0' : '게이지 지정 후 입력';
         input.disabled = !gaugeId || sessionRunning();
+        [['decrease-gauge-offset', -1], ['increase-gauge-offset', 1]].forEach(([id, direction]) => {
+          const button = root.querySelector('#' + id);
+          button.disabled = input.disabled;
+          button.setAttribute('aria-pressed', String(Boolean(gaugeId) && offsetDirections.get(gaugeId) === direction));
+        });
       }
-      root.querySelector('#selected-gauge-offset').addEventListener('change', (event) => {
-        const input = event.currentTarget;
+      function saveGaugeOffset(value, selectedDirection) {
+        const input = root.querySelector('#selected-gauge-offset');
         const gaugeId = input.dataset.gaugeId;
         if (!gaugeId || sessionRunning() || bearingItems[selectedBearingIndex]?.gaugeId !== gaugeId) {
           renderSelectedGaugeOffset();
           return;
         }
-        const offset = input.value.trim() === '' ? 0 : Number(input.value);
-        if (!Number.isFinite(offset)) {
+        const magnitude = value === '' ? 0 : Number(value);
+        if (!Number.isFinite(magnitude)) {
           renderSelectedGaugeOffset();
           showValidationNotice('게이지 오프셋을 숫자로 입력해 주세요.', 'devices', 'warning');
           return;
         }
+        const direction = selectedDirection || (magnitude < 0 ? -1 : offsetDirections.get(gaugeId) || 1);
+        const offset = Math.abs(magnitude) * direction;
+        offsetDirections.set(gaugeId, direction);
         displacementOffsets.set(gaugeId, offset);
-        input.value = String(offset);
+        input.value = String(Math.abs(magnitude));
+        renderSelectedGaugeOffset();
         try { localStorage.setItem(gaugeOffsetStorageKey, JSON.stringify(Object.fromEntries(displacementOffsets))); }
         catch (_) { showValidationNotice('오프셋은 현재 화면에 적용되었지만 이 브라우저에는 저장되지 않았습니다.', 'devices', 'warning'); }
         updateLiveSample(currentDemoSample());
+      }
+      root.querySelector('#selected-gauge-offset').addEventListener('change', (event) => saveGaugeOffset(event.currentTarget.value.trim()));
+      [['decrease-gauge-offset', -1], ['increase-gauge-offset', 1]].forEach(([id, direction]) => {
+        root.querySelector('#' + id).addEventListener('click', () => {
+          const input = root.querySelector('#selected-gauge-offset');
+          saveGaugeOffset(input.value.trim(), direction);
+        });
       });
       function renderGaugeAssignments() {
         const grid = root.querySelector('#gauge-assignment-grid');
@@ -2659,8 +2699,38 @@
             option.disabled = Boolean(assigned);
             select.add(option);
           });
+          if (mappingIsApplied(item) && rememberedConnection) {
+            const connected = describeModule(item.gaugeId).connected;
+            select.add(new Option(connected ? '이 게이지 연결 해제' : '이 게이지 다시 연결', '__toggle_connection__'));
+          }
           select.value = item.gaugeId || '';
           select.addEventListener('change', () => {
+            if (select.value === '__toggle_connection__') {
+              if (sessionRunning() || !mappingIsApplied(item) || !rememberedConnection) {
+                renderGaugeAssignments();
+                return;
+              }
+              const telemetry = moduleTelemetry.get(item.gaugeId);
+              const disconnectedIds = new Set(rememberedConnection.disconnectedIds || []);
+              if (telemetry.connected) {
+                telemetry.connected = false;
+                telemetry.receiving = false;
+                disconnectedIds.add(item.gaugeId);
+              } else if (telemetry.detected) {
+                telemetry.connected = true;
+                telemetry.receiving = true;
+                disconnectedIds.delete(item.gaugeId);
+              } else {
+                showValidationNotice('해당 디지털 게이지가 감지되지 않습니다. 전원과 통신 범위를 확인해 주세요.', 'devices');
+              }
+              rememberedConnection.disconnectedIds = [...disconnectedIds];
+              try { localStorage.setItem(rememberedConnectionKey, JSON.stringify(rememberedConnection)); }
+              catch (_) { connectionMemoryAvailable = false; }
+              renderGaugeAssignments();
+              renderMeasurementBearingChoices();
+              renderActiveDeviceStatus();
+              return;
+            }
             if (sessionRunning() || bearingItems.some(other => other !== item && other.gaugeId === select.value && select.value)) {
               select.value = item.gaugeId || '';
               showValidationNotice('측정 중에는 변경할 수 없으며 같은 게이지를 중복 지정할 수 없습니다.', 'devices');
@@ -2673,7 +2743,7 @@
           const status = document.createElement('span');
           const telemetry = describeModule(item.gaugeId);
           status.className = 'sub ' + (mappingIsApplied(item) && telemetry.connected ? telemetry.signal.color : 'warn');
-          status.textContent = !item.gaugeId ? '게이지 미지정' : !mappingIsApplied(item) ? '최초 연결·지정 적용 대기' : !telemetry.connected ? '자동 재연결 대기 · 장치 감지 시 연결' : telemetry.reception + ' · RSSI ' + telemetry.rssiText;
+          status.textContent = !item.gaugeId ? '게이지 미지정' : !mappingIsApplied(item) ? '최초 연결·지정 적용 대기' : !telemetry.connected ? (rememberedConnection?.disconnectedIds?.includes(item.gaugeId) ? '개별 연결 해제 · 목록에서 다시 연결' : rememberedConnection ? '자동 재연결 대기 · 장치 감지 시 연결' : '연결 해제 · 설정완료로 재연결') : telemetry.reception + ' · RSSI ' + telemetry.rssiText;
           field.append(label,select,status);
           grid.append(field);
         });
@@ -2915,12 +2985,12 @@
         if (!corrections.length) {
           const row = correctionHistoryBody.insertRow();
           const cell = row.insertCell();
-          cell.colSpan = 5;
+          cell.colSpan = 4;
           cell.textContent = '저장된 분석선 보정 이력이 없습니다.';
         } else {
           corrections.forEach(event => {
             const row = correctionHistoryBody.insertRow();
-            [event.time, event.worker, event.target, event.change, event.reason].forEach(value => {
+            [event.time, event.worker, event.target, event.change].forEach(value => {
               const cell = row.insertCell();
               cell.textContent = value;
             });
@@ -3072,7 +3142,7 @@
       const resetLiveAnalysisGraph = () => {
         analysisXMax = 800;
         const offsetHundredths = Number(measurementDeviceSnapshot?.displacementOffset || 0) * 100;
-        analysisYMin = Math.min(0, Math.floor(offsetHundredths / 10) * 10);
+        analysisYMin = 0;
         analysisYMax = Math.max(60, Math.ceil((60 + offsetHundredths) / 10) * 10);
         renderAnalysisZoom();
         analysisSamples.lifting.length = 0;
@@ -3750,15 +3820,9 @@
           return;
         }
         const worker = analysisCorrectionWorker.value.trim();
-        const reason = analysisCorrectionReason.value.trim();
         if (analysisHasManualChange && !worker) {
           showValidationNotice('분석선 기울기를 수동 조절했다면 보정 작업자를 입력해 주세요.', 'analysis-save', 'warning');
           analysisCorrectionWorker.focus();
-          return;
-        }
-        if (analysisHasManualChange && !reason) {
-          showValidationNotice('분석선 기울기를 수동 조절했다면 보정 사유를 입력해 주세요.', 'analysis-save', 'warning');
-          analysisCorrectionReason.focus();
           return;
         }
         clearValidationNotice('analysis-save');
@@ -3775,8 +3839,7 @@
             : '계산 대기';
           correctionEvents.push({
             time, worker, target: '분석선 기울기',
-            change: `L 0점 ${zeroPoint('lifting')} / D 0점 ${zeroPoint('lowering')}`,
-            reason
+            change: `L 0점 ${zeroPoint('lifting')} / D 0점 ${zeroPoint('lowering')}`
           });
         }
         const savedCondition = measurementDeviceSnapshot?.condition || activeMeasurementBearing;
@@ -3839,7 +3902,7 @@
         const summary = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '시험일', '베어링', '압력계', '디지털 게이지', '변위 오프셋 (mm)', 'Factor', '수신 수', '기록 표시 종료 압력 (bar)', '최종 반력 (tf)', '목표 대비 비율 / 허용 범위', '판정', '분석 저장']];
         const measurements = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '베어링', '순번', '수신 시각 (ISO)', '구간', '압력 (bar)', '오프셋 적용 변위 (mm)', '변위 원본 (mm)', '변위 오프셋 (mm)', '환산 하중 (kN)', '압력계', '디지털 게이지']];
         const barReadings = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '베어링', 'L 압력 (bar)', 'L 변위 (mm)', 'D 압력 (bar)', 'D 변위 (mm)']];
-        const corrections = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '베어링', '보정 시각', '작업자', '대상', '변경', '사유']];
+        const corrections = [['프로젝트 / 호선', 'Test ID', '기록 ID', '저장 시각 (ISO)', '측정 회차', '베어링', '보정 시각', '작업자', '대상', '변경']];
         sessions.forEach(session => {
           const test = testRecords.get(session.testKey);
           if (!test) return;
@@ -3857,7 +3920,7 @@
           (session.barReadings || []).forEach(row => barReadings.push([test.project, test.id, session.id, session.savedAt || '', session.round || test.round, session.bearingName,
             row[0] === '' ? null : Number(row[0]), row[1] === '' ? null : Number(row[1]), row[2] === '' ? null : Number(row[2]), row[3] === '' ? null : Number(row[3])]));
           (session.corrections || []).forEach(event => corrections.push([test.project, test.id, session.id, session.savedAt || '', session.round || test.round, session.bearingName,
-            event.time, event.worker, event.target, event.change, event.reason]));
+            event.time, event.worker, event.target, event.change]));
         });
         return { summary, measurements, barReadings, corrections };
       };
@@ -4204,10 +4267,10 @@
             });
           });
           const corrections = reportSessionsForTest(test).flatMap(session => (session.corrections || []).map(event => [
-            `${session.round || test.round} · ${session.bearingName}`, event.time, event.worker, event.target, event.change, event.reason]));
+            `${session.round || test.round} · ${session.bearingName}`, event.time, event.worker, event.target, event.change]));
           chunks(corrections, 8).forEach((part, index) => {
             const page = addPage(`전체 회차 보정 이력${index ? ` ${index + 1}` : ''}`, '전체 회차 · 분석선 보정 이력', test.id);
-            addTable(page, ['회차 · 베어링', '시각', '작업자', '대상', '변경', '사유'], part, '저장된 보정 이력이 없습니다.');
+            addTable(page, ['회차 · 베어링', '시각', '작업자', '대상', '변경'], part, '저장된 보정 이력이 없습니다.');
           });
           const summary = summaryForTest(test);
           const opinion = addPage('전체 회차 작업자 의견', '전체 회차 · 결과 확정 및 작업자 의견', test.id);
