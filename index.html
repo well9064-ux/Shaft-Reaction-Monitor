@@ -2712,7 +2712,7 @@
       function renderGaugeAssignments() {
         const grid = root.querySelector('#gauge-assignment-grid');
         grid.replaceChildren();
-        bearingItems.forEach((item,index) => {
+        bearingItems.map((item, index) => ({ item, index })).reverse().forEach(({ item, index }) => {
           const field = document.createElement('div');
           field.className = 'field';
           const label = document.createElement('label');
